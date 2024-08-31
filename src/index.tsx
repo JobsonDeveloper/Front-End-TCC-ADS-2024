@@ -3,13 +3,42 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import Inicial from './App'
+import Cadastro from './cadastroCliente/CadastroCliente'
+import Login from './login/Login'
+import Home from './home/Home'
+
+// ------
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Inicial />
+  },
+  {
+    path: 'sejaCliente',
+    element: <Cadastro />
+  },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/home',
+    element: <Home />
+  }
+])
+// ------
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    {/* Adicionar isso para ficar 'valendo' as rotas criadas */}
+    <RouterProvider router={router}/> 
   </React.StrictMode>
 );
 
