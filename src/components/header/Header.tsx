@@ -1,6 +1,6 @@
 import React from 'react';
 import './header.css'
-import Logo from '../../assets/logo.png';
+import Logo from '../../assets/icons/logo.png';
 
 // ---- Bootstrap
 import { useState } from 'react';
@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Options from '../../assets/options.png'
+import Options from '../../assets/icons/options.png'
 
 const Header = () => {
     // ---- Const Bootstrap

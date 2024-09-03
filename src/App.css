@@ -6,120 +6,182 @@
     box-sizing: border-box;
 }
 
-:root {
-    --sh-font-family: "Roboto", sans-serif;
 
-    --sh-font-size-textos: 1.4rem;
-    --sh-font-size-title: 2rem;
-    --sh-font-size-button: 1.6rem;
 
-    --sh-cor-primaria: #fff;
-    --sh-cor-secundaria: #0075FF;
-    --sh-cor-terciaria: #000;
-    --sh-cor-textos: #6F6F6F;
-    --sh-cor-textos-hover: #2c2c2c;
-
-    --sh-padding-geral: 10px;
-}
-
-.sh-container {
-
-    & .sh-apresentacao {
-        display: flex;
-        flex-direction: column;
-
-        & .sh-apresentacao-container {
-            display: flex;
-
-            & .sh-apresentacao-img {
-                width: -webkit-fill-available;
-            }
-        }
-
-        & .sh-apresentacao-item {
-            font-family: var(--sh-font-family);
-            padding: 10px;
-
-            & .sh-apresentacao-title {
-                font-size: var(--sh-font-size-title);
-                color: var(--sh-cor-terciaria);
-            }
-
-            & .sh-apresentacao-text {
-                font-size: var(--sh-font-size-textos);
-                color: var(--sh-cor-textos);
-            }
-
-            & .sh-apresentacao-link {
-                background-color: var(--sh-cor-secundaria);
-                border-radius: 50px;
-                padding: 3px 5px;
-                color: var(--sh-cor-primaria);
-                text-decoration: none;
-                font-size: var(--sh-font-size-button);
-                font-weight: 300;
-            }
-        }
-    }
-}
-
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
     :root {
         --sh-font-family: "Roboto", sans-serif;
     
-        --sh-font-size-apresentacao-textos: 1.5rem;
-        --sh-font-size-apresentacao-title: 2.5rem;
-        --sh-font-size-apresentacao-button: 1.8rem;
+        --sh-font-size-textos: 1.4rem;
+        --sh-font-size-posters: 1.6rem;
+        --sh-font-size-titulos: 2rem;
+        --sh-font-size-textos-buttons: 1.5rem;
     
         --sh-cor-primaria: #fff;
         --sh-cor-secundaria: #0075FF;
         --sh-cor-terciaria: #000;
+        --sh-cor-quaternaria: #35FF62;
         --sh-cor-textos: #6F6F6F;
         --sh-cor-textos-hover: #2c2c2c;
+
+        --sh-itens-gap-top: 45px;
     
-        --sh-padding-geral: 10px;
+        --sh-padding: 45px 25px 0 25px;
     }
 
     .sh-container {
+        font-family: var(--sh-font-family);
 
-        & .sh-apresentacao {
-            display: flex;
-            flex-direction: row;
-            margin-top: 30px;
+        /* Todo o header */
+        & .sh-header-apresentacao {
+            min-height: 100vh;
+            border-bottom: 1px solid var(--sh-cor-textos);
 
-            & .sh-apresentacao-container {
+            & .sh-apresentacao {
+                max-height: 100vh;
                 display: flex;
-                width: 60%;
+                padding: var(--sh-padding);
+                justify-content: space-between;
 
-                & .sh-apresentacao-img {
-                    width: -webkit-fill-available;
+                & .sh-apresentacao-posters {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 20px;
+
+                        & .sh-images-img {
+                            width: auto;
+                        }
+
+                        & .sh-apresentacao-cadastro {
+                            display: flex;
+                            gap: 15px;
+                            justify-content: center;
+                            align-items: center;
+
+                            & .sh-cadastro-textos {
+                                font-size: var(--sh-font-size-textos);
+                                margin: 0;
+                                color: var(--sh-cor-textos);
+                                font-size: var(--sh-font-size-posters);
+                            }
+                            
+                            & .sh-cadastro-buttons {
+                                font-size: var(--sh-font-size-textos-buttons);
+                                text-decoration: none;
+                                color: var(--sh-cor-primaria);
+                                background-color: var(--sh-cor-secundaria);
+                                padding: 5px 20px;
+                                border-radius: 50px;
+                            }
+                        }
+
                 }
             }
+        }
 
-            & .sh-apresentacao-item {
-                font-family: var(--sh-font-family);
-                padding: 0 25px;
+        /* Todo o main */
+        & .sh-main {
+            padding: var(--sh-padding);
 
-                & .sh-apresentacao-title {
-                    font-size: var(--sh-font-size-apresentacao-title);
+            & .sh-main-servicos {
+                display: flex;
+                flex-direction: column;
+                gap: var(--sh-itens-gap-top);
+
+                & .sh-servicos-titulo {
+                    text-align: center;
+                    font-size: var(--sh-font-size-titulos);
                     color: var(--sh-cor-terciaria);
                 }
 
-                & .sh-apresentacao-text {
-                    font-size: var(--sh-font-size-apresentacao-textos);
-                    color: var(--sh-cor-textos);
-                }
+                & .sh-servicos-lista {
+                    list-style-type: none;
+                    padding: 0;
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 5px;
 
-                & .sh-apresentacao-link {
-                    background-color: var(--sh-cor-secundaria);
-                    border-radius: 50px;
-                    padding: 3px 5px;
-                    color: var(--sh-cor-primaria);
-                    text-decoration: none;
-                    font-size: var(--sh-font-size-apresentacao-button);
-                    font-weight: 300;
+                    & .sh-servicos-itens {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+
+                        & .sh-itens-data {
+                            display: flex;
+                            justify-content: start;
+                            align-items: center;
+                            gap: 10px;
+                            width: 265px;
+
+                            & .sh-servicos-img-perfil {
+                                width: 25px;
+                            }
+
+                            & .sh-servicos-data-marcadores {
+                                margin: 0;
+                                font-size: 1.2rem;
+                                color: var(--sh-cor-terciaria);
+                                padding: 1px 5px;
+                                border-radius: 50px;
+                                background-color: var(--sh-cor-quaternaria);
+                            }
+
+                            & .sh-servicos-data-descricao {
+                                font-size: var(--sh-font-size-textos);
+                                color: var(--sh-cor-textos);
+                            }
+
+                            & .sh-servicos-data-remuneracao {
+                                font-size: var(--sh-font-size-textos);
+                                color: var(--sh-cor-textos);
+                                margin: 0;
+                            }
+
+                            & .sh-servicos-data-valor {
+                                margin: 0;
+                                font-size: 1.2rem;
+                                color: var(--sh-cor-terciaria);
+                                padding: 1px 5px;
+                                border-radius: 50px;
+                                background-color: var(--sh-cor-quaternaria);
+                            }
+                        }
+                    }
                 }
             }
+        }
+
+        /* Todo o footer */
+        & .sh-footer {
+
+        }
+    }
+}
+
+@media (min-width: 1400px) {
+    .sh-container {
+        background-color: rgb(159, 206, 123);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+
+        & .sh-header-apresentacao {
+            background-color: rgb(249, 160, 92);
+            min-height: 100vh;
+            width: 1400px;
+        }
+
+        /* Main */
+        & .sh-main {
+            background-color: rgb(92, 165, 249);
+            width: 1400px;
+        }
+
+        /* Footer */
+        & .sh-footer {
+            background-color: rgb(185, 64, 236);
+            width: 1400px;
         }
     }
 }
