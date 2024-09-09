@@ -11,12 +11,13 @@
 @media (min-width: 1200px) {
     :root {
         --sh-font-family: "Roboto", sans-serif;
-    
-        --sh-font-size-textos: 1.4rem;
-        --sh-font-size-posters: 1.6rem;
+
+        --sh-font-size-textos: 1.2rem;
+        --sh-font-size-posters: 1.3rem;
         --sh-font-size-titulos: 2rem;
-        --sh-font-size-textos-buttons: 1.5rem;
-    
+        --sh-font-size-subtitulos: 1.7rem;
+        --sh-font-size-textos-buttons: 1.3rem;
+
         --sh-cor-primaria: #fff;
         --sh-cor-secundaria: #0075FF;
         --sh-cor-terciaria: #000;
@@ -25,7 +26,7 @@
         --sh-cor-textos-hover: #2c2c2c;
 
         --sh-itens-gap-top: 45px;
-    
+
         --sh-padding: 45px 25px 0 25px;
     }
 
@@ -46,34 +47,33 @@
                 & .sh-apresentacao-posters {
                     display: flex;
                     flex-direction: column;
-                    row-gap: 20px;
+                    row-gap: 30px;
 
-                        & .sh-images-img {
-                            width: auto;
+                    & .sh-images-img {
+                        width: auto;
+                    }
+
+                    & .sh-apresentacao-cadastro {
+                        display: flex;
+                        gap: 15px;
+                        justify-content: center;
+                        align-items: center;
+
+                        & .sh-cadastro-textos {
+                            margin: 0;
+                            color: var(--sh-cor-textos);
+                            font-size: var(--sh-font-size-posters);
                         }
 
-                        & .sh-apresentacao-cadastro {
-                            display: flex;
-                            gap: 15px;
-                            justify-content: center;
-                            align-items: center;
-
-                            & .sh-cadastro-textos {
-                                font-size: var(--sh-font-size-textos);
-                                margin: 0;
-                                color: var(--sh-cor-textos);
-                                font-size: var(--sh-font-size-posters);
-                            }
-                            
-                            & .sh-cadastro-buttons {
-                                font-size: var(--sh-font-size-textos-buttons);
-                                text-decoration: none;
-                                color: var(--sh-cor-primaria);
-                                background-color: var(--sh-cor-secundaria);
-                                padding: 5px 20px;
-                                border-radius: 50px;
-                            }
+                        & .sh-cadastro-buttons {
+                            font-size: var(--sh-font-size-textos-buttons);
+                            text-decoration: none;
+                            color: var(--sh-cor-primaria);
+                            background-color: var(--sh-cor-secundaria);
+                            padding: 5px 20px;
+                            border-radius: 50px;
                         }
+                    }
 
                 }
             }
@@ -81,70 +81,69 @@
 
         /* Todo o main */
         & .sh-main {
-            padding: var(--sh-padding);
 
             & .sh-main-servicos {
                 display: flex;
                 flex-direction: column;
                 gap: var(--sh-itens-gap-top);
+                padding: var(--sh-padding);
 
                 & .sh-servicos-titulo {
                     text-align: center;
                     font-size: var(--sh-font-size-titulos);
                     color: var(--sh-cor-terciaria);
                 }
+            }
 
-                & .sh-servicos-lista {
-                    list-style-type: none;
+            & .sh-main-planos {
+                padding: var(--sh-padding);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                & .sh-planos-titulos {
+
+                    & .sh-planos-titulo {
+                        text-align: center;
+                        font-size: var(--sh-font-size-titulos);
+                        color: var(--sh-cor-terciaria);
+                    }
+
+                    & .sh-planos-subtitulo {
+                        color: var(--sh-cor-textos);
+                        font-size: var(--sh-font-size-subtitulos);
+                        margin: 0;
+                    }
+                }
+            }
+
+            & .sh-main-vantagens {
+                padding: var(--sh-padding);
+
+                & .sh-vantagens-titulo {
+                    text-align: center;
+                    font-size: var(--sh-font-size-titulos);
+                    color: var(--sh-cor-terciaria);
+                }
+
+                & .sh-vantagem-lista {
+                    background-color: red;
                     padding: 0;
-                    display: flex;
-                    justify-content: space-between;
-                    gap: 5px;
+                    list-style-type: none;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    gap: 22px;
 
-                    & .sh-servicos-itens {
+                    & .sh-vantagem-item {
+                        background-color: #034fff;
                         display: flex;
-                        flex-direction: column;
                         gap: 5px;
 
-                        & .sh-itens-data {
-                            display: flex;
-                            justify-content: start;
-                            align-items: center;
-                            gap: 10px;
-                            width: 265px;
-
-                            & .sh-servicos-img-perfil {
-                                width: 25px;
-                            }
-
-                            & .sh-servicos-data-marcadores {
-                                margin: 0;
-                                font-size: 1.2rem;
-                                color: var(--sh-cor-terciaria);
-                                padding: 1px 5px;
-                                border-radius: 50px;
-                                background-color: var(--sh-cor-quaternaria);
-                            }
-
-                            & .sh-servicos-data-descricao {
-                                font-size: var(--sh-font-size-textos);
-                                color: var(--sh-cor-textos);
-                            }
-
-                            & .sh-servicos-data-remuneracao {
-                                font-size: var(--sh-font-size-textos);
-                                color: var(--sh-cor-textos);
-                                margin: 0;
-                            }
-
-                            & .sh-servicos-data-valor {
-                                margin: 0;
-                                font-size: 1.2rem;
-                                color: var(--sh-cor-terciaria);
-                                padding: 1px 5px;
-                                border-radius: 50px;
-                                background-color: var(--sh-cor-quaternaria);
-                            }
+                        & .sh-vantagem-item-marcador {
+                            background-color: var(--sh-cor-quaternaria);
+                            width: 15px;
+                            height: 10px;
+                            border-radius: 100px;
                         }
                     }
                 }
@@ -152,9 +151,7 @@
         }
 
         /* Todo o footer */
-        & .sh-footer {
-
-        }
+        & .sh-footer {}
     }
 }
 
@@ -164,7 +161,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        
+
 
         & .sh-header-apresentacao {
             background-color: rgb(249, 160, 92);

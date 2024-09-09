@@ -1,0 +1,29 @@
+:root {
+    --sh-cor-primaria: #fff;
+    --sh-cor-secundaria: #0075FF;
+    --sh-cor-terciaria: #000;
+    --sh-cor-quaternaria: #35FF62;
+    --sh-cor-textos: #6F6F6F;
+    --sh-cor-textos-hover: #2c2c2c;
+
+    --sh-font-size-tag: 1.4rem;
+    --sh-font-size-definicao: 1.4rem;
+    --sh-font-size-valor: 3rem;
+}
+
+& .sh-planos-cards {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    padding: 65px 0 0;
+
+    & .sh-planos-card-item {
+        
+        & .sh-planos-car-img {
+            width: 280px;
+        }
+    }
+}

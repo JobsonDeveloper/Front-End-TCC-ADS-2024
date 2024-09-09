@@ -1,24 +1,50 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect, useLayoutEffect } from 'react';
+
+// Css
 import './App.css'
+
+// Components
 import Header from './components/header/Header';
 import Servicos from './components/servicos/Servicos';
+import imgApresentacaoUm from './assets/images_background/background_header_1Resultado.webp'
+import imgApresentacaoDois from './assets/images_background/background_header_2Resultado.webp'
+import Planos from './components/planos/Planos'
 
-import imgApresentacaoUm from './assets/images_background/background_header_1.svg'
-import imgApresentacaoDois from './assets/images_background/background_header_2.svg'
-import fotoPerfil from './assets/icons/perfil.svg'
+
+const ultimosServicos = [
+  {
+    tag: 'Serviços gerais',
+    descricao: 'Preciso de uma pessoa para limpar os banheiros do meu clube hoje a partir das 23:00 horas, pos uma festa de aniversário que ocorrerá no local.',
+    remuneracao: '250,00',
+    tipoDeRemuneracao: 'Diária'
+  },
+  {
+    tag: 'Professor',
+    descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
+    remuneracao: '1.200,00',
+    tipoDeRemuneracao: 'Mensal'
+  },
+  {
+    tag: 'Pedreiro',
+    descricao: 'Preciso de uma pessoa para dar andamento ao projeto da minha casa, começando o trabalho de segunda a quarta, das 08:00 da manhã até as 16:00 da tarde.',
+    remuneracao: '60,00',
+    tipoDeRemuneracao: 'Diária'
+  },
+  {
+    tag: 'Jardineiro',
+    descricao: 'Preciso de uma pessoa para limpar o jardim da minha casa até no máximo as 16:00 horas do dia 30/12/2024.',
+    remuneracao: '300,00',
+    tipoDeRemuneracao: 'Diária'
+  },
+];
 
 function App() {
-  const ultimosServicos = {
-    tag: 'Serviços gerais',
-    descricao: 'Preciso de uma pessoa para limpar os anheiros do meu clube hoje a partir das 23:00 horas, pos uma festa de aniversário que ocorrerá no local.',
-    remuneracao: '100,00'
-  }
-
+  window.onload = function () { console.log("Está carregado!") }
 
   return (
     <main className='sh-container'>
 
-      {/* Header completo */}
       <section className="sh-header-apresentacao">
         <Header />
 
@@ -41,89 +67,64 @@ function App() {
 
       </section>
 
-      {/* Main completo */}
       <section className="sh-main">
+        {/* Últimos serviços postados */}
         <article className="sh-main-servicos">
           <h2 className="sh-servicos-titulo">Últimos serviços postados</h2>
 
-          <ul className="sh-servicos-lista">
-            {/* <Servicos data={ultimosServicos}/> */}
-
-            {/* Remover */}
-            <li className="sh-servicos-itens">
-              <div className="sh-itens-data">
-                <img src={fotoPerfil} alt="Foto de perfil, sem foto da pessoa" className='sh-servicos-img-perfil' />
-                <p className="sh-servicos-data-marcadores">{ultimosServicos.tag}</p>
-              </div>
-
-              <div className="sh-itens-data">
-                <p className="sh-servicos-data-descricao">{ultimosServicos.descricao}</p>
-              </div>
-
-              <div className="sh-itens-data">
-                <p className='sh-servicos-data-remuneracao'>Remuneração:</p>
-                <p className="sh-servicos-data-valor">R${ultimosServicos.remuneracao}</p>
-              </div>
-            </li>
-            <li className="sh-servicos-itens">
-              <div className="sh-itens-data">
-                <img src={fotoPerfil} alt="Foto de perfil, sem foto da pessoa" className='sh-servicos-img-perfil' />
-                <p className="sh-servicos-data-marcadores">{ultimosServicos.tag}</p>
-              </div>
-
-              <div className="sh-itens-data">
-                <p className="sh-servicos-data-descricao">{ultimosServicos.descricao}</p>
-              </div>
-
-              <div className="sh-itens-data">
-                <p className='sh-servicos-data-remuneracao'>Remuneração:</p>
-                <p className="sh-servicos-data-valor">R${ultimosServicos.remuneracao}</p>
-              </div>
-            </li>
-            <li className="sh-servicos-itens">
-              <div className="sh-itens-data">
-                <img src={fotoPerfil} alt="Foto de perfil, sem foto da pessoa" className='sh-servicos-img-perfil' />
-                <p className="sh-servicos-data-marcadores">{ultimosServicos.tag}</p>
-              </div>
-
-              <div className="sh-itens-data">
-                <p className="sh-servicos-data-descricao">{ultimosServicos.descricao}</p>
-              </div>
-
-              <div className="sh-itens-data">
-                <p className='sh-servicos-data-remuneracao'>Remuneração:</p>
-                <p className="sh-servicos-data-valor">R${ultimosServicos.remuneracao}</p>
-              </div>
-            </li>
-            <li className="sh-servicos-itens">
-              <div className="sh-itens-data">
-                <img src={fotoPerfil} alt="Foto de perfil, sem foto da pessoa" className='sh-servicos-img-perfil' />
-                <p className="sh-servicos-data-marcadores">{ultimosServicos.tag}</p>
-              </div>
-
-              <div className="sh-itens-data">
-                <p className="sh-servicos-data-descricao">{ultimosServicos.descricao}</p>
-              </div>
-
-              <div className="sh-itens-data">
-                <p className='sh-servicos-data-remuneracao'>Remuneração:</p>
-                <p className="sh-servicos-data-valor">R${ultimosServicos.remuneracao}</p>
-              </div>
-            </li>
-            {/* Remover */}
-          </ul>
+          <Servicos data={ultimosServicos} />
         </article>
 
+        {/* Card de planos */}
         <article className="sh-main-planos">
-          <h2 className="sh-planos-titulos"></h2>
+          <div className='sh-planos-titulos'>
+            <h2 className="sh-planos-titulo">Deseja encontrar um cliente?</h2>
+            <h4 className="sh-planos-subtitulo">Contrate um de nossos planos</h4>
+          </div>
+
+          <Planos />
+        </article>
+
+        {/* Vanatágens de ser nosso cliente */}
+        <article className="sh-main-vantagens">
+          <h2 className="sh-vantagens-titulo">Vantagens de ser nosso cliente</h2>
+
+          <ul className="sh-vantagem-lista">
+            <li className="sh-vantagem-item">
+              <div className='sh-vantagem-item-marcador'></div>
+
+            <div>
+              Uma parte de nossos lucros é destinada para <strong>
+                Casas de
+                Adoção
+              </strong> e <strong>Ongs de preservação da natureza</strong>, ao se tornar
+              nosso cliente você estará melhorando a vida de muitas pessoas
+            </div>
+            </li>
+
+            <li className="sh-vantagem-item">
+              <ul className="sh-vantagens-item-info">
+                <li className="sh-vantagens-info-item">
+                  <div>.</div>
+                  Verificamos o perfil de cada profissional antes de aprovar a criação da conta
+                </li>
+                <li className="sh-vantagens-info-item"></li>
+              </ul>
+            </li>
+
+            <li className="sh-vantagem-item">
+
+            </li>
+          </ul>
         </article>
       </section>
 
-      {/* Footer completo */}
       <section className="sh-footer">footer</section>
     </main>
-
   );
 }
 
 export default App;
+
+
+
