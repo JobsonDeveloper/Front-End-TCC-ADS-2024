@@ -10,8 +10,9 @@ import Servicos from './components/servicos/Servicos';
 import imgApresentacaoUm from './assets/images_background/background_header_1Resultado.webp'
 import imgApresentacaoDois from './assets/images_background/background_header_2Resultado.webp'
 import Planos from './components/planos/Planos'
+import ProfissionaisEmDestaque from './components/profissionaiEmDestaque/ProfissionaisEmDestaque';
 
-
+// ------------ Monta do banco ----------
 const ultimosServicos = [
   {
     tag: 'Serviços gerais',
@@ -39,6 +40,41 @@ const ultimosServicos = [
   },
 ];
 
+const profDestaque = [
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'João Paulo César',
+    servicoUm: 'Músico',
+    servicoDois: 'Professor',
+    servicoTres: 'Tatuador',
+    estrelas: 103
+  },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'Marcos Amorim da Silva',
+    servicoUm: 'Músico',
+    servicoDois: 'Professor',
+    servicoTres: 'Tatuador',
+    estrelas: 87
+  },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'Victor Amaral  de souza',
+    servicoUm: 'Músico',
+    servicoDois: 'Professor',
+    servicoTres: 'Tatuador',
+    estrelas: 65
+  },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'André Coutinho Andrade',
+    servicoUm: 'Músico',
+    servicoDois: 'Professor',
+    servicoTres: 'Tatuador',
+    estrelas: 49
+  },
+];
+
 function App() {
   window.onload = function () { console.log("Está carregado!") }
 
@@ -56,6 +92,7 @@ function App() {
               <a href="cadastro freela" className='sh-cadastro-buttons'>Cadastre-se</a>
             </div>
           </div>
+
           <div className="sh-apresentacao-posters">
             <img src={imgApresentacaoDois} alt="Imagem de pessoas no trabalho" className='sh-images-img' />
             <div className='sh-apresentacao-cadastro'>
@@ -76,7 +113,7 @@ function App() {
         </article>
 
         {/* Card de planos */}
-        <article className="sh-main-planos">
+        <article className="sh-main-planos" id='sh_planos'>
           <div className='sh-planos-titulos'>
             <h2 className="sh-planos-titulo">Deseja encontrar um cliente?</h2>
             <h4 className="sh-planos-subtitulo">Contrate um de nossos planos</h4>
@@ -89,33 +126,74 @@ function App() {
         <article className="sh-main-vantagens">
           <h2 className="sh-vantagens-titulo">Vantagens de ser nosso cliente</h2>
 
-          <ul className="sh-vantagem-lista">
-            <li className="sh-vantagem-item">
-              <div className='sh-vantagem-item-marcador'></div>
+          <div className="sh-vantagem-lista">
 
-            <div>
-              Uma parte de nossos lucros é destinada para <strong>
-                Casas de
-                Adoção
-              </strong> e <strong>Ongs de preservação da natureza</strong>, ao se tornar
-              nosso cliente você estará melhorando a vida de muitas pessoas
-            </div>
-            </li>
+            <ul className="sh-vantagem-lista-item">
+              <li className="sh-vantagem-item-info">
+                Uma parte de nossos lucros é destinada para <strong>Casas de Adoção
+                </strong> e <strong>Ongs de preservação da natureza</strong>, ao se tornar
+                nosso cliente você estará melhorando a vida de muitas pessoas
+              </li>
+            </ul>
 
-            <li className="sh-vantagem-item">
-              <ul className="sh-vantagens-item-info">
-                <li className="sh-vantagens-info-item">
-                  <div>.</div>
-                  Verificamos o perfil de cada profissional antes de aprovar a criação da conta
-                </li>
-                <li className="sh-vantagens-info-item"></li>
-              </ul>
-            </li>
+            <ul className="sh-vantagem-lista-item">
+              <li className="sh-vantagem-item-info">
+                Verificamos o perfil de cada profissional antes de aprovar a criação da conta
+              </li>
+              <li className="sh-vantagem-item-info">
+                Cobramos dos profissionais e clientes em caso de comprovação de atitude inapropriada
+              </li>
+            </ul>
 
-            <li className="sh-vantagem-item">
+            <ul className="sh-vantagem-lista-item">
+              <li className="sh-vantagem-item-info">
+                Garantia de <strong>Qualidade</strong> e <strong>Segurança</strong>
+              </li>
+              <li className="sh-vantagem-item-info">
+                Fornecemos uma <strong>Assistência humanizada</strong>
+              </li>
+              <li className="sh-vantagem-item-info">
+                Prezamos por um <strong>Atendimento personalizado</strong>
+                por parte de nossos atendentes
+              </li>
+            </ul>
 
-            </li>
-          </ul>
+          </div>
+        </article>
+
+        {/* Como começar */}
+        <article className="sh-main-comecar">
+          <h2 className="sh-comecar-titulo">Como começar</h2>
+
+          <div className="sh-comecar-tipo">
+            <ul className="sh-comecar-list">
+              <li className="sh-comecar-tipo-titlulo">Cliente</li>
+              <li className="sh-comecar-list-item">Clique em em um dos botões do site para realizar o cadastro ou acesse <a href="#">este link.</a></li>
+              <li className="sh-comecar-list-item">Selecione o tipo “<strong>Cliente</strong>” para proseguir com o cadastro.</li>
+              <li className="sh-comecar-list-item">Em cada tela, forneça os dados solicitados e clique em “<strong>Continuar</strong>”.</li>
+              <li className="sh-comecar-list-item">Na ultima tela, verifique se os dados fornecidos estão corretos.</li>
+              <li className="sh-comecar-list-item">Caso algum dado esteja incorreto clique nele para editar.</li>
+              <li className="sh-comecar-list-item">Após realizar a verificação, clique em “<strong>Cadastrar</strong>”.</li>
+              <li className="sh-comecar-list-item">Pronto! Seu perfil foi criado e está pronto para ser utilizado.</li>
+            </ul>
+
+            <ul className="sh-comecar-list">
+              <li className="sh-comecar-tipo-titlulo">Freelancer</li>
+              <li className="sh-comecar-list-item">Clique em em um dos <a href="#sh_planos">cards de planos</a>, no botão “<strong>Cadastre-se</strong>o início do site ou <a href="#">neste link.</a></li>
+              <li className="sh-comecar-list-item">Caso tenha clicado no link ou em um dos botões, selecione o tipo “<strong>Profissional</strong>” para proseguir com o cadastro e escolha o plano que você deseja.</li>
+              <li className="sh-comecar-list-item">Após selecionar o plano desejado, forneça os dados solicitados e clique em “<strong>Continuar</strong>”.</li>
+              <li className="sh-comecar-list-item">Na ultima tela, verifique se os dados fornecidos estão corretos.</li>
+              <li className="sh-comecar-list-item">Caso algum dado esteja incorreto clique nele para editar.</li>
+              <li className="sh-comecar-list-item">Após realizar a verificação, clique em “<strong>Cadastrar</strong>”.</li>
+              <li className="sh-comecar-list-item">Após isto, o seu perfil será analisado por nossa equipe, a aprovação da conta pode levar até 5 dias úteis, você será informado por E-mail sobre o resultado da análise.</li>
+            </ul>
+          </div>
+        </article>
+
+        {/* Profissionais em destaque */}
+        <article className="sh-profissionaisEmDestaque">
+          <h2 className="sh-profissionaisEmDestaque-titulo">Profissionais em destaque</h2>
+          <ProfissionaisEmDestaque dados={profDestaque}/>
         </article>
       </section>
 
