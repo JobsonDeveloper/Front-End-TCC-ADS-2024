@@ -3,7 +3,7 @@
 :root {
   --sh-font-family: "Roboto", sans-serif;
 
-  --sh-font-size-textos-header: 1.4rem;
+  --sh-font-size-textos-header: 1.3rem;
 
   --sh-cor-primaria: #fff;
   --sh-cor-secundaria: #0075FF;
@@ -62,7 +62,7 @@
 
     & .sh-lg-header-title {
       font-size: var(--sh-font-size-textos-header);
-      color: var(--sh-cor-terciaria);
+      color: var(--sh-cor-primaria);
 
       & .sh-logo-img {
         width: 70px;
@@ -153,42 +153,3 @@
     }
   }
 }
-
-/* @media (min-width: 1200px) {
-    :root {
-        --sh-font-family: "Roboto", sans-serif;
-    
-        --sh-font-size-textos-header: 1.2rem;
-    
-        --sh-cor-primaria: #fff;
-        --sh-cor-secundaria: #0075FF;
-        --sh-cor-terciaria: #000;
-        --sh-cor-textos: #6F6F6F;
-        --sh-cor-textos-hover: #2c2c2c;
-    
-        --sh-padding-geral: 5px 10px;
-    }
-
-    .sh-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .sh-desktop-logo {
-            height: max-content;
-            & .sh-logo-img {
-                width: 140px;
-            }
-
-        }
-    }
-
-    .sh-header-offcanvas {
-
-        & .sh-header-navigation {
-            flex-direction: row;
-            gap: 26px;
-            padding: 8px 0px 5px;
-        }
-    }
-} */
