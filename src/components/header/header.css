@@ -3,7 +3,7 @@
 :root {
     --sh-font-family: "Roboto", sans-serif;
 
-    --sh-font-size-textos: 1.8rem;
+    --sh-font-size-textos-header: 1.8rem;
 
     --sh-cor-primaria: #fff;
     --sh-cor-secundaria: #0075FF;
@@ -33,7 +33,7 @@
             }
 
             & .sh-logo-img {
-                width: 50px;
+                width: 100px;
             }
         }
 
@@ -59,10 +59,10 @@
         list-style-type: none;
         padding: 0;
         margin: 0;
-        gap: 5px;
+        row-gap: 15px;
 
         & .sh-navigation-item {
-            font-size: var(--sh-font-size-textos);
+            font-size: var(--sh-font-size-textos-header);
             font-family: var(--sh-font-family);
             color: var(--sh-cor-textos);
 
@@ -73,6 +73,7 @@
                 transition: .5s;
                 text-decoration: none;
                 color: var(--sh-cor-textos);
+                font-size: var(--sh-font-size-textos-header);
 
                 &:hover {
                     color: var(--sh-cor-textos-hover);
@@ -88,7 +89,7 @@
     :root {
         --sh-font-family: "Roboto", sans-serif;
     
-        --sh-font-size-textos: 1.2rem;
+        --sh-font-size-textos-header: 1.2rem;
     
         --sh-cor-primaria: #fff;
         --sh-cor-secundaria: #0075FF;

@@ -39,6 +39,7 @@ const Header = () => {
                 <Offcanvas.Header closeButton className='sh-offcanvas-element'>
                     <Offcanvas.Title className='sh-lg-header-logo'>
                         {/* <img src={Logo} alt="Logo da SkillHub" className='sh-logo-img' /> */}
+                        Opções
                     </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
