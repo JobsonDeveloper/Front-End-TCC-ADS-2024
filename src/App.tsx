@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import { useEffect, useLayoutEffect } from 'react';
 
 // Css
@@ -11,6 +11,7 @@ import imgApresentacaoUm from './assets/images_background/background_header_1Res
 import imgApresentacaoDois from './assets/images_background/background_header_2Resultado.webp'
 import Planos from './components/planos/Planos'
 import ProfissionaisEmDestaque from './components/profissionaiEmDestaque/ProfissionaisEmDestaque';
+import Footer from './components/footer/Footer';
 
 // ------------ Monta do banco ----------
 const ultimosServicos = [
@@ -76,8 +77,6 @@ const profDestaque = [
 ];
 
 function App() {
-  window.onload = function () { console.log("Está carregado!") }
-
   return (
     <main className='sh-container'>
 
@@ -89,7 +88,7 @@ function App() {
             <img src={imgApresentacaoUm} alt="Imagem de pessoas no trabalho" className='sh-images-img' />
             <div className='sh-apresentacao-cadastro'>
               <p className='sh-cadastro-textos'>Seja um Freelancer de sucesso</p>
-              <a href="cadastro freela" className='sh-cadastro-buttons'>Cadastre-se</a>
+              <Link to='/cadastro-freelancer' className='sh-cadastro-buttons'>Cadastre-se</Link>
             </div>
           </div>
 
@@ -97,7 +96,7 @@ function App() {
             <img src={imgApresentacaoDois} alt="Imagem de pessoas no trabalho" className='sh-images-img' />
             <div className='sh-apresentacao-cadastro'>
               <p className='sh-cadastro-textos'>Economize o seu tempo! Contrate um Freelancer</p>
-              <a href="cadastro cliente" className='sh-cadastro-buttons'>Cadastre-se</a>
+              <Link to='/cadastro-cliente' className='sh-cadastro-buttons'  >Cadastre-se</Link>
             </div>
           </div>
         </article>
@@ -106,7 +105,7 @@ function App() {
 
       <section className="sh-main">
         {/* Últimos serviços postados */}
-        <article className="sh-main-servicos">
+        <article className="sh-main-servicos" id='sh_ultimas_postagens'>
           <h2 className="sh-servicos-titulo">Últimos serviços postados</h2>
 
           <Servicos data={ultimosServicos} />
@@ -123,7 +122,7 @@ function App() {
         </article>
 
         {/* Vanatágens de ser nosso cliente */}
-        <article className="sh-main-vantagens">
+        <article className="sh-main-vantagens" id='sh_vantagens'>
           <h2 className="sh-vantagens-titulo">Vantagens de ser nosso cliente</h2>
 
           <div className="sh-vantagem-lista">
@@ -162,16 +161,16 @@ function App() {
         </article>
 
         {/* Como começar */}
-        <article className="sh-main-comecar">
+        <article className="sh-main-comecar" id='sh_comecar'>
           <h2 className="sh-comecar-titulo">Como começar</h2>
 
           <div className="sh-comecar-tipo">
             <ul className="sh-comecar-list">
               <li className="sh-comecar-tipo-titlulo">Cliente</li>
-              <li className="sh-comecar-list-item">Clique em em um dos botões do site para realizar o cadastro ou acesse <a href="#">este link.</a></li>
+              <li className="sh-comecar-list-item">Clique em em um dos botões do site para realizar o cadastro ou acesse <Link to='/cadastro-cliente'>este link.</Link></li>
               <li className="sh-comecar-list-item">Selecione o tipo “<strong>Cliente</strong>” para proseguir com o cadastro.</li>
               <li className="sh-comecar-list-item">Em cada tela, forneça os dados solicitados e clique em “<strong>Continuar</strong>”.</li>
-              <li className="sh-comecar-list-item">Na ultima tela, verifique se os dados fornecidos estão corretos.</li>
+              <li className="sh-comecar-list-item">Na ultima tela, verifique se os dados fornecidcadastro-freelanceros estão corretos.</li>
               <li className="sh-comecar-list-item">Caso algum dado esteja incorreto clique nele para editar.</li>
               <li className="sh-comecar-list-item">Após realizar a verificação, clique em “<strong>Cadastrar</strong>”.</li>
               <li className="sh-comecar-list-item">Pronto! Seu perfil foi criado e está pronto para ser utilizado.</li>
@@ -179,7 +178,7 @@ function App() {
 
             <ul className="sh-comecar-list">
               <li className="sh-comecar-tipo-titlulo">Freelancer</li>
-              <li className="sh-comecar-list-item">Clique em em um dos <a href="#sh_planos">cards de planos</a>, no botão “<strong>Cadastre-se</strong>o início do site ou <a href="#">neste link.</a></li>
+              <li className="sh-comecar-list-item">Clique em em um dos <a href="#sh_planos">cards de planos</a>, no botão “<strong>Cadastre-se</strong> no início do site ou <Link to='/cadastro-freelancer'>este link.</Link></li>
               <li className="sh-comecar-list-item">Caso tenha clicado no link ou em um dos botões, selecione o tipo “<strong>Profissional</strong>” para proseguir com o cadastro e escolha o plano que você deseja.</li>
               <li className="sh-comecar-list-item">Após selecionar o plano desejado, forneça os dados solicitados e clique em “<strong>Continuar</strong>”.</li>
               <li className="sh-comecar-list-item">Na ultima tela, verifique se os dados fornecidos estão corretos.</li>
@@ -191,13 +190,13 @@ function App() {
         </article>
 
         {/* Profissionais em destaque */}
-        <article className="sh-profissionaisEmDestaque">
+        <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
           <h2 className="sh-profissionaisEmDestaque-titulo">Profissionais em destaque</h2>
-          <ProfissionaisEmDestaque dados={profDestaque}/>
+          <ProfissionaisEmDestaque dados={profDestaque} />
         </article>
       </section>
 
-      <section className="sh-footer">footer</section>
+      <Footer />
     </main>
   );
 }

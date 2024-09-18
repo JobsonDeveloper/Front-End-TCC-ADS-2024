@@ -1,6 +1,7 @@
 import React from 'react';
 import './header.css'
 import Logo from '../../assets/icons/logo.svg';
+import { Link } from 'react-router-dom';
 
 // ---- Bootstrap
 import { useState } from 'react';
@@ -29,7 +30,9 @@ const Header = () => {
             </div>
 
             <div className="d-none d-lg-block sh-desktop-logo">
-                <img src={Logo} alt="Logo da SkillHub" className='sh-logo-img' />
+                <Link to='/'>
+                    <img src={Logo} alt="Logo da SkillHub" className='sh-logo-img' />
+                </Link>
             </div>
 
             <Offcanvas show={show} onHide={handleClose} responsive="lg" className='sh-header-offcanvas'>
@@ -41,22 +44,22 @@ const Header = () => {
                 <Offcanvas.Body>
                     <ul className="mb-0 sh-header-navigation">
                         <li className="sh-navigation-item">
-                            <p className='sh-item-text'>Planos</p>
+                            <a href='#sh_planos' className='sh-item-text'>Planos</a>
                         </li>
                         <li className="sh-navigation-item">
-                            <p className='sh-item-text'>Vantágens</p>
+                            <a href='#sh_vantagens' className='sh-item-text'>Vantágens</a>
                         </li>
                         <li className="sh-navigation-item">
-                            <p className='sh-item-text'>Como começar</p>
+                            <a href='#sh_comecar' className='sh-item-text'>Como começar</a>
                         </li>
                         <li className="sh-navigation-item">
-                            <p className='sh-item-text'>Sobre nós</p>
+                            <Link to='/sobrenos' className='sh-item-text'>Sobre nós</Link>
                         </li>
                         <li className="sh-navigation-item">
-                            <p className='sh-item-text'>Dúvidas</p>
+                            <Link to='/duvidas' className='sh-item-text'>Dúvidas</Link>
                         </li>
                         <li className="sh-navigation-item">
-                            <p className='sh-item-text'>Login</p>
+                            <Link to='/login' className='sh-item-text'>Login</Link>
                         </li>
                     </ul>
                 </Offcanvas.Body>

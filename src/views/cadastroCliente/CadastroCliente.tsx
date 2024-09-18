@@ -1,9 +1,10 @@
 import React from "react";
+import './CadastroCliente.css';
 
 const CadastroCliente = () => {
     return (
         <div>
-            <h1>Página de cadastro de cliente</h1>
+            <h1>Cadastro de cliente</h1>
         </div>
     )
 }

@@ -9,6 +9,8 @@
     --sh-font-size-tag: 1.4rem;
     --sh-font-size-definicao: 1.4rem;
     --sh-font-size-valor: 3rem;
+
+    --sh-card-width: 280px;
 }
 
 & .sh-planos-cards {
@@ -23,7 +25,12 @@
     & .sh-planos-card-item {
         
         & .sh-planos-car-img {
-            width: 280px;
+            width: var(--sh-card-width);
+            cursor: pointer;
+        }
+
+        &:hover {
+            filter: drop-shadow(0 0 .5px rgba(0, 0, 0, .4));
         }
     }
 }

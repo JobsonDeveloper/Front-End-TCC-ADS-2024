@@ -71,7 +71,8 @@
                 border-bottom: 2px solid transparent;
                 cursor: pointer;
                 transition: .5s;
-                margin: 0;
+                text-decoration: none;
+                color: var(--sh-cor-textos);
 
                 &:hover {
                     color: var(--sh-cor-textos-hover);
