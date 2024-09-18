@@ -20,14 +20,19 @@ const Header = () => {
 
     return (
         <section className="sh-header">
-            <div className="d-lg-none sh-header-options">
-                <div className="sh-options-itens">
+            <ul className="d-lg-none sh-header-options">
+                <li className="sh-options-itens">
                     <img src={Options} alt="Opções de navegação" className='sh-options-img' onClick={handleShow} />
-                </div>
-                <div className="sh-options-itens">
+                </li>
+
+                <li className="sh-options-itens">
                     <img src={Logo} alt="Logo da SkillHub" className='sh-logo-img' />
-                </div>
-            </div>
+                </li>
+
+                <li className="sh-options-itens">
+                    <Link to='/login' className='sh-options-login'>Login</Link>
+                </li>
+            </ul>
 
             <div className="d-none d-lg-block sh-desktop-logo">
                 <Link to='/'>
@@ -58,9 +63,6 @@ const Header = () => {
                         </li>
                         <li className="sh-navigation-item">
                             <Link to='/duvidas' className='sh-item-text'>Dúvidas</Link>
-                        </li>
-                        <li className="sh-navigation-item">
-                            <Link to='/login' className='sh-item-text'>Login</Link>
                         </li>
                     </ul>
                 </Offcanvas.Body>
