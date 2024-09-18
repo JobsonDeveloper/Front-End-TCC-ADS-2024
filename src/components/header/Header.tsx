@@ -64,6 +64,9 @@ const Header = () => {
                         <li className="sh-navigation-item">
                             <Link to='/duvidas' className='sh-item-text'>Dúvidas</Link>
                         </li>
+                        <li className="sh-navigation-item">
+                            <Link to='/login' className='sh-item-text'>Login</Link>
+                        </li>
                     </ul>
                 </Offcanvas.Body>
             </Offcanvas>
