@@ -24,7 +24,7 @@
 
   --sh-itens-gap-top: 45px;
 
-  --sh-inicial-padding: 45px 10px 0 10px;
+  --sh-inicial-padding: 45px 10px 5px 10px;
 }
 
 .sh-container {
@@ -40,12 +40,11 @@
       flex-direction: column;
       padding: var(--sh-inicial-padding);
       justify-content: space-between;
-      gap: 20px;
+      gap: 50px;
 
       & .sh-apresentacao-posters {
         display: flex;
         flex-direction: column;
-        row-gap: 30px;
 
         & .sh-images-img {
           width: 100%;
@@ -53,6 +52,7 @@
 
         & .sh-apresentacao-cadastro {
           display: flex;
+          flex-direction: column;
           gap: 5px;
           justify-content: center;
           align-items: center;
@@ -227,6 +227,8 @@
         & .sh-apresentacao-posters {
   
           & .sh-apresentacao-cadastro {
+            flex-direction: row;
+            gap: 10px;
   
             & .sh-cadastro-textos {
 
