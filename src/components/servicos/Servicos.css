@@ -4,7 +4,7 @@
   display: flex;
   overflow-x: scroll;
   justify-content: space-between;
-  gap: 5px;
+  gap: 15px;
 
   & .sh-servicos-itens {
     display: flex;
@@ -48,17 +48,15 @@
 
       & .sh-servicos-data-remuneracao {
         font-size: var(--sh-font-size-textos);
-        color: var(--sh-cor-textos);
+        color: var(--sh-cor-terciaria);
         margin: 0;
+        padding: 0;
       }
 
       & .sh-servicos-data-valor {
         margin: 0;
         font-size: 1.2rem;
-        color: var(--sh-cor-terciaria);
-        padding: 1px 5px;
-        border-radius: 50px;
-        background-color: var(--sh-cor-quaternaria);
+        color: var(--sh-cor-textos);
         text-wrap: nowrap;
       }
     }
@@ -67,6 +65,7 @@
     & .sh-itens-remuneracao {
       flex-direction: column;
       align-items: start;
+      gap: 0;
     }
   }
 }
