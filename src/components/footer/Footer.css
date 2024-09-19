@@ -27,9 +27,9 @@
     margin: 0;
     list-style-type: none;
     display: grid;
-    grid-template-areas: 
-    "fundadores mapa"
-    "redes email";
+    grid-template-areas:
+      "fundadores mapa"
+      "redes email";
     row-gap: 25px;
 
     & .sh-footer-fundadores {
@@ -122,7 +122,7 @@
         column-gap: 50px;
         padding: 0;
 
-        & .sh-footer-mapa-item{
+        & .sh-footer-mapa-item {
           & .sh-mapa-link {
             color: var(--sh-cor-textos);
             font-size: var(--sh-footer-font-size-text);
@@ -141,11 +141,139 @@
 }
 
 @media (min-width: 576px) {
+  & .sh-footer {
 
+    & .sh-footer-info {
+      justify-content: space-between;
+
+      & .sh-footer-fundadores {
+
+        & .sh-fundadores-title {
+          text-align: center;
+        }
+
+        & .sh-fundadores-list {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 30px;
+          width: max-content;
+
+          & .sh-fundadores-nome {
+          }
+        }
+      }
+
+      & .sh-footer-redesSociais {
+
+        & .sh-footer-redesSociais-img {
+        }
+      }
+
+      & .sh-footer-email {
+        & .sh-email-title {
+        }
+
+        & .sh-email-text {
+        }
+      }
+
+      & .sh-footer-mapa {
+
+        & .sh-footer-mapa-title {
+          text-align: center;
+        }
+
+        & .sh-footer-mapa-list {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 30px;
+
+          & .sh-footer-mapa-item {
+            & .sh-mapa-link {
+            }
+          }
+        }
+      }
+    }
+
+    & .sh-footer-copyright {
+    }
+  }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 768px) {
+  & .sh-footer {
+
+    & .sh-footer-info {
+      justify-content: space-between;
+      grid-template-areas:
+      "fundadores redes email mapa";
+
+      & .sh-footer-fundadores {
+
+        & .sh-fundadores-title {
+          text-align: center;
+        }
+
+        & .sh-fundadores-list {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 30px;
+          width: max-content;
+
+          & .sh-fundadores-nome {
+          }
+        }
+      }
+
+      & .sh-footer-redesSociais {
+
+        & .sh-footer-redesSociais-img {
+        }
+      }
+
+      & .sh-footer-email {
+        & .sh-email-title {
+          text-align: center;
+        }
+
+        & .sh-email-text {
+        }
+      }
+
+      & .sh-footer-mapa {
+
+        & .sh-footer-mapa-title {
+          text-align: center;
+        }
+
+        & .sh-footer-mapa-list {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 30px;
+
+          & .sh-footer-mapa-item {
+            & .sh-mapa-link {
+            }
+          }
+        }
+      }
+    }
+
+    & .sh-footer-copyright {
+    }
+  }
+}
+
+@media (min-width: 992px) {
   :root {
+    --sh-footer-padding: 20px 20px 5px;
+  }
+}
+
+/* 
+@media (min-width: 1400px) {
+:root {
     --sh-font-family: "Roboto", sans-serif;
   
     --sh-cor-primaria: #fff;
@@ -275,4 +403,4 @@
       color: var(--sh-cor-textos);
     }
   }
-}
+} */
