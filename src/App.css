@@ -128,8 +128,8 @@
       & .sh-vantagem-lista {
         display: flex;
         flex-direction: column;
-        padding: 55px 30px;
-        gap: 50px;
+        padding: 45px 30px;
+        gap: 30px;
 
         & .sh-vantagem-lista-item {
           display: flex;
@@ -218,83 +218,83 @@
 @media (min-width: 768px) {
   :root {
     --sh-font-family: "Roboto", sans-serif;
-  
+
     --sh-font-size-textos: 1.2rem;
     --sh-font-size-posters: 1.3rem;
     --sh-font-size-titulos: 2rem;
     --sh-font-size-subtitulos: 1.7rem;
     --sh-font-size-textos-buttons: 1.2rem;
-  
+
     --sh-font-size-servicos-titulos: 1.6rem;
-  
+
     --sh-cor-primaria: #fff;
     --sh-cor-secundaria: #0075FF;
     --sh-cor-terciaria: #000;
     --sh-cor-quaternaria: #35FF62;
     --sh-cor-textos: #6F6F6F;
     --sh-cor-textos-hover: #2c2c2c;
-  
+
     --sh-itens-gap-top: 45px;
-  
+
     --sh-inicial-padding: 45px 10px 5px 10px;
   }
 
   .sh-container {
     & .sh-header-apresentacao {
       min-height: 100vh;
-  
+
       & .sh-apresentacao {
         display: flex;
         flex-direction: row;
-  
+
         & .sh-apresentacao-posters {
-  
+
           & .sh-apresentacao-cadastro {
             flex-direction: row;
             gap: 10px;
-  
+
             & .sh-cadastro-textos {
               font-size: var(--sh-font-size-posters);
             }
-  
+
             & .sh-cadastro-buttons {
               font-size: var(--sh-font-size-textos-buttons);
             }
           }
-  
+
         }
       }
     }
-  
+
     & .sh-main {
-  
+
       & .sh-main-servicos {
         display: flex;
         flex-direction: column;
         gap: var(--sh-itens-gap-top);
         padding: var(--sh-inicial-padding);
-  
+
         & .sh-servicos-titulo {
           text-align: center;
           font-size: var(--sh-font-size-titulos);
           color: var(--sh-cor-terciaria);
         }
       }
-  
+
       & .sh-main-planos {
         padding: var(--sh-inicial-padding);
         display: flex;
         flex-direction: column;
         align-items: center;
-  
+
         & .sh-planos-titulos {
-  
+
           & .sh-planos-titulo {
             text-align: center;
             font-size: var(--sh-font-size-titulos);
             color: var(--sh-cor-terciaria);
           }
-  
+
           & .sh-planos-subtitulo {
             color: var(--sh-cor-textos);
             font-size: var(--sh-font-size-subtitulos);
@@ -302,34 +302,34 @@
           }
         }
       }
-  
+
       & .sh-main-vantagens {
         padding: var(--sh-inicial-padding);
-  
+
         & .sh-vantagens-titulo {
           text-align: center;
           font-size: var(--sh-font-size-titulos);
           color: var(--sh-cor-terciaria);
         }
-  
+
         & .sh-vantagem-lista {
           display: flex;
           flex-direction: column;
           padding: 55px 30px;
           gap: 50px;
-  
+
           & .sh-vantagem-lista-item {
             display: flex;
             flex-direction: column;
             gap: 10px;
             padding: 0;
-  
-  
+
+
             & .sh-vantagem-item-info {
               list-style-image: url('./assets/icons/marcador.png');
               font-size: var(--sh-font-size-textos);
               color: var(--sh-cor-textos);
-  
+
               & strong {
                 color: var(--sh-cor-terciaria);
               }
@@ -337,59 +337,59 @@
           }
         }
       }
-  
+
       & .sh-main-comecar {
         padding: var(--sh-inicial-padding);
-  
+
         & .sh-comecar-titulo {
           text-align: center;
           font-size: var(--sh-font-size-titulos);
           color: var(--sh-cor-terciaria);
         }
-  
+
         & .sh-comecar-tipo {
           padding: 30px 0 0;
           display: flex;
           flex-direction: column;
           gap: 50px;
           justify-items: center;
-  
+
           & .sh-comecar-list {
             list-style-type: none;
             padding: 0;
             display: flex;
             flex-direction: column;
             gap: 12px;
-  
+
             & .sh-comecar-tipo-titlulo {
               color: var(--sh-cor-textos);
               font-size: var(--sh-font-size-titulos);
               text-align: center;
               padding: 5px 0;
             }
-  
+
             & .sh-comecar-list-item {
               color: var(--sh-cor-textos);
               font-size: var(--sh-font-size-textos);
-  
+
               & a {
                 text-decoration: none;
               }
-  
+
               & strong {
                 color: var(--sh-cor-terciaria);
               }
             }
           }
-  
+
         }
       }
-  
+
       & .sh-profissionaisEmDestaque {
         padding: var(--sh-inicial-padding);
         display: flex;
         flex-direction: column;
-  
+
         & .sh-profissionaisEmDestaque-titulo {
           text-align: center;
           font-size: var(--sh-font-size-titulos);
@@ -397,7 +397,142 @@
         }
       }
     }
-  
+
+    & .sh-footer {}
+  }
+}
+
+@media (min-width: 992px) {
+  .sh-container {
+
+    & .sh-header-apresentacao {
+
+      & .sh-apresentacao {
+
+        & .sh-apresentacao-posters {
+
+          & .sh-images-img {
+          }
+
+          & .sh-apresentacao-cadastro {
+
+            & .sh-cadastro-textos {
+            }
+
+            & .sh-cadastro-buttons {
+              
+            }
+          }
+
+        }
+      }
+    }
+
+    & .sh-main {
+
+      & .sh-main-servicos {
+
+        & .sh-servicos-titulo {
+        }
+      }
+
+      & .sh-main-planos {
+
+        & .sh-planos-titulos {
+
+          & .sh-planos-titulo {
+          }
+
+          & .sh-planos-subtitulo {
+          }
+        }
+      }
+
+      & .sh-main-vantagens {
+
+        & .sh-vantagens-titulo {
+          text-align: center;
+          font-size: var(--sh-font-size-titulos);
+          color: var(--sh-cor-terciaria);
+        }
+
+        & .sh-vantagem-lista {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+
+          & .sh-vantagem-lista-item {
+
+
+            & .sh-vantagem-item-info {
+
+              & strong {
+              }
+            }
+          }
+        }
+      }
+
+      & .sh-main-comecar {
+        padding: var(--sh-inicial-padding);
+
+        & .sh-comecar-titulo {
+          text-align: center;
+          font-size: var(--sh-font-size-titulos);
+          color: var(--sh-cor-terciaria);
+        }
+
+        & .sh-comecar-tipo {
+          padding: 30px 0 0;
+          display: flex;
+          flex-direction: column;
+          gap: 50px;
+          justify-items: center;
+
+          & .sh-comecar-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            & .sh-comecar-tipo-titlulo {
+              color: var(--sh-cor-textos);
+              font-size: var(--sh-font-size-titulos);
+              text-align: center;
+              padding: 5px 0;
+            }
+
+            & .sh-comecar-list-item {
+              color: var(--sh-cor-textos);
+              font-size: var(--sh-font-size-textos);
+
+              & a {
+                text-decoration: none;
+              }
+
+              & strong {
+                color: var(--sh-cor-terciaria);
+              }
+            }
+          }
+
+        }
+      }
+
+      & .sh-profissionaisEmDestaque {
+        padding: var(--sh-inicial-padding);
+        display: flex;
+        flex-direction: column;
+
+        & .sh-profissionaisEmDestaque-titulo {
+          text-align: center;
+          font-size: var(--sh-font-size-titulos);
+          color: var(--sh-cor-terciaria);
+        }
+      }
+    }
+
+    /* Todo o footer */
     & .sh-footer {}
   }
 }
