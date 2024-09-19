@@ -1,64 +1,65 @@
-@media(min-width: 1200px) {
-  .sh-servicos-lista {
-    list-style-type: none;
-    padding: 0;
+.sh-servicos-lista {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  overflow-x: scroll;
+  justify-content: space-between;
+  gap: 5px;
+
+  & .sh-servicos-itens {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 5px;
 
-    & .sh-servicos-itens {
+    & .sh-itens-data {
       display: flex;
-      flex-direction: column;
-      gap: 5px;
+      justify-content: start;
+      align-items: center;
+      gap: 10px;
+      width: 265px;
 
-      & .sh-itens-data {
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        gap: 10px;
-        width: 265px;
+      & .sh-servicos-img-perfil {
+        width: 25px;
+      }
 
-        & .sh-servicos-img-perfil {
-          width: 25px;
-        }
+      & .sh-servicos-data-marcadores {
+        margin: 0;
+        font-size: 1.2rem;
+        color: var(--sh-cor-terciaria);
+        padding: 1px 5px;
+        border-radius: 50px;
+        background-color: var(--sh-cor-quaternaria);
+      }
 
-        & .sh-servicos-data-marcadores {
-          margin: 0;
-          font-size: 1.2rem;
-          color: var(--sh-cor-terciaria);
-          padding: 1px 5px;
-          border-radius: 50px;
-          background-color: var(--sh-cor-quaternaria);
-        }
+      & .sh-servicos-data-descricao {
+        font-size: var(--sh-font-size-textos);
+        color: var(--sh-cor-textos);
+        height: 80px;
 
-        & .sh-servicos-data-descricao {
-          font-size: var(--sh-font-size-textos);
-          color: var(--sh-cor-textos);
-          height: 80px;
+        /* Limitar tamanho de texto */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+      }
 
-          /* Limitar tamanho de texto */
-          overflow: hidden;
-          text-overflow: ellipsis; 
-          display: -webkit-box;
-          -webkit-line-clamp: 4;
-          -webkit-box-orient: vertical;
-        }
+      & .sh-servicos-data-remuneracao {
+        font-size: var(--sh-font-size-textos);
+        color: var(--sh-cor-textos);
+        margin: 0;
+      }
 
-        & .sh-servicos-data-remuneracao {
-          font-size: var(--sh-font-size-textos);
-          color: var(--sh-cor-textos);
-          margin: 0;
-        }
-
-        & .sh-servicos-data-valor {
-          margin: 0;
-          font-size: 1.2rem;
-          color: var(--sh-cor-terciaria);
-          padding: 1px 5px;
-          border-radius: 50px;
-          background-color: var(--sh-cor-quaternaria);
-        }
+      & .sh-servicos-data-valor {
+        margin: 0;
+        font-size: 1.2rem;
+        color: var(--sh-cor-terciaria);
+        padding: 1px 5px;
+        border-radius: 50px;
+        background-color: var(--sh-cor-quaternaria);
       }
     }
   }
 }
+
+@media(min-width: 1200px) {}

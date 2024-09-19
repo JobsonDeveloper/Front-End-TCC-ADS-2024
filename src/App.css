@@ -15,6 +15,8 @@
   --sh-font-size-subtitulos: 1.7rem;
   --sh-font-size-textos-buttons: 1rem;
 
+  --sh-font-size-servicos-titulos: 1.6rem;
+
   --sh-cor-primaria: #fff;
   --sh-cor-secundaria: #0075FF;
   --sh-cor-terciaria: #000;
@@ -30,7 +32,6 @@
 .sh-container {
   font-family: var(--sh-font-family);
 
-  /* Todo o header */
   & .sh-header-apresentacao {
     min-height: 100vh;
     border-bottom: 1px solid var(--sh-cor-textos);
@@ -78,7 +79,6 @@
     }
   }
 
-  /* Todo o main */
   & .sh-main {
 
     & .sh-main-servicos {
@@ -89,7 +89,7 @@
 
       & .sh-servicos-titulo {
         text-align: center;
-        font-size: var(--sh-font-size-titulos);
+        font-size: var(--sh-font-size-servicos-titulos);
         color: var(--sh-cor-terciaria);
       }
     }
