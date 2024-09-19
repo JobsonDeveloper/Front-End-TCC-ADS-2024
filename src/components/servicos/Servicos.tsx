@@ -13,7 +13,7 @@ const Servicos = ({ data }: any) => {
       <div className="sh-itens-data">
         <p className="sh-servicos-data-descricao">{servico.descricao} da noite da segunda-feira, como se nada tivesse acontecido</p>
       </div>
-      <div className="sh-itens-data">
+      <div className="sh-itens-data sh-itens-remuneracao">
         <p className="sh-servicos-data-remuneracao">Remuneração:</p>
         <p className="sh-servicos-data-valor">R${servico.remuneracao} - {servico.tipoDeRemuneracao}</p>
       </div>
