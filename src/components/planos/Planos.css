@@ -10,7 +10,7 @@
     --sh-font-size-definicao: 1.4rem;
     --sh-font-size-valor: 3rem;
 
-    --sh-card-width: 280px;
+    --sh-card-width: 300px;
 }
 
 & .sh-planos-cards {
@@ -37,7 +37,7 @@
 }
 
 @media (min-width: 1400px) {
-    :root {
+    /* :root {
         --sh-cor-primaria: #fff;
         --sh-cor-secundaria: #0075FF;
         --sh-cor-terciaria: #000;
@@ -72,5 +72,5 @@
                 filter: drop-shadow(0 0 .5px rgba(0, 0, 0, .4));
             }
         }
-    }
+    } */
 }
