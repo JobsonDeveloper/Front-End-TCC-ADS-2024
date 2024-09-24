@@ -32,6 +32,10 @@
 .sh-container {
   font-family: var(--sh-font-family);
 
+  & sh-container-loading {
+    display: flex;
+  }
+
   & .sh-header-apresentacao {
     min-height: 100vh;
     border-bottom: 1px solid var(--sh-cor-textos);

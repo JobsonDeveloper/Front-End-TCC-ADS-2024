@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
-import { useEffect, useLayoutEffect } from 'react';
+import { StrictMode, useEffect, useLayoutEffect, useState } from 'react';
 
 // Css
 import './App.css'
@@ -12,6 +12,8 @@ import imgApresentacaoDois from './assets/images_background/background_header_2R
 import Planos from './components/planos/Planos'
 import ProfissionaisEmDestaque from './components/profissionaiEmDestaque/ProfissionaisEmDestaque';
 import Footer from './components/footer/Footer';
+import Loading from './components/loading/Loading';
+import { createRoot } from 'react-dom/client';
 
 // ------------ Monta do banco ----------
 const ultimosServicos = [
@@ -77,8 +79,43 @@ const profDestaque = [
 ];
 
 function App() {
+  const [removeLoading, setRemoveLoading] = useState(false);
+  
+  useEffect(() => {
+    
+  }, []);
+
+
+  // async function pegarDados() {
+  //   try {
+
+  //     const formData = new FormData();
+  //     formData.append('acao', 'login');
+  //     formData.append('cpf', '092.612.214-24');
+  //     formData.append('senha', '12345678');
+
+  //     const requsicao = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+  //       method: 'POST',
+  //       mode: 'cors',
+  //       body: formData
+  //     });
+
+  //     const resposta = await requsicao.json();
+
+  //     let status = resposta.status;
+  //     let dados = resposta.data;
+
+  //     console.log(status, dados);
+  //     setRemoveLoading(true);
+
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
   return (
     <main className='sh-container'>
+      {!removeLoading && <Loading />}
 
       <section className="sh-header-apresentacao">
         <Header />
