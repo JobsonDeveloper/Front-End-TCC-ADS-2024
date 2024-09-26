@@ -80,9 +80,9 @@ const profDestaque = [
 
 function App() {
   const [removeLoading, setRemoveLoading] = useState(false);
-  
+
   useEffect(() => {
-    
+    setRemoveLoading(true);
   }, []);
 
 
