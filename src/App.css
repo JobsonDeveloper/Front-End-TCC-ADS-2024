@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 * {
   padding: 0;
@@ -7,26 +7,30 @@
 }
 
 :root {
-  --sh-font-family: "Roboto", sans-serif;
+  --sh-index-font-family: "Nunito", sans-serif;
 
-  --sh-font-size-textos: 1.2rem;
-  --sh-font-size-posters: 1rem;
-  --sh-font-size-titulos: 1.6rem;
-  --sh-font-size-subtitulos: 1.4rem;
-  --sh-font-size-textos-buttons: 1rem;
+  --sh-index-font-size-textos: 1.2rem;
+  --sh-index-font-size-posters: 1rem;
+  --sh-index-font-size-titulos: 1.6rem;
+  --sh-index-font-size-subtitulos: 1.4rem;
+  --sh-index-font-size-textos-buttons: 1rem;
 
-  --sh-font-size-servicos-titulos: 1.6rem;
+  --sh-index-font-size-servicos-titulos: 1.6rem;
 
-  --sh-cor-primaria: #fff;
-  --sh-cor-secundaria: #0075FF;
-  --sh-cor-terciaria: #000;
-  --sh-cor-quaternaria: #35FF62;
-  --sh-cor-textos: #6F6F6F;
-  --sh-cor-textos-hover: #2c2c2c;
+  --sh-index-cor-primaria: #fff;
+  --sh-index-cor-secundaria: #0075FF;
+  --sh-index-cor-terciaria: #000;
+  --sh-index-cor-quaternaria: #35FF62;
+  --sh-index-cor-textos: #6F6F6F;
+  --sh-index-cor-textos-hover: #2c2c2c;
 
-  --sh-itens-gap-top: 45px;
+  --sh-index-itens-gap-top: 45px;
 
-  --sh-inicial-padding: 45px 10px 5px 10px;
+  --sh-index-inicial-padding: 45px 10px 5px 10px;
+
+
+  --sh-index-font-size-titulos: 1.7rem;
+  --sh-index-font-size-textos: 1.2rem;
 }
 
 .sh-container {
@@ -38,16 +42,97 @@
 
   & .sh-header-apresentacao {
     min-height: 100vh;
-    border-bottom: 1px solid var(--sh-cor-textos);
 
     & .sh-apresentacao {
       display: flex;
       flex-direction: column;
-      padding: var(--sh-inicial-padding);
       justify-content: space-between;
-      gap: 50px;
+      gap: 10px;
 
-      & .sh-apresentacao-posters {
+      & .sh-apresentacao-um {
+        & .sh-apresentacao-img {
+          width: 100%;
+        }
+      }
+
+      & .sh-apresentacao-textos {
+        display: flex;
+        flex-direction: column;
+        padding: 0 5px;
+
+        & .sh-apresentacao-titulos {
+          font-size: var(--sh-index-font-size-titulos);
+          color: var(--sh-index-cor-terciaria);
+        }
+
+        & .sh-apresentacao-paragrafos {
+          font-size: var(--sh-index-font-size-textos);
+          color: var(--sh-index-cor-textos);
+          margin-top: 2px;
+        }
+      }
+
+      & .sh-apresentacao-button {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        & .sh-apresentacao-button-item {
+          & .sh-apresentacao-button-icon {
+            width: 20px;
+          }
+
+          & .sh-invert {
+            rotate: 180deg;
+          }
+
+          & .sh-apresentacao-button-cadastro {
+            text-decoration: none;
+            font-size: var(--sh-index-font-size-subtitulos);
+            color: var(--sh-index-cor-secundaria);
+          }
+        }
+      }
+
+      & .sh-apresentacao-dois {
+        display: flex;
+        flex-direction: column;
+        padding: 0 5px;
+
+        & .sh-apresentacao-dois-container-img {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          & .sh-apresentacao-dois-titulos {
+            margin: 0;
+            padding: 0;
+            font-size: var(--sh-index-font-size-titulos);
+            color: var(--sh-index-cor-terciaria);
+          }
+
+          & .sh-apresentacao-dois-img {
+            width: 80%;
+          }
+        }
+
+        & .sh-apresentacao-textos {
+          display: flex;
+          flex-direction: column;
+          padding: 10px 0 0;
+
+          & .sh-apresentacao-dois-textos {
+            padding: 0;
+            font-size: var(--sh-index-font-size-textos);
+            color: var(--sh-index-cor-textos);
+          }
+        }
+      }
+
+      /* & .sh-apresentacao-posters {
         display: flex;
         flex-direction: column;
 
@@ -79,7 +164,7 @@
           }
         }
 
-      }
+      } */
     }
   }
 
@@ -219,7 +304,7 @@
   & .sh-footer {}
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   :root {
     --sh-font-family: "Roboto", sans-serif;
 
@@ -534,7 +619,6 @@
       }
     }
 
-    /* Todo o footer */
     & .sh-footer {}
   }
 }
@@ -553,16 +637,14 @@
       width: 1400px;
     }
 
-    /* Main */
     & .sh-main {
       background-color: rgb(92, 165, 249);
       width: 1400px;
     }
 
-    /* Footer */
     & .sh-footer {
       background-color: rgb(185, 64, 236);
       width: 1400px;
     }
   }
-}
+} */

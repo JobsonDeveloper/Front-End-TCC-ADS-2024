@@ -15,6 +15,10 @@ import Footer from './components/footer/Footer';
 import Loading from './components/loading/Loading';
 import { createRoot } from 'react-dom/client';
 
+import backgroundApresentacaoUm from './assets/index/backgrounds/background-apresentacao-lg.png'
+import backgroundApresentacaoDois from './assets/index/backgrounds/imagem-apresentacao.webp'
+import apresentacaoButtonIcon from './assets/index/icons/apresentacao-button-icon.png';
+
 // ------------ Monta do banco ----------
 const ultimosServicos = [
   {
@@ -121,7 +125,7 @@ function App() {
         <Header />
 
         <article className='sh-apresentacao'>
-          <div className="sh-apresentacao-posters">
+          {/* <div className="sh-apresentacao-posters">
             <img src={imgApresentacaoUm} alt="Imagem de pessoas no trabalho" className='sh-images-img' />
             <div className='sh-apresentacao-cadastro'>
               <p className='sh-cadastro-textos'>Seja um Freelancer de sucesso</p>
@@ -135,7 +139,54 @@ function App() {
               <p className='sh-cadastro-textos'>Economize o seu tempo! Contrate um Freelancer</p>
               <Link to='/cadastro-cliente' className='sh-cadastro-buttons'  >Cadastre-se</Link>
             </div>
-          </div>
+          </div> */}
+
+          <article className="sh-apresentacao-um">
+            <img src={backgroundApresentacaoUm} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img" />
+          </article>
+
+          <article className="sh-apresentacao-textos">
+            <h2 className="sh-apresentacao-titulos">Faça sua carreira decolar!</h2>
+            <h2 className="sh-apresentacao-titulos">Conquiste o mercado conosco</h2>
+            <p className="sh-apresentacao-paragrafos">
+              Aqui você tem a oportunidade de encontrar novos clientes, se tornar prestigiado e requisitado por muitas pessoas.
+            </p>
+            <p className="sh-apresentacao-paragrafos">
+              Cadastre-se no nosso site e seja mais um Freelancer de sucesso!
+            </p>
+          </article>
+
+          {/* Button para freelancers */}
+          <ul className="sh-apresentacao-button">
+            <li className="sh-apresentacao-button-item">
+              <img src={apresentacaoButtonIcon} alt="" className="sh-apresentacao-button-icon" />
+            </li>
+            <li className="sh-apresentacao-button-item">
+              <Link to='/' className='sh-apresentacao-button-cadastro'>Seja um Freelancer</Link>
+
+            </li>
+            <li className="sh-apresentacao-button-item">
+              <img src={apresentacaoButtonIcon} alt="" className="sh-apresentacao-button-icon sh-invert" />
+            </li>
+          </ul>
+
+          {/* Secundo post */}
+          <article className="sh-apresentacao-dois">
+            <div className="sh-apresentacao-dois-container-img">
+              <h1 className="sh-apresentacao-dois-titulos">
+                Seja cliente de forma 100% gratuíta
+              </h1>
+              <img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img" />
+            </div>
+
+            <div className="sh-apresentacao-textos">
+              <p className="sh-apresentacao-dois-textos">
+                Estamos sempre buscando facilitar a vida de nossos clientes, concedendo o acesso a Freelancers qualificado.
+              </p>
+              <p className="sh-apresentacao-dois-textos">
+                Cadastre-se na nossa plataforma de forma fácil e rápida, contrate um de nossos Freelancers e economize o seu tempo.              </p>
+            </div>
+          </article>
         </article>
 
       </section>
