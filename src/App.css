@@ -9,28 +9,16 @@
 :root {
   --sh-index-font-family: "Nunito", sans-serif;
 
-  --sh-index-font-size-textos: 1.2rem;
-  --sh-index-font-size-posters: 1rem;
-  --sh-index-font-size-titulos: 1.6rem;
-  --sh-index-font-size-subtitulos: 1.4rem;
-  --sh-index-font-size-textos-buttons: 1rem;
-
-  --sh-index-font-size-servicos-titulos: 1.6rem;
-
   --sh-index-cor-primaria: #fff;
   --sh-index-cor-secundaria: #0075FF;
   --sh-index-cor-terciaria: #000;
   --sh-index-cor-quaternaria: #35FF62;
-  --sh-index-cor-textos: #6F6F6F;
-  --sh-index-cor-textos-hover: #2c2c2c;
-
-  --sh-index-itens-gap-top: 45px;
 
   --sh-index-inicial-padding: 45px 10px 5px 10px;
 
 
-  --sh-index-font-size-titulos: 1.7rem;
-  --sh-index-font-size-textos: 1.2rem;
+  --sh-index-font-size-titulos: 1.5rem;
+  --sh-index-font-size-textos: 1.1rem;
 }
 
 .sh-container {
@@ -88,11 +76,17 @@
           & .sh-invert {
             rotate: 180deg;
           }
+        }
 
+        & .sh-apresentacao-button {
+          background-color: var(--sh-index-cor-secundaria);
+          width: 100%;
+          
           & .sh-apresentacao-button-cadastro {
             text-decoration: none;
-            font-size: var(--sh-index-font-size-subtitulos);
-            color: var(--sh-index-cor-secundaria);
+            font-size: var(--sh-index-font-size-titulos);
+            color: var(--sh-index-cor-primaria);
+            font-weight: 400;
           }
         }
       }
@@ -101,6 +95,7 @@
         display: flex;
         flex-direction: column;
         padding: 0 5px;
+        margin-top: 20px;
 
         & .sh-apresentacao-dois-container-img {
           display: flex;

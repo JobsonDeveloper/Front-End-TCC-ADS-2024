@@ -15,7 +15,7 @@ import Footer from './components/footer/Footer';
 import Loading from './components/loading/Loading';
 import { createRoot } from 'react-dom/client';
 
-import backgroundApresentacaoUm from './assets/index/backgrounds/background-apresentacao-lg.png'
+import backgroundApresentacaoUm from './assets/index/backgrounds/background-apresentacao-lg.webp'
 import backgroundApresentacaoDois from './assets/index/backgrounds/imagem-apresentacao.webp'
 import apresentacaoButtonIcon from './assets/index/icons/apresentacao-button-icon.png';
 
@@ -158,16 +158,15 @@ function App() {
 
           {/* Button para freelancers */}
           <ul className="sh-apresentacao-button">
-            <li className="sh-apresentacao-button-item">
+            {/* <li className="sh-apresentacao-button-item">
               <img src={apresentacaoButtonIcon} alt="" className="sh-apresentacao-button-icon" />
-            </li>
-            <li className="sh-apresentacao-button-item">
-              <Link to='/' className='sh-apresentacao-button-cadastro'>Seja um Freelancer</Link>
-
-            </li>
-            <li className="sh-apresentacao-button-item">
+            </li> */}
+            <li className="sh-apresentacao-button-item sh-apresentacao-button">
+              <Link to='/' className='sh-apresentacao-button-cadastro'>Torne-se um Freelancer</Link>
+            </li> 
+            {/* <li className="sh-apresentacao-button-item">
               <img src={apresentacaoButtonIcon} alt="" className="sh-apresentacao-button-icon sh-invert" />
-            </li>
+            </li> */}
           </ul>
 
           {/* Secundo post */}
