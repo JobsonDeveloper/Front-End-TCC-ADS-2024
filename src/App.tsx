@@ -308,29 +308,36 @@ function App() {
         <article className="sh-main-duvidas" id='sh_duvidas'>
           <h2 className="sh-duvidas-titulo">Dúvidas frequentes</h2>
 
-          <Accordion>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>Accordion Item #1</Accordion.Header>
+          <Accordion className='sh-duvidas-acordeon'>
+            <Accordion.Item eventKey="0" className='sh-duvidas-acordeon-item'>
+              <Accordion.Header className='sh-duvidas-header'>Como os freelancers conversam com os clientes?</Accordion.Header>
               <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
+                ...
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="1">
-              <Accordion.Header>Accordion Item #2</Accordion.Header>
+
+            <Accordion.Item eventKey="1" className='sh-duvidas-acordeon-item'>
+              <Accordion.Header className='sh-duvidas-header'>O suporte é 24 horas?</Accordion.Header>
               <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
+                ...
+              </Accordion.Body>
+            </Accordion.Item>
+
+            <Accordion.Item eventKey="2" className='sh-duvidas-acordeon-item'>
+              <Accordion.Header className='sh-duvidas-header'>Os clientes pagam para se cadastrar?</Accordion.Header>
+              <Accordion.Body>
+                Para os clientes, a utilização da plataforma é 100% 
+                gratuíta, o pagameto só será realizado ao freelancer 
+                ao qual você deseja contratar para um determinado serviço. 
+                O valor da remuneração do serviço é definido pelo cliente 
+                no momento da postagem do mesmo.
+              </Accordion.Body>
+            </Accordion.Item>
+
+            <Accordion.Item eventKey="3" className='sh-duvidas-acordeon-item'>
+              <Accordion.Header className='sh-duvidas-header'>Quais são os meios de pagamento para aderir a um plano?</Accordion.Header>
+              <Accordion.Body>
+                ...
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

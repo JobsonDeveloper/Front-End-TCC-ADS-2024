@@ -302,6 +302,45 @@
         color: var(--sh-index-cor-terciaria);
         font-size: var(--sh-index-font-size-titulos);
       }
+
+      & .sh-duvidas-acordeon {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        & .sh-duvidas-acordeon-item {
+          border: none;
+  
+          & .sh-duvidas-header {
+  
+            & .accordion-button {
+              font-weight: bold;
+              gap: 5px;
+              padding: 0;
+              outline: none;
+              border: none;
+              align-items: normal;
+  
+              &:not(.collapsed) {
+                color: var(--sh-index-cor-textos);
+                background-color: transparent;
+                box-shadow: none;
+                border: none;
+              }
+  
+              &:focus {
+                box-shadow: none;
+              }
+  
+              &::after {
+                order: -1;
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+
     }
 
     /* últimos serviços postados */
