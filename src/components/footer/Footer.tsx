@@ -3,8 +3,8 @@ import './Footer.css';
 import { Link } from "react-router-dom";
 
 // Components
-import WhatsAppImg from '../../assets/icons/WhatsApp.svg';
-import InstagramImg from '../../assets/icons/Instagram.svg';
+import WhatsAppImg from '../../assets/index/icons/icon-whatsapp.png';
+import InstagramImg from '../../assets/index/icons/icon-instagram.png';
 
 const Footer = () => {
 
@@ -27,15 +27,14 @@ const Footer = () => {
             <li className="sh-fundadores-nome">Jobson Oliveira</li>
           </ul>
         </li>
-        
-        <li className="sh-footer-info-item sh-footer-redesSociais">
-          <img src={InstagramImg} alt="Foto de instagram da skillhub" className="sh-footer-redesSociais-img" />
-          <img src={WhatsAppImg} alt="Foto de whatsapp da skillhub" className="sh-footer-redesSociais-img" />
-        </li>
 
-        <li className="sh-footer-info-item sh-footer-email">
-          <h5 className="sh-email-title">Email</h5>
-          <p className="sh-email-text">skillhub@gmail.com</p>
+        <li className="sh-footer-info-item sh-footer-faleConosco">
+          <h5 className="sh-faleConosco-title">Fale conosco</h5>
+          <p className="sh-faleConosco-text">E-mail: skillhub@gmail.com</p>
+          <div className="sh-faleConosco-redesSociais">
+            <img src={InstagramImg} alt="Foto de instagram da skillhub" className="sh-footer-redesSociais-img" />
+            <img src={WhatsAppImg} alt="Foto de whatsapp da skillhub" className="sh-footer-redesSociais-img" />
+          </div>
         </li>
 
         <li className="sh-footer-info-item sh-footer-mapa">
@@ -80,7 +79,7 @@ const Footer = () => {
       </ul>
 
       <article className="sh-footer-copyright">
-        Sabedoria é saber que sempre seremos eternos aprendizes | Skillhub - {year} | &copy; - Todos os direitos reservados
+        Skillhub - {year} | &copy; - Todos os direitos reservados
       </article>
     </section>
   )

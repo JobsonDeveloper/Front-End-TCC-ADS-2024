@@ -8,7 +8,7 @@ const Servicos = ({ data }: any) => {
     <li key={index} className="sh-servicos-itens">
       <div className="sh-itens-data">
         <img src={fotoPerfil} alt="Foto de perfil sem rosto" className="sh-servicos-img-perfil" />
-        <p className="sh-servicos-data-marcadores">{servico.tag}</p>
+        <p className="sh-servicos-data-marcador">{servico.tag}</p>
       </div>
       <div className="sh-itens-data">
         <p className="sh-servicos-data-descricao">{servico.descricao} da noite da segunda-feira, como se nada tivesse acontecido</p>

@@ -13,16 +13,19 @@
   --sh-index-cor-secundaria: #0075FF;
   --sh-index-cor-terciaria: #000;
   --sh-index-cor-quaternaria: #35FF62;
+  --sh-index-cor-textos: #494949;
 
-  --sh-index-inicial-padding: 45px 10px 5px 10px;
+  --sh-index-padding: 0 5px;
+  --sh-index-margin: 20px 0;
 
 
   --sh-index-font-size-titulos: 1.5rem;
+  --sh-index-font-size-subtitulos: 1.3rem;
   --sh-index-font-size-textos: 1.1rem;
 }
 
 .sh-container {
-  font-family: var(--sh-font-family);
+  font-family: var(--sh-index-font-family);
 
   & sh-container-loading {
     display: flex;
@@ -36,6 +39,8 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 10px;
+      box-shadow: var(--sh-index-cor-terciaria) 0px 0px 5px;
+      padding: 0 0 10px 0;
 
       & .sh-apresentacao-um {
         & .sh-apresentacao-img {
@@ -46,7 +51,8 @@
       & .sh-apresentacao-textos {
         display: flex;
         flex-direction: column;
-        padding: 0 5px;
+        padding: var(--sh-index-padding);
+        gap: 5px;
 
         & .sh-apresentacao-titulos {
           font-size: var(--sh-index-font-size-titulos);
@@ -56,13 +62,11 @@
         & .sh-apresentacao-paragrafos {
           font-size: var(--sh-index-font-size-textos);
           color: var(--sh-index-cor-textos);
-          margin-top: 2px;
+          margin: 0;
         }
       }
 
       & .sh-apresentacao-button {
-        list-style-type: none;
-        padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -81,7 +85,7 @@
         & .sh-apresentacao-button {
           background-color: var(--sh-index-cor-secundaria);
           width: 100%;
-          
+
           & .sh-apresentacao-button-cadastro {
             text-decoration: none;
             font-size: var(--sh-index-font-size-titulos);
@@ -94,13 +98,25 @@
       & .sh-apresentacao-dois {
         display: flex;
         flex-direction: column;
-        padding: 0 5px;
+        padding: 0;
         margin-top: 20px;
 
         & .sh-apresentacao-dois-container-img {
           display: flex;
           flex-direction: column;
           gap: 10px;
+
+          & .sh-apresentacao-dois-img {
+            width: 100%;
+          }
+        }
+
+        & .sh-apresentacao-textos {
+          display: flex;
+          flex-direction: column;
+          margin-top: 10px;
+          padding: var(--sh-index-padding);
+          gap: 5px;
 
           & .sh-apresentacao-dois-titulos {
             margin: 0;
@@ -109,146 +125,135 @@
             color: var(--sh-index-cor-terciaria);
           }
 
-          & .sh-apresentacao-dois-img {
-            width: 80%;
-          }
-        }
-
-        & .sh-apresentacao-textos {
-          display: flex;
-          flex-direction: column;
-          padding: 10px 0 0;
-
           & .sh-apresentacao-dois-textos {
             padding: 0;
             font-size: var(--sh-index-font-size-textos);
             color: var(--sh-index-cor-textos);
+            margin: 0;
           }
         }
       }
-
-      /* & .sh-apresentacao-posters {
-        display: flex;
-        flex-direction: column;
-
-        & .sh-images-img {
-          width: 100%;
-        }
-
-        & .sh-apresentacao-cadastro {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-          justify-content: center;
-          align-items: center;
-
-          & .sh-cadastro-textos {
-            margin: 0;
-            color: var(--sh-cor-textos);
-            font-size: var(--sh-font-size-posters);
-          }
-
-          & .sh-cadastro-buttons {
-            font-size: var(--sh-font-size-textos-buttons);
-            text-decoration: none;
-            color: var(--sh-cor-primaria);
-            background-color: var(--sh-cor-secundaria);
-            padding: 5px 20px;
-            border-radius: 50px;
-            text-wrap: nowrap;
-          }
-        }
-
-      } */
     }
   }
 
   & .sh-main {
+    display: flex;
+    flex-direction: column;
 
-    & .sh-main-servicos {
+    /* O que é a Skillhub */
+    & .sh-main-skillhub {
       display: flex;
       flex-direction: column;
-      gap: var(--sh-itens-gap-top);
-      padding: var(--sh-inicial-padding);
+      gap: 10px;
+      margin: 40px 0 20px;
+      padding: var(--sh-index-padding);
 
-      & .sh-servicos-titulo {
+      & .sh-skillhub-titulo {
+        color: var(--sh-index-cor-terciaria);
+        font-size: var(--sh-index-font-size-titulos);
         text-align: center;
-        font-size: var(--sh-font-size-servicos-titulos);
-        color: var(--sh-cor-terciaria);
+      }
+
+      & .sh-skillhub-textos-list {
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        padding: 0;
+        gap: 10px;
+
+        & .sh-skillhub-paragrafos {
+          font-size: var(--sh-index-font-size-textos);
+          color: var(--sh-index-cor-textos);
+        }
       }
     }
 
+    /* Profissionais em destaque */
+    & .sh-profissionaisEmDestaque {
+      display: flex;
+      flex-direction: column;
+      margin: var(--sh-index-margin);
+      gap: 10px;
+
+      & .sh-profissionaisEmDestaque-titulo {
+        text-align: center;
+        font-size: var(--sh-index-font-size-titulos);
+        color: var(--sh-index-cor-terciaria);
+      }
+    }
+
+    /* Deseja ser um Freelancer? */
     & .sh-main-planos {
-      padding: var(--sh-inicial-padding);
+      padding: var(--sh-index-padding);
+      margin: var(--sh-index-margin);
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 10px;
 
       & .sh-planos-titulos {
 
         & .sh-planos-titulo {
           text-align: center;
-          font-size: var(--sh-font-size-titulos);
-          color: var(--sh-cor-terciaria);
+          color: var(--sh-index-cor-terciaria);
+          font-size: var(--sh-index-font-size-titulos);
+          margin: 0;
         }
 
         & .sh-planos-subtitulo {
-          color: var(--sh-cor-textos);
-          font-size: var(--sh-font-size-subtitulos);
+          color: var(--sh-index-cor-textos);
+          font-size: var(--sh-index-font-size-subtitulos);
           margin: 0;
         }
       }
     }
 
+    /* Vantagens de fazer parte do nosso time */
     & .sh-main-vantagens {
-      padding: var(--sh-inicial-padding);
+      padding: var(--sh-index-padding);
+      margin: var(--sh-index-margin);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
       & .sh-vantagens-titulo {
         text-align: center;
-        font-size: var(--sh-font-size-titulos);
-        color: var(--sh-cor-terciaria);
+        color: var(--sh-index-cor-terciaria);
+        font-size: var(--sh-index-font-size-titulos);
       }
 
-      & .sh-vantagem-lista {
+      & .sh-vantagens-lista {
+        list-style-image: url('./assets/icons/marcador.png');
+        padding: 0 15px;
         display: flex;
         flex-direction: column;
-        padding: 45px 10px 0;
-        gap: 30px;
+        gap: 15px;
 
-        & .sh-vantagem-lista-item {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          padding: 0;
-
-
-          & .sh-vantagem-item-info {
-            list-style-image: url('./assets/icons/marcador.png');
-            font-size: var(--sh-font-size-textos);
-            color: var(--sh-cor-textos);
-
-            & strong {
-              color: var(--sh-cor-terciaria);
-            }
-          }
+        & .sh-vantagem-item-info {
+          color: var(--sh-index-cor-textos);
+          font-size: var(--sh-index-font-size-textos);
         }
       }
     }
 
+    /* Como começar */
     & .sh-main-comecar {
-      padding: var(--sh-inicial-padding);
+      display: flex;
+      flex-direction: column;
+      padding: var(--sh-index-padding);
+      margin: var(--sh-index-margin);
+      gap: 10px;
 
       & .sh-comecar-titulo {
         text-align: center;
-        font-size: var(--sh-font-size-titulos);
-        color: var(--sh-cor-terciaria);
+        color: var(--sh-index-cor-terciaria);
+        font-size: var(--sh-index-font-size-titulos);
       }
 
       & .sh-comecar-tipo {
-        padding: 30px 0 0;
         display: flex;
         flex-direction: column;
-        gap: 50px;
+        gap: 30px;
         justify-items: center;
 
         & .sh-comecar-list {
@@ -259,44 +264,60 @@
           gap: 12px;
 
           & .sh-comecar-tipo-titlulo {
-            color: var(--sh-cor-textos);
-            font-size: var(--sh-font-size-titulos);
-            text-align: center;
-            padding: 5px 0;
+            color: var(--sh-index-cor-terciaria);
+            font-size: var(--sh-index-font-size-subtitulos);
+            font-weight: bold;
+            text-align: start;
           }
 
           & .sh-comecar-list-item {
-            color: var(--sh-cor-textos);
-            font-size: var(--sh-font-size-textos);
+            color: var(--sh-index-cor-textos);
+            font-size: var(--sh-index-font-size-textos);
 
             & a {
               text-decoration: none;
             }
+          }
 
-            & strong {
-              color: var(--sh-cor-terciaria);
-            }
+          & .sh-span-destaque {
+            font-weight: bold;
+            font-size: var(--sh-index-font-size-textos);
+            color: var(--sh-index-cor-textos);
           }
         }
 
       }
     }
 
-    & .sh-profissionaisEmDestaque {
-      padding: var(--sh-inicial-padding);
+    /* Dúvidas frequentes */
+    & .sh-main-duvidas {
       display: flex;
       flex-direction: column;
+      padding: var(--sh-index-padding);
+      margin: var(--sh-index-margin);
+      gap: 10px;
 
-      & .sh-profissionaisEmDestaque-titulo {
+      & .sh-duvidas-titulo {
         text-align: center;
-        font-size: var(--sh-font-size-titulos);
-        color: var(--sh-cor-terciaria);
+        color: var(--sh-index-cor-terciaria);
+        font-size: var(--sh-index-font-size-titulos);
+      }
+    }
+
+    /* últimos serviços postados */
+    & .sh-main-servicos {
+      margin: var(--sh-index-margin);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      & .sh-servicos-titulo {
+        text-align: center;
+        color: var(--sh-index-cor-terciaria);
+        font-size: var(--sh-index-font-size-titulos);
       }
     }
   }
-
-  /* Todo o footer */
-  & .sh-footer {}
 }
 
 /* @media (min-width: 768px) {

@@ -18,6 +18,7 @@ import { createRoot } from 'react-dom/client';
 import backgroundApresentacaoUm from './assets/index/backgrounds/background-apresentacao-lg.webp'
 import backgroundApresentacaoDois from './assets/index/backgrounds/imagem-apresentacao.webp'
 import apresentacaoButtonIcon from './assets/index/icons/apresentacao-button-icon.png';
+import { Accordion } from 'react-bootstrap';
 
 // ------------ Monta do banco ----------
 const ultimosServicos = [
@@ -146,8 +147,7 @@ function App() {
           </article>
 
           <article className="sh-apresentacao-textos">
-            <h2 className="sh-apresentacao-titulos">Faça sua carreira decolar!</h2>
-            <h2 className="sh-apresentacao-titulos">Conquiste o mercado conosco</h2>
+            <h2 className="sh-apresentacao-titulos">Faça sua carreira decolar! <br /> Conquiste o mercado conosco</h2>
             <p className="sh-apresentacao-paragrafos">
               Aqui você tem a oportunidade de encontrar novos clientes, se tornar prestigiado e requisitado por muitas pessoas.
             </p>
@@ -157,28 +157,22 @@ function App() {
           </article>
 
           {/* Button para freelancers */}
-          <ul className="sh-apresentacao-button">
-            {/* <li className="sh-apresentacao-button-item">
-              <img src={apresentacaoButtonIcon} alt="" className="sh-apresentacao-button-icon" />
-            </li> */}
-            <li className="sh-apresentacao-button-item sh-apresentacao-button">
-              <Link to='/' className='sh-apresentacao-button-cadastro'>Torne-se um Freelancer</Link>
-            </li> 
-            {/* <li className="sh-apresentacao-button-item">
-              <img src={apresentacaoButtonIcon} alt="" className="sh-apresentacao-button-icon sh-invert" />
-            </li> */}
-          </ul>
+          <article className="sh-apresentacao-button">
+            <div className="sh-apresentacao-button-item sh-apresentacao-button">
+              <Link to='/cadastro-freelancer' className='sh-apresentacao-button-cadastro'>Torne-se um Freelancer</Link>
+            </div>
+          </article>
 
           {/* Secundo post */}
           <article className="sh-apresentacao-dois">
             <div className="sh-apresentacao-dois-container-img">
-              <h1 className="sh-apresentacao-dois-titulos">
-                Seja cliente de forma 100% gratuíta
-              </h1>
               <img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img" />
             </div>
 
             <div className="sh-apresentacao-textos">
+              <h1 className="sh-apresentacao-dois-titulos">
+                Seja cliente de forma 100% gratuíta
+              </h1>
               <p className="sh-apresentacao-dois-textos">
                 Estamos sempre buscando facilitar a vida de nossos clientes, concedendo o acesso a Freelancers qualificado.
               </p>
@@ -191,60 +185,94 @@ function App() {
       </section>
 
       <section className="sh-main">
-        {/* Últimos serviços postados */}
-        <article className="sh-main-servicos" id='sh_ultimas_postagens'>
-          <h2 className="sh-servicos-titulo">Últimos serviços postados</h2>
+        {/* Oque é a Skillhun */}
+        <article className="sh-main-skillhub" id='sh_main_skillhub'>
+          <h2 className="sh-skillhub-titulo">Oque é a Skillhub</h2>
 
-          <Servicos data={ultimosServicos} />
+          <ul className="sh-skillhub-textos-list">
+            <li className="sh-skillhub-paragrafos">
+              A Skillhub é uma plataforma criada para facilitar os
+              fornecimentos e as solicitações de serviços para todos.
+              Funcionando 100% online, nós desejamos lhe proporcionar
+              uma boa experiência de contratação de serviço e/ou do
+              fornecimento dele.
+            </li>
+
+            <li className="sh-skillhub-paragrafos">
+              Não somos somente uma plataforma, somos uma porta aberta
+              para aqueles que desejam adquirir visibilidade fazendo
+              aquilo de que gostam, também somos um facilitador para
+              aqueles que desejam economizar tempo, chamando
+              alguém para realizar um serviço.
+            </li>
+
+            <li className="sh-skillhub-paragrafos">
+              Sendo cliente, você pode postar um serviço desejado e
+              aguardar enquanto o divulgamos, até que um freelancer
+              se interesse pelo trabalho e entre em contato para saber
+              mais sobre o trabalho.
+            </li>
+
+            <li className="sh-skillhub-paragrafos">
+              Sendo Freelancer, você encontrará serviços rápidos e bem
+              remunerados perto da sua residência, facilitando tanto
+              a sua vida quanto a vida de outras pessoas.
+            </li>
+          </ul>
         </article>
 
-        {/* Card de planos */}
+        {/* Profissionais em destaque */}
+        <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
+          <h2 className="sh-profissionaisEmDestaque-titulo">Profissionais em destaque</h2>
+          <ProfissionaisEmDestaque dados={profDestaque} />
+        </article>
+
+        {/* Deseja ser um Freelancer? */}
         <article className="sh-main-planos" id='sh_planos'>
           <div className='sh-planos-titulos'>
             <h2 className="sh-planos-titulo">Deseja encontrar um cliente?</h2>
-            <h4 className="sh-planos-subtitulo">Contrate um de nossos planos</h4>
+            <h2 className="sh-planos-subtitulo">Contrate um de nossos planos</h2>
           </div>
 
           <Planos />
         </article>
 
-        {/* Vanatágens de ser nosso cliente */}
+        {/* Vantagens de fazer parte do nosso time */}
         <article className="sh-main-vantagens" id='sh_vantagens'>
           <h2 className="sh-vantagens-titulo">Vantagens de ser nosso cliente</h2>
 
-          <div className="sh-vantagem-lista">
+          <ul className="sh-vantagens-lista">
+            <li className="sh-vantagem-item-info">
+              Uma parte de nossos lucros é destinada para
+              Casas de Adoção e Ongs de preservação da natureza,
+              ao se tornar nosso cliente você estará melhorando a
+              vida de muitas pessoas.
+            </li>
 
-            <ul className="sh-vantagem-lista-item">
-              <li className="sh-vantagem-item-info">
-                Uma parte de nossos lucros é destinada para <strong>Casas de Adoção
-                </strong> e <strong>Ongs de preservação da natureza</strong>, ao se tornar
-                nosso cliente você estará melhorando a vida de muitas pessoas
-              </li>
-            </ul>
+            <li className="sh-vantagem-item-info">
+              Verificamos o perfil de cada profissional antes
+              de aprovar a criação da conta.
+            </li>
 
-            <ul className="sh-vantagem-lista-item">
-              <li className="sh-vantagem-item-info">
-                Verificamos o perfil de cada profissional antes de aprovar a criação da conta
-              </li>
-              <li className="sh-vantagem-item-info">
-                Cobramos dos profissionais e clientes em caso de comprovação de atitude inapropriada
-              </li>
-            </ul>
+            <li className="sh-vantagem-item-info">
+              Cobramos dos profissionais e clientes em caso
+              de comprovação de atitude inapropriada.
+            </li>
 
-            <ul className="sh-vantagem-lista-item">
-              <li className="sh-vantagem-item-info">
-                Garantia de <strong>Qualidade</strong> e <strong>Segurança</strong>
-              </li>
-              <li className="sh-vantagem-item-info">
-                Fornecemos uma <strong>Assistência humanizada</strong>
-              </li>
-              <li className="sh-vantagem-item-info">
-                Prezamos por um <strong>Atendimento personalizado</strong>
-                por parte de nossos atendentes
-              </li>
-            </ul>
+            <li className="sh-vantagem-item-info">
+              Garantia de Qualidade e Segurança.
+            </li>
 
-          </div>
+            <li className="sh-vantagem-item-info">
+              Fornecemos uma Assistência humanizada.
+            </li>
+
+            <li className="sh-vantagem-item-info">
+              Prezamos por um Atendimento personalizado
+              por parte de nossos atendentes.
+            </li>
+
+          </ul>
         </article>
 
         {/* Como começar */}
@@ -255,31 +283,64 @@ function App() {
             <ul className="sh-comecar-list">
               <li className="sh-comecar-tipo-titlulo">Cliente</li>
               <li className="sh-comecar-list-item">Clique em em um dos botões do site para realizar o cadastro ou acesse <Link to='/cadastro-cliente'>este link.</Link></li>
-              <li className="sh-comecar-list-item">Selecione o tipo “<strong>Cliente</strong>” para proseguir com o cadastro.</li>
-              <li className="sh-comecar-list-item">Em cada tela, forneça os dados solicitados e clique em “<strong>Continuar</strong>”.</li>
+              <li className="sh-comecar-list-item">Selecione o tipo “<span className='sh-span-destaque'>Cliente</span>” para proseguir com o cadastro.</li>
+              <li className="sh-comecar-list-item">Em cada tela, forneça os dados solicitados e clique em “<span className='sh-span-destaque'>Continuar</span>”.</li>
               <li className="sh-comecar-list-item">Na ultima tela, verifique se os dados fornecidcadastro-freelanceros estão corretos.</li>
               <li className="sh-comecar-list-item">Caso algum dado esteja incorreto clique nele para editar.</li>
-              <li className="sh-comecar-list-item">Após realizar a verificação, clique em “<strong>Cadastrar</strong>”.</li>
+              <li className="sh-comecar-list-item">Após realizar a verificação, clique em “<span className='sh-span-destaque'>Cadastrar</span>”.</li>
               <li className="sh-comecar-list-item">Pronto! Seu perfil foi criado e está pronto para ser utilizado.</li>
             </ul>
 
             <ul className="sh-comecar-list">
               <li className="sh-comecar-tipo-titlulo">Freelancer</li>
-              <li className="sh-comecar-list-item">Clique em em um dos <a href="#sh_planos">cards de planos</a>, no botão “<strong>Cadastre-se</strong> no início do site ou <Link to='/cadastro-freelancer'>este link.</Link></li>
-              <li className="sh-comecar-list-item">Caso tenha clicado no link ou em um dos botões, selecione o tipo “<strong>Profissional</strong>” para proseguir com o cadastro e escolha o plano que você deseja.</li>
-              <li className="sh-comecar-list-item">Após selecionar o plano desejado, forneça os dados solicitados e clique em “<strong>Continuar</strong>”.</li>
+              <li className="sh-comecar-list-item">Clique em em um dos <a href="#sh_planos">cards de planos</a>, no botão “<span className='sh-span-destaque'>Cadastre-se</span> no início do site ou <Link to='/cadastro-freelancer'>este link.</Link></li>
+              <li className="sh-comecar-list-item">Caso tenha clicado no link ou em um dos botões, selecione o tipo “<span className='sh-span-destaque'>Profissional</span>” para proseguir com o cadastro e escolha o plano que você deseja.</li>
+              <li className="sh-comecar-list-item">Após selecionar o plano desejado, forneça os dados solicitados e clique em “<span className='sh-span-destaque'>Continuar</span>”.</li>
               <li className="sh-comecar-list-item">Na ultima tela, verifique se os dados fornecidos estão corretos.</li>
               <li className="sh-comecar-list-item">Caso algum dado esteja incorreto clique nele para editar.</li>
-              <li className="sh-comecar-list-item">Após realizar a verificação, clique em “<strong>Cadastrar</strong>”.</li>
+              <li className="sh-comecar-list-item">Após realizar a verificação, clique em “<span className='sh-span-destaque'>Cadastrar</span>”.</li>
               <li className="sh-comecar-list-item">Após isto, o seu perfil será analisado por nossa equipe, a aprovação da conta pode levar até 5 dias úteis, você será informado por E-mail sobre o resultado da análise.</li>
             </ul>
           </div>
         </article>
 
-        {/* Profissionais em destaque */}
-        <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
-          <h2 className="sh-profissionaisEmDestaque-titulo">Profissionais em destaque</h2>
-          <ProfissionaisEmDestaque dados={profDestaque} />
+        {/* Dúvidas frequentes  */}
+        <article className="sh-main-duvidas" id='sh_duvidas'>
+          <h2 className="sh-duvidas-titulo">Dúvidas frequentes</h2>
+
+          <Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Accordion Item #1</Accordion.Header>
+              <Accordion.Body>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum.
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header>Accordion Item #2</Accordion.Header>
+              <Accordion.Body>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum.
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </article>
+
+        {/* Últimos serviços postados */}
+        <article className="sh-main-servicos" id='sh_ultimas_postagens'>
+          <h2 className="sh-servicos-titulo">Últimos serviços postados</h2>
+
+          <Servicos data={ultimosServicos} />
         </article>
       </section>
 

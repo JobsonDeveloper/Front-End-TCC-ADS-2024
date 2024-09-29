@@ -1,34 +1,36 @@
 :root {
-    --sh-font-family: "Roboto", sans-serif;
+    --sh-profissionais-font-family: "Roboto", sans-serif;
 
-    --sh-font-size-textos: 1.2rem;
-    /* --sh-font-size-titulos: 2rem; */
-    /* --sh-font-size-subtitulos: 1.7rem; */
+    --sh-profissionais-font-size-textos: 1.2rem;
 
-    --sh-cor-primaria: #fff;
-    --sh-cor-secundaria: #0075FF;
-    --sh-cor-terciaria: #000;
-    --sh-cor-quaternaria: #35FF62;
-    --sh-cor-textos: #6F6F6F;
-    --sh-cor-textos-hover: #2c2c2c;
+    --sh-profissionais-cor-primaria: #fff;
+    --sh-profissionais-cor-secundaria: #0075FF;
+    --sh-profissionais-cor-terciaria: #000;
+    --sh-profissionais-cor-quaternaria: #35FF62;
+    --sh-profissionais-cor-textos: #6F6F6F;
+    --sh-profissionais-cor-textos-hover: #2c2c2c;
 
-    --sh-itens-gap-top: 45px;
+    --sh-profissionais-itens-gap-top: 45px;
 
-    --sh-padding: 45px 25px 0 25px;
+    --sh-profissionais-padding: 45px 25px 0 25px;
 }
 
 & .sh-EmDestaque-lista {
     display: flex;
     list-style-type: none;
-    padding: 45px 0 5px;
+    padding: 25px 0;
     justify-items: center;
     overflow-x: scroll;
     gap: 30px;
+    background-image: url('../../assets/index/backgrounds/background-profissoes.webp');
 
     & .sh-EmDestaque-item {
         width: 225px;
-        padding: 3px;
+        padding: 5px;
+        border-radius: 5px;
         height: 135px;
+        background-color: var(--sh-profissionais-cor-primaria);
+        box-shadow: #555555 3px 3px 9px;
 
         & .sh-EmDestaque-item-dados {
             display: flex;
@@ -41,8 +43,8 @@
             }
 
             & .sh-EmDestaque-profissonal-nome {
-                color: var(--sh-cor-textos);
-                font-size: var(--sh-font-size-textos);
+                color: var(--sh-profissionais-cor-textos);
+                font-size: var(--sh-profissionais-font-size-textos);
                 margin: 0;
                 height: max-content;
                 font-weight: 500;
@@ -57,8 +59,8 @@
         }
 
         & .sh-EmDestaque-servicos-titulo {
-            color: var(--sh-cor-textos);
-            font-size: var(--sh-font-size-textos);
+            color: var(--sh-profissionais-cor-textos);
+            font-size: var(--sh-profissionais-font-size-textos);
             padding: 8px 0 0;
             font-weight: 500;
         }
@@ -70,9 +72,9 @@
             gap: 10px;
 
             & .sh-servicos-list {
-                background-color: var(--sh-cor-quaternaria);
+                background-color: var(--sh-profissionais-cor-quaternaria);
                 padding: 1px 5px;
-                color: var(--sh-cor-terciaria);
+                color: var(--sh-profissionais-cor-terciaria);
                 border-radius: 50px;
                 font-size: 1.2rem;
             }
@@ -89,9 +91,9 @@
             }
 
             & .sh-EmDestaque-estrelas-quantidade {
-                color: var(--sh-cor-terciaria);
+                color: var(--sh-profissionais-cor-terciaria);
                 font-weight: 500;
-                font-size: var(--sh-font-size-textos);
+                font-size: var(--sh-profissionais-font-size-textos);
                 margin: 0;
             }
         }

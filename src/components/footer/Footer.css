@@ -1,102 +1,99 @@
 :root {
-  --sh-font-family: "Roboto", sans-serif;
+  --sh-footer-font-family: "Roboto", sans-serif;
 
-  --sh-cor-primaria: #fff;
-  --sh-cor-titulos: #272727;
-  --sh-cor-textos: #6F6F6F;
-  --sh-cor-footer: #F8F8F8;
+  --sh-footer-cor-primaria: #fff;
+  --sh-footer-cor-secundaria: #0075FF;
+  --sh-footer-cor-terciaria: #000;
+  --sh-footer-cor-quaternaria: #35FF62;
 
-  --sh-font-size-copyright: 1.1 rem;
-  --sh-footer-font-size-title: 1.2rem;
+  --sh-footer-cor-titulos: #272727;
+  --sh-footer-cor-background-footer: #26466B;
+  --sh-footer-cor-textos: #E2E2E2;
+
+  --sh-footer-font-size-copyright: 1.1 rem;
+  --sh-footer-font-size-title: 1.3rem;
   --sh-footer-font-size-text: 1.1rem;
 
   --sh-footer-padding: 20px 5px 5px;
 }
 
 & .sh-footer {
-  background-color: var(--sh-cor-footer);
+  background-color: var(--sh-footer-cor-background-footer);
   padding: var(--sh-footer-padding);
   display: flex;
   flex-direction: column;
   gap: 30px;
-  border-top: 1px solid var(--sh-cor-textos);
-  margin-top: 30px;
+  border-top: 1px solid var(--sh-footer-cor-terciaria);
 
   & .sh-footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
     padding: 0;
-    margin: 0;
-    list-style-type: none;
-    display: grid;
-    grid-template-areas:
-      "fundadores mapa"
-      "redes email";
-    row-gap: 25px;
 
     & .sh-footer-fundadores {
       display: flex;
       grid-area: fundadores;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
       width: max-content;
 
       & .sh-fundadores-title {
-        color: var(--sh-cor-titulos);
+        color: var(--sh-footer-cor-primaria);
         font-size: var(--sh-footer-font-size-title);
         font-weight: 450;
         text-align: left;
-        color: var(--sh-cor-titulos);
         margin: 0;
       }
 
       & .sh-fundadores-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         list-style-type: none;
         padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        column-gap: 30px;
+        column-gap: 40px;
         width: max-content;
 
         & .sh-fundadores-nome {
-          color: var(--sh-cor-textos);
+          color: var(--sh-footer-cor-textos);
+          font-weight: 250;
           font-size: var(--sh-footer-font-size-text);
         }
       }
     }
 
-    & .sh-footer-redesSociais {
+    & .sh-footer-faleConosco {
       display: flex;
-      grid-area: redes;
-      gap: 30px;
-      align-items: start;
-
-      & .sh-footer-redesSociais-img {
-        width: 23px;
-      }
-    }
-
-    & .sh-footer-email {
-      display: flex;
-      grid-area: email;
+      grid-area: faleConosco;
       flex-direction: column;
       align-items: center;
+      gap: 15px;
+      align-items: start;
 
-      & .sh-email-title {
-        color: var(--sh-cor-titulos);
+      & .sh-faleConosco-title {
+        color: var(--sh-footer-cor-primaria);
         font-size: var(--sh-footer-font-size-title);
         font-weight: 450;
         text-align: left;
-        color: var(--sh-cor-titulos);
         margin: 0;
         width: 100%;
       }
 
-      & .sh-email-text {
-        color: var(--sh-cor-textos);
+      & .sh-faleConosco-text {
+        color: var(--sh-footer-cor-textos);
         font-size: var(--sh-footer-font-size-text);
         margin: 0;
         text-align: left;
         width: 100%;
+      }
+
+      & .sh-faleConosco-redesSociais {
+        display: flex;
+        gap: 40px;
+
+        & .sh-footer-redesSociais-img {
+          width: 23px;
+        }
       }
     }
 
@@ -104,29 +101,32 @@
       display: flex;
       grid-area: mapa;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
 
       & .sh-footer-mapa-title {
-        color: var(--sh-cor-titulos);
+        color: var(--sh-footer-cor-primaria);
         font-size: var(--sh-footer-font-size-title);
         font-weight: 450;
         text-align: left;
-        color: var(--sh-cor-titulos);
         margin: 0;
       }
 
       & .sh-footer-mapa-list {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         list-style-type: none;
-        column-gap: 50px;
         padding: 0;
+        column-gap: 0px;
+        width: max-content;
 
         & .sh-footer-mapa-item {
+          color: var(--sh-footer-cor-textos);
+          font-weight: 250;
+          font-size: var(--sh-footer-font-size-text);
+
           & .sh-mapa-link {
-            color: var(--sh-cor-textos);
-            font-size: var(--sh-footer-font-size-text);
             text-decoration: none;
+            color: var(--sh-footer-cor-textos);
           }
         }
       }
@@ -134,13 +134,13 @@
   }
 
   & .sh-footer-copyright {
-    font-size: var(--sh-font-size-copyright);
+    color: var(--sh-footer-cor-textos);
+    font-size: var(--sh-footer-font-size-text);
     text-align: center;
-    color: var(--sh-cor-textos);
   }
 }
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   & .sh-footer {
 
     & .sh-footer-info {
@@ -268,139 +268,5 @@
 @media (min-width: 992px) {
   :root {
     --sh-footer-padding: 20px 20px 5px;
-  }
-}
-
-/* 
-@media (min-width: 1400px) {
-:root {
-    --sh-font-family: "Roboto", sans-serif;
-  
-    --sh-cor-primaria: #fff;
-    --sh-cor-titulos: #272727;
-    --sh-cor-textos: #6F6F6F;
-    --sh-cor-footer: #F8F8F8;
-  
-    --sh-font-size-copyright: 1.2rem;
-    --sh-footer-font-size-title: 1.2rem;
-    --sh-footer-font-size-text: 1.1rem;
-  
-    --sh-footer-padding: 20px 45px 5px;
-  }
-
-  & .sh-footer {
-    background-color: var(--sh-cor-footer);
-    padding: var(--sh-footer-padding);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-top: 1px solid var(--sh-cor-textos);
-    margin-top: 30px;
-
-    & .sh-footer-info {
-      padding: 0;
-      margin: 0;
-      list-style-type: none;
-      display: flex;
-      justify-content: space-between;
-      gap: 2px;
-
-      & .sh-footer-fundadores {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        & .sh-fundadores-title {
-          color: var(--sh-cor-titulos);
-          font-size: var(--sh-footer-font-size-title);
-          font-weight: 450;
-          text-align: center;
-          color: var(--sh-cor-titulos);
-          margin: 0;
-        }
-
-        & .sh-fundadores-list {
-          list-style-type: none;
-          padding: 0;
-          margin: 0;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          column-gap: 50px;
-
-          & .sh-fundadores-nome {
-            color: var(--sh-cor-textos);
-            font-size: var(--sh-footer-font-size-text);
-          }
-        }
-      }
-
-      & .sh-footer-redesSociais {
-        display: flex;
-        gap: 60px;
-        align-items: start;
-
-        & .sh-footer-redesSociais-img {
-          width: 25px;
-        }
-      }
-
-      & .sh-footer-email {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        & .sh-email-title {
-          color: var(--sh-cor-titulos);
-          font-size: var(--sh-footer-font-size-title);
-          font-weight: 450;
-          text-align: center;
-          color: var(--sh-cor-titulos);
-          margin: 0;
-        }
-
-        & .sh-email-text {
-          color: var(--sh-cor-textos);
-          font-size: var(--sh-footer-font-size-text);
-          margin: 0;
-        }
-      }
-
-      & .sh-footer-mapa {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        & .sh-footer-mapa-title {
-          color: var(--sh-cor-titulos);
-          font-size: var(--sh-footer-font-size-title);
-          font-weight: 450;
-          text-align: center;
-          color: var(--sh-cor-titulos);
-          margin: 0;
-        }
-
-        & .sh-footer-mapa-list {
-          display: grid;
-          list-style-type: none;
-          grid-template-columns: 1fr 1fr 1fr;
-          column-gap: 50px;
-          padding: 0;
-
-          & .sh-footer-mapa-item {
-            & .sh-mapa-link {
-              color: var(--sh-cor-textos);
-              font-size: var(--sh-footer-font-size-text);
-              text-decoration: none;
-            }
-          }
-        }
-      }
-    }
-
-    & .sh-footer-copyright {
-      font-size: var(--sh-font-size-copyright);
-      text-align: center;
-      color: var(--sh-cor-textos);
-    }
   }
 } */

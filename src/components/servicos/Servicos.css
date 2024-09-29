@@ -1,17 +1,39 @@
+:root {
+  --sh-servicos-cor-primaria: #fff;
+  --sh-servicos-cor-secundaria: #0075FF;
+  --sh-servicos-cor-terciaria: #000;
+  --sh-servicos-cor-quaternaria: #35FF62;
+  --sh-servicos-cor-textos: #494949;
+
+  --sh-servicos-padding: 0 5px;
+  --sh-servicos-margin: 20px 0;
+
+
+  --sh-servicos-font-size-titulos: 1.5rem;
+  --sh-servicos-font-size-remuneracao: 1.3rem;
+  --sh-servicos-font-size-textos: 1.1rem;
+}
+
 .sh-servicos-lista {
   list-style-type: none;
-  padding: 0;
+  padding: 25px 0;
   display: flex;
   overflow-x: scroll;
   justify-content: space-between;
   gap: 15px;
+  background-image: url('../../assets/index/backgrounds/background-ultimos-servicos.webp');
 
   & .sh-servicos-itens {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 5px 0;
+    padding: 5px;
     width: max-content;
+    background-color: var(--sh-servicos-cor-primaria);
+    border-radius: 5px;
+    box-shadow: #555555 3px 3px 9px;
+
+
 
     & .sh-itens-data {
       display: flex;
@@ -24,18 +46,18 @@
         width: 25px;
       }
 
-      & .sh-servicos-data-marcadores {
+      & .sh-servicos-data-marcador {
         margin: 0;
-        font-size: 1.2rem;
-        color: var(--sh-cor-terciaria);
+        background-color: var(--sh-servicos-cor-secundaria);
+        font-size: var(--sh-servicos-font-size-textos);
+        color: var(--sh-servicos-cor-primaria);
         padding: 1px 5px;
         border-radius: 50px;
-        background-color: var(--sh-cor-quaternaria);
       }
 
       & .sh-servicos-data-descricao {
-        font-size: var(--sh-font-size-textos);
-        color: var(--sh-cor-textos);
+        color: var(--sh-servicos-cor-textos);
+        font-size: var(--sh-servicos-font-size-textos);
         height: 80px;
 
         /* Limitar tamanho de texto */
@@ -45,27 +67,30 @@
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
       }
-
-      & .sh-servicos-data-remuneracao {
-        font-size: var(--sh-font-size-textos);
-        color: var(--sh-cor-terciaria);
-        margin: 0;
-        padding: 0;
-      }
-
-      & .sh-servicos-data-valor {
-        margin: 0;
-        font-size: 1.2rem;
-        color: var(--sh-cor-textos);
-        text-wrap: nowrap;
-      }
     }
 
 
     & .sh-itens-remuneracao {
+      display: flex;
       flex-direction: column;
-      align-items: start;
+      justify-content: start;
       gap: 0;
+      align-items: start;
+
+      & .sh-servicos-data-remuneracao {
+        color: var(--sh-servicos-cor-terciaria);
+        font-size: var(--sh-servicos-font-size-remuneracao);
+        margin: 0;
+        width: max-content;
+        font-weight: bold;
+      }
+
+      & .sh-servicos-data-valor {
+        margin: 0;
+        font-size: var(--sh-servicos-font-size-textos);
+        color: var(--sh-servicos-cor-textos);
+        width: max-content;
+      }
     }
   }
 }
