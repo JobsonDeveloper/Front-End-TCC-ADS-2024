@@ -311,21 +311,21 @@ function App() {
           <Accordion className='sh-duvidas-acordeon'>
             <Accordion.Item eventKey="0" className='sh-duvidas-acordeon-item'>
               <Accordion.Header className='sh-duvidas-header'>Como os freelancers conversam com os clientes?</Accordion.Header>
-              <Accordion.Body>
+              <Accordion.Body className='sh-acordeon-body'>
                 ...
               </Accordion.Body>
             </Accordion.Item>
 
             <Accordion.Item eventKey="1" className='sh-duvidas-acordeon-item'>
               <Accordion.Header className='sh-duvidas-header'>O suporte é 24 horas?</Accordion.Header>
-              <Accordion.Body>
+              <Accordion.Body className='sh-acordeon-body'>
                 ...
               </Accordion.Body>
             </Accordion.Item>
 
             <Accordion.Item eventKey="2" className='sh-duvidas-acordeon-item'>
               <Accordion.Header className='sh-duvidas-header'>Os clientes pagam para se cadastrar?</Accordion.Header>
-              <Accordion.Body>
+              <Accordion.Body className='sh-acordeon-body'>
                 Para os clientes, a utilização da plataforma é 100% 
                 gratuíta, o pagameto só será realizado ao freelancer 
                 ao qual você deseja contratar para um determinado serviço. 
@@ -336,7 +336,7 @@ function App() {
 
             <Accordion.Item eventKey="3" className='sh-duvidas-acordeon-item'>
               <Accordion.Header className='sh-duvidas-header'>Quais são os meios de pagamento para aderir a um plano?</Accordion.Header>
-              <Accordion.Body>
+              <Accordion.Body className='sh-acordeon-body'>
                 ...
               </Accordion.Body>
             </Accordion.Item>

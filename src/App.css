@@ -314,7 +314,9 @@
           & .sh-duvidas-header {
   
             & .accordion-button {
-              font-weight: bold;
+              color: var(--sh-index-cor-terciaria);
+              font-size: var(--sh-index-font-size-textos);
+              font-weight: 650;
               gap: 5px;
               padding: 0;
               outline: none;
@@ -338,6 +340,11 @@
               }
             }
           }
+
+          & .sh-acordeon-body {
+            color: var(--sh-index-cor-textos);
+            font-size: var(--sh-index-font-size-textos);
+          }
         }
       }
     }
@@ -345,6 +352,7 @@
     /* últimos serviços postados */
     & .sh-main-servicos {
       margin: var(--sh-index-margin);
+      margin-bottom: 0;
       display: flex;
       flex-direction: column;
       gap: 10px;

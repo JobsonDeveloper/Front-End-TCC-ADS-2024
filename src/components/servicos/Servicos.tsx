@@ -1,5 +1,5 @@
 import React from "react";
-import fotoPerfil from '../../assets/icons/perfil.svg'
+import fotoPerfil from '../../assets/index/icons/icon-perfil.png'
 import './Servicos.css'
 
 const Servicos = ({ data }: any) => {
