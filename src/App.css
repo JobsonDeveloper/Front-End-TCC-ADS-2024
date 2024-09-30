@@ -39,7 +39,7 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 10px;
-      box-shadow: var(--sh-index-cor-terciaria) 0px 0px 5px;
+      border-bottom: 1px solid #ababab;
       padding: 0 0 10px 0;
 
       & .sh-apresentacao-um {
