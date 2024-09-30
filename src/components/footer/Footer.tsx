@@ -44,35 +44,49 @@ const Footer = () => {
             <li className="sh-footer-mapa-item">
               <Link to='/' className="sh-mapa-link">Home</Link>
             </li>
+            
             <li className="sh-footer-mapa-item">
-              <a href="#sh_ultimas_postagens" className="sh-mapa-link">Últimas postágens</a>
+              <Link to='/' className="sh-mapa-link">Oque é a Skillhub</Link>
             </li>
-            <li className="sh-footer-mapa-item">
-              <a href="#sh_planos" className="sh-mapa-link">Planos</a>
-            </li>
-            <li className="sh-footer-mapa-item">
-              <a href="#sh_vantagens" className="sh-mapa-link">Vantágens</a>
-            </li>
-            <li className="sh-footer-mapa-item">
-              <a href="#sh_comecar" className="sh-mapa-link">Como começar</a>
-            </li>
+
             <li className="sh-footer-mapa-item">
               <a href="#sh_profissionais_emDestaque" className="sh-mapa-link">Profissionais em destaque</a>
             </li>
+
             <li className="sh-footer-mapa-item">
-              <Link to='/sobrenos' className="sh-mapa-link">Sobre nós</Link>
+              <a href="#sh_planos" className="sh-mapa-link">Planos</a>
             </li>
+
             <li className="sh-footer-mapa-item">
-              <Link to='/duvidas' className="sh-mapa-link">Dúvidas</Link>
+              <a href="#sh_vantagens" className="sh-mapa-link">Vantagens</a>
             </li>
+
+            <li className="sh-footer-mapa-item">
+              <a href="#sh_comecar" className="sh-mapa-link">Como começar</a>
+            </li>
+
+            <li className="sh-footer-mapa-item">
+              <Link to='/duvidas' className="sh-mapa-link">Dúvidas frequentes</Link>
+            </li>
+
+            <li className="sh-footer-mapa-item">
+              <a href="#sh_ultimas_postagens" className="sh-mapa-link">Últimas postágens</a>
+            </li>
+
+            <li className="sh-footer-mapa-item">
+              <Link to='/sobrenos' className="sh-mapa-link">Saiba mais sobre nós</Link>
+            </li>
+
             <li className="sh-footer-mapa-item">
               <Link to='/login' className="sh-mapa-link">Login</Link>
             </li>
-            <li className="sh-footer-mapa-item">
-              <Link to='/cadastro-cliente' className="sh-mapa-link">Ser Cliente</Link>
-            </li>
+
             <li className="sh-footer-mapa-item">
               <Link to='/cadastro-freelancer' className="sh-mapa-link">Ser Freelancer</Link>
+            </li>
+
+            <li className="sh-footer-mapa-item">
+              <Link to='/cadastro-cliente' className="sh-mapa-link">Ser Cliente</Link>
             </li>
           </ul>
         </li>

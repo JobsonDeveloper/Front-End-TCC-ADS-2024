@@ -10,11 +10,11 @@
   --sh-footer-cor-background-footer: #26466B;
   --sh-footer-cor-textos: #E2E2E2;
 
-  --sh-footer-font-size-copyright: 1.1 rem;
+  --sh-footer-font-size-copyright: 1.1rem;
   --sh-footer-font-size-title: 1.3rem;
   --sh-footer-font-size-text: 1.1rem;
 
-  --sh-footer-padding: 20px 5px 5px;
+  --sh-footer-padding: 20px 10px 5px;
 }
 
 & .sh-footer {
@@ -116,7 +116,8 @@
         grid-template-columns: 1fr 1fr;
         list-style-type: none;
         padding: 0;
-        column-gap: 0px;
+        column-gap: 30px;
+        row-gap: 4px;
         width: max-content;
 
         & .sh-footer-mapa-item {

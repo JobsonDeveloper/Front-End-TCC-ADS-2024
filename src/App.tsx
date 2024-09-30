@@ -126,22 +126,6 @@ function App() {
         <Header />
 
         <article className='sh-apresentacao'>
-          {/* <div className="sh-apresentacao-posters">
-            <img src={imgApresentacaoUm} alt="Imagem de pessoas no trabalho" className='sh-images-img' />
-            <div className='sh-apresentacao-cadastro'>
-              <p className='sh-cadastro-textos'>Seja um Freelancer de sucesso</p>
-              <Link to='/cadastro-freelancer' className='sh-cadastro-buttons'>Cadastre-se</Link>
-            </div>
-          </div>
-
-          <div className="sh-apresentacao-posters">
-            <img src={imgApresentacaoDois} alt="Imagem de pessoas no trabalho" className='sh-images-img' />
-            <div className='sh-apresentacao-cadastro'>
-              <p className='sh-cadastro-textos'>Economize o seu tempo! Contrate um Freelancer</p>
-              <Link to='/cadastro-cliente' className='sh-cadastro-buttons'  >Cadastre-se</Link>
-            </div>
-          </div> */}
-
           <article className="sh-apresentacao-um">
             <img src={backgroundApresentacaoUm} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img" />
           </article>

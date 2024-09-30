@@ -53,26 +53,41 @@ const Header = () => {
         <Offcanvas.Body className='sh-header-offcanvas-body'>
           <ul className="mb-0 sh-header-navegacao">
             <li className="sh-navegacao-item">
-              <a href='#sh_planos' className='sh-item-text'>Planos</a>
+              <a href='#sh_main_skillhub' className='sh-item-text'>Oque é a Skillhub</a>
             </li>
+
             <li className="sh-navegacao-item">
               <a href='#sh_profissionais_emDestaque' className='sh-item-text'>Profissionais em destaque</a>
             </li>
+
+            <li className="sh-navegacao-item">
+              <a href='#sh_planos' className='sh-item-text'>Planos</a>
+            </li>
+            
+            <li className="sh-navegacao-item">
+              <a href='#sh_vantagens' className='sh-item-text'>Vantagens</a>
+            </li>
+
             <li className="sh-navegacao-item">
               <a href='#sh_comecar' className='sh-item-text'>Como começar</a>
             </li>
+
             <li className="sh-navegacao-item">
-              <Link to='/sobrenos' className='sh-item-text'>Sobre nós</Link>
+              <Link to='#sh_duvidas' className='sh-item-text'>Dúvidas frequentes</Link>
             </li>
+
             <li className="sh-navegacao-item">
-              <Link to='/duvidas' className='sh-item-text'>Dúvidas</Link>
+              <Link to='#sh_ultimas_postagens' className='sh-item-text'>Últimas postágens</Link>
             </li>
+
             <li className="d-lg-none sh-navegacao-item">
-              <Link to='/sobrenos' className='sh-item-text'>Registre-se</Link>
+              <Link to='/cadastro-freelancer' className='sh-item-text'>Seja um Freelance</Link>
             </li>
+
             <li className="d-lg-none sh-navegacao-item">
-              <Link to='/duvidas' className='sh-item-text'>Login</Link>
+              <Link to='/cadastro-cliente' className='sh-item-text'>Seja um Cliente</Link>
             </li>
+            
           </ul>
         </Offcanvas.Body>
 

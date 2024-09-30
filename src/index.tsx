@@ -25,11 +25,11 @@ const router = createBrowserRouter([
   { path: '/duvidas', element: <Duvidas /> },
 
   // Rotas de clientes
-  { path: 'cadastro-cliente', element: <CadastroCliente /> },
+  { path: '/cadastro-cliente', element: <CadastroCliente /> },
   { path: '/home-cliente', element: <HomeCliente /> },
 
   // Rotas de Freelancers
-  { path: 'cadastro-freelancer', element: <CadastroFreelancer /> },
+  { path: '/cadastro-freelancer', element: <CadastroFreelancer /> },
   { path: '/home-freelancer', element: < HomeFreelancer/> },
 ])
 
