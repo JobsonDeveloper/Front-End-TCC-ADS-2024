@@ -1,6 +1,7 @@
 :root {
   --sh-servicos-cor-primaria: #fff;
   --sh-servicos-cor-secundaria: #0075FF;
+  --sh-servicos-cor-marcadores: #5584E0;
   --sh-servicos-cor-terciaria: #000;
   --sh-servicos-cor-quaternaria: #35FF62;
   --sh-servicos-cor-textos: #494949;
@@ -10,13 +11,13 @@
 
 
   --sh-servicos-font-size-titulos: 1.5rem;
-  --sh-servicos-font-size-remuneracao: 1.3rem;
+  --sh-servicos-font-size-remuneracao: 1.2rem;
   --sh-servicos-font-size-textos: 1.1rem;
 }
 
 .sh-servicos-lista {
   list-style-type: none;
-  padding: 25px 0;
+  padding: 25px 20px;
   display: flex;
   overflow-x: scroll;
   justify-content: space-between;
@@ -27,12 +28,11 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 5px;
+    padding: 10px;
     width: max-content;
     background-color: var(--sh-servicos-cor-primaria);
     border-radius: 5px;
     box-shadow: #555555 3px 3px 9px;
-
 
 
     & .sh-itens-data {
@@ -48,10 +48,10 @@
 
       & .sh-servicos-data-marcador {
         margin: 0;
-        background-color: var(--sh-servicos-cor-secundaria);
+        background-color: var(--sh-servicos-cor-marcadores);
         font-size: var(--sh-servicos-font-size-textos);
         color: var(--sh-servicos-cor-primaria);
-        padding: 1px 5px;
+        padding: 2px 8px;
         border-radius: 50px;
       }
 

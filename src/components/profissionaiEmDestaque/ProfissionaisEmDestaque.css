@@ -25,10 +25,10 @@
     background-image: url('../../assets/index/backgrounds/background-profissoes.webp');
 
     & .sh-EmDestaque-item {
-        width: 225px;
+        width: 100%;
         padding: 5px;
         border-radius: 5px;
-        height: 135px;
+        height: 100%;
         background-color: var(--sh-profissionais-cor-primaria);
         box-shadow: #555555 3px 3px 9px;
 

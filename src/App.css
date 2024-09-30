@@ -15,7 +15,7 @@
   --sh-index-cor-quaternaria: #35FF62;
   --sh-index-cor-textos: #494949;
 
-  --sh-index-padding: 0 5px;
+  --sh-index-padding: 0 10px;
   --sh-index-margin: 20px 0;
 
 
@@ -340,7 +340,6 @@
           }
         }
       }
-
     }
 
     /* últimos serviços postados */
