@@ -12,8 +12,6 @@ const ProfissionaisEmDestaque = ({ dados }: any) => {
         <p className="sh-EmDestaque-profissonal-nome">{profissional.nome}</p>
       </div>
 
-      <p className="sh-EmDestaque-servicos-titulo">Serviços principais</p>
-
       <ul className="sh-EmDestaque-servicos">
         <li className="sh-servicos-list">{profissional.servicoUm}</li>
         <li className="sh-servicos-list">{profissional.servicoDois}</li>
