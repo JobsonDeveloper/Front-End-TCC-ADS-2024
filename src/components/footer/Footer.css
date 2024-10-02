@@ -141,133 +141,35 @@
   }
 }
 
-/* @media (min-width: 576px) {
+@media (min-width: 576px) {
+  :root {
+    --sh-footer-font-size-title: 1.7rem;
+    --sh-footer-font-size-text: 1.4rem;
+  }
+
   & .sh-footer {
-
     & .sh-footer-info {
-      justify-content: space-between;
-
-      & .sh-footer-fundadores {
-
-        & .sh-fundadores-title {
-          text-align: center;
-        }
-
-        & .sh-fundadores-list {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          column-gap: 30px;
-          width: max-content;
-
-          & .sh-fundadores-nome {
+      & .sh-footer-faleConosco {
+        & .sh-faleConosco-redesSociais {
+          & .sh-footer-redesSociais-img {
+            width: 28px;
           }
         }
       }
-
-      & .sh-footer-redesSociais {
-
-        & .sh-footer-redesSociais-img {
-        }
-      }
-
-      & .sh-footer-email {
-        & .sh-email-title {
-        }
-
-        & .sh-email-text {
-        }
-      }
-
-      & .sh-footer-mapa {
-
-        & .sh-footer-mapa-title {
-          text-align: center;
-        }
-
-        & .sh-footer-mapa-list {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          column-gap: 30px;
-
-          & .sh-footer-mapa-item {
-            & .sh-mapa-link {
-            }
-          }
-        }
-      }
-    }
-
-    & .sh-footer-copyright {
     }
   }
 }
 
 @media (min-width: 768px) {
+  :root {
+    --sh-footer-font-size-title: 1.5rem;
+    --sh-footer-font-size-text: 1.3rem;
+  }
+
   & .sh-footer {
-
     & .sh-footer-info {
-      justify-content: space-between;
-      grid-template-areas:
-      "fundadores redes email mapa";
+      display: flex;
 
-      & .sh-footer-fundadores {
-
-        & .sh-fundadores-title {
-          text-align: center;
-        }
-
-        & .sh-fundadores-list {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          column-gap: 30px;
-          width: max-content;
-
-          & .sh-fundadores-nome {
-          }
-        }
-      }
-
-      & .sh-footer-redesSociais {
-
-        & .sh-footer-redesSociais-img {
-        }
-      }
-
-      & .sh-footer-email {
-        & .sh-email-title {
-          text-align: center;
-        }
-
-        & .sh-email-text {
-        }
-      }
-
-      & .sh-footer-mapa {
-
-        & .sh-footer-mapa-title {
-          text-align: center;
-        }
-
-        & .sh-footer-mapa-list {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          column-gap: 30px;
-
-          & .sh-footer-mapa-item {
-            & .sh-mapa-link {
-            }
-          }
-        }
-      }
-    }
-
-    & .sh-footer-copyright {
     }
   }
 }
-
-@media (min-width: 992px) {
-  :root {
-    --sh-footer-padding: 20px 20px 5px;
-  }
-} */

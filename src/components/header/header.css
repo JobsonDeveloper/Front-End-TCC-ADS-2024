@@ -20,6 +20,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 99;
 
   & .sh-header-options {
     padding: 0;
@@ -114,6 +115,23 @@
           }
         }
 
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  :root {
+    --sh-header-font-size-textos: 1.4rem;
+  }
+
+
+  & .sh-header {
+    & .sh-header-options {
+      & .sh-options-itens {
+        & .sh-lg-logo-img {
+          width: 145px;
+        }
       }
     }
   }

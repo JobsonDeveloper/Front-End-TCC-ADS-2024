@@ -6,10 +6,6 @@
     --sh-planos-cor-textos: #6F6F6F;
     --sh-planos-cor-textos-hover: #2c2c2c;
 
-    --sh-planos-font-size-tag: 1.4rem;
-    --sh-planos-font-size-definicao: 1.4rem;
-    --sh-planos-font-size-valor: 3rem;
-
     --sh-planos-card-width: 300px;
 }
 
@@ -33,6 +29,18 @@
         &:hover {
             filter: drop-shadow(0 0 .5px rgba(0, 0, 0, .4));
         }
+    }
+}
+
+@media (min-width: 576px) {
+    :root {
+        --sh-planos-card-width: 350px;
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+        --sh-planos-card-width: 300px;
     }
 }
 

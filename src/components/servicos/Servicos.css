@@ -15,7 +15,7 @@
   --sh-servicos-font-size-textos: 1.1rem;
 }
 
-.sh-servicos-lista {
+& .sh-servicos-lista {
   list-style-type: none;
   padding: 25px 20px;
   margin: 0;
@@ -59,7 +59,6 @@
       & .sh-servicos-data-descricao {
         color: var(--sh-servicos-cor-textos);
         font-size: var(--sh-servicos-font-size-textos);
-        height: 80px;
 
         /* Limitar tamanho de texto */
         overflow: hidden;
@@ -91,6 +90,42 @@
         font-size: var(--sh-servicos-font-size-textos);
         color: var(--sh-servicos-cor-textos);
         width: max-content;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  :root {
+    --sh-servicos-font-size-remuneracao: 1.7rem;
+    --sh-servicos-font-size-textos: 1.4rem;
+  }
+
+  & .sh-servicos-lista {
+    & .sh-servicos-itens {
+      & .sh-itens-data {
+        width: 310px;
+
+        & .sh-servicos-img-perfil {
+          width: 35px;
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 768px) {
+  :root {
+    --sh-servicos-font-size-textos: 1.2rem;
+    --sh-servicos-font-size-remuneracao: 1.3rem;
+  }
+
+  & .sh-servicos-lista {
+    & .sh-servicos-itens {
+      & .sh-itens-data {
+        & .sh-servicos-img-perfil {
+          width: 30px;
+        }
       }
     }
   }

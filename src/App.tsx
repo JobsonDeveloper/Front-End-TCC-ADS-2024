@@ -16,8 +16,10 @@ import Loading from './components/loading/Loading';
 import { createRoot } from 'react-dom/client';
 
 import backgroundApresentacaoUm from './assets/index/backgrounds/background-apresentacao-lg.webp'
+import backgroundApresentacaoUmMd from './assets/index/backgrounds/background-apresentacaoMd.png'
 import backgroundApresentacaoDois from './assets/index/backgrounds/imagem-apresentacao.webp'
 import apresentacaoButtonIcon from './assets/index/icons/apresentacao-button-icon.png';
+import buttonFreelancer from './assets/index/backgrounds/serFreelancer.png';
 import { Accordion } from 'react-bootstrap';
 
 // ------------ Monta do banco ----------
@@ -127,10 +129,14 @@ function App() {
 
         <article className='sh-apresentacao'>
           <article className="sh-apresentacao-um">
-            <img src={backgroundApresentacaoUm} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img" />
+            <img src={backgroundApresentacaoUm} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-md-none" />
+            <img src={backgroundApresentacaoUmMd} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-none d-md-flex" />
+            <div className='sh-apresentacao-md-button d-none d-md-flex'>
+              <img src={buttonFreelancer} alt="Botão para ser freelancer" className="sh-apresentacao-md-button-link" />
+            </div>
           </article>
 
-          <article className="sh-apresentacao-textos">
+          <article className="sh-apresentacao-textos d-md-none">
             <h2 className="sh-apresentacao-titulos">Faça sua carreira decolar! <br /> Conquiste o mercado conosco</h2>
             <p className="sh-apresentacao-paragrafos">
               Aqui você tem a oportunidade de encontrar novos clientes, se tornar prestigiado e requisitado por muitas pessoas.
@@ -141,7 +147,7 @@ function App() {
           </article>
 
           {/* Button para freelancers */}
-          <article className="sh-apresentacao-button">
+          <article className="sh-apresentacao-button d-md-none">
             <div className="sh-apresentacao-button-item sh-apresentacao-button">
               <Link to='/cadastro-freelancer' className='sh-apresentacao-button-cadastro'>Torne-se um Freelancer</Link>
             </div>
@@ -310,10 +316,10 @@ function App() {
             <Accordion.Item eventKey="2" className='sh-duvidas-acordeon-item'>
               <Accordion.Header className='sh-duvidas-header'>Os clientes pagam para se cadastrar?</Accordion.Header>
               <Accordion.Body className='sh-acordeon-body'>
-                Para os clientes, a utilização da plataforma é 100% 
-                gratuíta, o pagameto só será realizado ao freelancer 
-                ao qual você deseja contratar para um determinado serviço. 
-                O valor da remuneração do serviço é definido pelo cliente 
+                Para os clientes, a utilização da plataforma é 100%
+                gratuíta, o pagameto só será realizado ao freelancer
+                ao qual você deseja contratar para um determinado serviço.
+                O valor da remuneração do serviço é definido pelo cliente
                 no momento da postagem do mesmo.
               </Accordion.Body>
             </Accordion.Item>

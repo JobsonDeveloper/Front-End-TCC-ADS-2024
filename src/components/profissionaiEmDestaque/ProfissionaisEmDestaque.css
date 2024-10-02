@@ -97,6 +97,20 @@
     }
 }
 
+@media (min-width: 576px) {
+    :root {
+        --sh-profissionais-font-size-subtitulos: 1.7rem;
+        --sh-profissionais-font-size-textos: 1.4rem;
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+        --sh-profissionais-font-size-subtitulos: 1.4rem;
+        --sh-profissionais-font-size-textos: 1.1rem;
+    }
+}
+
 @media (min-width: 946px) {
     & .sh-EmDestaque-lista {
         overflow-x: hidden;
