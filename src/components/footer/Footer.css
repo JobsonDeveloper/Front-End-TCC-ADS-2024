@@ -169,7 +169,35 @@
   & .sh-footer {
     & .sh-footer-info {
       display: flex;
+      flex-direction: row;
+      justify-content: space-between;
 
+      & .sh-footer-fundadores {
+        & .sh-fundadores-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --sh-footer-font-size-title: 1.5rem;
+    --sh-footer-font-size-text: 1.3rem;
+  }
+
+  & .sh-footer {
+    & .sh-footer-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      
+      & .sh-footer-fundadores {
+        & .sh-fundadores-list {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
     }
   }
 }

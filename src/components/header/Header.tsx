@@ -11,12 +11,38 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Options from '../../assets/index/icons/icon-options.png'
+import { Modal } from 'react-bootstrap';
 
 const Header = () => {
   // ---- Const Bootstrap
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [modalRegistro, setModalRegistro] = useState(false);
+
+  function ModalTipoDeCadastro(props: any) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Qual tipo de cadastro você deseja realizar?
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Link to='/cadastro-freelancer' className='sh-item-text'>Tornar-se um Freelancer</Link>
+          <Link to='/cadastro-cliente' className='sh-item-text'>Tornar-se um Cliente</Link>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
   return (
     <section className="sh-header">
@@ -52,9 +78,6 @@ const Header = () => {
 
         <Offcanvas.Body className='sh-header-offcanvas-body'>
           <ul className="mb-0 sh-header-navegacao">
-            <li className="sh-navegacao-item">
-              <a href='#sh_main_skillhub' className='sh-item-text'>Oque é a Skillhub</a>
-            </li>
 
             <li className="sh-navegacao-item">
               <a href='#sh_profissionais_emDestaque' className='sh-item-text'>Profissionais em destaque</a>
@@ -63,7 +86,7 @@ const Header = () => {
             <li className="sh-navegacao-item">
               <a href='#sh_planos' className='sh-item-text'>Planos</a>
             </li>
-            
+
             <li className="sh-navegacao-item">
               <a href='#sh_vantagens' className='sh-item-text'>Vantagens</a>
             </li>
@@ -76,29 +99,28 @@ const Header = () => {
               <Link to='#sh_duvidas' className='sh-item-text'>Dúvidas frequentes</Link>
             </li>
 
-            <li className="sh-navegacao-item">
-              <Link to='#sh_ultimas_postagens' className='sh-item-text'>Últimas postágens</Link>
-            </li>
-
             <li className="d-lg-none sh-navegacao-item">
-              <Link to='/cadastro-freelancer' className='sh-item-text'>Seja um Freelance</Link>
+              <Link to='/cadastro-freelancer' className='sh-item-text'>Seja um Freelancer</Link>
             </li>
 
             <li className="d-lg-none sh-navegacao-item">
               <Link to='/cadastro-cliente' className='sh-item-text'>Seja um Cliente</Link>
             </li>
-            
+
           </ul>
         </Offcanvas.Body>
 
         <ul className='d-none d-lg-flex sh-header-option-dois'>
           <li className="sh-navegacao-item">
-            <Link to='/duvidas' className='sh-item-text'>Registre-se</Link>
+            {/* <Link to='/duvidas' className='sh-item-text'>Registre-se</Link> */}
+            <button className='sh-item-text' onClick={() => setModalRegistro(true)}>Registre-se</button>
           </li>
           <li className="sh-navegacao-item">
             <Link to='/duvidas' className='sh-item-text'>Login</Link>
           </li>
         </ul>
+
+        <ModalTipoDeCadastro show={modalRegistro} onHide={() => setModalRegistro(false)} />
       </Offcanvas>
     </section>
   )
