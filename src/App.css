@@ -14,6 +14,7 @@
   --sh-index-cor-terciaria: #000;
   --sh-index-cor-quaternaria: #35FF62;
   --sh-index-cor-textos: #494949;
+  --sh-footer-cor-background-footer: #26466B;
 
   --sh-index-padding: 0 10px;
   --sh-index-margin: 20px 0;
@@ -406,6 +407,63 @@
           flex-direction: row;
         }
       }
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .sh-container {
+
+
+    & .sh-header-apresentacao {
+      padding: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & .sh-apresentacao {
+        width: 1400px;
+      }
+    }
+
+    & .sh-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & .sh-main-skillhub {
+        width: 1400px;
+      }
+
+      & .sh-profissionaisEmDestaque {
+        width: 1400px;
+      }
+
+      & .sh-main-planos {
+        width: 1400px;
+      }
+
+      & .sh-main-vantagens {
+        width: 1400px;
+      }
+
+      & .sh-main-comecar {
+        width: 1400px;
+      }
+
+      & .sh-main-duvidas {
+        width: 1400px;
+      }
+
+      & .sh-main-servicos {
+        width: 100%;
+      }
+    }
+
+    & .sh-footer {
+      display: flex;
+      justify-content: center;
+      background-color: var(--sh-footer-cor-background-footer);
     }
   }
 }

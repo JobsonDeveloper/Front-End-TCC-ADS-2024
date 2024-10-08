@@ -341,7 +341,9 @@ function App() {
         </article>
       </section>
 
-      <Footer />
+      <section className="sh-footer">
+        <Footer />
+      </section>
     </main>
   );
 }

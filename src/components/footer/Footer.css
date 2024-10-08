@@ -7,18 +7,17 @@
   --sh-footer-cor-quaternaria: #35FF62;
 
   --sh-footer-cor-titulos: #272727;
-  --sh-footer-cor-background-footer: #26466B;
   --sh-footer-cor-textos: #E2E2E2;
 
-  --sh-footer-font-size-copyright: 1.1rem;
-  --sh-footer-font-size-title: 1.3rem;
-  --sh-footer-font-size-text: 1.1rem;
+  --sh-footer-font-size-copyright: .8rem;
+  --sh-footer-font-size-title: 1.1rem;
+  --sh-footer-font-size-text: 1rem;
 
   --sh-footer-padding: 20px 10px 5px;
 }
 
-& .sh-footer {
-  background-color: var(--sh-footer-cor-background-footer);
+& .sh-footer-element {
+  
   padding: var(--sh-footer-padding);
   display: flex;
   flex-direction: column;
@@ -113,7 +112,7 @@
 
       & .sh-footer-mapa-list {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         list-style-type: none;
         padding: 0;
         column-gap: 30px;
@@ -136,7 +135,7 @@
 
   & .sh-footer-copyright {
     color: var(--sh-footer-cor-textos);
-    font-size: var(--sh-footer-font-size-text);
+    font-size: var(--sh-footer-font-size-copyright);
     text-align: center;
   }
 }
@@ -145,9 +144,10 @@
   :root {
     --sh-footer-font-size-title: 1.7rem;
     --sh-footer-font-size-text: 1.4rem;
+    --sh-footer-font-size-copyright: 1.2rem;
   }
 
-  & .sh-footer {
+  & .sh-footer-element {
     & .sh-footer-info {
       & .sh-footer-faleConosco {
         & .sh-faleConosco-redesSociais {
@@ -156,6 +156,12 @@
           }
         }
       }
+
+      & .sh-footer-mapa {
+        & .sh-footer-mapa-list {
+          grid-template-columns: 1fr 1fr;
+        }
+    }
     }
   }
 }
@@ -166,16 +172,27 @@
     --sh-footer-font-size-text: 1.3rem;
   }
 
-  & .sh-footer {
+  & .sh-footer-element {
     & .sh-footer-info {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      display: grid;
+      grid-template-areas: 
+      "fundadores mapa"
+      "contatos contatos";
 
       & .sh-footer-fundadores {
+        grid-area: fundadores;
+
         & .sh-fundadores-list {
           grid-template-columns: 1fr;
         }
+      }
+
+      & .sh-footer-faleConosco {
+        grid-area: contatos;
+      }
+
+      & .sh-footer-mapa {
+        grid-area: mapa;
       }
     }
   }
@@ -183,11 +200,12 @@
 
 @media (min-width: 992px) {
   :root {
-    --sh-footer-font-size-title: 1.5rem;
-    --sh-footer-font-size-text: 1.3rem;
+    --sh-footer-font-size-title: 1rem;
+    --sh-footer-font-size-text: 0.9rem;
+    --sh-footer-font-size-copyright: 0.8rem;
   }
 
-  & .sh-footer {
+  & .sh-footer-element {
     & .sh-footer-info {
       display: flex;
       flex-direction: row;
@@ -199,5 +217,11 @@
         }
       }
     }
+  }
+}
+
+@media (min-width: 1400px) {
+  & .sh-footer-element {
+    width: 1400px;
   }
 }

@@ -114,7 +114,7 @@
   }
 }
 
-@media(min-width: 768px) {
+@media (min-width: 768px) {
   :root {
     --sh-servicos-font-size-textos: 1.2rem;
     --sh-servicos-font-size-remuneracao: 1.3rem;
@@ -131,8 +131,14 @@
   }
 }
 
-@media(min-width: 1125px) {
+@media (min-width: 1125px) {
   .sh-servicos-lista {
     overflow-x: hidden;
+  }
+}
+
+@media (min-width: 1400px) {
+  & .sh-servicos-lista {
+    justify-content: center;
   }
 }

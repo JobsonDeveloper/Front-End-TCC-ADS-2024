@@ -139,19 +139,7 @@
 
 @media (min-width: 992px) {
   :root {
-    --sh-font-family: "Roboto", sans-serif;
-
-    --sh-font-size-header: 1.2rem;
-
-    --sh-cor-primaria: #fff;
-    --sh-cor-secundaria: #0075FF;
-    --sh-cor-terciaria: #000;
-    --sh-cor-textos: #6F6F6F;
-    --sh-cor-textos-hover: #2c2c2c;
-
-    --sh-padding-geral: 10px;
-
-    --sh-padding-header: 10px 30px;
+    --sh-header-font-size-textos: 1rem;
   }
 
   .sh-header {
@@ -251,5 +239,11 @@
 
       }
     }
+  }
+}
+
+@media (min-width: 1400px) {
+  .sh-header {
+    width: 1400px;
   }
 }

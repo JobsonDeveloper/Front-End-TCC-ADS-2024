@@ -11,8 +11,9 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <section className="sh-footer">
+    <section className="sh-footer-element">
       <ul className="sh-footer-info">
+
         <li className="sh-footer-info-item sh-footer-fundadores">
           <h5 className="sh-fundadores-title">Fundadores</h5>
 
@@ -90,6 +91,7 @@ const Footer = () => {
             </li>
           </ul>
         </li>
+
       </ul>
 
       <article className="sh-footer-copyright">

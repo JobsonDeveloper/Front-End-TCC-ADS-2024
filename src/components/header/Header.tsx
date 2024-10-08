@@ -80,15 +80,11 @@ const Header = () => {
           <ul className="mb-0 sh-header-navegacao">
 
             <li className="sh-navegacao-item">
-              <a href='#sh_profissionais_emDestaque' className='sh-item-text'>Profissionais em destaque</a>
-            </li>
-
-            <li className="sh-navegacao-item">
               <a href='#sh_planos' className='sh-item-text'>Planos</a>
             </li>
 
             <li className="sh-navegacao-item">
-              <a href='#sh_vantagens' className='sh-item-text'>Vantagens</a>
+              <a href='#sh_profissionais_emDestaque' className='sh-item-text'>Profissionais em destaque</a>
             </li>
 
             <li className="sh-navegacao-item">
@@ -96,17 +92,12 @@ const Header = () => {
             </li>
 
             <li className="sh-navegacao-item">
-              <Link to='#sh_duvidas' className='sh-item-text'>Dúvidas frequentes</Link>
+              <Link to='/cadastro-freelancer' className='sh-item-text'>Sobre nós</Link>
             </li>
 
-            <li className="d-lg-none sh-navegacao-item">
-              <Link to='/cadastro-freelancer' className='sh-item-text'>Seja um Freelancer</Link>
+            <li className="sh-navegacao-item">
+              <Link to='#sh_duvidas' className='sh-item-text'>Dúvidas</Link>
             </li>
-
-            <li className="d-lg-none sh-navegacao-item">
-              <Link to='/cadastro-cliente' className='sh-item-text'>Seja um Cliente</Link>
-            </li>
-
           </ul>
         </Offcanvas.Body>
 
