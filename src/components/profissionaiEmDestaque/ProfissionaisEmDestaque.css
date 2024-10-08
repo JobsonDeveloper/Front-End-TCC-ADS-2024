@@ -1,9 +1,7 @@
 :root {
     --sh-profissionais-font-family: "Roboto", sans-serif;
 
-    --sh-profissionais-font-size-titulos: 1.5rem;
-    --sh-profissionais-font-size-subtitulos: 1.3rem;
-    --sh-profissionais-font-size-textos: 1.1rem;
+    --sh-profissionais-font-size-textos: 1rem;
 
     --sh-profissionais-cor-primaria: #fff;
     --sh-profissionais-cor-secundaria: #0075FF;
@@ -49,7 +47,7 @@
 
             & .sh-EmDestaque-profissonal-nome {
                 color: var(--sh-profissionais-cor-textos);
-                font-size: var(--sh-profissionais-font-size-subtitulos);
+                font-size: var(--sh-profissionais-font-size-textos);
                 margin: 0;
                 height: max-content;
                 font-weight: 500;
@@ -61,6 +59,10 @@
                 -webkit-line-clamp: 1;
                 -webkit-box-orient: vertical;
             }
+        }
+
+        & .sh-EmDestaque-item-dataCadastro {
+            margin: 0;
         }
 
         & .sh-EmDestaque-servicos {
@@ -95,18 +97,17 @@
             }
         }
     }
+
 }
 
 @media (min-width: 576px) {
     :root {
-        --sh-profissionais-font-size-subtitulos: 1.7rem;
         --sh-profissionais-font-size-textos: 1.4rem;
     }
 }
 
 @media (min-width: 768px) {
     :root {
-        --sh-profissionais-font-size-subtitulos: 1.4rem;
         --sh-profissionais-font-size-textos: 1.1rem;
     }
 }

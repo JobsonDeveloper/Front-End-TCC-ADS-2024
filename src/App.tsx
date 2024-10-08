@@ -57,6 +57,7 @@ const profDestaque = [
     servicoUm: 'Músico',
     servicoDois: 'Professor',
     servicoTres: 'Tatuador',
+    dataCadastro: '10/05/2024',
     estrelas: 103
   },
   {
@@ -65,6 +66,7 @@ const profDestaque = [
     servicoUm: 'Músico',
     servicoDois: 'Professor',
     servicoTres: 'Tatuador',
+    dataCadastro: '10/05/2024',
     estrelas: 87
   },
   {
@@ -73,6 +75,7 @@ const profDestaque = [
     servicoUm: 'Músico',
     servicoDois: 'Professor',
     servicoTres: 'Tatuador',
+    dataCadastro: '10/05/2024',
     estrelas: 65
   },
   {
@@ -81,6 +84,7 @@ const profDestaque = [
     servicoUm: 'Músico',
     servicoDois: 'Professor',
     servicoTres: 'Tatuador',
+    dataCadastro: '10/05/2024',
     estrelas: 49
   },
 ];

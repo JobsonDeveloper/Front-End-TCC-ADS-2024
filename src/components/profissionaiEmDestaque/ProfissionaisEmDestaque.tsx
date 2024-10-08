@@ -4,13 +4,15 @@ import imgProfissional from '../../assets/profissionais/profissional.png';
 import imgEstrelas from '../../assets/icons/estrela.svg';
 
 const ProfissionaisEmDestaque = ({ dados }: any) => {
-
   const listaProfDestaque = dados.map((profissional: any, index: any) =>
+
     <li key={index} className="sh-EmDestaque-item">
       <div className="sh-EmDestaque-item-dados">
         <img src={imgProfissional} alt="Foto de perfil" className="sh-EmDestaque-imagemProfissional" />
         <p className="sh-EmDestaque-profissonal-nome">{profissional.nome}</p>
       </div>
+
+      <p className="sh-EmDestaque-item-dataCadastro">Desde {profissional.dataCadastro}</p>
 
       <ul className="sh-EmDestaque-servicos">
         <li className="sh-servicos-list">{profissional.servicoUm}</li>

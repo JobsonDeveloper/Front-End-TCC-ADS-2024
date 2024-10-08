@@ -96,7 +96,11 @@ const Header = () => {
             </li>
 
             <li className="sh-navegacao-item">
-              <Link to='#sh_duvidas' className='sh-item-text'>Dúvidas</Link>
+              <a href='#sh_duvidas' className='sh-item-text'>Dúvidas</a>
+            </li>
+
+            <li className="sh-navegacao-item">
+              <Link to='/cadastro-cliente' className='sh-item-text'>Torne-se um cliente</Link>
             </li>
           </ul>
         </Offcanvas.Body>

@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 :root {
-  --sh-header-font-family: "Roboto", sans-serif;
 
-  --sh-header-font-size-textos: 1.2rem;
+  --sh-header-font-size-textos: 1rem;
+
+  --sh-index-font-family: "Nunito", sans-serif;
 
   --sh-header-cor-primaria: #fff;
   --sh-header-cor-secundaria: #0075FF;
@@ -21,6 +22,7 @@
   left: 0;
   width: 100%;
   z-index: 99;
+  font-family: var(--sh-index-font-family);
 
   & .sh-header-options {
     padding: 0;
@@ -75,6 +77,7 @@
     & .sh-lg-header-title {
       font-size: var(--sh-header-font-size-textos);
       color: var(--sh-header-cor-primaria);
+      font-family: var(--sh-index-font-family);
 
       & .sh-logo-img {
         width: 70px;
@@ -97,7 +100,6 @@
 
       & .sh-navegacao-item {
         font-size: var(--sh-font-size-textos-header);
-        font-family: var(--sh-font-family);
         color: var(--sh-cor-textos);
 
         & .sh-item-text {
@@ -108,6 +110,7 @@
           text-decoration: none;
           color: var(--sh-header-cor-terciaria);
           font-size: var(--sh-header-font-size-textos);
+          font-family: var(--sh-index-font-family);
 
           &:hover {
             color: var(--sh-cor-textos-hover);
@@ -183,7 +186,6 @@
 
         & .sh-navegacao-item {
           font-size: var(--sh-font-size-textos-header);
-          font-family: var(--sh-font-family);
           color: var(--sh-cor-textos);
           display: flex;
           align-items: center;
@@ -217,7 +219,6 @@
 
       & .sh-navegacao-item {
         font-size: var(--sh-font-size-textos-header);
-        font-family: var(--sh-font-family);
         color: var(--sh-cor-textos);
         display: flex;
         align-items: center;
