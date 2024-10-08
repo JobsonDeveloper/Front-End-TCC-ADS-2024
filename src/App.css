@@ -20,9 +20,9 @@
   --sh-index-margin: 20px 0;
 
 
-  --sh-index-font-size-titulos: 1.5rem;
-  --sh-index-font-size-subtitulos: 1.3rem;
-  --sh-index-font-size-textos: 1.1rem;
+  --sh-index-font-size-titulos: 1.4rem;
+  --sh-index-font-size-subtitulos: 1.2rem;
+  --sh-index-font-size-textos: 1rem;
 }
 
 .sh-container {
@@ -365,6 +365,10 @@
       }
     }
   }
+
+  & .sh-footer {
+    background-color: var(--sh-footer-cor-background-footer);
+  }
 }
 
 @media (min-width: 576px) {
@@ -463,7 +467,6 @@
     & .sh-footer {
       display: flex;
       justify-content: center;
-      background-color: var(--sh-footer-cor-background-footer);
     }
   }
 }
