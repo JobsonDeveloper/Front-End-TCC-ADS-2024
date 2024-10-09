@@ -11,6 +11,7 @@ import imgApresentacaoUm from './assets/images_background/background_header_1Res
 import imgApresentacaoDois from './assets/images_background/background_header_2Resultado.webp'
 import Planos from './components/planos/Planos'
 import ProfissionaisEmDestaque from './components/profissionaiEmDestaque/ProfissionaisEmDestaque';
+import ClientesEmDestaque from './components/clientesEmDestaque/ClientesEmDestaque';
 import Footer from './components/footer/Footer';
 import Loading from './components/loading/Loading';
 import { createRoot } from 'react-dom/client';
@@ -57,7 +58,7 @@ const profDestaque = [
     servicoUm: 'Músico',
     servicoDois: 'Professor',
     servicoTres: 'Tatuador',
-    dataCadastro: '10/05/2024',
+    dataCadastro: '05/2024',
     estrelas: 103
   },
   {
@@ -66,7 +67,7 @@ const profDestaque = [
     servicoUm: 'Músico',
     servicoDois: 'Professor',
     servicoTres: 'Tatuador',
-    dataCadastro: '10/05/2024',
+    dataCadastro: '05/2024',
     estrelas: 87
   },
   {
@@ -75,7 +76,7 @@ const profDestaque = [
     servicoUm: 'Músico',
     servicoDois: 'Professor',
     servicoTres: 'Tatuador',
-    dataCadastro: '10/05/2024',
+    dataCadastro: '05/2024',
     estrelas: 65
   },
   {
@@ -84,8 +85,48 @@ const profDestaque = [
     servicoUm: 'Músico',
     servicoDois: 'Professor',
     servicoTres: 'Tatuador',
-    dataCadastro: '10/05/2024',
+    dataCadastro: '05/2024',
     estrelas: 49
+  },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'André Felipe Silva',
+    servicoDois: 'Suporte técnico',
+    dataCadastro: '05/2024',
+    estrelas: 30
+  },
+];
+
+const cliDestaque = [
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'João Paulo César',  
+    dataCadastro: '05/2024',
+    estrelas: 103
+  },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'João Paulo César',  
+    dataCadastro: '05/2024',
+    estrelas: 90
+  },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'João Paulo César',  
+    dataCadastro: '05/2024',
+    estrelas: 87
+  },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'João Paulo César',  
+    dataCadastro: '05/2024',
+    estrelas: 78
+  },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'João Paulo César',  
+    dataCadastro: '05/2024',
+    estrelas: 76
   },
 ];
 
@@ -93,7 +134,9 @@ function App() {
   const [removeLoading, setRemoveLoading] = useState(false);
 
   useEffect(() => {
-    setRemoveLoading(true);
+    setTimeout(() => {
+      setRemoveLoading(true);
+    }, 1500);
   }, []);
 
 
@@ -219,6 +262,14 @@ function App() {
         <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
           <h2 className="sh-profissionaisEmDestaque-titulo">Profissionais em destaque</h2>
           <ProfissionaisEmDestaque dados={profDestaque} />
+        </article>
+
+        {/* Clientes em destaque */}
+        <article className="sh-clientesEmDestaque" id='sh_profissionais_emDestaque'>
+          <h2 className="sh-clientesEmDestaque-titulo">Clientes em destaque</h2>
+          <div className="sh-clientesEmDestaque-lista">
+            <ClientesEmDestaque dados={cliDestaque} />
+          </div>
         </article>
 
         {/* Deseja ser um Freelancer? */}

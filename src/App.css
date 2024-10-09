@@ -183,6 +183,21 @@
       }
     }
 
+    /* Clientes em destaque */
+    & .sh-clientesEmDestaque {
+      display: flex;
+      flex-direction: column;
+      margin: var(--sh-index-margin);
+      gap: 10px;
+      width: 100%;
+
+      & .sh-clientesEmDestaque-titulo {
+        text-align: center;
+        font-size: var(--sh-index-font-size-titulos);
+        color: var(--sh-index-cor-terciaria);
+      }
+    }
+
     /* Deseja ser um Freelancer? */
     & .sh-main-planos {
       padding: var(--sh-index-padding);
@@ -442,6 +457,10 @@
       & .sh-profissionaisEmDestaque {
         width: 1400px;
       }
+
+      /* & .sh-clientesEmDestaque {
+        width: 1400px;
+      } */
 
       & .sh-main-planos {
         width: 1400px;

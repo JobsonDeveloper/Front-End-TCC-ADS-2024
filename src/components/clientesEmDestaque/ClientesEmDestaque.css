@@ -15,44 +15,43 @@
     --sh-profissionais-padding: 45px 25px 0 25px;
 }
 
-& .sh-EmDestaque-lista {
+& .sh-cliEmDestaque {
     display: flex;
     list-style-type: none;
     padding: 25px 20px;
     justify-items: center;
     overflow-x: auto;
     gap: 30px;
-    background-image: url('../../assets/index/backgrounds/background-profissoes.webp');
+    justify-content: space-evenly;
 
-    & .sh-EmDestaque-item {
+    & .sh-cliEmDestaque-item {
         display: flex;
         flex-direction: column;
         gap: 15px;
-        width: 100%;
         padding: 5px;
         border-radius: 5px;
         height: 100%;
         background-color: var(--sh-profissionais-cor-primaria);
         box-shadow: #555555 3px 3px 9px;
 
-        & .sh-EmDestaque-item-dados {
+        & .sh-cliEmDestaque-item-dados {
             display: flex;
             align-items: center;
             gap: 10px;
 
-            & .sh-EmDestaque-imagemProfissional {
+            & .sh-cliEmDestaque-imagemProfissional {
                 width: 35px;
                 height: 35px;
             }
 
-            & .sh-EmDestaque-profissonal-nome {
+            & .sh-cliEmDestaque-cliente-nome {
                 color: var(--sh-profissionais-cor-textos);
                 font-size: var(--sh-profissionais-font-size-textos);
                 margin: 0;
                 height: max-content;
                 font-weight: 500;
+                text-wrap: nowrap;
 
-                /* Limitar tamanho de texto */
                 overflow: hidden;
                 text-overflow: ellipsis;
                 display: -webkit-box;
@@ -61,35 +60,20 @@
             }
         }
 
-        & .sh-EmDestaque-servicos {
-            list-style-type: none;
-            display: flex;
-            padding: 0;
-            gap: 10px;
-
-            & .sh-servicos-list {
-                color: var(--sh-profissionais-cor-terciaria);
-                background-color: var(--sh-profissionais-cor-quaternaria);
-                padding: 1px 5px;
-                border-radius: 50px;
-                font-size: var(--sh-profissionais-font-size-textos);
-            }
-        }
-
-        & .sh-EmDestaque-item-dataCadastro {
+        & .sh-cliEmDestaque-item-dataCadastro {
             margin: 0;
         }
 
-        & .sh-EmDestaque-estrelas {
+        & .sh-cliEmDestaque-estrelas {
             display: flex;
             align-items: center;
             gap: 5px;
 
-            & .sh-EmDestaque-estrelas-img {
+            & .sh-cliEmDestaque-estrelas-img {
                 width: 21px;
             }
 
-            & .sh-EmDestaque-estrelas-quantidade {
+            & .sh-cliEmDestaque-estrelas-quantidade {
                 color: var(--sh-profissionais-cor-terciaria);
                 font-weight: 500;
                 font-size: var(--sh-profissionais-font-size-textos);
@@ -100,23 +84,4 @@
 
 }
 
-@media (min-width: 576px) {
-    :root {
-        --sh-profissionais-font-size-textos: 1.4rem;
-    }
-}
 
-@media (min-width: 768px) {
-    :root {
-        --sh-profissionais-font-size-textos: 1.1rem;
-    }
-}
-
-@media (min-width: 946px) {
-    /* & .sh-EmDestaque-lista {
-        overflow-x: hidden;
-        justify-content: space-evenly;
-    } */
-}
-
-@media (min-width: 1400px) {}

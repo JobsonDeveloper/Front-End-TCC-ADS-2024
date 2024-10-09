@@ -99,8 +99,12 @@ const Header = () => {
               <a href='#sh_duvidas' className='sh-item-text'>Dúvidas</a>
             </li>
 
-            <li className="sh-navegacao-item">
+            <li className="d-sm-none sh-navegacao-item">
               <Link to='/cadastro-cliente' className='sh-item-text'>Torne-se um cliente</Link>
+            </li>
+            
+            <li className="d-sm-none sh-navegacao-item">
+              <Link to='/cadastro-freelancer' className='sh-item-text'>Torne-se um Freelancer</Link>
             </li>
           </ul>
         </Offcanvas.Body>

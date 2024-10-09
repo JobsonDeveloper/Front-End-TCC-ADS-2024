@@ -12,13 +12,13 @@ const ProfissionaisEmDestaque = ({ dados }: any) => {
         <p className="sh-EmDestaque-profissonal-nome">{profissional.nome}</p>
       </div>
 
-      <p className="sh-EmDestaque-item-dataCadastro">Desde {profissional.dataCadastro}</p>
-
       <ul className="sh-EmDestaque-servicos">
         <li className="sh-servicos-list">{profissional.servicoUm}</li>
         <li className="sh-servicos-list">{profissional.servicoDois}</li>
         <li className="sh-servicos-list">{profissional.servicoTres}</li>
       </ul>
+
+      <p className="sh-EmDestaque-item-dataCadastro">Desde {profissional.dataCadastro}</p>
 
       <div className="sh-EmDestaque-estrelas">
         <img src={imgEstrelas} alt="Estrelas" className="sh-EmDestaque-estrelas-img"/>
