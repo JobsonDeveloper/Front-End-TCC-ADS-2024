@@ -21,7 +21,6 @@
   overflow-x: scroll;
   justify-content: space-between;
   gap: 15px;
-  background-image: url('../../assets/index/backgrounds/background-ultimos-servicos.webp');
 
   & .sh-servicos-itens {
     display: flex;

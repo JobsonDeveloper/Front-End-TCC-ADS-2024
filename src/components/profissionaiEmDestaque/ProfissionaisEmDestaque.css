@@ -16,22 +16,22 @@
 }
 
 & .sh-EmDestaque-lista {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     list-style-type: none;
     padding: 25px 20px;
-    justify-items: center;
     overflow-x: auto;
     gap: 30px;
-    background-image: url('../../assets/index/backgrounds/background-profissoes.webp');
+    justify-items: center;
 
     & .sh-EmDestaque-item {
         display: flex;
         flex-direction: column;
-        gap: 15px;
-        width: 100%;
+        gap: 10px;
+        width: 190px;
+        height: 13 0px;
         padding: 5px;
         border-radius: 5px;
-        height: 100%;
         background-color: var(--sh-profissionais-cor-primaria);
         box-shadow: #555555 3px 3px 9px;
 
@@ -73,11 +73,14 @@
                 padding: 1px 5px;
                 border-radius: 50px;
                 font-size: var(--sh-profissionais-font-size-textos);
+                text-wrap: nowrap;
             }
         }
 
         & .sh-EmDestaque-item-dataCadastro {
             margin: 0;
+            font-size: var(--sh-profissionais-font-size-textos);
+            color: var(--sh-profissionais-cor-textos);
         }
 
         & .sh-EmDestaque-estrelas {
@@ -90,33 +93,69 @@
             }
 
             & .sh-EmDestaque-estrelas-quantidade {
+                display: flex;
+                height: max-content;
+                margin: 4px 0 0;
                 color: var(--sh-profissionais-cor-terciaria);
                 font-weight: 500;
                 font-size: var(--sh-profissionais-font-size-textos);
-                margin: 0;
             }
         }
     }
-
 }
 
 @media (min-width: 576px) {
     :root {
         --sh-profissionais-font-size-textos: 1.4rem;
     }
-}
 
-@media (min-width: 768px) {
-    :root {
-        --sh-profissionais-font-size-textos: 1.1rem;
+    & .sh-EmDestaque-lista {
+        & .sh-EmDestaque-item {
+            width: 240px;
+            height: 146px;
+        }
+
     }
 }
 
-@media (min-width: 946px) {
-    /* & .sh-EmDestaque-lista {
-        overflow-x: hidden;
-        justify-content: space-evenly;
-    } */
+@media (min-width: 768px) {
+    & .sh-EmDestaque-lista {
+        & .sh-EmDestaque-item {
+            width: 235px;
+            height: 145px;
+            gap: 10px;
+        }
+    }
 }
 
-@media (min-width: 1400px) {}
+@media (min-width: 576px) {
+    :root {
+        --sh-profissionais-font-size-textos: 1.2rem;
+    }
+
+    & .sh-EmDestaque-lista {
+        & .sh-EmDestaque-item {
+            width: 210px;
+            height: 137px;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --sh-profissionais-font-size-textos: 1.4rem;
+    }
+
+    & .sh-EmDestaque-lista {
+        & .sh-EmDestaque-item {
+            width: 235px;
+            height: 146px;
+        }
+    }
+}
+
+@media (min-width: 1400px) {
+    & .sh-EmDestaque-lista {
+        width: 1400px;
+    }
+}

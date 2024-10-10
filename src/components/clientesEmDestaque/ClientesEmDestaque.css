@@ -1,37 +1,38 @@
 :root {
-    --sh-profissionais-font-family: "Roboto", sans-serif;
+    --sh-clientes-font-family: "Roboto", sans-serif;
 
-    --sh-profissionais-font-size-textos: 1rem;
+    --sh-clientes-font-size-textos: 1rem;
 
-    --sh-profissionais-cor-primaria: #fff;
-    --sh-profissionais-cor-secundaria: #0075FF;
-    --sh-profissionais-cor-terciaria: #000;
-    --sh-profissionais-cor-quaternaria: #35FF62;
-    --sh-profissionais-cor-textos: #6F6F6F;
-    --sh-profissionais-cor-textos-hover: #2c2c2c;
+    --sh-clientes-cor-primaria: #fff;
+    --sh-clientes-cor-secundaria: #0075FF;
+    --sh-clientes-cor-terciaria: #000;
+    --sh-clientes-cor-quaternaria: #35FF62;
+    --sh-clientes-cor-textos: #6F6F6F;
+    --sh-clientes-cor-textos-hover: #2c2c2c;
 
-    --sh-profissionais-itens-gap-top: 45px;
+    --sh-clientes-itens-gap-top: 45px;
 
-    --sh-profissionais-padding: 45px 25px 0 25px;
+    --sh-clientes-padding: 45px 25px 0 25px;
 }
 
 & .sh-cliEmDestaque {
-    display: flex;
-    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     padding: 25px 20px;
     justify-items: center;
     overflow-x: auto;
     gap: 30px;
-    justify-content: space-evenly;
+    justify-items: center;
 
     & .sh-cliEmDestaque-item {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 5px;
         padding: 5px;
         border-radius: 5px;
-        height: 100%;
-        background-color: var(--sh-profissionais-cor-primaria);
+        width: 145px;
+        height: 93px;
+        background-color: var(--sh-clientes-cor-primaria);
         box-shadow: #555555 3px 3px 9px;
 
         & .sh-cliEmDestaque-item-dados {
@@ -45,8 +46,8 @@
             }
 
             & .sh-cliEmDestaque-cliente-nome {
-                color: var(--sh-profissionais-cor-textos);
-                font-size: var(--sh-profissionais-font-size-textos);
+                color: var(--sh-clientes-cor-textos);
+                font-size: var(--sh-clientes-font-size-textos);
                 margin: 0;
                 height: max-content;
                 font-weight: 500;
@@ -62,6 +63,8 @@
 
         & .sh-cliEmDestaque-item-dataCadastro {
             margin: 0;
+            font-size: var(--sh-clientes-font-size-textos);
+            color: var(--sh-clientes-cor-textos);
         }
 
         & .sh-cliEmDestaque-estrelas {
@@ -74,14 +77,75 @@
             }
 
             & .sh-cliEmDestaque-estrelas-quantidade {
-                color: var(--sh-profissionais-cor-terciaria);
+                height: max-content;
+                display: flex;
+                margin: 4px 0 0;
                 font-weight: 500;
-                font-size: var(--sh-profissionais-font-size-textos);
-                margin: 0;
+                color: var(--sh-clientes-cor-terciaria);
+                font-size: var(--sh-clientes-font-size-textos);
+                align-items: end;
             }
         }
     }
 
 }
 
+@media (min-width: 576px) {
+    :root {
+        --sh-clientes-font-size-textos: 1.4rem;
+    }
 
+    & .sh-cliEmDestaque {
+
+        & .sh-cliEmDestaque-item {
+            width: 177px;
+            height: 105px;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+        --sh-clientes-font-size-textos: 1.4rem;
+    }
+
+    & .sh-cliEmDestaque {
+
+        & .sh-cliEmDestaque-item {
+            width: 177px;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    :root {
+        --sh-clientes-font-size-textos: 1.2rem;
+    }
+
+    & .sh-cliEmDestaque {
+        & .sh-cliEmDestaque-item {
+            width: 177px;
+            gap: 8px;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --sh-clientes-font-size-textos: 1.4rem;
+    }
+
+    & .sh-cliEmDestaque {
+        & .sh-cliEmDestaque-item {
+            width: 177px;
+            height: 112px;
+            gap: 8px;
+        }
+    }
+}
+
+@media (min-width: 1400px) {
+    & .sh-cliEmDestaque {
+        width: 1400px;
+    }
+}

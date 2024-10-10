@@ -23,7 +23,7 @@ const ClientesEmDestaque = ({ dados }: any) => {
 
 
     return (
-        <ul className="sh-cliEmDestaque">
+        <ul className="sh-show sh-cliEmDestaque">
             {listaCliEmDestaque}
         </ul>
     )

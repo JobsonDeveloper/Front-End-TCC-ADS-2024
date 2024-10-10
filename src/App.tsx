@@ -176,11 +176,12 @@ function App() {
 
         <article className='sh-apresentacao'>
           <article className="sh-apresentacao-um">
-            <img src={backgroundApresentacaoUm} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-md-none" />
-            <img src={backgroundApresentacaoUmMd} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-none d-md-flex" />
-            <div className='sh-apresentacao-md-button d-none d-md-flex'>
-              <img src={buttonFreelancer} alt="Botão para ser freelancer" className="sh-apresentacao-md-button-link" />
+            <img src={backgroundApresentacaoUm} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-lg-none" />
+            <img src={backgroundApresentacaoUmMd} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-none d-lg-flex" />
+            <div className='sh-apresentacao-md-button d-none d-lg-flex'>
+              <Link to='/cadastro-freelancer'><img src={buttonFreelancer} alt="Botão para ser freelancer" className="sh-apresentacao-md-button-link" /></Link>
             </div>
+
           </article>
 
           <article className="sh-apresentacao-textos d-md-none">
@@ -203,7 +204,7 @@ function App() {
           {/* Secundo post */}
           <article className="sh-apresentacao-dois">
             <div className="sh-apresentacao-dois-container-img">
-              <img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img" />
+              <Link to='/cadastro-cliente'><img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img" /></Link>
             </div>
 
             <div className="sh-apresentacao-textos">
@@ -223,7 +224,7 @@ function App() {
 
       <section className="sh-main">
         {/* Oque é a Skillhun */}
-        <article className="sh-main-skillhub" id='sh_main_skillhub'>
+        <article className="sh-show sh-main-skillhub" id='sh_main_skillhub'>
           <h2 className="sh-skillhub-titulo">Oque é a Skillhub</h2>
 
           <ul className="sh-skillhub-textos-list">
@@ -261,7 +262,9 @@ function App() {
         {/* Profissionais em destaque */}
         <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
           <h2 className="sh-profissionaisEmDestaque-titulo">Profissionais em destaque</h2>
-          <ProfissionaisEmDestaque dados={profDestaque} />
+          <div className="sh-profissionalEmDestaque-lista">
+            <ProfissionaisEmDestaque dados={profDestaque} />
+          </div>
         </article>
 
         {/* Clientes em destaque */}
@@ -273,7 +276,7 @@ function App() {
         </article>
 
         {/* Deseja ser um Freelancer? */}
-        <article className="sh-main-planos" id='sh_planos'>
+        <article className="sh-show sh-main-planos" id='sh_planos'>
           <div className='sh-planos-titulos'>
             <h2 className="sh-planos-titulo">Deseja encontrar um cliente?</h2>
             <h2 className="sh-planos-subtitulo">Contrate um de nossos planos</h2>
@@ -284,9 +287,9 @@ function App() {
 
         {/* Vantagens de fazer parte do nosso time */}
         <article className="sh-main-vantagens" id='sh_vantagens'>
-          <h2 className="sh-vantagens-titulo">Vantagens de ser nosso cliente</h2>
+          <h2 className="sh-show sh-vantagens-titulo">Vantagens de ser nosso cliente</h2>
 
-          <ul className="sh-vantagens-lista">
+          <ul className="sh-show sh-vantagens-lista">
             <li className="sh-vantagem-item-info">
               Uma parte de nossos lucros é destinada para
               Casas de Adoção e Ongs de preservação da natureza,
@@ -322,10 +325,10 @@ function App() {
 
         {/* Como começar */}
         <article className="sh-main-comecar" id='sh_comecar'>
-          <h2 className="sh-comecar-titulo">Como começar</h2>
+          <h2 className="sh-show sh-comecar-titulo">Como começar</h2>
 
           <div className="sh-comecar-tipo">
-            <ul className="sh-comecar-list">
+            <ul className="sh-show sh-comecar-list">
               <li className="sh-comecar-tipo-titlulo">Cliente</li>
               <li className="sh-comecar-list-item">Clique em em um dos botões do site para realizar o cadastro ou acesse <Link to='/cadastro-cliente'>este link.</Link></li>
               <li className="sh-comecar-list-item">Selecione o tipo “<span className='sh-span-destaque'>Cliente</span>” para proseguir com o cadastro.</li>
@@ -336,7 +339,7 @@ function App() {
               <li className="sh-comecar-list-item">Pronto! Seu perfil foi criado e está pronto para ser utilizado.</li>
             </ul>
 
-            <ul className="sh-comecar-list">
+            <ul className="sh-show sh-comecar-list">
               <li className="sh-comecar-tipo-titlulo">Freelancer</li>
               <li className="sh-comecar-list-item">Clique em em um dos <a href="#sh_planos">cards de planos</a>, no botão “<span className='sh-span-destaque'>Cadastre-se</span> no início do site ou <Link to='/cadastro-freelancer'>este link.</Link></li>
               <li className="sh-comecar-list-item">Caso tenha clicado no link ou em um dos botões, selecione o tipo “<span className='sh-span-destaque'>Profissional</span>” para proseguir com o cadastro e escolha o plano que você deseja.</li>
@@ -351,9 +354,9 @@ function App() {
 
         {/* Dúvidas frequentes  */}
         <article className="sh-main-duvidas" id='sh_duvidas'>
-          <h2 className="sh-duvidas-titulo">Dúvidas frequentes</h2>
+          <h2 className="sh-show sh-duvidas-titulo">Dúvidas frequentes</h2>
 
-          <Accordion className='sh-duvidas-acordeon'>
+          <Accordion className='sh-show sh-duvidas-acordeon'>
             <Accordion.Item eventKey="0" className='sh-duvidas-acordeon-item'>
               <Accordion.Header className='sh-duvidas-header'>Como os freelancers conversam com os clientes?</Accordion.Header>
               <Accordion.Body className='sh-acordeon-body'>
@@ -390,9 +393,11 @@ function App() {
 
         {/* Últimos serviços postados */}
         <article className="sh-main-servicos" id='sh_ultimas_postagens'>
-          <h2 className="sh-servicos-titulo">Últimos serviços postados</h2>
+          <h2 className="sh-show sh-servicos-titulo">Últimos serviços postados</h2>
 
-          <Servicos data={ultimosServicos} />
+          <div className="sh-servicos-lista">
+            <Servicos data={ultimosServicos} />
+          </div>
         </article>
       </section>
 

@@ -21,7 +21,7 @@ const Servicos = ({ data }: any) => {
   );
 
   return (
-    <ul className="sh-servicos-lista">
+    <ul className="sh-show sh-servicos-lista">
       { listaServicos }
     </ul>
   )

@@ -13,9 +13,9 @@ const ProfissionaisEmDestaque = ({ dados }: any) => {
       </div>
 
       <ul className="sh-EmDestaque-servicos">
-        <li className="sh-servicos-list">{profissional.servicoUm}</li>
-        <li className="sh-servicos-list">{profissional.servicoDois}</li>
-        <li className="sh-servicos-list">{profissional.servicoTres}</li>
+        { profissional.servicoUm && <li className="sh-servicos-list">{profissional.servicoUm}</li> }
+        { profissional.servicoDois && <li className="sh-servicos-list">{profissional.servicoDois}</li> }
+        { profissional.servicoTres && <li className="sh-servicos-list">{profissional.servicoTres}</li> }
       </ul>
 
       <p className="sh-EmDestaque-item-dataCadastro">Desde {profissional.dataCadastro}</p>
@@ -28,7 +28,7 @@ const ProfissionaisEmDestaque = ({ dados }: any) => {
   )
 
   return (
-    <ul className="sh-EmDestaque-lista">
+    <ul className="sh-show sh-EmDestaque-lista">
       {listaProfDestaque}
     </ul>
   )
