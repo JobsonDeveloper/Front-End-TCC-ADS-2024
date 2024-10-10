@@ -487,8 +487,9 @@
 
 @media (min-width: 992px) {
   :root {
-    --sh-index-font-size-titulos: 1.8rem;
-    --sh-index-font-size-textos: 1.2rem;
+    --sh-index-font-size-titulos: 1.5rem;
+    --sh-index-font-size-subtitulos: 1.2rem;
+    --sh-index-font-size-textos: .9rem;
   }
 
   .sh-container {
@@ -501,6 +502,9 @@
           margin: 0;
 
           & .sh-apresentacao-dois-container-img {
+            width: max-content;
+            gap: 0;
+            
             & .sh-apresentacao-dois-img {
               width: 177px;
             }
@@ -524,8 +528,8 @@
 
 @media (min-width: 1200px) {
   :root {
-    --sh-index-font-size-titulos: 2rem;
-    --sh-index-font-size-textos: 1.4rem;
+    --sh-index-font-size-titulos: 1.5rem;
+    --sh-index-font-size-textos: 1rem;
   }
 
   .sh-container {
@@ -545,8 +549,8 @@
 
 @media (min-width: 1400px) {
   :root {
-    --sh-index-font-size-titulos: 2.4rem;
-    --sh-index-font-size-textos: 1.7rem;
+    /* --sh-index-font-size-titulos: 2.4rem;
+    --sh-index-font-size-textos: 1.7rem; */
   }
 
   .sh-container {

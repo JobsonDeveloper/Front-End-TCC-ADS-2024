@@ -31,7 +31,7 @@
         padding: 5px;
         border-radius: 5px;
         width: 145px;
-        height: 93px;
+        height: 100%;
         background-color: var(--sh-clientes-cor-primaria);
         box-shadow: #555555 3px 3px 9px;
 
@@ -96,10 +96,8 @@
     }
 
     & .sh-cliEmDestaque {
-
         & .sh-cliEmDestaque-item {
             width: 177px;
-            height: 105px;
         }
     }
 }
@@ -119,7 +117,7 @@
 
 @media (min-width: 992px) {
     :root {
-        --sh-clientes-font-size-textos: 1.2rem;
+        --sh-clientes-font-size-textos: .9rem;
     }
 
     & .sh-cliEmDestaque {
@@ -132,13 +130,12 @@
 
 @media (min-width: 1200px) {
     :root {
-        --sh-clientes-font-size-textos: 1.4rem;
+        --sh-clientes-font-size-textos: .8rem;
     }
 
     & .sh-cliEmDestaque {
         & .sh-cliEmDestaque-item {
             width: 177px;
-            height: 112px;
             gap: 8px;
         }
     }

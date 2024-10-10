@@ -12,7 +12,7 @@
   --sh-header-cor-textos: #6F6F6F;
   --sh-header-cor-textos-hover: #2c2c2c;
 
-  --sh-header-padding-header: 5px 5px;
+  --sh-header-padding: 5px 10px;
 }
 
 .sh-header {
@@ -108,7 +108,7 @@
           cursor: pointer;
           transition: .5s;
           text-decoration: none;
-          color: var(--sh-header-cor-terciaria);
+          color: var(--sh-header-cor-textos);
           font-size: var(--sh-header-font-size-textos);
           font-family: var(--sh-index-font-family);
 
@@ -142,11 +142,11 @@
 
 @media (min-width: 992px) {
   :root {
-    --sh-header-font-size-textos: 1rem;
+    --sh-header-font-size-textos: .9rem;
   }
 
   .sh-header {
-    padding: var(--sh-padding-header);
+    padding: var(--sh-header-padding);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -196,8 +196,8 @@
             cursor: pointer;
             transition: .5s;
             text-decoration: none;
-            color: var(--sh-cor-terciaria);
-            font-size: var(--sh-font-size-header);
+            color: var(--sh-header-cor-textos);
+            font-size: var(--sh-header-font-size-textos);
 
             &:hover {
               color: var(--sh-cor-textos-hover);
@@ -229,8 +229,8 @@
           cursor: pointer;
           transition: .5s;
           text-decoration: none;
-          color: var(--sh-cor-terciaria);
-          font-size: var(--sh-font-size-header);
+          color: var(--sh-header-cor-textos);
+          font-size: var(--sh-header-font-size-textos);
 
           &:hover {
             color: var(--sh-cor-textos-hover);

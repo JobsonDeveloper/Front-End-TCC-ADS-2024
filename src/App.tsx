@@ -17,9 +17,8 @@ import Loading from './components/loading/Loading';
 import { createRoot } from 'react-dom/client';
 
 import backgroundApresentacaoUm from './assets/index/backgrounds/background-apresentacao-lg.webp'
-import backgroundApresentacaoUmMd from './assets/index/backgrounds/background-apresentacaoMd.png'
 import backgroundApresentacaoDois from './assets/index/backgrounds/imagem-apresentacao.webp'
-import apresentacaoButtonIcon from './assets/index/icons/apresentacao-button-icon.png';
+import backgroundApresentacaoMd from './assets/index/backgrounds/background-apresentacaoMd.png'
 import buttonFreelancer from './assets/index/backgrounds/serFreelancer.png';
 import { Accordion } from 'react-bootstrap';
 
@@ -177,11 +176,7 @@ function App() {
         <article className='sh-apresentacao'>
           <article className="sh-apresentacao-um">
             <img src={backgroundApresentacaoUm} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-lg-none" />
-            <img src={backgroundApresentacaoUmMd} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-none d-lg-flex" />
-            <div className='sh-apresentacao-md-button d-none d-lg-flex'>
-              <Link to='/cadastro-freelancer'><img src={buttonFreelancer} alt="Botão para ser freelancer" className="sh-apresentacao-md-button-link" /></Link>
-            </div>
-
+            <img src={backgroundApresentacaoMd} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-none d-lg-flex" />
           </article>
 
           <article className="sh-apresentacao-textos d-md-none">
@@ -202,9 +197,9 @@ function App() {
           </article>
 
           {/* Secundo post */}
-          <article className="sh-apresentacao-dois">
+          <article className="sh-apresentacao-dois d-md-none">
             <div className="sh-apresentacao-dois-container-img">
-              <Link to='/cadastro-cliente'><img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img" /></Link>
+              <Link to='/cadastro-cliente'><img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img d-md-none" /></Link>
             </div>
 
             <div className="sh-apresentacao-textos">
