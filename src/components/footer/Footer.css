@@ -143,9 +143,9 @@
 
 @media (min-width: 576px) {
   :root {
-    --sh-footer-font-size-title: 1.7rem;
-    --sh-footer-font-size-text: 1.4rem;
-    --sh-footer-font-size-copyright: 1.2rem;
+    --sh-footer-font-size-title: 1.6rem;
+    --sh-footer-font-size-text: 1.2rem;
+    --sh-footer-font-size-copyright: 1rem;
   }
 
   & .sh-footer-element {
@@ -169,8 +169,9 @@
 
 @media (min-width: 768px) {
   :root {
-    --sh-footer-font-size-title: 1.5rem;
-    --sh-footer-font-size-text: 1.3rem;
+    --sh-footer-font-size-title: 1.3rem;
+    --sh-footer-font-size-text: 1rem;
+    --sh-footer-font-size-copyright: .8rem;
   }
 
   & .sh-footer-element {

@@ -92,25 +92,25 @@
 
 @media (min-width: 576px) {
     :root {
-        --sh-clientes-font-size-textos: 1.4rem;
+        --sh-clientes-font-size-textos: 1.2rem;
     }
 
     & .sh-cliEmDestaque {
         & .sh-cliEmDestaque-item {
-            width: 177px;
+            width: 210px;
         }
     }
 }
 
 @media (min-width: 768px) {
     :root {
-        --sh-clientes-font-size-textos: 1.4rem;
+        --sh-clientes-font-size-textos: 1rem;
     }
 
     & .sh-cliEmDestaque {
 
         & .sh-cliEmDestaque-item {
-            width: 177px;
+            width: 182px;
         }
     }
 }

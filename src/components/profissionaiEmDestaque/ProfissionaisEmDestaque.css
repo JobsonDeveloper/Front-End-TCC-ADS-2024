@@ -6,7 +6,7 @@
     --sh-profissionais-cor-primaria: #fff;
     --sh-profissionais-cor-secundaria: #0075FF;
     --sh-profissionais-cor-terciaria: #000;
-    --sh-profissionais-cor-quaternaria: #35FF62;
+    --sh-profissionais-cor-quaternaria: #4198ff;
     --sh-profissionais-cor-textos: #6F6F6F;
     --sh-profissionais-cor-textos-hover: #2c2c2c;
 
@@ -68,7 +68,7 @@
             gap: 10px;
 
             & .sh-servicos-list {
-                color: var(--sh-profissionais-cor-terciaria);
+                color: var(--sh-profissionais-cor-primaria);
                 background-color: var(--sh-profissionais-cor-quaternaria);
                 padding: 1px 5px;
                 border-radius: 50px;
@@ -106,7 +106,7 @@
 
 @media (min-width: 576px) {
     :root {
-        --sh-profissionais-font-size-textos: 1.4rem;
+        --sh-profissionais-font-size-textos: 1.2rem;
     }
 
     & .sh-EmDestaque-lista {
@@ -118,9 +118,13 @@
 }
 
 @media (min-width: 768px) {
+    :root {
+        --sh-profissionais-font-size-textos: 1rem;
+    }
+
     & .sh-EmDestaque-lista {
         & .sh-EmDestaque-item {
-            width: 285px;
+            width: 250px;
             gap: 10px;
         }
     }

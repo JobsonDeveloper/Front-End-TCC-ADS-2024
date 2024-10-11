@@ -26,7 +26,7 @@ import { Accordion } from 'react-bootstrap';
 const ultimosServicos = [
   {
     tag: 'Serviços gerais',
-    descricao: 'Preciso de uma pessoa para limpar os banheiros do meu clube hoje a partir das 23:00 horas, pos uma festa de aniversário que ocorrerá no local.',
+    descricao: 'Preciso de uma pesso',
     remuneracao: '250,00',
     tipoDeRemuneracao: 'Diária'
   },
@@ -47,7 +47,7 @@ const ultimosServicos = [
     descricao: 'Preciso de uma pessoa para limpar o jardim da minha casa até no máximo as 16:00 horas do dia 30/12/2024.',
     remuneracao: '300,00',
     tipoDeRemuneracao: 'Diária'
-  },
+  }
 ];
 
 const profDestaque = [
@@ -99,42 +99,44 @@ const profDestaque = [
 const cliDestaque = [
   {
     fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',  
+    nome: 'João Paulo César',
     dataCadastro: '05/2024',
     estrelas: 103
   },
   {
     fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',  
+    nome: 'João Paulo César',
     dataCadastro: '05/2024',
     estrelas: 90
   },
   {
     fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',  
+    nome: 'João Paulo César',
     dataCadastro: '05/2024',
     estrelas: 87
   },
   {
     fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',  
+    nome: 'João Paulo César',
     dataCadastro: '05/2024',
     estrelas: 78
   },
   {
     fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',  
+    nome: 'João Paulo César',
     dataCadastro: '05/2024',
     estrelas: 76
   },
 ];
 
 function App() {
-  const [removeLoading, setRemoveLoading] = useState(false);
+  const [loading, removeLoading] = useState(false);
+  const [sideBar, removeSideBar] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
-      setRemoveLoading(true);
+      removeLoading(true);
+      removeSideBar(false);
     }, 1500);
   }, []);
 
@@ -168,10 +170,10 @@ function App() {
 
   return (
     <main className='sh-container'>
-      {!removeLoading && <Loading />}
+      {!loading && <Loading />}
 
       <section className="sh-header-apresentacao">
-        <Header />
+        {!sideBar && <Header />}
 
         <article className='sh-apresentacao'>
           <article className="sh-apresentacao-um">
@@ -390,7 +392,7 @@ function App() {
         <article className="sh-main-servicos" id='sh_ultimas_postagens'>
           <h2 className="sh-show sh-servicos-titulo">Últimos serviços postados</h2>
 
-          <div className="sh-servicos-lista">
+          <div className="sh-servicos-lista-container">
             <Servicos data={ultimosServicos} />
           </div>
         </article>

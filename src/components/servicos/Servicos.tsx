@@ -11,7 +11,7 @@ const Servicos = ({ data }: any) => {
         <p className="sh-servicos-data-marcador">{servico.tag}</p>
       </div>
       <div className="sh-itens-data">
-        <p className="sh-servicos-data-descricao">{servico.descricao} da noite da segunda-feira, como se nada tivesse acontecido</p>
+        <p className="sh-servicos-data-descricao">{servico.descricao}</p>
       </div>
       <div className="sh-itens-data sh-itens-remuneracao">
         <p className="sh-servicos-data-remuneracao">Remuneração:</p>
