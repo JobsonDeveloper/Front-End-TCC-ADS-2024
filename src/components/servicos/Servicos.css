@@ -56,6 +56,7 @@
       & .sh-servicos-data-descricao {
         color: var(--sh-servicos-cor-textos);
         font-size: var(--sh-servicos-font-size-textos);
+        margin: 0;
 
         /* Limitar tamanho de texto */
         overflow: hidden;
@@ -113,12 +114,30 @@
 
 @media (min-width: 768px) {
   :root {
-    --sh-servicos-font-size-textos: 1.rem;
+    --sh-servicos-font-size-textos: 1rem;
   }
 
   & .sh-servicos-lista {
     & .sh-servicos-itens {
       & .sh-itens-data {
+        & .sh-servicos-img-perfil {
+          width: 30px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --sh-servicos-font-size-textos: .9rem;
+  }
+
+  & .sh-servicos-lista {
+    & .sh-servicos-itens {
+      & .sh-itens-data {
+        width: 305px;
+
         & .sh-servicos-img-perfil {
           width: 30px;
         }

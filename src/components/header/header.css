@@ -11,12 +11,13 @@
   --sh-header-cor-terciaria: #000;
   --sh-header-cor-textos: #6F6F6F;
   --sh-header-cor-textos-hover: #2c2c2c;
+  --sh-footer-cor-background-modal: #26466B;
 
   --sh-header-padding: 5px 10px;
 }
 
 .sh-header {
-  padding: var(--sh-header-padding-header);
+  padding: var(--sh-header-padding);
   position: fixed;
   top: 0;
   left: 0;
@@ -105,18 +106,12 @@
 
         & .sh-item-text {
           width: max-content;
-          border-bottom: 2px solid transparent;
           cursor: pointer;
           transition: .5s;
           text-decoration: none;
           color: var(--sh-header-cor-primaria);
           font-size: var(--sh-header-font-size-textos);
           font-family: var(--sh-index-font-family);
-
-          &:hover {
-            color: var(--sh-cor-textos-hover);
-            border-bottom: 2px solid var(--sh-cor-secundaria);
-          }
         }
 
       }
@@ -149,7 +144,10 @@
 
 @media (min-width: 992px) {
   :root {
+    --sh-header-padding: 10px;
     --sh-header-font-size-textos: .9rem;
+    --sh-header-font-size-titulos: 1.5rem;
+    --sh-header-font-size-subtitulos: 1.2rem;
   }
 
   .sh-header {
@@ -208,7 +206,7 @@
 
             &:hover {
               color: var(--sh-cor-textos-hover);
-              border-bottom: 2px solid var(--sh-cor-secundaria);
+              border-color: var(--sh-cor-secundaria);
             }
           }
 
@@ -232,19 +230,79 @@
 
         & .sh-item-text {
           width: max-content;
+          border: none;
+          background-color: transparent;
+          outline: none;
           border-bottom: 2px solid transparent;
           cursor: pointer;
           transition: .5s;
           text-decoration: none;
           color: var(--sh-header-cor-textos);
           font-size: var(--sh-header-font-size-textos);
+          border-bottom: 2px solid transparent;
 
           &:hover {
             color: var(--sh-cor-textos-hover);
-            border-bottom: 2px solid var(--sh-cor-secundaria);
+            border-color: var(--sh-header-cor-terciaria);
           }
         }
+      }
+    }
 
+
+  }
+
+  & .sh-modal-register {
+
+    & .modal-content {
+      border-radius: 5px;
+      
+      & .sh-modal-header-register {
+        background-color: var(--sh-header-cor-primaria);
+        padding: 5px 10px;
+  
+        & .sh-modal-header-text {
+          color: var(--sh-header-cor-terciaria);
+          font-size: var(--sh-header-font-size-subtitulos);
+        }
+      }
+  
+      & .sh-modal-body-register {
+        display: flex;
+        gap: 50px;
+        background-color: var(--sh-footer-cor-background-modal);
+  
+        & .sh-modal-body-link {
+          border-bottom: 2px solid transparent;
+          text-decoration: none;
+          color: var(--sh-header-cor-primaria);
+          font-size: var(--sh-header-font-size-textos);
+          transition: .5s;
+
+          &:hover {
+            border-color: var(--sh-header-cor-primaria);
+          }
+        }
+      }
+
+      & .sh-modal-footer {
+        background-color: var(--sh-footer-cor-background-modal);
+        border: none;
+
+        & .sh-modal-footer-button {
+          background-color: transparent;
+          border: none;
+          border-bottom: 2px solid transparent;
+          font-size: var(--sh-header-font-size-textos);
+          color: var(--sh-header-cor-primaria);
+          border-radius: 0px;
+          transition: .5s;
+          padding: 0;
+
+          &:hover {
+            border-color: var(--sh-header-cor-primaria);
+          }
+        }
       }
     }
   }

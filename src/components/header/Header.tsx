@@ -10,6 +10,8 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import serFreelancerImg from '../../assets/index/backgrounds/serFreelancer.png';
+import serClienteImg from '../../assets/index/backgrounds/serCliente.png';
 import Options from '../../assets/index/icons/icon-options.png'
 import { Modal } from 'react-bootstrap';
 
@@ -27,18 +29,26 @@ const Header = () => {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        className='sh-modal-register'
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Header closeButton className='sh-modal-header-register'>
+          <Modal.Title id="contained-modal-title-vcenter" className='sh-modal-header-text'>
             Qual tipo de cadastro você deseja realizar?
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Link to='/cadastro-freelancer' className='sh-item-text'>Tornar-se um Freelancer</Link>
-          <Link to='/cadastro-cliente' className='sh-item-text'>Tornar-se um Cliente</Link>
+        <Modal.Body className='sh-modal-body-register'>
+          <Link to='/cadastro-freelancer' className='sh-modal-body-link'>
+            {/* <img src={serFreelancerImg} alt="Botão para ser Freelance" className='sh-modal-body-img' /> */}
+            Tornar-se um Freelancer
+          </Link>
+
+          <Link to='/cadastro-cliente' className='sh-modal-body-link'>
+            {/* <img src={serClienteImg} alt="Botão para ser Freelance" className='sh-modal-body-img' /> */}
+            Tornar-se um Cliente
+          </Link>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+        <Modal.Footer className='sh-modal-footer'>
+          <Button onClick={props.onHide} className='sh-modal-footer-button'>Voltar</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -102,7 +112,7 @@ const Header = () => {
             <li className="d-sm-none sh-navegacao-item">
               <Link to='/cadastro-cliente' className='sh-item-text'>Torne-se um cliente</Link>
             </li>
-            
+
             <li className="d-sm-none sh-navegacao-item">
               <Link to='/cadastro-freelancer' className='sh-item-text'>Torne-se um Freelancer</Link>
             </li>

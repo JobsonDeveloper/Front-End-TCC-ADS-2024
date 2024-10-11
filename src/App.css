@@ -34,7 +34,6 @@
   }
 
   & .sh-header-apresentacao {
-    min-height: 100vh;
 
     & .sh-apresentacao {
       display: flex;
@@ -137,10 +136,6 @@
         }
       }
     }
-
-    & .sh-header {
-      padding: 5px;
-    }
   }
 
   & .sh-main {
@@ -151,7 +146,7 @@
     & .sh-main-skillhub {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 20px;
       margin: 40px 0 20px;
       padding: var(--sh-index-padding);
 
@@ -180,7 +175,7 @@
       display: flex;
       flex-direction: column;
       margin: var(--sh-index-margin);
-      gap: 10px;
+      gap: 20px;
       width: 100%;
 
       & .sh-profissionaisEmDestaque-titulo {
@@ -204,7 +199,7 @@
       display: flex;
       flex-direction: column;
       margin: var(--sh-index-margin);
-      gap: 10px;
+      gap: 20px;
       width: 100%;
 
       & .sh-clientesEmDestaque-titulo {
@@ -230,7 +225,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 20px;
 
       & .sh-planos-titulos {
 
@@ -255,7 +250,7 @@
       margin: var(--sh-index-margin);
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 20px;
 
       & .sh-vantagens-titulo {
         text-align: center;
@@ -283,7 +278,7 @@
       flex-direction: column;
       padding: var(--sh-index-padding);
       margin: var(--sh-index-margin);
-      gap: 10px;
+      gap: 20px;
 
       & .sh-comecar-titulo {
         text-align: center;
@@ -336,7 +331,7 @@
       flex-direction: column;
       padding: var(--sh-index-padding);
       margin: var(--sh-index-margin);
-      gap: 10px;
+      gap: 20px;
 
       & .sh-duvidas-titulo {
         text-align: center;
@@ -396,7 +391,7 @@
       margin-bottom: 0;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 20px;
 
       & .sh-servicos-titulo {
         text-align: center;
@@ -504,7 +499,7 @@
           & .sh-apresentacao-dois-container-img {
             width: max-content;
             gap: 0;
-            
+
             & .sh-apresentacao-dois-img {
               width: 177px;
             }
@@ -519,6 +514,32 @@
             }
           }
 
+        }
+      }
+    }
+
+    & .sh-main {
+      & .sh-main-skillhub {
+        & .sh-skillhub-textos-list {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 50px;
+        }
+      }
+
+      & .sh-main-vantagens {
+        & .sh-vantagens-lista {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 50px;
+        }
+      }
+
+      & .sh-main-comecar {
+        & .sh-comecar-tipo {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 50px;
         }
       }
     }
