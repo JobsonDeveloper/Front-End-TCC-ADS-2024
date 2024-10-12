@@ -93,11 +93,11 @@ const Login = () => {
 
                 <li className="sh-formulario-item sh-formulario-main">
                     <div className="sh-formulario-main-content">
-                        <TextField id="outlined-basic" label="CPF/CNPJ" variant="outlined" className="sh-formulario-data-text" />
+                        <TextField id="sh_user" label="CPF/CNPJ" variant="outlined" className="sh-formulario-data-text" />
                     </div>
 
                     <div className="sh-formulario-main-content">
-                        <TextField id="outlined-basic" label="Senha" variant="outlined" type="password" className="sh-formulario-data-text" />
+                        <TextField id="sh_password" label="Senha" variant="outlined" type="password" className="sh-formulario-data-text" />
                     </div>
                 </li>
 

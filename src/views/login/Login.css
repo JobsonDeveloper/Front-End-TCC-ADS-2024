@@ -18,17 +18,20 @@
     --sh-login-form-width: 300px;
 
     --sh-login-fontSize-text: 1rem;
+
+    --sh-login-background:  url('../../assets/login/background/background-img.svg');
 }
 
 .sh-login {
     height: 100vh;
     width: 100%;
-    background-image: url('../../assets/login/background/background-img.svg');
+    background-image: var(--sh-login-background);
     background-size: cover;
     font-family: var(--sh-login-font-family);
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background-color: red; */
 
     & .sh-login-formulario {
         background-color: var(--sh-login-cor-primaria);
