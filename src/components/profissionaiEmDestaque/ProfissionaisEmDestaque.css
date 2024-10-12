@@ -17,7 +17,7 @@
 
 & .sh-EmDestaque-lista {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     list-style-type: none;
     padding: 25px 20px;
     overflow-x: auto;
@@ -136,6 +136,9 @@
     }
 
     & .sh-EmDestaque-lista {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 10px;
+
         & .sh-EmDestaque-item {
             width: 227px;
         }
@@ -148,9 +151,17 @@
     }
 
     & .sh-EmDestaque-lista {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
         & .sh-EmDestaque-item {
             width: 210px;
         }
+    }
+}
+
+@media (min-width: 1355px) {
+    & .sh-EmDestaque-lista {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     }
 }
 

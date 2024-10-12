@@ -43,15 +43,8 @@ const Footer = () => {
 
           <ul className="sh-footer-mapa-list">
             <li className="sh-footer-mapa-item">
-              <Link to='/' className="sh-mapa-link">Home</Link>
-            </li>
-            
-            <li className="sh-footer-mapa-item">
-              <Link to='/' className="sh-mapa-link">Oque é a Skillhub</Link>
-            </li>
-
-            <li className="sh-footer-mapa-item">
-              <a href="#sh_profissionais_emDestaque" className="sh-mapa-link">Profissionais em destaque</a>
+              <a href="#sh_home_header" className="sh-mapa-link">Home</a>
+              {/* <Link to='/' >Home</Link> */}
             </li>
 
             <li className="sh-footer-mapa-item">
@@ -59,23 +52,31 @@ const Footer = () => {
             </li>
 
             <li className="sh-footer-mapa-item">
-              <a href="#sh_vantagens" className="sh-mapa-link">Vantagens</a>
+              <a href="#sh_profissionais_emDestaque" className="sh-mapa-link">Profissionais em destaque</a>
+            </li>
+
+            <li className="sh-footer-mapa-item">
+              <a href="#sh_clientes_emDestaque" className="sh-mapa-link">Clientes em destaque</a>
+            </li>
+
+            <li className="sh-footer-mapa-item">
+              <a href="#sh_vantagens" className="sh-mapa-link">Vantagens de ser nosso cliente</a>
+            </li>
+
+            <li className="sh-footer-mapa-item">
+              <a href="#sh_ultimas_postagens" className="sh-mapa-link">Últimos serviços postados</a>
             </li>
 
             <li className="sh-footer-mapa-item">
               <a href="#sh_comecar" className="sh-mapa-link">Como começar</a>
             </li>
-
+            
             <li className="sh-footer-mapa-item">
-              <Link to='/duvidas' className="sh-mapa-link">Dúvidas frequentes</Link>
+              <a href="#sh_sobre_a_skillhub" className="sh-mapa-link">Oque é a Skillhub</a>
             </li>
-
+            
             <li className="sh-footer-mapa-item">
-              <a href="#sh_ultimas_postagens" className="sh-mapa-link">Últimas postágens</a>
-            </li>
-
-            <li className="sh-footer-mapa-item">
-              <Link to='/sobrenos' className="sh-mapa-link">Saiba mais sobre nós</Link>
+              <a href='#sh_duvidas' className="sh-mapa-link">Dúvidas frequentes</a>
             </li>
 
             <li className="sh-footer-mapa-item">
@@ -83,11 +84,11 @@ const Footer = () => {
             </li>
 
             <li className="sh-footer-mapa-item">
-              <Link to='/cadastro-freelancer' className="sh-mapa-link">Ser Freelancer</Link>
+              <Link to='/cadastro-freelancer' className="sh-mapa-link">Tornar-se um Freelancer</Link>
             </li>
 
             <li className="sh-footer-mapa-item">
-              <Link to='/cadastro-cliente' className="sh-mapa-link">Ser Cliente</Link>
+              <Link to='/cadastro-cliente' className="sh-mapa-link">Tornar-se um Cliente</Link>
             </li>
           </ul>
         </li>

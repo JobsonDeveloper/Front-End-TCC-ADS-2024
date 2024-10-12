@@ -26,7 +26,7 @@ import { Accordion } from 'react-bootstrap';
 const ultimosServicos = [
   {
     tag: 'Serviços gerais',
-    descricao: 'Preciso de uma pesso',
+    descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
     remuneracao: '250,00',
     tipoDeRemuneracao: 'Diária'
   },
@@ -94,6 +94,13 @@ const profDestaque = [
     dataCadastro: '05/2024',
     estrelas: 30
   },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'André Felipe Silva',
+    servicoDois: 'Suporte técnico',
+    dataCadastro: '05/2024',
+    estrelas: 30
+  },
 ];
 
 const cliDestaque = [
@@ -120,6 +127,12 @@ const cliDestaque = [
     nome: 'João Paulo César',
     dataCadastro: '05/2024',
     estrelas: 78
+  },
+  {
+    fotoUrl: '../../assets/profissionais/profissional.png',
+    nome: 'João Paulo César',
+    dataCadastro: '05/2024',
+    estrelas: 76
   },
   {
     fotoUrl: '../../assets/profissionais/profissional.png',
@@ -172,7 +185,7 @@ function App() {
     <main className='sh-container'>
       {!loading && <Loading />}
 
-      <section className="sh-header-apresentacao">
+      <section className="sh-header-apresentacao" id='sh_home_header'>
         {!sideBar && <Header />}
 
         <article className='sh-apresentacao'>
@@ -221,40 +234,38 @@ function App() {
 
       <section className="sh-main">
         {/* Oque é a Skillhun */}
-        <article className="sh-show sh-main-skillhub" id='sh_main_skillhub'>
-          <h2 className="sh-skillhub-titulo">Oque é a Skillhub</h2>
-
-          <ul className="sh-skillhub-textos-list">
-            <li className="sh-skillhub-paragrafos">
-              A Skillhub é uma plataforma criada para facilitar os
-              fornecimentos e as solicitações de serviços para todos.
-              Funcionando 100% online, nós desejamos lhe proporcionar
-              uma boa experiência de contratação de serviço e/ou do
-              fornecimento dele.
-            </li>
-
-            <li className="sh-skillhub-paragrafos">
-              Não somos somente uma plataforma, somos uma porta aberta
-              para aqueles que desejam adquirir visibilidade fazendo
-              aquilo de que gostam, também somos um facilitador para
-              aqueles que desejam economizar tempo, chamando
-              alguém para realizar um serviço.
-            </li>
-
-            <li className="sh-skillhub-paragrafos">
-              Sendo cliente, você pode postar um serviço desejado e
-              aguardar enquanto o divulgamos, até que um freelancer
-              se interesse pelo trabalho e entre em contato para saber
-              mais sobre o trabalho.
-            </li>
-
-            <li className="sh-skillhub-paragrafos">
-              Sendo Freelancer, você encontrará serviços rápidos e bem
-              remunerados perto da sua residência, facilitando tanto
-              a sua vida quanto a vida de outras pessoas.
-            </li>
-          </ul>
-        </article>
+        <div className="sh-skillhub-info" id='sh_sobre_a_skillhub'>
+          <article className="sh-show sh-main-skillhub" id='sh_main_skillhub'>
+            <h2 className="sh-skillhub-titulo">Oque é a Skillhub</h2>
+            <ul className="sh-skillhub-textos-list">
+              <li className="sh-skillhub-paragrafos">
+                A Skillhub é uma plataforma criada para facilitar os
+                fornecimentos e as solicitações de serviços para todos.
+                Funcionando 100% online, nós desejamos lhe proporcionar
+                uma boa experiência de contratação de serviço e/ou do
+                fornecimento dele.
+              </li>
+              <li className="sh-skillhub-paragrafos">
+                Não somos somente uma plataforma, somos uma porta aberta
+                para aqueles que desejam adquirir visibilidade fazendo
+                aquilo de que gostam, também somos um facilitador para
+                aqueles que desejam economizar tempo, chamando
+                alguém para realizar um serviço.
+              </li>
+              <li className="sh-skillhub-paragrafos">
+                Sendo cliente, você pode postar um serviço desejado e
+                aguardar enquanto o divulgamos, até que um freelancer
+                se interesse pelo trabalho e entre em contato para saber
+                mais sobre o trabalho.
+              </li>
+              <li className="sh-skillhub-paragrafos">
+                Sendo Freelancer, você encontrará serviços rápidos e bem
+                remunerados perto da sua residência, facilitando tanto
+                a sua vida quanto a vida de outras pessoas.
+              </li>
+            </ul>
+          </article>
+        </div>
 
         {/* Profissionais em destaque */}
         <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
@@ -265,7 +276,7 @@ function App() {
         </article>
 
         {/* Clientes em destaque */}
-        <article className="sh-clientesEmDestaque" id='sh_profissionais_emDestaque'>
+        <article className="sh-clientesEmDestaque" id='sh_clientes_emDestaque'>
           <h2 className="sh-clientesEmDestaque-titulo">Clientes em destaque</h2>
           <div className="sh-clientesEmDestaque-lista">
             <ClientesEmDestaque dados={cliDestaque} />

@@ -11,9 +11,9 @@
   --sh-header-cor-terciaria: #000;
   --sh-header-cor-textos: #6F6F6F;
   --sh-header-cor-textos-hover: #2c2c2c;
-  --sh-footer-cor-background-modal: #26466B;
+  --sh-header-cor-background-blue: #26466B;
 
-  --sh-header-padding: 5px 10px;
+  --sh-header-padding: 5px;
 }
 
 .sh-header {
@@ -72,12 +72,13 @@
 .sh-header-offcanvas {
 
   & .sh-offcanvas-element {
-    border-bottom: 1px solid #e9e9e9;
-    background-color: var(--sh-header-cor-primaria);
+    border-bottom: 1px solid var(--sh-header-cor-primaria);
+    background-color: var(--sh-header-cor-secundaria);
 
     & .sh-lg-header-title {
       font-size: var(--sh-header-font-size-textos);
-      color: var(--sh-header-cor-terciaria);
+      color: var(--sh-header-cor-primaria);
+      font-weight: 700;
       font-family: var(--sh-index-font-family);
 
       & .sh-logo-img {
@@ -90,7 +91,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background-color: var(--sh-header-cor-secundaria);
+    background-color: var(--sh-header-cor-background-blue);
 
     & .sh-header-navegacao {
       display: flex;
@@ -107,6 +108,7 @@
         & .sh-item-text {
           width: max-content;
           cursor: pointer;
+          font-weight: 300;
           transition: .5s;
           text-decoration: none;
           color: var(--sh-header-cor-primaria);
@@ -139,6 +141,7 @@
 @media (min-width: 768px) {
   :root {
     --sh-header-font-size-textos: 1rem;
+    --sh-header-padding: 5px 10px;
   }
 }
 
@@ -203,6 +206,7 @@
             text-decoration: none;
             color: var(--sh-header-cor-textos);
             font-size: var(--sh-header-font-size-textos);
+            font-weight: 500;
 
             &:hover {
               color: var(--sh-cor-textos-hover);
@@ -253,58 +257,64 @@
   }
 
   & .sh-modal-register {
+    & .modal-lg, .modal-xl {
+      width: max-content;
 
-    & .modal-content {
-      border-radius: 5px;
-      
-      & .sh-modal-header-register {
-        background-color: var(--sh-header-cor-primaria);
-        padding: 5px 10px;
-  
-        & .sh-modal-header-text {
-          color: var(--sh-header-cor-terciaria);
-          font-size: var(--sh-header-font-size-subtitulos);
-        }
-      }
-  
-      & .sh-modal-body-register {
-        display: flex;
-        gap: 50px;
-        background-color: var(--sh-footer-cor-background-modal);
-  
-        & .sh-modal-body-link {
-          border-bottom: 2px solid transparent;
-          text-decoration: none;
-          color: var(--sh-header-cor-primaria);
-          font-size: var(--sh-header-font-size-textos);
-          transition: .5s;
-
-          &:hover {
-            border-color: var(--sh-header-cor-primaria);
+      & .modal-content {
+        border-radius: 5px;
+        background-color: transparent;
+        
+        & .sh-modal-header-register {
+          background-color: var(--sh-header-cor-primaria);
+          padding: 5px 10px;
+          gap: 20px;
+    
+          & .sh-modal-header-text {
+            color: var(--sh-header-cor-terciaria);
+            font-size: var(--sh-header-font-size-subtitulos);
           }
         }
-      }
-
-      & .sh-modal-footer {
-        background-color: var(--sh-footer-cor-background-modal);
-        border: none;
-
-        & .sh-modal-footer-button {
-          background-color: transparent;
+    
+        & .sh-modal-body-register {
+          display: flex;
+          gap: 50px;
+          background-color: var(--sh-header-cor-background-blue);
+    
+          & .sh-modal-body-link {
+            border-bottom: 2px solid transparent;
+            text-decoration: none;
+            color: var(--sh-header-cor-primaria);
+            font-size: var(--sh-header-font-size-textos);
+            transition: .5s;
+  
+            &:hover {
+              border-color: var(--sh-header-cor-primaria);
+            }
+          }
+        }
+  
+        & .sh-modal-footer {
+          background-color: var(--sh-header-cor-background-blue);
           border: none;
-          border-bottom: 2px solid transparent;
-          font-size: var(--sh-header-font-size-textos);
-          color: var(--sh-header-cor-primaria);
-          border-radius: 0px;
-          transition: .5s;
-          padding: 0;
-
-          &:hover {
-            border-color: var(--sh-header-cor-primaria);
+  
+          & .sh-modal-footer-button {
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-size: var(--sh-header-font-size-textos);
+            color: var(--sh-header-cor-primaria);
+            border-radius: 0px;
+            transition: .5s;
+            padding: 0;
+  
+            &:hover {
+              border-color: var(--sh-header-cor-primaria);
+            }
           }
         }
       }
     }
+
   }
 }
 

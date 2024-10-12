@@ -17,7 +17,7 @@
 
 & .sh-cliEmDestaque {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     padding: 25px 20px;
     justify-items: center;
     overflow-x: auto;
@@ -121,6 +121,9 @@
     }
 
     & .sh-cliEmDestaque {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        gap: 10px;
+        
         & .sh-cliEmDestaque-item {
             width: 177px;
             gap: 8px;
@@ -134,6 +137,7 @@
     }
 
     & .sh-cliEmDestaque {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         & .sh-cliEmDestaque-item {
             width: 177px;
             gap: 8px;

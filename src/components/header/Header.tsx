@@ -88,6 +88,9 @@ const Header = () => {
 
         <Offcanvas.Body className='sh-header-offcanvas-body'>
           <ul className="mb-0 sh-header-navegacao">
+          <li className="sh-navegacao-item d-sm-none">
+              <a href='#sh_home_header' className='sh-item-text'>Home</a>
+            </li>
 
             <li className="sh-navegacao-item">
               <a href='#sh_planos' className='sh-item-text'>Planos</a>
@@ -97,16 +100,32 @@ const Header = () => {
               <a href='#sh_profissionais_emDestaque' className='sh-item-text'>Profissionais em destaque</a>
             </li>
 
+            <li className="sh-navegacao-item d-sm-none">
+              <a href='#sh_clientes_emDestaque' className='sh-item-text'>Clientes em destaque</a>
+            </li>
+
+            <li className="sh-navegacao-item d-sm-none">
+              <a href='#sh_vantagens' className='sh-item-text'>Vantagens de ser nosso cliente</a>
+            </li>
+
+            <li className="sh-navegacao-item d-sm-none">
+              <a href='#sh_ultimas_postagens' className='sh-item-text'>Últimos servicos postados</a>
+            </li>
+
             <li className="sh-navegacao-item">
               <a href='#sh_comecar' className='sh-item-text'>Como começar</a>
             </li>
 
-            <li className="sh-navegacao-item">
-              <Link to='/cadastro-freelancer' className='sh-item-text'>Sobre nós</Link>
+            <li className="sh-navegacao-item d-sm-none">
+              <a href="#sh_sobre_a_skillhub" className='sh-item-text'>Oque é a Skillhub</a>
             </li>
 
             <li className="sh-navegacao-item">
-              <a href='#sh_duvidas' className='sh-item-text'>Dúvidas</a>
+              <a href='#sh_duvidas' className='sh-item-text'>Dúvidas Frequentes</a>
+            </li>
+
+            <li className="sh-navegacao-item d-sm-none">
+              <Link to='/login' className='sh-item-text'>Login</Link>
             </li>
 
             <li className="d-sm-none sh-navegacao-item">
@@ -125,7 +144,7 @@ const Header = () => {
             <button className='sh-item-text' onClick={() => setModalRegistro(true)}>Registre-se</button>
           </li>
           <li className="sh-navegacao-item">
-            <Link to='/duvidas' className='sh-item-text'>Login</Link>
+            <Link to='/login' className='sh-item-text'>Login</Link>
           </li>
         </ul>
 

@@ -2,6 +2,8 @@
   --sh-servicos-cor-primaria: #fff;
   --sh-servicos-cor-secundaria: #0075FF;
   --sh-servicos-cor-marcadores: #5584E0;
+  --sh-servicos-cor-cards-background: #26466B;
+  --sh-servicos-cor-cards-background-hover: #203d5d;
   --sh-servicos-cor-terciaria: #000;
   --sh-servicos-cor-quaternaria: #35FF62;
   --sh-servicos-cor-textos: #494949;
@@ -23,51 +25,59 @@
   gap: 15px;
 
   & .sh-servicos-itens {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 10px;
-    width: max-content;
-    background-color: #ffffffb0;
-    border-radius: 5px;
-    box-shadow: #555555 3px 3px 9px;
-
-
-    & .sh-itens-data {
+    & .sh-servicos-link {
+      text-decoration: none;
       display: flex;
-      justify-content: start;
-      align-items: center;
-      gap: 10px;
-      width: 265px;
+      flex-direction: column;
+      gap: 5px;
+      padding: 10px;
+      width: max-content;
+      height: 100%;
+      background-color: var(--sh-servicos-cor-cards-background);
+      border-radius: 5px;
+      box-shadow: #555555 3px 3px 9px;
 
-      & .sh-servicos-img-perfil {
-        width: 30px;
+      &:hover {
+        background-color: var(--sh-servicos-cor-cards-background-hover);
       }
 
-      & .sh-servicos-data-marcador {
-        margin: 0;
-        background-color: var(--sh-servicos-cor-marcadores);
-        font-size: var(--sh-servicos-font-size-textos);
-        color: var(--sh-servicos-cor-primaria);
-        padding: 2px 8px;
-        border-radius: 50px;
-      }
+      & .sh-itens-data {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+        width: 265px;
 
-      & .sh-servicos-data-descricao {
-        color: var(--sh-servicos-cor-textos);
-        font-size: var(--sh-servicos-font-size-textos);
-        margin: 0;
+        & .sh-servicos-img-perfil {
+          width: 30px;
+        }
 
-        /* Limitar tamanho de texto */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
+        & .sh-servicos-data-marcador {
+          margin: 0;
+          background-color: var(--sh-servicos-cor-marcadores);
+          font-size: var(--sh-servicos-font-size-textos);
+          color: var(--sh-servicos-cor-primaria);
+          padding: 2px 8px;
+          border-radius: 50px;
+        }
+
+        & .sh-servicos-data-descricao {
+          color: var(--sh-servicos-cor-primaria);
+          font-size: var(--sh-servicos-font-size-textos);
+          margin: 0;
+
+          /* Limitar tamanho de texto */
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+        }
       }
     }
 
 
+    /* 
     & .sh-itens-remuneracao {
       display: flex;
       flex-direction: column;
@@ -90,7 +100,7 @@
         color: var(--sh-servicos-cor-textos);
         width: max-content;
       }
-    }
+    } */
   }
 }
 
@@ -101,11 +111,13 @@
 
   & .sh-servicos-lista {
     & .sh-servicos-itens {
-      & .sh-itens-data {
-        width: 310px;
-
-        & .sh-servicos-img-perfil {
-          width: 35px;
+      & .sh-servicos-link {
+        & .sh-itens-data {
+          width: 310px;
+  
+          & .sh-servicos-img-perfil {
+            width: 35px;
+          }
         }
       }
     }
@@ -119,9 +131,11 @@
 
   & .sh-servicos-lista {
     & .sh-servicos-itens {
-      & .sh-itens-data {
-        & .sh-servicos-img-perfil {
-          width: 30px;
+      & .sh-servicos-link {
+        & .sh-itens-data {
+          & .sh-servicos-img-perfil {
+            width: 30px;
+          }
         }
       }
     }
@@ -135,11 +149,13 @@
 
   & .sh-servicos-lista {
     & .sh-servicos-itens {
-      & .sh-itens-data {
-        width: 305px;
-
-        & .sh-servicos-img-perfil {
-          width: 30px;
+      & .sh-servicos-link {
+        & .sh-itens-data {
+          width: 305px;
+  
+          & .sh-servicos-img-perfil {
+            width: 30px;
+          }
         }
       }
     }

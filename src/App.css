@@ -15,9 +15,10 @@
   --sh-index-cor-quaternaria: #35FF62;
   --sh-index-cor-textos: #494949;
   --sh-footer-cor-background-footer: #26466B;
+  --sh-footer-cor-background-skillhub: #0089e0;
 
   --sh-index-padding: 0 10px;
-  --sh-index-margin: 20px 0;
+  --sh-index-margin: 30px 0;
 
 
   --sh-index-font-size-titulos: 1.4rem;
@@ -34,6 +35,7 @@
   }
 
   & .sh-header-apresentacao {
+    min-height: 100vh;
 
     & .sh-apresentacao {
       display: flex;
@@ -143,29 +145,37 @@
     flex-direction: column;
 
     /* O que é a Skillhub */
-    & .sh-main-skillhub {
+    & .sh-skillhub-info {
       display: flex;
-      flex-direction: column;
-      gap: 20px;
-      margin: 40px 0 20px;
-      padding: var(--sh-index-padding);
+      justify-content: center;
+      background-color: var(--sh-footer-cor-background-skillhub);
+      width: 100%;
 
-      & .sh-skillhub-titulo {
-        color: var(--sh-index-cor-terciaria);
-        font-size: var(--sh-index-font-size-titulos);
-        text-align: center;
-      }
-
-      & .sh-skillhub-textos-list {
+      & .sh-main-skillhub {
         display: flex;
         flex-direction: column;
-        list-style-type: none;
-        padding: 0;
-        gap: 10px;
+        gap: 20px;
+        padding: var(--sh-index-padding);
+        padding-top: 40px;
+        padding-bottom: 40px;
 
-        & .sh-skillhub-paragrafos {
-          font-size: var(--sh-index-font-size-textos);
-          color: var(--sh-index-cor-textos);
+        & .sh-skillhub-titulo {
+          color: var(--sh-index-cor-primaria);
+          font-size: var(--sh-index-font-size-titulos);
+          text-align: center;
+        }
+
+        & .sh-skillhub-textos-list {
+          display: flex;
+          flex-direction: column;
+          list-style-type: none;
+          padding: 0;
+          gap: 10px;
+
+          & .sh-skillhub-paragrafos {
+            font-size: var(--sh-index-font-size-textos);
+            color: var(--sh-index-cor-primaria);
+          }
         }
       }
     }
@@ -350,7 +360,7 @@
           & .sh-duvidas-header {
 
             & .accordion-button {
-              color: var(--sh-index-cor-terciaria);
+              color: var(--sh-index-cor-textos);
               font-size: var(--sh-index-font-size-textos);
               font-weight: 650;
               gap: 5px;
@@ -432,12 +442,12 @@
     --sh-index-font-size-titulos: 1.4rem;
     --sh-index-font-size-subtitulos: 1.2rem;
     --sh-index-font-size-textos: 1rem;
+    --sh-index-margin: 45px 0;
   }
 
   .sh-container {
     & .sh-header-apresentacao {
       & .sh-apresentacao {
-        margin-top: 65px;
         row-gap: 40px;
 
         & .sh-apresentacao-um {
@@ -489,8 +499,10 @@
 
   .sh-container {
     & .sh-header-apresentacao {
+
       & .sh-apresentacao {
         flex-direction: row;
+        padding: 0 10px;
 
         & .sh-apresentacao-dois {
           flex-direction: column;
@@ -519,13 +531,16 @@
     }
 
     & .sh-main {
-      & .sh-main-skillhub {
-        & .sh-skillhub-textos-list {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          column-gap: 50px;
+      & .sh-skillhub-info {
+        & .sh-main-skillhub {
+          & .sh-skillhub-textos-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 50px;
+          }
         }
       }
+
 
       & .sh-main-vantagens {
         & .sh-vantagens-lista {
@@ -540,6 +555,14 @@
           display: grid;
           grid-template-columns: 1fr 1fr;
           column-gap: 50px;
+          justify-items: start;
+        }
+      }
+
+      & .sh-main-duvidas {
+        & .sh-duvidas-acordeon {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
         }
       }
     }
@@ -562,6 +585,15 @@
               width: 235px;
             }
           }
+        }
+      }
+    }
+
+    & .sh-main {
+
+      & .sh-main-vantagens {
+        & .sh-vantagens-lista {
+          grid-template-columns: 1fr 1fr 1fr;
         }
       }
     }
