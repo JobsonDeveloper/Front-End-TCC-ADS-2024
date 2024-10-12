@@ -24,6 +24,15 @@
     gap: 30px;
     justify-items: center;
 
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        height: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+
     & .sh-EmDestaque-item {
         display: flex;
         flex-direction: column;

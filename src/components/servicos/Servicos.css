@@ -2,8 +2,7 @@
   --sh-servicos-cor-primaria: #fff;
   --sh-servicos-cor-secundaria: #0075FF;
   --sh-servicos-cor-marcadores: #5584E0;
-  --sh-servicos-cor-cards-background: #26466B;
-  --sh-servicos-cor-cards-background-hover: #203d5d;
+  --sh-servicos-cor-cards-background-hover: #e3e3e3;
   --sh-servicos-cor-terciaria: #000;
   --sh-servicos-cor-quaternaria: #35FF62;
   --sh-servicos-cor-textos: #494949;
@@ -24,6 +23,15 @@
   justify-content: space-between;
   gap: 15px;
 
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    height: 2px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
   & .sh-servicos-itens {
     & .sh-servicos-link {
       text-decoration: none;
@@ -33,7 +41,7 @@
       padding: 10px;
       width: max-content;
       height: 100%;
-      background-color: var(--sh-servicos-cor-cards-background);
+      background-color: var(--sh-servicos-cor-primaria);
       border-radius: 5px;
       box-shadow: #555555 3px 3px 9px;
 
@@ -62,7 +70,7 @@
         }
 
         & .sh-servicos-data-descricao {
-          color: var(--sh-servicos-cor-primaria);
+          color: var(--sh-servicos-cor-terciaria);
           font-size: var(--sh-servicos-font-size-textos);
           margin: 0;
 

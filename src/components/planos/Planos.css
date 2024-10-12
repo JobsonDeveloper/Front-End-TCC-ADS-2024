@@ -17,7 +17,16 @@
     list-style-type: none;
     padding: 0;
     padding-bottom: 5px;
-    overflow-x: scroll;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        height: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
 
     & .sh-planos-card-item {
 

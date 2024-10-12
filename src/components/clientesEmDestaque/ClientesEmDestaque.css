@@ -24,13 +24,22 @@
     gap: 30px;
     justify-items: center;
 
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        height: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+
     & .sh-cliEmDestaque-item {
         display: flex;
         flex-direction: column;
         gap: 5px;
         padding: 5px;
         border-radius: 5px;
-        width: 145px;
+        width: 180px;
         height: 100%;
         background-color: var(--sh-clientes-cor-primaria);
         box-shadow: #555555 3px 3px 9px;
@@ -123,7 +132,7 @@
     & .sh-cliEmDestaque {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         gap: 10px;
-        
+
         & .sh-cliEmDestaque-item {
             width: 177px;
             gap: 8px;
@@ -138,6 +147,7 @@
 
     & .sh-cliEmDestaque {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
         & .sh-cliEmDestaque-item {
             width: 177px;
             gap: 8px;
