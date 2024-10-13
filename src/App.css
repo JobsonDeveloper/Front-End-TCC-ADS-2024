@@ -26,6 +26,29 @@
   --sh-index-font-size-textos: 1rem;
 }
 
+@keyframes showLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes showRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
 .sh-container {
   font-family: var(--sh-index-font-family);
@@ -158,23 +181,38 @@
         padding: var(--sh-index-padding);
         padding-top: 40px;
         padding-bottom: 40px;
-
+        overflow-x: clip;
+        
         & .sh-skillhub-titulo {
           color: var(--sh-index-cor-primaria);
           font-size: var(--sh-index-font-size-titulos);
           text-align: center;
         }
-
+        
         & .sh-skillhub-textos-list {
           display: flex;
           flex-direction: column;
           list-style-type: none;
           padding: 0;
           gap: 10px;
+          over
 
           & .sh-skillhub-paragrafos {
             font-size: var(--sh-index-font-size-textos);
             color: var(--sh-index-cor-primaria);
+          }
+
+          
+          & .sh-skillhub-paragrafo-um {
+            animation: 4s showLeft linear;
+            animation-timeline: view();
+            animation-range: entry 0;
+          }
+        
+          & .sh-skillhub-paragrafo-dois {
+            animation: 4s showRight linear;
+            animation-timeline: view();
+            animation-range: entry 0;
           }
         }
       }
