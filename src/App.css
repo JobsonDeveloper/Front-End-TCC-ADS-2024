@@ -202,7 +202,7 @@
           }
 
           
-          & .sh-skillhub-paragrafo-um {
+          /* & .sh-skillhub-paragrafo-um {
             animation: 4s showLeft linear;
             animation-timeline: view();
             animation-range: entry 0;
@@ -212,7 +212,7 @@
             animation: 4s showRight linear;
             animation-timeline: view();
             animation-range: entry 0;
-          }
+          } */
         }
       }
     }

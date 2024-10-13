@@ -21,6 +21,10 @@ import backgroundApresentacaoDois from './assets/index/backgrounds/imagem-aprese
 import backgroundApresentacaoMd from './assets/index/backgrounds/background-apresentacaoMd.png'
 import buttonFreelancer from './assets/index/backgrounds/serFreelancer.png';
 import { Accordion } from 'react-bootstrap';
+import { duration } from '@mui/material';
+
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 // ------------ Monta do banco ----------
 const ultimosServicos = [
@@ -151,6 +155,8 @@ function App() {
       removeLoading(true);
       removeSideBar(false);
     }, 1500);
+
+    Aos.init({ duration: 500 });
   }, []);
 
 
@@ -180,6 +186,8 @@ function App() {
   //     console.error(error);
   //   }
   // }
+
+  
 
   return (
     <main className='sh-container'>
@@ -238,27 +246,27 @@ function App() {
           <article className="sh-show sh-main-skillhub" id='sh_main_skillhub'>
             <h2 className="sh-skillhub-titulo">Oque é a Skillhub</h2>
             <ul className="sh-skillhub-textos-list">
-              <li className="sh-skillhub-paragrafos sh-skillhub-paragrafo-um">
+              <li className="sh-skillhub-paragrafos" data-aos="fade-right">
                 A Skillhub é uma plataforma criada para facilitar os
                 fornecimentos e as solicitações de serviços para todos.
                 Funcionando 100% online, nós desejamos lhe proporcionar
                 uma boa experiência de contratação de serviço e/ou do
                 fornecimento dele.
               </li>
-              <li className="sh-skillhub-paragrafos sh-skillhub-paragrafo-dois">
+              <li className="sh-skillhub-paragrafos" data-aos="fade-left">
                 Não somos somente uma plataforma, somos uma porta aberta
                 para aqueles que desejam adquirir visibilidade fazendo
                 aquilo de que gostam, também somos um facilitador para
                 aqueles que desejam economizar tempo, chamando
                 alguém para realizar um serviço.
               </li>
-              <li className="sh-skillhub-paragrafos sh-skillhub-paragrafo-um">
+              <li className="sh-skillhub-paragrafos" data-aos="fade-right">
                 Sendo cliente, você pode postar um serviço desejado e
                 aguardar enquanto o divulgamos, até que um freelancer
                 se interesse pelo trabalho e entre em contato para saber
                 mais sobre o trabalho.
               </li>
-              <li className="sh-skillhub-paragrafos sh-skillhub-paragrafo-dois">
+              <li className="sh-skillhub-paragrafos" data-aos="fade-left">
                 Sendo Freelancer, você encontrará serviços rápidos e bem
                 remunerados perto da sua residência, facilitando tanto
                 a sua vida quanto a vida de outras pessoas.
