@@ -42,12 +42,10 @@ const Login = () => {
                 if (data.status === 201) {
                     localStorage.setItem('usuário', data.data.Usuarioid);
 
-                    // Se o usuário é um cliente
                     if (data.data.type === 0) {
                         pagina('/home-cliente');
                     }
 
-                    // Se o usuário é um freelancer
                     if (data.data.type === 1) {
                         pagina('/home-freelancer');
                     }
@@ -83,7 +81,9 @@ const Login = () => {
                 <li className="sh-formulario-item sh-formulario-header">
 
                     <div className="sh-header-logo">
-                        <img src={logo} alt="" className="sh-header-logo-img" />
+                        <Link to="/">
+                            <img src={logo} alt="" className="sh-header-logo-img" />
+                        </Link>
                     </div>
 
                     <div className="sh-header-descricao">
