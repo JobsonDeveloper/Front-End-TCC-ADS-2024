@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './ClientesEmDestaque.css';
 import imgEstrelas from '../../assets/icons/estrela.svg';
 import imgCliente from '../../assets/profissionais/profissional.png';
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const ClientesEmDestaque = ({ dados }: any) => {
+    useEffect(() => {
+        Aos.init({ duration: 500 });
+    });
+
     const listaCliEmDestaque = dados.map((cliente: any, index: any) =>
 
-        <li key={index} className="sh-cliEmDestaque-item">
+        <li key={index} className="sh-cliEmDestaque-item" data-aos="flip-left">
             <div className="sh-cliEmDestaque-item-dados">
                 <img src={imgCliente} alt="Foto de perfil" className="sh-cliEmDestaque-imagemProfissional" />
                 <p className="sh-cliEmDestaque-cliente-nome">{cliente.nome}</p>

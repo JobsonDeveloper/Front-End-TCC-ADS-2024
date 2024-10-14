@@ -127,6 +127,7 @@
         flex-direction: column;
         padding: 0;
         margin-top: 20px;
+        overflow-x: hidden;
 
         & .sh-apresentacao-dois-container-img {
           display: flex;
@@ -338,6 +339,7 @@
         flex-direction: column;
         gap: 30px;
         justify-items: center;
+        overflow-x: hidden;
 
         & .sh-comecar-list {
           list-style-type: none;

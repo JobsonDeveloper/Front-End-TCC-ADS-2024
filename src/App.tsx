@@ -221,11 +221,11 @@ function App() {
 
           {/* Secundo post */}
           <article className="sh-apresentacao-dois d-md-none">
-            <div className="sh-apresentacao-dois-container-img">
+            <div className="sh-apresentacao-dois-container-img" data-aos="fade-right">
               <Link to='/cadastro-cliente'><img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img d-md-none" /></Link>
             </div>
 
-            <div className="sh-apresentacao-textos">
+            <div className="sh-apresentacao-textos" data-aos="fade-left">
               <h1 className="sh-apresentacao-dois-titulos">
                 Seja cliente de forma 100% gratuíta
               </h1>
@@ -244,7 +244,7 @@ function App() {
         {/* Oque é a Skillhun */}
         <div className="sh-skillhub-info" id='sh_sobre_a_skillhub'>
           <article className="sh-show sh-main-skillhub" id='sh_main_skillhub'>
-            <h2 className="sh-skillhub-titulo">Oque é a Skillhub</h2>
+            <h2 className="sh-skillhub-titulo" data-aos="zoom-in">Oque é a Skillhub</h2>
             <ul className="sh-skillhub-textos-list">
               <li className="sh-skillhub-paragrafos" data-aos="fade-right">
                 A Skillhub é uma plataforma criada para facilitar os
@@ -277,7 +277,7 @@ function App() {
 
         {/* Profissionais em destaque */}
         <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
-          <h2 className="sh-profissionaisEmDestaque-titulo">Profissionais em destaque</h2>
+          <h2 className="sh-profissionaisEmDestaque-titulo" data-aos="zoom-in">Profissionais em destaque</h2>
           <div className="sh-profissionalEmDestaque-lista">
             <ProfissionaisEmDestaque dados={profDestaque} />
           </div>
@@ -285,7 +285,7 @@ function App() {
 
         {/* Clientes em destaque */}
         <article className="sh-clientesEmDestaque" id='sh_clientes_emDestaque'>
-          <h2 className="sh-clientesEmDestaque-titulo">Clientes em destaque</h2>
+          <h2 className="sh-clientesEmDestaque-titulo" data-aos="zoom-in">Clientes em destaque</h2>
           <div className="sh-clientesEmDestaque-lista">
             <ClientesEmDestaque dados={cliDestaque} />
           </div>
@@ -293,7 +293,7 @@ function App() {
 
         {/* Deseja ser um Freelancer? */}
         <article className="sh-show sh-main-planos" id='sh_planos'>
-          <div className='sh-planos-titulos'>
+          <div className='sh-planos-titulos' data-aos="zoom-in">
             <h2 className="sh-planos-titulo">Deseja encontrar um cliente?</h2>
             <h2 className="sh-planos-subtitulo">Contrate um de nossos planos</h2>
           </div>
@@ -303,9 +303,9 @@ function App() {
 
         {/* Vantagens de fazer parte do nosso time */}
         <article className="sh-main-vantagens" id='sh_vantagens'>
-          <h2 className="sh-show sh-vantagens-titulo">Vantagens de ser nosso cliente</h2>
+          <h2 className="sh-show sh-vantagens-titulo" data-aos="zoom-in">Vantagens de ser nosso cliente</h2>
 
-          <ul className="sh-show sh-vantagens-lista">
+          <ul className="sh-show sh-vantagens-lista" data-aos="zoom-in">
             <li className="sh-vantagem-item-info">
               Uma parte de nossos lucros é destinada para
               Casas de Adoção e Ongs de preservação da natureza,
@@ -341,10 +341,10 @@ function App() {
 
         {/* Como começar */}
         <article className="sh-main-comecar" id='sh_comecar'>
-          <h2 className="sh-show sh-comecar-titulo">Como começar</h2>
+          <h2 className="sh-show sh-comecar-titulo" data-aos="zoom-in">Como começar</h2>
 
           <div className="sh-comecar-tipo">
-            <ul className="sh-show sh-comecar-list">
+            <ul className="sh-show sh-comecar-list" data-aos="fade-right">
               <li className="sh-comecar-tipo-titlulo">Cliente</li>
               <li className="sh-comecar-list-item">Clique em em um dos botões do site para realizar o cadastro ou acesse <Link to='/cadastro-cliente'>este link.</Link></li>
               <li className="sh-comecar-list-item">Selecione o tipo “<span className='sh-span-destaque'>Cliente</span>” para proseguir com o cadastro.</li>
@@ -355,7 +355,7 @@ function App() {
               <li className="sh-comecar-list-item">Pronto! Seu perfil foi criado e está pronto para ser utilizado.</li>
             </ul>
 
-            <ul className="sh-show sh-comecar-list">
+            <ul className="sh-show sh-comecar-list" data-aos="fade-left">
               <li className="sh-comecar-tipo-titlulo">Freelancer</li>
               <li className="sh-comecar-list-item">Clique em em um dos <a href="#sh_planos">cards de planos</a>, no botão “<span className='sh-span-destaque'>Cadastre-se</span> no início do site ou <Link to='/cadastro-freelancer'>este link.</Link></li>
               <li className="sh-comecar-list-item">Caso tenha clicado no link ou em um dos botões, selecione o tipo “<span className='sh-span-destaque'>Profissional</span>” para proseguir com o cadastro e escolha o plano que você deseja.</li>
@@ -370,9 +370,9 @@ function App() {
 
         {/* Dúvidas frequentes  */}
         <article className="sh-main-duvidas" id='sh_duvidas'>
-          <h2 className="sh-show sh-duvidas-titulo">Dúvidas frequentes</h2>
+          <h2 className="sh-show sh-duvidas-titulo" data-aos="zoom-in">Dúvidas frequentes</h2>
 
-          <Accordion className='sh-show sh-duvidas-acordeon'>
+          <Accordion className='sh-show sh-duvidas-acordeon' data-aos="zoom-in">
             <Accordion.Item eventKey="0" className='sh-duvidas-acordeon-item'>
               <Accordion.Header className='sh-duvidas-header'>Como os freelancers conversam com os clientes?</Accordion.Header>
               <Accordion.Body className='sh-acordeon-body'>
@@ -409,7 +409,7 @@ function App() {
 
         {/* Últimos serviços postados */}
         <article className="sh-main-servicos" id='sh_ultimas_postagens'>
-          <h2 className="sh-show sh-servicos-titulo">Últimos serviços postados</h2>
+          <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Últimos serviços postados</h2>
 
           <div className="sh-servicos-lista-container">
             <Servicos data={ultimosServicos} />

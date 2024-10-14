@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import fotoPerfil from '../../assets/index/icons/profissional.png'
 import './Servicos.css'
 import { Link } from "react-router-dom";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Servicos = ({ data }: any) => {
 
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  })
+
   const listaServicos = data.map((servico: any, index: any) =>
-    <li key={index} className="sh-servicos-itens">
+    <li key={index} className="sh-servicos-itens" data-aos="flip-left">
       <Link to='/login' className="sh-servicos-link">
         <div className="sh-itens-data">
           <img src={fotoPerfil} alt="Foto de perfil sem rosto" className="sh-servicos-img-perfil" />
