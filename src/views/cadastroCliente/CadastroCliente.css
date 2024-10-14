@@ -1,0 +1,46 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --sh-cadastro-font-family: "Nunito", sans-serif;
+
+    --sh-cadastro-cor-primaria: #fff;
+    --sh-cadastro-cor-secundaria: #0075FF;
+    --sh-cadastro-cor-terciaria: #000;
+    --sh-cadastro-cor-quaternaria: #35FF62;
+    --sh-cadastro-cor-textos: #494949;
+    --sh-cadastro-cor-background: #26466B;
+    --sh-cadastro-cor-background-dois: #0089e0;
+
+    --sh-cadastro-padding: 0 10px;
+    --sh-cadastro-margin: 30px 0;
+
+
+    --sh-cadastro-font-size-titulos: 1.4rem;
+    --sh-cadastro-font-size-subtitulos: 1.2rem;
+    --sh-cadastro-font-size-textos: 1rem;
+}
+
+.sh-cadastroCliente {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url('../../assets/CadastroCliente/background/background-img.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    & .sh-cadastro-formulario {
+        background-color: var(--sh-cadastro-cor-primaria);
+        padding: 10px;
+
+        & .sh-steper-cadastro {
+            border-radius: 5px;
+        }
+    }
+
+}

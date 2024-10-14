@@ -147,13 +147,13 @@ const cliDestaque = [
 ];
 
 function App() {
-  const [loading, removeLoading] = useState(false);
-  const [sideBar, removeSideBar] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [sideBar, setSideBar] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      removeLoading(true);
-      removeSideBar(false);
+      setLoading(false);
+      setSideBar(true);
     }, 1500);
 
     Aos.init({ duration: 500 });
@@ -180,7 +180,7 @@ function App() {
   //     let dados = resposta.data;
 
   //     console.log(status, dados);
-  //     setRemoveLoading(true);
+  //     setLoading(true);
 
   //   } catch (error) {
   //     console.error(error);
@@ -191,10 +191,10 @@ function App() {
 
   return (
     <main className='sh-container'>
-      {!loading && <Loading />}
+      {loading && <Loading />}
 
       <section className="sh-header-apresentacao" id='sh_home_header'>
-        {!sideBar && <Header />}
+        {sideBar && <Header />}
 
         <article className='sh-apresentacao'>
           <article className="sh-apresentacao-um">
@@ -213,7 +213,7 @@ function App() {
           </article>
 
           {/* Button para freelancers */}
-          <article className="sh-apresentacao-button d-md-none">
+          <article className="sh-apresentacao-button d-sm-none">
             <div className="sh-apresentacao-button-item sh-apresentacao-button">
               <Link to='/cadastro-freelancer' className='sh-apresentacao-button-cadastro'>Torne-se um Freelancer</Link>
             </div>

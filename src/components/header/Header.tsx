@@ -88,7 +88,7 @@ const Header = () => {
 
         <Offcanvas.Body className='sh-header-offcanvas-body'>
           <ul className="mb-0 sh-header-navegacao">
-          <li className="sh-navegacao-item d-sm-none">
+          <li className="sh-navegacao-item d-lg-none">
               <a href='#sh_home_header' className='sh-item-text'>Home</a>
             </li>
 
@@ -100,15 +100,15 @@ const Header = () => {
               <a href='#sh_profissionais_emDestaque' className='sh-item-text'>Profissionais em destaque</a>
             </li>
 
-            <li className="sh-navegacao-item d-sm-none">
+            <li className="sh-navegacao-item d-lg-none">
               <a href='#sh_clientes_emDestaque' className='sh-item-text'>Clientes em destaque</a>
             </li>
 
-            <li className="sh-navegacao-item d-sm-none">
+            <li className="sh-navegacao-item d-lg-none">
               <a href='#sh_vantagens' className='sh-item-text'>Vantagens de ser nosso cliente</a>
             </li>
 
-            <li className="sh-navegacao-item d-sm-none">
+            <li className="sh-navegacao-item d-lg-none">
               <a href='#sh_ultimas_postagens' className='sh-item-text'>Últimos servicos postados</a>
             </li>
 
@@ -116,7 +116,7 @@ const Header = () => {
               <a href='#sh_comecar' className='sh-item-text'>Como começar</a>
             </li>
 
-            <li className="sh-navegacao-item d-sm-none">
+            <li className="sh-navegacao-item d-lg-none">
               <a href="#sh_sobre_a_skillhub" className='sh-item-text'>Oque é a Skillhub</a>
             </li>
 
@@ -124,15 +124,15 @@ const Header = () => {
               <a href='#sh_duvidas' className='sh-item-text'>Dúvidas Frequentes</a>
             </li>
 
-            <li className="sh-navegacao-item d-sm-none">
+            <li className="sh-navegacao-item d-lg-none">
               <Link to='/login' className='sh-item-text'>Login</Link>
             </li>
 
-            <li className="d-sm-none sh-navegacao-item">
+            <li className="d-lg-none sh-navegacao-item">
               <Link to='/cadastro-cliente' className='sh-item-text'>Torne-se um cliente</Link>
             </li>
 
-            <li className="d-sm-none sh-navegacao-item">
+            <li className="d-lg-none sh-navegacao-item">
               <Link to='/cadastro-freelancer' className='sh-item-text'>Torne-se um Freelancer</Link>
             </li>
           </ul>
