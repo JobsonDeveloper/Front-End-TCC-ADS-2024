@@ -7,38 +7,47 @@ import logo from '../../assets/icons/logoLogin.svg';
 import imgDescricao from '../../assets/icons/descricao.svg';
 import imgLogin from '../../assets/icons/btn-login.svg';
 import Loading from "../../components/loading/Loading";
-import { Button, Step, StepLabel, Stepper, Typography } from "@mui/material";
+import { Button, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
+import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 
 export const FormDadosBase = () => {
     return (
-        <div className="sh-dados-iniciais">
-            Nome, Sobrenome, CPF, Nascimento
-        </div>
+        <article className="sh-dados sh-dados-iniciais">
+            <TextField id="outlined-basic" label="Nome" variant="outlined" type="text" />
+            <TextField id="outlined-basic" label="Sobrenome" variant="outlined" type="text" />
+            <TextField id="outlined-basic" label="CPF" variant="outlined" type="number" />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateField label="Nascimento" format="DD/MM/YYYY" />
+            </LocalizationProvider>
+
+        </article>
     )
 }
 
 export const FormLocalizacaoContato = () => {
     return (
-        <div className="sh-dados-iniciais">
+        <article className="sh-dados sh-dados-localizacao">
             Rua, Número, Cidade, Estado, DDD, Telefone
-        </div>
+        </article>
     )
 }
 
 export const FormSeguranca = () => {
     return (
-        <div className="sh-dados-iniciais">
+        <article className="sh-dados sh-dados-seguranca">
             E-mail, Senha, Confirmar senha
-        </div>
+        </article>
     )
 }
 
 export const FormConfirmaDados = () => {
     return (
-        <div className="sh-dados-iniciais">
+        <article className="sh-dados sh-confirmacao">
             Lista de todos os dados
-        </div>
+        </article>
     )
 }
 
@@ -89,12 +98,12 @@ const CadastroCliente = () => {
                         <StepLabel />
                     </Step>
                 </Stepper>
-                <Typography sx={{ mt: 2, mb: 1 }}>
+                <div className="sh-formulario-inputs">
                     {activeStep == 0 && <FormDadosBase />}
                     {activeStep == 1 && <FormLocalizacaoContato />}
                     {activeStep == 2 && <FormSeguranca />}
                     {activeStep == 3 && <FormConfirmaDados />}
-                </Typography>
+                </div>
                 <Button variant="outlined" onClick={() => { mudarStep('anterior') }}>Voltar</Button>
                 <Button variant="outlined" onClick={() => { mudarStep('proximo') }}>Próximo</Button>
             </div>

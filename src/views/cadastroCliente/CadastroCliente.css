@@ -30,7 +30,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-image: url('../../assets/CadastroCliente/background/teste.png');
+    background-image: url('../../assets/CadastroCliente/background/background.png');
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -38,8 +38,16 @@
         background-color: var(--sh-cadastro-cor-primaria);
         padding: 10px;
 
-        & .sh-steper-cadastro {
-            border-radius: 5px;
+        & .sh-formulario-inputs{
+            padding: 2px;
+            background-color: rgb(254, 146, 146);
+            
+            & .sh-dados-iniciais {
+                display: grid;
+                gap: 20px;
+                background-color: rgb(132, 132, 251);
+                padding: 2px;
+            }
         }
     }
 
