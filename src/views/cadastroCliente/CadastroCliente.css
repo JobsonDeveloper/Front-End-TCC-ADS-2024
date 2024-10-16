@@ -35,7 +35,9 @@
     background-repeat: no-repeat;
 
     & .sh-cadastro-formulario {
-        display: grid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         gap: 15px;
         background-color: var(--sh-cadastro-cor-primaria);
         min-width: 310px;
@@ -61,61 +63,55 @@
             margin-bottom: 10px;
         }
 
-        & .sh-formulario-inputs {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2px;
-            width: 100%;
-            padding: 15px 5px;
-            height: 295px;
+        & .sh-stepersForm {
+            width: max-content;
+            width: 90%;
 
-            & .sh-dados {
-                display: grid;
-                gap: 20px;
-                height: max-content;
+            & .sh-formulario-inputs {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 padding: 2px;
-            }
+                width: 100%;
+                padding: 15px 5px;
+                height: 295px;
 
-            & .sh-dados-iniciais {
-                display: grid;
-            }
-
-            & .sh-dados-localizacao {
-                display: grid;
-                grid-template-areas:
-                    "rua rua rua numero"
-                    "cidade cidade cidade estado"
-                    "ddd telefone telefone telefone";
-
-                & .sh-cadastro-rua {
-                    grid-area: rua;
-                    width: 245px;
+                & .sh-dados {
+                    display: grid;
+                    gap: 20px;
+                    height: max-content;
+                    padding: 2px;
                 }
 
-                & .sh-cadastro-numero {
-                    grid-area: numero;
-                    width: 65px;
+                & .sh-dados-iniciais {
+                    display: grid;
                 }
 
-                & .sh-cadastro-cidade {
-                    grid-area: cidade;
-                    width: 245px;
-                }
+                & .sh-dados-localizacao {
+                    list-style-type: none;
+                    padding: 0;
+                    display: grid;
 
-                & .sh-cadastro-estado {
-                    grid-area: estado;
-                    width: 65px;
-                }
+                    & .sh-dados-localizacao-item {
+                        display: flex;
+                        gap: 10px;
 
-                & .sh-cadastro-ddd {
-                    grid-area: ddd;
-                    width: 65px;
-                }
+                        & .sh-dados-simples {
+                            width: 60px;
+                        }
+                    }
 
-                & .sh-cadastro-telefone {
-                    grid-area: telefone;
-                    width: 245px;
+                    & .sh-cadastro-rua {}
+
+                    & .sh-cadastro-numero {}
+
+                    & .sh-cadastro-cidade {}
+
+                    & .sh-cadastro-estado {}
+
+                    & .sh-cadastro-ddd {}
+
+                    & .sh-cadastro-telefone {}
                 }
             }
         }
@@ -125,6 +121,7 @@
             justify-content: space-between;
             padding: 10px 0 0;
             align-items: end;
+            width: 100%;
 
             & .sh-cadastro-button-link {
                 & .sh-cadastro-button-home {
