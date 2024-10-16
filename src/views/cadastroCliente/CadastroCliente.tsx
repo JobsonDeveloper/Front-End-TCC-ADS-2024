@@ -121,38 +121,34 @@ export const FormLocalizacaoContato = () => {
 }
 
 export const FormSeguranca = () => {
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const selecaoMudarSenha = () => setShowPassword((show) => !show);
+    const selecaoMudarConfirmSenha = () => setshowConfirmPassword((show) => !show);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setshowConfirmPassword] = useState(false);
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+    const MouseDownMudarSenha = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-    const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    
+    const MouseUpMudarSenha = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-
-
-
 
     return (
         <article className="sh-dados sh-dados-seguranca">
             <TextField id="standard-basic" label="E-mail" variant="standard" type="email" sx={styledTextField} />
-            {/* <TextField id="standard-basic" label="Senha" variant="standard" type="text" sx={styledTextField} /> */}
-            {/* <TextField id="standard-basic" label="Confirmar senha" variant="standard" type="text" sx={styledTextField} /> */}
-
-
             <FormControl variant="standard">
-                <InputLabel htmlFor="standard-adornment-password">Senha</InputLabel>
+                <InputLabel htmlFor="sh_label_senha_input">Senha</InputLabel>
                 <Input
-                    id="standard-adornment-password"
+                    id="sh_label_senha_input"
                     type={showPassword ? 'text' : 'password'}
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
                                 aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                onMouseUp={handleMouseUpPassword}
+                                onClick={selecaoMudarSenha}
+                                onMouseDown={MouseDownMudarSenha}
+                                onMouseUp={MouseUpMudarSenha}
                             >
                                 {showPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
@@ -163,17 +159,17 @@ export const FormSeguranca = () => {
 
 
             <FormControl variant="standard">
-                <InputLabel htmlFor="standard-adornment-password">Confirmar senha</InputLabel>
+                <InputLabel htmlFor="sh_label_confirm_senha_input">Confirmar senha</InputLabel>
                 <Input
-                    id="standard-adornment-password"
+                    id="sh_label_confirm_senha_input"
                     type={showConfirmPassword ? 'text' : 'password'}
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
                                 aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                onMouseUp={handleMouseUpPassword}
+                                onClick={selecaoMudarConfirmSenha}
+                                onMouseDown={MouseDownMudarSenha}
+                                onMouseUp={MouseUpMudarSenha}
                             >
                                 {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
