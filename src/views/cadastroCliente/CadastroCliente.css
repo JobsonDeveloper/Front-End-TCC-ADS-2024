@@ -35,12 +35,39 @@
     background-repeat: no-repeat;
 
     & .sh-cadastro-formulario {
+        display: grid;
+        gap: 15px;
         background-color: var(--sh-cadastro-cor-primaria);
-        padding: 10px;
+        width: 95%;
+        border-radius: 10px;
+        overflow: hidden;
+
+        & .sh-cadastro-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0 0 5px;
+
+            & .sh-cadastro-logoImg {
+                width: 120px;
+            }
+
+            & .sh-cadastro-tituloPagina {
+                width: 130px;
+                border-radius: 0 10px 0 0;
+            }
+            margin-bottom: 10px;
+        }
 
         & .sh-formulario-inputs{
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 2px;
             background-color: rgb(254, 146, 146);
+            width: 100%;
+            height: 300px;
             
             & .sh-dados-iniciais {
                 display: grid;

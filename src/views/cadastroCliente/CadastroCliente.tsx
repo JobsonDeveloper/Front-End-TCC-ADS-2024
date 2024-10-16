@@ -3,26 +3,39 @@ import { Link, useNavigate } from "react-router-dom";
 import './CadastroCliente.css';
 
 // Components
-import logo from '../../assets/icons/logoLogin.svg';
+import logoImg from '../../assets/CadastroCliente/icons/logo.svg';
+import tituloPaginaImg from '../../assets/CadastroCliente/icons/cadastroCliente.png'
 import imgDescricao from '../../assets/icons/descricao.svg';
 import imgLogin from '../../assets/icons/btn-login.svg';
 import Loading from "../../components/loading/Loading";
 import { Button, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import { color, fontFamily, fontSize, styled } from "@mui/system";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
+const styledTextField = {
+    '& .MuiInputBase-input': {
+        fontSize: '1rem',
+        fontFamily: '"Nunito", sans-serif;',
+        color: '#000'
+    },
+
+    '@media (min-width: 992px)' : {
+        '& .MuiInputBase-input': {
+            fontSize: '.9rem',
+        }
+    }
+};
 
 export const FormDadosBase = () => {
     return (
         <article className="sh-dados sh-dados-iniciais">
-            <TextField id="outlined-basic" label="Nome" variant="outlined" type="text" />
-            <TextField id="outlined-basic" label="Sobrenome" variant="outlined" type="text" />
-            <TextField id="outlined-basic" label="CPF" variant="outlined" type="number" />
+            <TextField id="standard-basic" label="Nome" variant="standard" type="text" sx={styledTextField}/>
+            <TextField id="standard-basic" label="Sobrenome" variant="standard" type="text" />
+            <TextField id="standard-basic" label="CPF/CNPJ" variant="standard" type="number" />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateField label="Nascimento" format="DD/MM/YYYY" />
+                <DateField label="Nascimento" variant="standard" format="DD/MM/YYYY" />
             </LocalizationProvider>
-
         </article>
     )
 }
@@ -84,19 +97,15 @@ const CadastroCliente = () => {
             {loading && <Loading />}
 
             <div className="sh-cadastro-formulario">
-                <Stepper activeStep={activeStep} className="sh-steper-cadastro">
-                    <Step>
-                        <StepLabel />
-                    </Step>
-                    <Step>
-                        <StepLabel />
-                    </Step>
-                    <Step>
-                        <StepLabel />
-                    </Step>
-                    <Step>
-                        <StepLabel />
-                    </Step>
+                <article className="sh-cadastro-header">
+                    <img src={logoImg} alt="" className="sh-cadastro-logoImg"/>
+                    <img src={tituloPaginaImg} alt="" className="sh-cadastro-tituloPagina"/>
+                </article>
+                <Stepper activeStep={activeStep} className="sh-steper-cadastro" alternativeLabel>
+                    <Step> <StepLabel /> </Step>
+                    <Step> <StepLabel /> </Step>
+                    <Step> <StepLabel /> </Step>
+                    <Step> <StepLabel /> </Step>
                 </Stepper>
                 <div className="sh-formulario-inputs">
                     {activeStep == 0 && <FormDadosBase />}
@@ -104,8 +113,10 @@ const CadastroCliente = () => {
                     {activeStep == 2 && <FormSeguranca />}
                     {activeStep == 3 && <FormConfirmaDados />}
                 </div>
-                <Button variant="outlined" onClick={() => { mudarStep('anterior') }}>Voltar</Button>
-                <Button variant="outlined" onClick={() => { mudarStep('proximo') }}>Próximo</Button>
+                <article className="sh-cadastro-buttons">
+                    <Button variant="outlined" onClick={() => { mudarStep('anterior') }}>Voltar</Button>
+                    <Button variant="outlined" onClick={() => { mudarStep('proximo') }}>Próximo</Button>
+                </article>
             </div>
         </main>
     )
