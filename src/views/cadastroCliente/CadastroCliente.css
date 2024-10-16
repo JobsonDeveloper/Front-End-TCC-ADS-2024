@@ -38,7 +38,7 @@
         display: grid;
         gap: 15px;
         background-color: var(--sh-cadastro-cor-primaria);
-        width: 95%;
+        min-width: 310px;
         border-radius: 10px;
         overflow: hidden;
 
@@ -157,17 +157,4 @@
         }
     }
 
-}
-
-@media (min-width: 425px) {
-    .sh-cadastroCliente {
-        & .sh-cadastro-formulario {
-            & .sh-formulario-inputs {
-                & .sh-dados-iniciais {
-                    grid-template-columns: 1fr 1fr;
-                    row-gap: 50px;
-                }
-            }
-        }
-    }
 }
