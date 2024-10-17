@@ -15,6 +15,7 @@ import anteriorImg from '../../assets/CadastroCliente/icons/anterior.png'
 import concluirImg from '../../assets/CadastroCliente/icons/concluir.png'
 import tituloPaginaImg from '../../assets/CadastroCliente/icons/cadastroCliente.png'
 import Loading from "../../components/loading/Loading";
+import dayjs from "dayjs";
 
 // --------------- ESTILIZAÇÃO DE COMPONENTES DO MATERIAL UI
 
@@ -24,12 +25,6 @@ const styledTextField = {
         fontFamily: '"Nunito", sans-serif;',
         color: '#000'
     },
-
-    '@media (min-width: 992px)': {
-        '& .MuiInputBase-input': {
-            fontSize: '.9rem',
-        }
-    }
 };
 
 const styledSelect = {
@@ -44,77 +39,340 @@ const styledSelect = {
 // --------------- COMPONENTES
 
 export const FormDadosBase = () => {
+    const [nome, setNome] = useState('');
+    const [sobrenome, setSobrenome] = useState('');
+    const [cpfCnpj, setCpfCnpj] = useState('');
+    const [nascimento, setNascimento] = useState('');
+
+    useEffect(() => {
+        if (localStorage.getItem('nome')) {
+            setNome(`${localStorage.getItem('nome')}`);
+        }
+
+        if (localStorage.getItem('sobrenome')) {
+            setSobrenome(`${localStorage.getItem('sobrenome')}`);
+        }
+
+        if (localStorage.getItem('cpfCnpj')) {
+            setCpfCnpj(`${localStorage.getItem('cpfCnpj')}`);
+        }
+
+        if (localStorage.getItem('nascimento')) {
+            const data = new Date(`${localStorage.getItem('nascimento')}`)
+            let dia = `${data.getDate()}`;
+            let mes = `${data.getMonth() + 1}`;
+            let ano = `${data.getFullYear()}`;
+
+            if (dia.length < 2) {
+                dia = `0${dia}`;
+            }
+
+            if (mes.length < 2) {
+                mes = `0${mes}`;
+            }
+
+            setNascimento(`${dia}/${mes}/${ano}`);
+
+        }
+    })
+
     return (
         <article className="sh-dados sh-dados-iniciais">
-            <TextField id="standard-basic" label="Nome" variant="standard" type="text" sx={styledTextField} />
-            <TextField id="standard-basic" label="Sobrenome" variant="standard" type="text" sx={styledTextField} />
-            <TextField id="standard-basic" label="CPF/CNPJ" variant="standard" type="number" sx={styledTextField} />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateField label="Nascimento" variant="standard" format="DD/MM/YYYY" sx={styledTextField} />
-            </LocalizationProvider>
+            {nome && <TextField
+                id="standard-basic"
+                label="Nome"
+                variant="standard"
+                type="text"
+                sx={styledTextField}
+                onChange={(e: any) => localStorage.setItem('nome', e.target.value)}
+                defaultValue={nome}
+            />}
+
+            {!nome && <TextField
+                id="standard-basic"
+                label="Nome"
+                variant="standard"
+                type="text"
+                sx={styledTextField}
+                onChange={(e: any) => localStorage.setItem('nome', e.target.value)}
+            />}
+
+            {sobrenome && <TextField
+                id="standard-basic"
+                label="Sobrenome"
+                variant="standard"
+                type="text"
+                sx={styledTextField}
+                onChange={(e: any) => localStorage.setItem('sobrenome', e.target.value)}
+                defaultValue={sobrenome}
+            />}
+
+            {!sobrenome && <TextField
+                id="standard-basic"
+                label="Sobrenome"
+                variant="standard"
+                type="text"
+                sx={styledTextField}
+                onChange={(e: any) => localStorage.setItem('sobrenome', e.target.value)}
+                defaultValue={sobrenome}
+            />}
+
+            {cpfCnpj && <TextField
+                id="standard-basic"
+                label="CPF/CNPJ"
+                variant="standard"
+                type="number"
+                sx={styledTextField}
+                onChange={(e: any) => localStorage.setItem('cpfCnpj', e.target.value)}
+                defaultValue={cpfCnpj}
+            />}
+
+            {!cpfCnpj && <TextField
+                id="standard-basic"
+                label="CPF/CNPJ"
+                variant="standard"
+                type="number"
+                sx={styledTextField}
+                onChange={(e: any) => localStorage.setItem('cpfCnpj', e.target.value)}
+                defaultValue={cpfCnpj}
+            />}
+
+            {/* Se não tiver umda data já escrita */}
+            {!nascimento &&
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateField
+                        label="Nascimento"
+                        variant="standard"
+                        format="DD/MM/YYYY"
+                        sx={styledTextField}
+                        onChange={(e: any) => localStorage.setItem('nascimento', e)}
+                    />
+                </LocalizationProvider>
+            }
+
+            {/* Se não tiver umda data já escrita */}
+            {nascimento && <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateField
+                    label="Nascimento"
+                    variant="standard"
+                    format="DD/MM/YYYY"
+                    defaultValue={dayjs(nascimento)}
+                    sx={styledTextField}
+                    onChange={(e: any) => localStorage.setItem('nascimento', e)}
+                />
+            </LocalizationProvider>}
+
+
         </article>
     )
 }
 
 export const FormLocalizacaoContato = () => {
+    const [rua, setRua] = useState('')
+    const [numero, setNumero] = useState('')
+    const [cidade, setCidade] = useState('')
+    const [estado, setEstado] = useState('')
+    const [ddd, setDdd] = useState('')
+    const [telefone, setTelefone] = useState('')
+
+    if (localStorage.getItem('rua')) {
+        setRua(`${localStorage.getItem('rua')}`);
+    }
+
+    if (localStorage.getItem('numero')) {
+        setNumero(`${localStorage.getItem('numero')}`);
+    }
+
+    if (localStorage.getItem('cidade')) {
+        setCidade(`${localStorage.getItem('cidade')}`);
+    }
+
+    if (localStorage.getItem('estado')) {
+        setEstado(`${localStorage.getItem('estado')}`);
+    }
+
+    if (localStorage.getItem('ddd')) {
+        setDdd(`${localStorage.getItem('ddd')}`);
+    }
+
+    if (localStorage.getItem('telefone')) {
+        setTelefone(`${localStorage.getItem('telefone')}`);
+    }
 
     const todosOsEstados = [
-        { estado: 'AC' },
-        { estado: 'AL' },
-        { estado: 'AP' },
-        { estado: 'AM' },
-        { estado: 'BA' },
-        { estado: 'CE' },
-        { estado: 'ES' },
-        { estado: 'GO' },
-        { estado: 'MA' },
-        { estado: 'MT' },
-        { estado: 'MS' },
-        { estado: 'MG' },
-        { estado: 'PA' },
-        { estado: 'PB' },
-        { estado: 'PR' },
-        { estado: 'PE' },
-        { estado: 'PI' },
-        { estado: 'RJ' },
-        { estado: 'RN' },
-        { estado: 'RS' },
-        { estado: 'RO' },
-        { estado: 'RR' },
-        { estado: 'SC' },
-        { estado: 'SP' },
-        { estado: 'SE' },
-        { estado: 'TO' }
+        { estado: 'AC', id: 1 },
+        { estado: 'AL', id: 2 },
+        { estado: 'AP', id: 3 },
+        { estado: 'AM', id: 4 },
+        { estado: 'BA', id: 5 },
+        { estado: 'CE', id: 6 },
+        { estado: 'ES', id: 7 },
+        { estado: 'GO', id: 8 },
+        { estado: 'MA', id: 9 },
+        { estado: 'MT', id: 10 },
+        { estado: 'MS', id: 11 },
+        { estado: 'MG', id: 12 },
+        { estado: 'PA', id: 13 },
+        { estado: 'PB', id: 14 },
+        { estado: 'PR', id: 15 },
+        { estado: 'PE', id: 16 },
+        { estado: 'PI', id: 17 },
+        { estado: 'RJ', id: 18 },
+        { estado: 'RN', id: 19 },
+        { estado: 'RS', id: 20 },
+        { estado: 'RO', id: 21 },
+        { estado: 'RR', id: 22 },
+        { estado: 'SC', id: 23 },
+        { estado: 'SP', id: 24 },
+        { estado: 'SE', id: 25 },
+        { estado: 'TO', id: 26 }
     ];
 
     const capturaValoresSelect = {
-        options: todosOsEstados,
-        getOptionLabel: (option:any) => option.estado,
+        options: todosOsEstados.map((option) => option.estado),
     };
 
+    interface tiposDadosEstado {
+        estado: string;
+        id: number;
+      }
+
+    // const capturaValoresSelect = {
+    //     options: todosOsEstados,
+    //     getOptionLabel: (option: any) => option.estado,
+    // };
 
     return (
         <ul className="sh-dados sh-dados-localizacao">
             <li className="sh-dados-localizacao-item">
-                <TextField id="standard-basic" label="Rua" variant="standard" type="text" sx={styledTextField} className="sh-cadastro-rua" />
-                <TextField id="standard-basic" label="Numero" variant="standard" type="number" sx={styledTextField} className="sh-cadastro-numero sh-dados-simples" />
+                {rua && <TextField
+                    id="standard-basic"
+                    label="Rua"
+                    variant="standard"
+                    type="text"
+                    sx={styledTextField}
+                    className="sh-cadastro-rua"
+                    defaultValue={rua}
+                />}
+
+                {!rua && <TextField
+                    id="standard-basic"
+                    label="Rua"
+                    variant="standard"
+                    type="text"
+                    sx={styledTextField}
+                    className="sh-cadastro-rua"
+                />}
+
+                {numero && <TextField
+                    id="standard-basic"
+                    label="Numero"
+                    variant="standard"
+                    type="number"
+                    sx={styledTextField}
+                    className="sh-cadastro-numero sh-dados-simples"
+                    defaultValue={numero}
+                />}
+
+                {!numero && <TextField
+                    id="standard-basic"
+                    label="Numero"
+                    variant="standard"
+                    type="number"
+                    sx={styledTextField}
+                    className="sh-cadastro-numero sh-dados-simples"
+                />}
             </li>
+
             <li className="sh-dados-localizacao-item">
-                <TextField id="standard-basic" label="Cidade" variant="standard" type="text" sx={styledTextField} className="sh-cadastro-cidade" />
-                <Stack spacing={1} sx={styledSelect}>
+                {cidade && <TextField
+                    id="standard-basic"
+                    label="Cidade"
+                    variant="standard"
+                    type="text"
+                    sx={styledTextField}
+                    className="sh-cadastro-cidade"
+                    defaultValue={cidade}
+                />}
+
+                {!cidade && <TextField
+                    id="standard-basic"
+                    label="Cidade"
+                    variant="standard"
+                    type="text"
+                    sx={styledTextField}
+                    className="sh-cadastro-cidade"
+                />}
+
+                {estado && <Stack spacing={1} sx={styledSelect}>
+                    <Autocomplete
+                        {...capturaValoresSelect}
+                        id="disable-clearable"
+                        disableClearable
+                        onChange={(event: any, newValue: any) => {
+                            setEstado(`${newValue}`);
+                            console.log(estado);
+                        }}
+                        renderInput={(parametros) => (
+                            <TextField {...parametros}
+                                label="Estado"
+                                variant="standard" />
+                        )}
+                    />
+                </ Stack>}
+
+                {!estado && <Stack spacing={1} sx={styledSelect}>
                     <Autocomplete
                         {...capturaValoresSelect}
                         id="disable-clearable"
                         disableClearable
                         renderInput={(parametros) => (
-                            <TextField {...parametros} label="Estado" variant="standard"/>
+                            <TextField {...parametros}
+                                label="Estado"
+                                variant="standard" />
                         )}
                     />
-                </ Stack>
+                </ Stack>}
             </li>
+
             <li className="sh-dados-localizacao-item">
-                <TextField id="standard-basic" label="DDD" variant="standard" type="number" sx={styledTextField} className="sh-cadastro-ddd sh-dados-simples" />
-                <TextField id="standard-basic" label="Telefone" variant="standard" type="number" sx={styledTextField} className="sh-cadastro-telefone" />
+                {ddd && <TextField
+                    id="standard-basic"
+                    label="DDD"
+                    variant="standard"
+                    type="number"
+                    sx={styledTextField}
+                    className="sh-cadastro-ddd sh-dados-simples"
+                    defaultValue={ddd}
+                />}
+
+                {!ddd && <TextField
+                    id="standard-basic"
+                    label="DDD"
+                    variant="standard"
+                    type="number"
+                    sx={styledTextField}
+                    className="sh-cadastro-ddd sh-dados-simples"
+                />}
+
+                {telefone && <TextField
+                    id="standard-basic"
+                    label="Telefone"
+                    variant="standard"
+                    type="number"
+                    sx={styledTextField}
+                    className="sh-cadastro-telefone"
+                    defaultValue={telefone}
+                />}
+
+                {!telefone && <TextField
+                    id="standard-basic"
+                    label="Telefone"
+                    variant="standard"
+                    type="number"
+                    sx={styledTextField}
+                    className="sh-cadastro-telefone"
+                />}
             </li>
         </ul>
     )
@@ -129,7 +387,7 @@ export const FormSeguranca = () => {
     const MouseDownMudarSenha = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-    
+
     const MouseUpMudarSenha = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
@@ -186,6 +444,31 @@ export const FormSeguranca = () => {
 const CadastroCliente = () => {
     const [loading, setLoading] = useState(true);
     const [activeStep, setActiveStep] = useState(0);
+
+    localStorage.removeItem('nome');
+    localStorage.removeItem('sobrenome');
+    localStorage.removeItem('cpfCnpj');
+    localStorage.removeItem('nascimento');
+
+    function mostrar() {
+        console.log(localStorage.getItem('nome'));
+        console.log(localStorage.getItem('sobrenome'));
+        console.log(localStorage.getItem('cpfCnpj'));
+        const data = new Date(`${localStorage.getItem('nascimento')}`)
+        let dia = `${data.getDate()}`;
+        let mes = `${data.getMonth() + 1}`;
+        let ano = `${data.getFullYear()}`;
+
+        if (dia.length < 2) {
+            dia = `0${dia}`;
+        }
+
+        if (mes.length < 2) {
+            mes = `0${mes}`;
+        }
+
+        console.log(`${dia}-${mes}-${ano}`);
+    }
 
     useEffect(() => {
         setTimeout(() => {
