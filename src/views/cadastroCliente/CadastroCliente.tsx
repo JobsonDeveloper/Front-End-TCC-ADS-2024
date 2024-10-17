@@ -36,136 +36,140 @@ const styledSelect = {
     }
 }
 
+let dataNascimento = '';
+let estadoOndeMora = '';
+
+
 // --------------- COMPONENTES
 
-export const FormDadosBase = () => {
-    const [nome, setNome] = useState('');
-    const [sobrenome, setSobrenome] = useState('');
-    const [cpfCnpj, setCpfCnpj] = useState('');
-    const [nascimento, setNascimento] = useState('');
+// export const FormDadosBase = () => {
+//     const [nome, setNome] = useState('');
+//     const [sobrenome, setSobrenome] = useState('');
+//     const [cpfCnpj, setCpfCnpj] = useState('');
+//     const [nascimento, setNascimento] = useState('');
 
-    useEffect(() => {
-        if (localStorage.getItem('nome')) {
-            setNome(`${localStorage.getItem('nome')}`);
-        }
+//     useEffect(() => {
+//         if (localStorage.getItem('nome')) {
+//             setNome(`${localStorage.getItem('nome')}`);
+//         }
 
-        if (localStorage.getItem('sobrenome')) {
-            setSobrenome(`${localStorage.getItem('sobrenome')}`);
-        }
+//         if (localStorage.getItem('sobrenome')) {
+//             setSobrenome(`${localStorage.getItem('sobrenome')}`);
+//         }
 
-        if (localStorage.getItem('cpfCnpj')) {
-            setCpfCnpj(`${localStorage.getItem('cpfCnpj')}`);
-        }
+//         if (localStorage.getItem('cpfCnpj')) {
+//             setCpfCnpj(`${localStorage.getItem('cpfCnpj')}`);
+//         }
 
-        if (localStorage.getItem('nascimento')) {
-            const data = new Date(`${localStorage.getItem('nascimento')}`)
-            let dia = `${data.getDate()}`;
-            let mes = `${data.getMonth() + 1}`;
-            let ano = `${data.getFullYear()}`;
+//         if (localStorage.getItem('nascimento')) {
+//             const data = new Date(`${localStorage.getItem('nascimento')}`)
+//             let dia = `${data.getDate()}`;
+//             let mes = `${data.getMonth() + 1}`;
+//             let ano = `${data.getFullYear()}`;
 
-            if (dia.length < 2) {
-                dia = `0${dia}`;
-            }
+//             if (dia.length < 2) {
+//                 dia = `0${dia}`;
+//             }
 
-            if (mes.length < 2) {
-                mes = `0${mes}`;
-            }
+//             if (mes.length < 2) {
+//                 mes = `0${mes}`;
+//             }
 
-            setNascimento(`${dia}/${mes}/${ano}`);
+//             setNascimento(`${dia}/${mes}/${ano}`);
 
-        }
-    })
+//         }
+//     })
 
-    return (
-        <article className="sh-dados sh-dados-iniciais">
-            {nome && <TextField
-                id="standard-basic-nome"
-                label="Nome"
-                variant="standard"
-                type="text"
-                sx={styledTextField}
-                onChange={(e: any) => localStorage.setItem('nome', e.target.value)}
-                defaultValue={nome}
-            />}
+//     return (
+//         <article className="sh-dados sh-dados-iniciais">
+//             {nome && <TextField
+//                 id="standard-basic-nome"
+//                 label="Nome"
+//                 variant="standard"
+//                 type="text"
+//                 sx={styledTextField}
+//                 onChange={(e: any) => localStorage.setItem('nome', e.target.value)}
+//                 defaultValue={nome}
+//             />}
 
-            {!nome && <TextField
-                id="standard-basic-nome"
-                label="Nome"
-                variant="standard"
-                type="text"
-                sx={styledTextField}
-                onChange={(e: any) => localStorage.setItem('nome', e.target.value)}
-            />}
+//             {!nome && <TextField
+//                 id="standard-basic-nome"
+//                 label="Nome"
+//                 variant="standard"
+//                 type="text"
+//                 sx={styledTextField}
+//                 onChange={(e: any) => localStorage.setItem('nome', e.target.value)}
+//             />}
 
-            {sobrenome && <TextField
-                id="standard-basic-sobrenome"
-                label="Sobrenome"
-                variant="standard"
-                type="text"
-                sx={styledTextField}
-                onChange={(e: any) => localStorage.setItem('sobrenome', e.target.value)}
-                defaultValue={sobrenome}
-            />}
+//             {sobrenome && <TextField
+//                 id="standard-basic-sobrenome"
+//                 label="Sobrenome"
+//                 variant="standard"
+//                 type="text"
+//                 sx={styledTextField}
+//                 onChange={(e: any) => localStorage.setItem('sobrenome', e.target.value)}
+//                 defaultValue={sobrenome}
+//             />}
 
-            {!sobrenome && <TextField
-                id="standard-basic-sobrenome"
-                label="Sobrenome"
-                variant="standard"
-                type="text"
-                sx={styledTextField}
-                onChange={(e: any) => localStorage.setItem('sobrenome', e.target.value)}
-                defaultValue={sobrenome}
-            />}
+//             {!sobrenome && <TextField
+//                 id="standard-basic-sobrenome"
+//                 label="Sobrenome"
+//                 variant="standard"
+//                 type="text"
+//                 sx={styledTextField}
+//                 onChange={(e: any) => localStorage.setItem('sobrenome', e.target.value)}
+//                 defaultValue={sobrenome}
+//             />}
 
-            {cpfCnpj && <TextField
-                id="standard-basic-cpfCnpj"
-                label="CPF/CNPJ"
-                variant="standard"
-                type="number"
-                sx={styledTextField}
-                onChange={(e: any) => localStorage.setItem('cpfCnpj', e.target.value)}
-                defaultValue={cpfCnpj}
-            />}
+//             {cpfCnpj && <TextField
+//                 id="standard-basic-cpfCnpj"
+//                 label="CPF/CNPJ"
+//                 variant="standard"
+//                 type="number"
+//                 sx={styledTextField}
+//                 onChange={(e: any) => localStorage.setItem('cpfCnpj', e.target.value)}
+//                 defaultValue={cpfCnpj}
+//             />}
 
-            {!cpfCnpj && <TextField
-                id="standard-basiccpfCnpj"
-                label="CPF/CNPJ"
-                variant="standard"
-                type="number"
-                sx={styledTextField}
-                onChange={(e: any) => localStorage.setItem('cpfCnpj', e.target.value)}
-                defaultValue={cpfCnpj}
-            />}
+//             {!cpfCnpj && <TextField
+//                 id="standard-basiccpfCnpj"
+//                 label="CPF/CNPJ"
+//                 variant="standard"
+//                 type="number"
+//                 sx={styledTextField}
+//                 onChange={(e: any) => localStorage.setItem('cpfCnpj', e.target.value)}
+//                 defaultValue={cpfCnpj}
+//             />}
 
-            {/* Se não tiver umda data já escrita */}
-            {!nascimento &&
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateField
-                        label="Nascimento"
-                        variant="standard"
-                        format="DD/MM/YYYY"
-                        sx={styledTextField}
-                        onChange={(e: any) => localStorage.setItem('nascimento', e)}
-                    />
-                </LocalizationProvider>
-            }
+//             {/* Se não tiver umda data já escrita */}
+//             {!nascimento &&
+//                 <LocalizationProvider dateAdapter={AdapterDayjs}>
+//                     <DateField
+//                         label="Nascimento"
+//                         variant="standard"
+//                         format="DD/MM/YYYY"
+//                         sx={styledTextField}
+//                         onChange={(e: any) => localStorage.setItem('nascimento', e)}
+//                     />
+//                 </LocalizationProvider>
+//             }
 
-            {/* Se não tiver umda data já escrita */}
-            {nascimento && <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateField
-                    label="Nascimento"
-                    variant="standard"
-                    format="DD/MM/YYYY"
-                    defaultValue={dayjs(nascimento)}
-                    sx={styledTextField}
-                    onChange={(e: any) => localStorage.setItem('nascimento', e)}
-                />
-            </LocalizationProvider>}
+//             {/* Se não tiver umda data já escrita */}
+//             {nascimento && <LocalizationProvider dateAdapter={AdapterDayjs}>
+//                 <DateField
+//                     label="Nascimento"
+//                     variant="standard"
+//                     format="DD/MM/YYYY"
+//                     defaultValue={dayjs(nascimento)}
+//                     sx={styledTextField}
+//                     onChange={(e: any) => localStorage.setItem('nascimento', e)}
+//                 />
+//             </LocalizationProvider>}
 
 
-        </article>
-    )
-}
+//         </article>
+//     )
+// }
 
 export const FormLocalizacaoContato = () => {
     const [rua, setRua] = useState('')
@@ -445,10 +449,57 @@ const CadastroCliente = () => {
     const [loading, setLoading] = useState(true);
     const [activeStep, setActiveStep] = useState(0);
 
+    // Form de dados básicos
     const [nome, setNome] = useState('');
     const [sobrenome, setSobrenome] = useState('');
     const [cpfCnpj, setCpfCnpj] = useState('');
     const [nascimento, setNascimento] = useState('');
+
+    // Form de localização e contato
+    const todosOsEstados = [
+        'AC',
+        'AL',
+        'AP',
+        'AM',
+        'BA',
+        'CE',
+        'ES',
+        'GO',
+        'MA',
+        'MT',
+        'MS',
+        'MG',
+        'PA',
+        'PB',
+        'PR',
+        'PE',
+        'PI',
+        'RJ',
+        'RN',
+        'RS',
+        'RO',
+        'RR',
+        'SC',
+        'SP',
+        'SE',
+        'TO'
+    ];
+    const [rua, setRua] = useState('')
+    const [numero, setNumero] = useState('')
+    const [cidade, setCidade] = useState('')
+    // const [estado, setEstado]:any = useState('')
+    const [estado, setEstado] = useState<string | null>();
+    const [ddd, setDdd] = useState('')
+    const [telefone, setTelefone] = useState('')
+    
+    const capturaValoresSelect = {
+        options: todosOsEstados.map((option) => option),
+    };
+
+    interface tiposDadosEstado {
+        estado: string;
+        id: number;
+    }
 
     function mostrar() {
         console.log(localStorage.getItem('nome'));
@@ -495,11 +546,41 @@ const CadastroCliente = () => {
 
     }
 
+    const pegarDataNascimento = (e: any) => {
+        e.preventDefault();
+
+        if (nascimento) {
+            const data = new Date(nascimento)
+            let dia = `${data.getDate()}`;
+            let mes = `${data.getMonth() + 1}`;
+            let ano = `${data.getFullYear()}`;
+
+            if (dia.length < 2) {
+                dia = `0${dia}`;
+            }
+
+            if (mes.length < 2) {
+                mes = `0${mes}`;
+            }
+
+            dataNascimento = `${dia}/${mes}/${ano}`;
+
+        }
+    }
+
+    const pegarEstado = (e: any) => {
+        e.preventDefault();
+
+        if(estado) {
+            estadoOndeMora = estado;
+        }
+    }
+
     return (
         <main className="sh-cadastroCliente">
             {loading && <Loading />}
 
-            <div className="sh-cadastro-formulario">
+            <form onSubmit={pegarDataNascimento} className="sh-cadastro-formulario">
                 <article className="sh-cadastro-header">
                     <Link to="/"><img src={logoImg} alt="" className="sh-cadastro-logoImg" /></Link>
                     <img src={tituloPaginaImg} alt="" className="sh-cadastro-tituloPagina" />
@@ -511,7 +592,9 @@ const CadastroCliente = () => {
                         <Step> <StepLabel /> </Step>
                         <Step> <StepLabel /> </Step>
                     </Stepper>
+
                     <div className="sh-formulario-inputs">
+                        {/* dados básicos */}
                         {activeStep == 0 &&
                             <article className="sh-dados sh-dados-iniciais">
 
@@ -546,27 +629,124 @@ const CadastroCliente = () => {
                                 />
 
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    {nascimento &&  <DateField
-                                        label="Nascimento"
-                                        variant="standard"
-                                        format="DD/MM/YYYY"
-                                        sx={styledTextField}
-                                        onChange={(data: any) => setNascimento(data)}
-                                        defaultValue={dayjs(nascimento)}
-                                    />}
+                                    {dataNascimento &&
+                                        <DateField
+                                            id="TESTEEEEE"
+                                            label="Nascimento"
+                                            variant="standard"
+                                            format="DD/MM/YYYY"
+                                            sx={styledTextField}
+                                            onChange={(e: any) => setNascimento(e)}
+                                            defaultValue={dayjs(dataNascimento)}
+                                        />
+                                    }
 
-                                    {!nascimento && <DateField
+                                    {!dataNascimento && <DateField
                                         label="Nascimento"
                                         variant="standard"
                                         format="DD/MM/YYYY"
                                         sx={styledTextField}
-                                        onChange={(data: any) => setNascimento(data)}
+                                        onChange={(e: any) => setNascimento(e)}
                                     />}
                                 </LocalizationProvider>
                             </article>
                         }
 
-                        {activeStep == 1 && <FormLocalizacaoContato />}
+                        {/* localização e contato */}
+                        {activeStep == 1 &&
+                            <ul className="sh-dados sh-dados-localizacao">
+                                <li className="sh-dados-localizacao-item">
+                                    <TextField
+                                        label="Rua"
+                                        variant="standard"
+                                        type="text"
+                                        sx={styledTextField}
+                                        className="sh-cadastro-rua"
+                                        defaultValue={rua}
+                                        onChange={(e) => setRua(e.target.value)}
+                                    />
+
+                                    <TextField
+                                        label="Numero"
+                                        variant="standard"
+                                        type="number"
+                                        sx={styledTextField}
+                                        className="sh-cadastro-numero sh-dados-simples"
+                                        defaultValue={numero}
+                                        onChange={(e) => setNumero(e.target.value)}
+                                    />
+                                </li>
+
+                                <li className="sh-dados-localizacao-item">
+                                    <TextField
+                                        label="Cidade"
+                                        variant="standard"
+                                        type="text"
+                                        sx={styledTextField}
+                                        className="sh-cadastro-cidade"
+                                        defaultValue={cidade}
+                                        onChange={(e) => setCidade(e.target.value)}
+                                    />
+
+                                    {estadoOndeMora && <Stack spacing={1} sx={styledSelect}>
+                                        <Autocomplete
+                                            {...capturaValoresSelect}
+                                            disableClearable
+                                            value={estadoOndeMora}
+                                            onChange={(event: any, newValue: string | null) => {
+                                                setEstado(newValue);
+                                                pegarDataNascimento(event)
+                                            }}
+                                            renderInput={(parametros) => (
+                                                <TextField {...parametros}
+                                                    label="Estado"
+                                                    variant="standard" />
+                                            )}
+                                        />
+                                    </ Stack>}
+
+                                    {!estadoOndeMora && <Stack spacing={1} sx={styledSelect}>
+                                        <Autocomplete
+                                            {...capturaValoresSelect}
+                                            disableClearable
+                                            onChange={(event: any, newValue: string | null) => {
+                                                setEstado(newValue);
+                                                pegarDataNascimento(event)
+                                            }}
+                                            renderInput={(parametros) => (
+                                                <TextField {...parametros}
+                                                    label="Estado"
+                                                    variant="standard" />
+                                            )}
+                                        />
+                                    </ Stack>}
+                                </li>
+
+                                <li className="sh-dados-localizacao-item">
+                                    <TextField
+                                        label="DDD"
+                                        variant="standard"
+                                        type="number"
+                                        sx={styledTextField}
+                                        className="sh-cadastro-ddd sh-dados-simples"
+                                        defaultValue={ddd}
+                                        onChange={(e) => setDdd(e.target.value)}
+                                    />
+
+                                    <TextField
+                                        label="Telefone"
+                                        variant="standard"
+                                        type="number"
+                                        sx={styledTextField}
+                                        className="sh-cadastro-telefone"
+                                        defaultValue={telefone}
+                                        onChange={(e) => setTelefone(e.target.value)}
+                                    />
+                                </li>
+                            </ul>
+                        }
+
+                        {/* E-mail e senha */}
                         {activeStep == 2 && <FormSeguranca />}
                     </div>
                 </div>
@@ -574,10 +754,12 @@ const CadastroCliente = () => {
                 <article className="sh-cadastro-buttons">
                     {activeStep == 0 && <Link to="/" className="sh-cadastro-button-link"> <img src={homeImg} alt="Butão para voltar para a home" className="sh-cadastro-button-home" /> </Link>}
                     {activeStep > 0 && <img src={anteriorImg} alt="Butão para voltar para a home" className="sh-cadastro-button-anterior" onClick={() => { mudarStep('anterior') }} />}
-                    {activeStep < 2 && <img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />}
-                    {activeStep == 2 && <img src={concluirImg} alt="Butão para voltar para a home" className="sh-cadastro-button-concluir" />}
+
+                    {activeStep == 0 && <button type="submit" className="sh-cadastro-button-elemento"><img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} /></button>}
+                    {activeStep == 1 && <button type="button" onClick={pegarEstado} className="sh-cadastro-button-elemento"><img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} /></button>}
+                    {activeStep == 2 && <button type="submit" className="sh-cadastro-button-elemento"><img src={concluirImg} alt="Butão para voltar para a home" className="sh-cadastro-button-concluir" /></button>}
                 </article>
-            </div>
+            </form>
         </main>
     )
 }
