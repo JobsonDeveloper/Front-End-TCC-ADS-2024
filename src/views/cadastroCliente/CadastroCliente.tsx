@@ -79,7 +79,7 @@ export const FormDadosBase = () => {
     return (
         <article className="sh-dados sh-dados-iniciais">
             {nome && <TextField
-                id="standard-basic"
+                id="standard-basic-nome"
                 label="Nome"
                 variant="standard"
                 type="text"
@@ -89,7 +89,7 @@ export const FormDadosBase = () => {
             />}
 
             {!nome && <TextField
-                id="standard-basic"
+                id="standard-basic-nome"
                 label="Nome"
                 variant="standard"
                 type="text"
@@ -98,7 +98,7 @@ export const FormDadosBase = () => {
             />}
 
             {sobrenome && <TextField
-                id="standard-basic"
+                id="standard-basic-sobrenome"
                 label="Sobrenome"
                 variant="standard"
                 type="text"
@@ -108,7 +108,7 @@ export const FormDadosBase = () => {
             />}
 
             {!sobrenome && <TextField
-                id="standard-basic"
+                id="standard-basic-sobrenome"
                 label="Sobrenome"
                 variant="standard"
                 type="text"
@@ -118,7 +118,7 @@ export const FormDadosBase = () => {
             />}
 
             {cpfCnpj && <TextField
-                id="standard-basic"
+                id="standard-basic-cpfCnpj"
                 label="CPF/CNPJ"
                 variant="standard"
                 type="number"
@@ -128,7 +128,7 @@ export const FormDadosBase = () => {
             />}
 
             {!cpfCnpj && <TextField
-                id="standard-basic"
+                id="standard-basiccpfCnpj"
                 label="CPF/CNPJ"
                 variant="standard"
                 type="number"
@@ -235,7 +235,7 @@ export const FormLocalizacaoContato = () => {
     interface tiposDadosEstado {
         estado: string;
         id: number;
-      }
+    }
 
     // const capturaValoresSelect = {
     //     options: todosOsEstados,
@@ -286,7 +286,7 @@ export const FormLocalizacaoContato = () => {
 
             <li className="sh-dados-localizacao-item">
                 {cidade && <TextField
-                    id="standard-basic"
+                    id="standard-basic-cidade"
                     label="Cidade"
                     variant="standard"
                     type="text"
@@ -296,7 +296,7 @@ export const FormLocalizacaoContato = () => {
                 />}
 
                 {!cidade && <TextField
-                    id="standard-basic"
+                    id="standard-basic-cidade"
                     label="Cidade"
                     variant="standard"
                     type="text"
@@ -307,7 +307,7 @@ export const FormLocalizacaoContato = () => {
                 {estado && <Stack spacing={1} sx={styledSelect}>
                     <Autocomplete
                         {...capturaValoresSelect}
-                        id="disable-clearable"
+                        id="disable-clearable-estado"
                         disableClearable
                         onChange={(event: any, newValue: any) => {
                             setEstado(`${newValue}`);
@@ -324,7 +324,7 @@ export const FormLocalizacaoContato = () => {
                 {!estado && <Stack spacing={1} sx={styledSelect}>
                     <Autocomplete
                         {...capturaValoresSelect}
-                        id="disable-clearable"
+                        id="disable-clearable-estado"
                         disableClearable
                         renderInput={(parametros) => (
                             <TextField {...parametros}
@@ -337,7 +337,7 @@ export const FormLocalizacaoContato = () => {
 
             <li className="sh-dados-localizacao-item">
                 {ddd && <TextField
-                    id="standard-basic"
+                    id="standard-basic-ddd"
                     label="DDD"
                     variant="standard"
                     type="number"
@@ -347,7 +347,7 @@ export const FormLocalizacaoContato = () => {
                 />}
 
                 {!ddd && <TextField
-                    id="standard-basic"
+                    id="standard-basic-ddd"
                     label="DDD"
                     variant="standard"
                     type="number"
@@ -356,7 +356,7 @@ export const FormLocalizacaoContato = () => {
                 />}
 
                 {telefone && <TextField
-                    id="standard-basic"
+                    id="standard-basic-telefone"
                     label="Telefone"
                     variant="standard"
                     type="number"
@@ -366,7 +366,7 @@ export const FormLocalizacaoContato = () => {
                 />}
 
                 {!telefone && <TextField
-                    id="standard-basic"
+                    id="standard-basic-telefone"
                     label="Telefone"
                     variant="standard"
                     type="number"
@@ -394,7 +394,7 @@ export const FormSeguranca = () => {
 
     return (
         <article className="sh-dados sh-dados-seguranca">
-            <TextField id="standard-basic" label="E-mail" variant="standard" type="email" sx={styledTextField} />
+            <TextField id="standard-basic-email" label="E-mail" variant="standard" type="email" sx={styledTextField} />
             <FormControl variant="standard">
                 <InputLabel htmlFor="sh_label_senha_input">Senha</InputLabel>
                 <Input
@@ -445,15 +445,16 @@ const CadastroCliente = () => {
     const [loading, setLoading] = useState(true);
     const [activeStep, setActiveStep] = useState(0);
 
-    localStorage.removeItem('nome');
-    localStorage.removeItem('sobrenome');
-    localStorage.removeItem('cpfCnpj');
-    localStorage.removeItem('nascimento');
+    const [nome, setNome] = useState('');
+    const [sobrenome, setSobrenome] = useState('');
+    const [cpfCnpj, setCpfCnpj] = useState('');
+    const [nascimento, setNascimento] = useState('');
 
     function mostrar() {
         console.log(localStorage.getItem('nome'));
         console.log(localStorage.getItem('sobrenome'));
         console.log(localStorage.getItem('cpfCnpj'));
+
         const data = new Date(`${localStorage.getItem('nascimento')}`)
         let dia = `${data.getDate()}`;
         let mes = `${data.getMonth() + 1}`;
@@ -511,7 +512,60 @@ const CadastroCliente = () => {
                         <Step> <StepLabel /> </Step>
                     </Stepper>
                     <div className="sh-formulario-inputs">
-                        {activeStep == 0 && <FormDadosBase />}
+                        {activeStep == 0 &&
+                            <article className="sh-dados sh-dados-iniciais">
+
+                                <TextField
+                                    id="standard-basic-nome"
+                                    label="Nome"
+                                    variant="standard"
+                                    type="text"
+                                    sx={styledTextField}
+                                    onChange={(e: any) => setNome(e.target.value)}
+                                    defaultValue={nome ? nome : ''}
+                                />
+
+                                <TextField
+                                    id="standard-basic-sobrenome"
+                                    label="Sobrenome"
+                                    variant="standard"
+                                    type="text"
+                                    sx={styledTextField}
+                                    onChange={(e: any) => setSobrenome(e.target.value)}
+                                    defaultValue={sobrenome ? sobrenome : ''}
+                                />
+
+                                <TextField
+                                    id="standard-basic-cpfCnpj"
+                                    label="CPF/CNPJ"
+                                    variant="standard"
+                                    type="number"
+                                    sx={styledTextField}
+                                    onChange={(e: any) => setCpfCnpj(e.target.value)}
+                                    defaultValue={cpfCnpj ? cpfCnpj : ''}
+                                />
+
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    {nascimento &&  <DateField
+                                        label="Nascimento"
+                                        variant="standard"
+                                        format="DD/MM/YYYY"
+                                        sx={styledTextField}
+                                        onChange={(data: any) => setNascimento(data)}
+                                        defaultValue={dayjs(nascimento)}
+                                    />}
+
+                                    {!nascimento && <DateField
+                                        label="Nascimento"
+                                        variant="standard"
+                                        format="DD/MM/YYYY"
+                                        sx={styledTextField}
+                                        onChange={(data: any) => setNascimento(data)}
+                                    />}
+                                </LocalizationProvider>
+                            </article>
+                        }
+
                         {activeStep == 1 && <FormLocalizacaoContato />}
                         {activeStep == 2 && <FormSeguranca />}
                     </div>
