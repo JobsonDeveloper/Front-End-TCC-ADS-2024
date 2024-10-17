@@ -93,8 +93,9 @@ const CadastroCliente = () => {
     const [mostrarConfirmSenha, setMostrarConfirmSenha] = useState(false);
     const MouseDownMudarSenha = (event: React.MouseEvent<HTMLButtonElement>) => { event.preventDefault() };
     const MouseUpMudarSenha = (event: React.MouseEvent<HTMLButtonElement>) => { event.preventDefault() };
+    const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    const [, setConfirmSenha] = useState('');
+    const [confirmSenha, setConfirmSenha] = useState('');
 
     useEffect(() => {
         setTimeout(() => {
@@ -293,12 +294,23 @@ const CadastroCliente = () => {
                         {/* E-mail e senha */}
                         {activeStep == 2 &&
                             <article className="sh-dados sh-dados-seguranca">
-                                <TextField id="standard-basic-email" label="E-mail" variant="standard" type="email" sx={styledTextField} />
+                                <TextField
+                                    id="standard-basic-email"
+                                    label="E-mail"
+                                    variant="standard"
+                                    type="email"
+                                    sx={styledTextField}
+                                    defaultValue={email}
+                                    onChange={((e) => { setEmail(e.target.value) })}
+                                />
+
                                 <FormControl variant="standard">
                                     <InputLabel htmlFor="sh_label_senha_input">Senha</InputLabel>
                                     <Input
                                         id="sh_label_senha_input"
                                         type={mostrarSenha ? 'text' : 'password'}
+                                        defaultValue={senha}
+                                        onChange={((e) => { setSenha(e.target.value) })}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <IconButton
@@ -320,6 +332,8 @@ const CadastroCliente = () => {
                                     <Input
                                         id="sh_label_confirm_senha_input"
                                         type={mostrarConfirmSenha ? 'text' : 'password'}
+                                        defaultValue={confirmSenha}
+                                        onChange={((e) => { setConfirmSenha(e.target.value) })}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <IconButton
@@ -341,18 +355,15 @@ const CadastroCliente = () => {
 
                 <article className="sh-cadastro-buttons">
                     {activeStep == 0 && <Link to="/" className="sh-cadastro-button-link"> <img src={homeImg} alt="Butão para voltar para a home" className="sh-cadastro-button-home" /> </Link>}
-                    {activeStep > 0 && <img src={anteriorImg} alt="Butão para voltar para a home" className="sh-cadastro-button-anterior" onClick={() => { mudarStep('anterior') }} />}
-
-                    {/* {activeStep == 0 && <button type="submit" className="sh-cadastro-button-elemento">
-                    </button>}
-                    {activeStep == 1 && <button type="button" onClick={pegarEstado} className="sh-cadastro-button-elemento">
-                    </button>}
-                    {activeStep == 2 && <button type="button" className="sh-cadastro-button-elemento">
-                    </button>} */}
+                    <button type="submit" className="sh-cadastro-button-elemento">
+                        {activeStep > 0 &&
+                            <img src={anteriorImg} alt="Butão para voltar para a home" className="sh-cadastro-button-anterior" onClick={() => { mudarStep('anterior') }} />
+                        }
+                    </button>
 
                     <button type="submit" className="sh-cadastro-button-elemento">
                         {activeStep === 0 &&
-                            < img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
+                            <img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
                         }
                         {activeStep === 1 &&
                             <img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
@@ -361,12 +372,6 @@ const CadastroCliente = () => {
                             <img src={concluirImg} alt="Butão para voltar para a home" className="sh-cadastro-button-concluir" />
                         }
                     </button>
-
-                    {/* {activeStep === 1 && <button type="button" onClick={pegarEstado} className="sh-cadastro-button-elemento">
-                        <img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
-                    </button>} */}
-
-
                 </article>
             </form>
         </main>
