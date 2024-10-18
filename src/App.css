@@ -511,16 +511,16 @@
         }
 
         & .sh-apresentacao-dois {
-          flex-direction: row;
+          /* flex-direction: row; */
 
           & .sh-apresentacao-dois-container-img {
-            width: max-content;
-            width: 25%;
+            /* width: max-content; */
+            /* width: 25%; */
           }
 
           & .sh-apresentacao-textos {
             & .sh-apresentacao-dois-textos {
-              width: 360px;
+              /* width: 360px; */
             }
           }
         }

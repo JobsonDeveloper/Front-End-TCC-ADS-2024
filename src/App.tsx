@@ -202,7 +202,7 @@ function App() {
             <img src={backgroundApresentacaoMd} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-none d-lg-flex" />
           </article>
 
-          <article className="sh-apresentacao-textos d-md-none">
+          <article className="sh-apresentacao-textos d-lg-none">
             <h2 className="sh-apresentacao-titulos">Faça sua carreira decolar! <br /> Conquiste o mercado conosco</h2>
             <p className="sh-apresentacao-paragrafos">
               Aqui você tem a oportunidade de encontrar novos clientes, se tornar prestigiado e requisitado por muitas pessoas.
@@ -220,9 +220,9 @@ function App() {
           </article>
 
           {/* Secundo post */}
-          <article className="sh-apresentacao-dois d-md-none">
+          <article className="sh-apresentacao-dois d-lg-none">
             <div className="sh-apresentacao-dois-container-img" data-aos="fade-right">
-              <Link to='/cadastro-cliente'><img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img d-md-none" /></Link>
+              <Link to='/cadastro-cliente'><img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img d-lg-none" /></Link>
             </div>
 
             <div className="sh-apresentacao-textos" data-aos="fade-left">
