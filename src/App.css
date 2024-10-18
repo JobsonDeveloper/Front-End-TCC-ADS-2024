@@ -58,7 +58,6 @@
   }
 
   & .sh-header-apresentacao {
-    min-height: 100vh;
 
     & .sh-apresentacao {
       display: flex;
