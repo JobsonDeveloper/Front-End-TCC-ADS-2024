@@ -103,11 +103,72 @@ const CadastroCliente = () => {
         }, 2000);
     });
 
+    async function cadastraCliente(e:any) {
+        e.preventDefault();
+        
+        try {
+            const shDate = new Date(nascimento);
+            let nascimentoDia = `${shDate.getDate()}`;
+            let nascimentoMes = `${shDate.getMonth() + 1}`;
+            let nascimentoAno = `${shDate.getFullYear()}`;
+
+            if (nascimentoDia.length < 2) {
+                nascimentoDia = `0${nascimentoDia}`;
+            }
+
+            if (nascimentoMes.length < 2) {
+                nascimentoMes = `0${nascimentoMes}`;
+            }
+
+            // const dados = {
+            //     nomeCliente: nome,
+            //     sobrenomeCliente: sobrenome,
+            //     cpfCnpjCliente: cpfCnpj,
+            //     nascimentoCliente: `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`,
+            //     enderecoCliente: `${rua}, numero ${numero}, ${cidade} - ${estado}`,
+            //     telefoneCliente: `(${ddd}) ${telefone}`,
+            //     emailCliente: email,
+            //     senhaCliente: senha
+            // }
+
+            const formData = new FormData();
+            formData.append('acao', 'cadastro');
+            formData.append('nome', nome);
+            formData.append('sobrenome', sobrenome);
+            formData.append('cpf', cpfCnpj);
+            formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
+            formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
+            formData.append('numero', `(${ddd}) ${telefone}`);
+            formData.append('email', email);
+            formData.append('senha', senha);
+
+            const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                method: 'POST',
+                mode: 'cors',
+                body: formData
+            });
+
+            const response = await request.json();
+
+            if(response.status === 201) {
+                console.log(response.status);
+                console.log(response.data);
+            }
+            else {
+                console.log(console.log('O cadastro não pôde ser realizado.'))
+            }
+
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+
     const mudarStep = (variante: string) => {
 
         if (variante === 'proximo') {
-            if (activeStep >= 2) {
-                alert('cadastro realiado')
+            if(activeStep >= 2) {
+                return;
             }
 
             setActiveStep((currentStep) => currentStep + 1);
@@ -116,7 +177,8 @@ const CadastroCliente = () => {
             if (activeStep <= 0) {
                 return;
             }
-            setActiveStep((currentStep) => currentStep + -1);
+
+            setActiveStep((currentStep) => currentStep -1);
         }
 
     }
@@ -369,7 +431,7 @@ const CadastroCliente = () => {
                             <img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
                         }
                         {activeStep === 2 &&
-                            <img src={concluirImg} alt="Butão para voltar para a home" className="sh-cadastro-button-concluir" />
+                            <img src={concluirImg} alt="Butão para voltar para a home" className="sh-cadastro-button-concluir" onClick={cadastraCliente}/>
                         }
                     </button>
                 </article>
