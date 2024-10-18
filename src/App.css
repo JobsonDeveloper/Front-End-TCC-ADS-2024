@@ -58,6 +58,7 @@
   }
 
   & .sh-header-apresentacao {
+    padding-bottom: 20px;
 
     & .sh-apresentacao {
       display: flex;
@@ -647,6 +648,7 @@
   .sh-container {
     & .sh-header-apresentacao {
       padding: 3px;
+      padding-bottom: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
