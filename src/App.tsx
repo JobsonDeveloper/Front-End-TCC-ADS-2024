@@ -187,7 +187,7 @@ function App() {
   //   }
   // }
 
-  
+
 
   return (
     <main className='sh-container'>
@@ -368,6 +368,15 @@ function App() {
           </div>
         </article>
 
+        {/* Últimos serviços postados */}
+        <article className="sh-main-servicos" id='sh_ultimas_postagens'>
+          <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Últimos serviços postados</h2>
+
+          <div className="sh-servicos-lista-container">
+            <Servicos data={ultimosServicos} />
+          </div>
+        </article>
+
         {/* Dúvidas frequentes  */}
         <article className="sh-main-duvidas" id='sh_duvidas'>
           <h2 className="sh-show sh-duvidas-titulo" data-aos="zoom-in">Dúvidas frequentes</h2>
@@ -405,15 +414,6 @@ function App() {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-        </article>
-
-        {/* Últimos serviços postados */}
-        <article className="sh-main-servicos" id='sh_ultimas_postagens'>
-          <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Últimos serviços postados</h2>
-
-          <div className="sh-servicos-lista-container">
-            <Servicos data={ultimosServicos} />
-          </div>
         </article>
       </section>
 

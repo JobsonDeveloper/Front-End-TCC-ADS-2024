@@ -3,9 +3,9 @@ import './Planos.css'
 import { Link } from "react-router-dom";
 
 // Components
-import PlanoSimples from '../../assets/planos/plano-simples.svg'
-import PlanoCustoBeneficio from '../../assets/planos/plano-custo-beneficio.svg'
-import PlanoMaiorGanho from '../../assets/planos/plano-maior-ganho.svg'
+import PlanoSimples from '../../assets/index/planos/plano-simples.svg'
+import PlanoCustoBeneficio from '../../assets/index/planos/plano-custo-beneficio.svg'
+import PlanoMaiorGanho from '../../assets/index/planos/plano-maior-ganho.svg'
 import Aos from "aos";
 import "aos/dist/aos.css";
 

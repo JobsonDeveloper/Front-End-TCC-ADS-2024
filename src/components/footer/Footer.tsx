@@ -31,7 +31,7 @@ const Footer = () => {
 
         <li className="sh-footer-info-item sh-footer-faleConosco">
           <h5 className="sh-faleConosco-title">Fale conosco</h5>
-          <p className="sh-faleConosco-text">E-mail: skillhub@gmail.com</p>
+          <p className="sh-faleConosco-text">skillhub@gmail.com</p>
           <div className="sh-faleConosco-redesSociais">
             <img src={InstagramImg} alt="Foto de instagram da skillhub" className="sh-footer-redesSociais-img" />
             <img src={WhatsAppImg} alt="Foto de whatsapp da skillhub" className="sh-footer-redesSociais-img" />

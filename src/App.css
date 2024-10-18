@@ -14,8 +14,9 @@
   --sh-index-cor-terciaria: #000;
   --sh-index-cor-quaternaria: #35FF62;
   --sh-index-cor-textos: #494949;
-  --sh-footer-cor-background-footer: #26466B;
+  --sh-index-cor-background-footer: #26466B;
   --sh-footer-cor-background-skillhub: #0089e0;
+  --sh-index-cor-background-components: #356FB0;
 
   --sh-index-padding: 0 10px;
   --sh-index-margin: 30px 0;
@@ -110,7 +111,7 @@
         }
 
         & .sh-apresentacao-button {
-          background-color: var(--sh-index-cor-secundaria);
+          background-color: var(--sh-index-cor-background-components);
           width: 100%;
 
           & .sh-apresentacao-button-cadastro {
@@ -172,16 +173,17 @@
     & .sh-skillhub-info {
       display: flex;
       justify-content: center;
-      background-color: var(--sh-footer-cor-background-skillhub);
-      width: 100%;
+      background-color: var(--sh-index-cor-background-components);
+      margin: 0 5px;
+      border-radius: 25px;
 
       & .sh-main-skillhub {
         display: flex;
         flex-direction: column;
         gap: 20px;
         padding: var(--sh-index-padding);
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: 30px;
+        padding-bottom: 30px;
         overflow-x: clip;
         
         & .sh-skillhub-titulo {
@@ -236,9 +238,9 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        background-image: url('./assets/index/backgrounds/background-profissoes.webp');
+        /* background-image: url('./assets/index/backgrounds/background-profissoes.webp');
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: cover; */
       }
     }
 
@@ -260,9 +262,9 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        background-image: url('./assets/index/backgrounds/background-profissoes.webp');
+        /* background-image: url('./assets/index/backgrounds/background-profissoes.webp');
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: cover; */
       }
     }
 
@@ -299,10 +301,16 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      background-color: var(--sh-index-cor-background-components);
+      padding-top: 30px;
+      padding-bottom: 30px;
+      border-radius: 25px;
+      margin-left: 5px;
+      margin-right: 5px;
 
       & .sh-vantagens-titulo {
         text-align: center;
-        color: var(--sh-index-cor-terciaria);
+        color: var(--sh-index-cor-primaria);
         font-size: var(--sh-index-font-size-titulos);
       }
 
@@ -314,7 +322,7 @@
         gap: 15px;
 
         & .sh-vantagem-item-info {
-          color: var(--sh-index-cor-textos);
+          color: var(--sh-index-cor-primaria);
           font-size: var(--sh-index-font-size-textos);
         }
       }
@@ -378,13 +386,17 @@
     & .sh-main-duvidas {
       display: flex;
       flex-direction: column;
-      padding: var(--sh-index-padding);
-      margin: var(--sh-index-margin);
       gap: 20px;
+      background-color: var(--sh-index-cor-background-components);
+      margin: 45px 0;
+      padding: 30px 10px;
+      border-radius: 25px;
+      margin-left: 5px;
+      margin-right: 5px;
 
       & .sh-duvidas-titulo {
         text-align: center;
-        color: var(--sh-index-cor-terciaria);
+        color: var(--sh-index-cor-primaria);
         font-size: var(--sh-index-font-size-titulos);
       }
 
@@ -395,11 +407,12 @@
 
         & .sh-duvidas-acordeon-item {
           border: none;
+          background-color: transparent;
 
           & .sh-duvidas-header {
 
             & .accordion-button {
-              color: var(--sh-index-cor-textos);
+              color: var(--sh-index-cor-primaria);
               font-size: var(--sh-index-font-size-textos);
               font-weight: 650;
               gap: 5px;
@@ -407,9 +420,10 @@
               outline: none;
               border: none;
               align-items: normal;
+              background-color: transparent;
 
               &:not(.collapsed) {
-                color: var(--sh-index-cor-textos);
+                color: var(--sh-index-cor-primaria);
                 background-color: transparent;
                 box-shadow: none;
                 border: none;
@@ -422,12 +436,14 @@
               &::after {
                 order: -1;
                 margin: 0;
+                
+                background-image: url('./assets/index/icons/seta.png');
               }
             }
           }
 
           & .sh-acordeon-body {
-            color: var(--sh-index-cor-textos);
+            color: var(--sh-index-cor-primaria);
             font-size: var(--sh-index-font-size-textos);
           }
         }
@@ -437,7 +453,6 @@
     /* últimos serviços postados */
     & .sh-main-servicos {
       margin: var(--sh-index-margin);
-      margin-bottom: 0;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -449,10 +464,8 @@
       }
 
       & .sh-servicos-lista-container {
-        /* background-image: url('./assets/index/backgrounds/background-ultimos-servicos.webp'); */
-        background-image: url('./assets/index/backgrounds/background-servicos.svg');
-        background-repeat: no-repeat;
-        background-size: cover;
+        display: flex;
+        justify-content: center;
       }
     }
 
@@ -464,7 +477,7 @@
   }
 
   & .sh-footer {
-    background-color: var(--sh-footer-cor-background-footer);
+    background-color: var(--sh-index-cor-background-components);
   }
 }
 

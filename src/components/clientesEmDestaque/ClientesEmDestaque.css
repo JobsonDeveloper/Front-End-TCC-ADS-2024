@@ -23,6 +23,9 @@
     overflow-x: auto;
     gap: 30px;
     justify-items: center;
+    background-image: url('../../assets/index/backgrounds/background-profissoes.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
 
     &::-webkit-scrollbar {
         background-color: transparent;
@@ -158,5 +161,6 @@
 @media (min-width: 1400px) {
     & .sh-cliEmDestaque {
         width: 1400px;
+        border-radius: 5px;
     }
 }

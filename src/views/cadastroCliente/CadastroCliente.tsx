@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import './CadastroCliente.css';
-import { Autocomplete, FormControl, IconButton, Input, InputAdornment, InputLabel, Step, StepLabel, Stepper, TextField } from "@mui/material";
+import { Autocomplete, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, FormControlLabel, IconButton, Input, InputAdornment, InputLabel, Slide, Step, StepLabel, Stepper, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -16,6 +16,7 @@ import concluirImg from '../../assets/CadastroCliente/icons/concluir.png'
 import tituloPaginaImg from '../../assets/CadastroCliente/icons/cadastroCliente.png'
 import Loading from "../../components/loading/Loading";
 import dayjs from "dayjs";
+import { TransitionProps } from "@mui/material/transitions";
 
 // --------------- ESTILIZAÇÃO DE COMPONENTES DO MATERIAL UI
 
@@ -35,6 +36,15 @@ const styledSelect = {
         display: 'none'
     }
 }
+
+const Transition = React.forwardRef(function Transition(
+    props: TransitionProps & {
+        children: React.ReactElement<any, any>;
+    },
+    ref: React.Ref<unknown>,
+) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 let dataNascimento = '';
 let estadoOndeMora = '';
@@ -97,15 +107,26 @@ const CadastroCliente = () => {
     const [senha, setSenha] = useState('');
     const [confirmSenha, setConfirmSenha] = useState('');
 
+    // Do dialog de termos de uso
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
         }, 2000);
     });
 
-    async function cadastraCliente(e:any) {
+    async function cadastraCliente(e: any) {
         e.preventDefault();
-        
+
         try {
             const shDate = new Date(nascimento);
             let nascimentoDia = `${shDate.getDate()}`;
@@ -150,7 +171,7 @@ const CadastroCliente = () => {
 
             const response = await request.json();
 
-            if(response.status === 201) {
+            if (response.status === 201) {
                 console.log(response.status);
                 console.log(response.data);
             }
@@ -167,7 +188,7 @@ const CadastroCliente = () => {
     const mudarStep = (variante: string) => {
 
         if (variante === 'proximo') {
-            if(activeStep >= 2) {
+            if (activeStep >= 2) {
                 return;
             }
 
@@ -178,7 +199,7 @@ const CadastroCliente = () => {
                 return;
             }
 
-            setActiveStep((currentStep) => currentStep -1);
+            setActiveStep((currentStep) => currentStep - 1);
         }
 
     }
@@ -410,6 +431,33 @@ const CadastroCliente = () => {
                                         }
                                     />
                                 </FormControl>
+
+                                <div className="sh-termoDeServico">
+                                    <div>
+                                        <Checkbox defaultChecked />
+                                        <button onClick={handleClickOpen}>Termos de uso</button>
+                                    </div>
+
+
+                                    <Dialog
+                                        open={open}
+                                        TransitionComponent={Transition}
+                                        keepMounted
+                                        onClose={handleClose}
+                                        aria-describedby="alert-dialog-slide-description"
+                                    >
+                                        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+                                        <DialogContent>
+                                            <DialogContentText id="alert-dialog-slide-description">
+                                                Let Google help apps determine location. This means sending anonymous
+                                                location data to Google, even when no apps are running.
+                                            </DialogContentText>
+                                        </DialogContent>
+                                        <DialogActions>
+                                            <Button onClick={handleClose}>Fechar</Button>
+                                        </DialogActions>
+                                    </Dialog>
+                                </div>
                             </article>
                         }
                     </div>
@@ -431,7 +479,7 @@ const CadastroCliente = () => {
                             <img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
                         }
                         {activeStep === 2 &&
-                            <img src={concluirImg} alt="Butão para voltar para a home" className="sh-cadastro-button-concluir" onClick={cadastraCliente}/>
+                            <img src={concluirImg} alt="Butão para voltar para a home" className="sh-cadastro-button-concluir" onClick={cadastraCliente} />
                         }
                     </button>
                 </article>

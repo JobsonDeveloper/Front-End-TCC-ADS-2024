@@ -6,6 +6,7 @@
   --sh-servicos-cor-terciaria: #000;
   --sh-servicos-cor-quaternaria: #35FF62;
   --sh-servicos-cor-textos: #494949;
+  --sh-servicos-cor-background-components: #356FB0;
 
   --sh-servicos-padding: 0 5px;
   --sh-servicos-margin: 20px 0;
@@ -22,12 +23,15 @@
   overflow-x: auto;
   justify-content: space-between;
   gap: 15px;
+  background-image: url('../../assets/index/backgrounds/background-servicos.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
 
   &::-webkit-scrollbar {
     background-color: transparent;
     height: 2px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
@@ -62,7 +66,7 @@
 
         & .sh-servicos-data-marcador {
           margin: 0;
-          background-color: var(--sh-servicos-cor-marcadores);
+          background-color: var(--sh-servicos-cor-background-components);
           font-size: var(--sh-servicos-font-size-textos);
           color: var(--sh-servicos-cor-primaria);
           padding: 2px 8px;
@@ -122,7 +126,7 @@
       & .sh-servicos-link {
         & .sh-itens-data {
           width: 310px;
-  
+
           & .sh-servicos-img-perfil {
             width: 35px;
           }
@@ -160,7 +164,7 @@
       & .sh-servicos-link {
         & .sh-itens-data {
           width: 305px;
-  
+
           & .sh-servicos-img-perfil {
             width: 30px;
           }
@@ -173,5 +177,7 @@
 @media (min-width: 1400px) {
   & .sh-servicos-lista {
     justify-content: center;
+    width: 1400px;
+    border-radius: 5px;
   }
 }
