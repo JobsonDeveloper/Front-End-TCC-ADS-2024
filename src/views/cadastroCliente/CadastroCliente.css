@@ -24,6 +24,21 @@
     --sh-cadastro-font-size-textos: 1rem;
 }
 
+@keyframes alertsAnim {
+    from {
+        right: -100%;
+    }
+    10% {
+        right: 0;
+    }
+    90% {
+        right: 0;
+    }
+    to {
+        right: -100%;
+    }
+}
+
 .sh-cadastroCliente {
     display: flex;
     flex-direction: column;
@@ -33,6 +48,8 @@
     background-image: url('../../assets/CadastroCliente/background/background.png');
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
 
     & .sh-cadastro-formulario {
         display: flex;
@@ -113,6 +130,32 @@
 
                     & .sh-cadastro-telefone {}
                 }
+
+                & .sh-dados-seguranca {
+                    
+                    & .sh-termosDeServico {
+                        display: flex;
+                        
+                        & .sh-termosDeUso-checkbox {
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            & .sh-termosDeUso-checkbox-link {
+                                color: var(--sh-cadastro-cor-textos);
+                                background-color: transparent;
+                                border: none;
+                                outline: none;
+                                font-weight: 250;
+
+                                & strong {
+                                    color: #1346ff;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -160,4 +203,12 @@
         }
     }
 
+    & .sh-alerts {
+        width: max-content;
+        padding: 2px;
+        position: absolute;
+        top: 0;
+        right: -100%;
+        animation: alertsAnim 4s linear;
+    }
 }

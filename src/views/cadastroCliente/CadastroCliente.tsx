@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import './CadastroCliente.css';
-import { Autocomplete, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, FormControlLabel, IconButton, Input, InputAdornment, InputLabel, Slide, Step, StepLabel, Stepper, TextField } from "@mui/material";
-import { Stack } from "@mui/system";
+import { Alert, Autocomplete, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, FormControlLabel, IconButton, Input, InputAdornment, InputLabel, Slide, Step, StepLabel, Stepper, TextField } from "@mui/material";
+import { color, fontFamily, fontSize, fontWeight, Stack } from "@mui/system";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -37,17 +37,81 @@ const styledSelect = {
     }
 }
 
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & {
-        children: React.ReactElement<any, any>;
+const styledDialog = {
+    '& .MuiTypography-h6': {
+        color: '#000',
+        fontFamily: '"Nunito", sans-serif',
+        fontSize: '1.4rem'
     },
-    ref: React.Ref<unknown>,
-) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
+
+    '& .MuiDialogContent-root': {
+        display: 'grid',
+        gap: '5px',
+
+        '& .MuiDialogContentText-root': {
+            color: '#494949',
+            fontFamily: '"Nunito", sans-serif',
+            fontSize: '1rem',
+
+            '& a': {
+                textDecoration: 'none'
+            }
+        },
+
+        '& .sh-termos-subtitulos': {
+            fontWeight: 'bold',
+            marginTop: '10px'
+        }
+    }
+
+
+};
+
+const ShAlert = () => {
+    return (
+        <>
+            {tipoAlert === 0 &&
+                <Alert severity="success">
+                    {mensagemAlert}
+                </Alert>
+            }
+            
+            {tipoAlert === 1 &&
+                <Alert severity="info">
+                    {mensagemAlert}
+                </Alert>
+            }
+            
+            {tipoAlert === 2 &&
+                <Alert severity="warning">
+                    {mensagemAlert}
+                </Alert>
+            }
+            
+            {tipoAlert === 3 &&
+                <Alert severity="error">
+                    {mensagemAlert}
+                </Alert>
+            }
+        </>
+    )
+}
+
+const Transition = React.forwardRef(
+    function Transition(
+        props: TransitionProps & {
+            children: React.ReactElement<any, any>;
+        },
+        ref: React.Ref<unknown>,
+    ) {
+        return <Slide direction="up" ref={ref} {...props} />;
+    }
+);
 
 let dataNascimento = '';
 let estadoOndeMora = '';
+let mensagemAlert = "";
+let tipoAlert = 0;
 
 // --------------- PÁGINA DE CADASTRO
 
@@ -106,6 +170,18 @@ const CadastroCliente = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmSenha, setConfirmSenha] = useState('');
+    const [termosAceitos, setTermosAceitos] = useState(false);
+    const [mostrarAlert, setmostrarAlert] = useState(false);
+
+    const alteraTermosAceitos = () => {
+        if (termosAceitos === true) {
+            setTermosAceitos(false);
+        }
+        else {
+            setTermosAceitos(true);
+        }
+
+    }
 
     // Do dialog de termos de uso
     const [open, setOpen] = React.useState(false);
@@ -127,62 +203,73 @@ const CadastroCliente = () => {
     async function cadastraCliente(e: any) {
         e.preventDefault();
 
-        try {
-            const shDate = new Date(nascimento);
-            let nascimentoDia = `${shDate.getDate()}`;
-            let nascimentoMes = `${shDate.getMonth() + 1}`;
-            let nascimentoAno = `${shDate.getFullYear()}`;
+        if (termosAceitos) {
+            tipoAlert = 0;
+            mensagemAlert = "Usuário cadastrado!"
 
-            if (nascimentoDia.length < 2) {
-                nascimentoDia = `0${nascimentoDia}`;
-            }
+            setmostrarAlert(true);
 
-            if (nascimentoMes.length < 2) {
-                nascimentoMes = `0${nascimentoMes}`;
-            }
-
-            // const dados = {
-            //     nomeCliente: nome,
-            //     sobrenomeCliente: sobrenome,
-            //     cpfCnpjCliente: cpfCnpj,
-            //     nascimentoCliente: `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`,
-            //     enderecoCliente: `${rua}, numero ${numero}, ${cidade} - ${estado}`,
-            //     telefoneCliente: `(${ddd}) ${telefone}`,
-            //     emailCliente: email,
-            //     senhaCliente: senha
-            // }
-
-            const formData = new FormData();
-            formData.append('acao', 'cadastro');
-            formData.append('nome', nome);
-            formData.append('sobrenome', sobrenome);
-            formData.append('cpf', cpfCnpj);
-            formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
-            formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
-            formData.append('numero', `(${ddd}) ${telefone}`);
-            formData.append('email', email);
-            formData.append('senha', senha);
-
-            const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-                method: 'POST',
-                mode: 'cors',
-                body: formData
-            });
-
-            const response = await request.json();
-
-            if (response.status === 201) {
-                console.log(response.status);
-                console.log(response.data);
-            }
-            else {
-                console.log(console.log('O cadastro não pôde ser realizado.'))
-            }
-
+            setTimeout(() => {
+                setmostrarAlert(false);
+            }, 4000);
         }
-        catch (error) {
-            console.error(error);
+
+        if (!termosAceitos) {
+            tipoAlert = 2;
+            mensagemAlert = "É preciso aceitar os termos de uso!"
+
+            setmostrarAlert(true);
+
+            setTimeout(() => {
+                setmostrarAlert(false);
+            }, 4000);
         }
+
+        // try {
+        //     const shDate = new Date(nascimento);
+        //     let nascimentoDia = `${shDate.getDate()}`;
+        //     let nascimentoMes = `${shDate.getMonth() + 1}`;
+        //     let nascimentoAno = `${shDate.getFullYear()}`;
+
+        //     if (nascimentoDia.length < 2) {
+        //         nascimentoDia = `0${nascimentoDia}`;
+        //     }
+
+        //     if (nascimentoMes.length < 2) {
+        //         nascimentoMes = `0${nascimentoMes}`;
+        //     }
+
+        //     const formData = new FormData();
+        //     formData.append('acao', 'cadastro');
+        //     formData.append('nome', nome);
+        //     formData.append('sobrenome', sobrenome);
+        //     formData.append('cpf', cpfCnpj);
+        //     formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
+        //     formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
+        //     formData.append('numero', `(${ddd}) ${telefone}`);
+        //     formData.append('email', email);
+        //     formData.append('senha', senha);
+
+        //     const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+        //         method: 'POST',
+        //         mode: 'cors',
+        //         body: formData
+        //     });
+
+        //     const response = await request.json();
+
+        //     if (response.status === 201) {
+        //         console.log(response.status);
+        //         console.log(response.data);
+        //     }
+        //     else {
+        //         console.log(console.log('O cadastro não pôde ser realizado.'))
+        //     }
+
+        // }
+        // catch (error) {
+        //     console.error(error);
+        // }
     }
 
     const mudarStep = (variante: string) => {
@@ -432,10 +519,10 @@ const CadastroCliente = () => {
                                     />
                                 </FormControl>
 
-                                <div className="sh-termoDeServico">
-                                    <div>
-                                        <Checkbox defaultChecked />
-                                        <button onClick={handleClickOpen}>Termos de uso</button>
+                                <div className="sh-termosDeServico">
+                                    <div className="sh-termosDeUso-checkbox">
+                                        <Checkbox onChange={alteraTermosAceitos} />
+                                        <button onClick={handleClickOpen} className="sh-termosDeUso-checkbox-link">Aceito os <strong>termos de uso</strong></button>
                                     </div>
 
 
@@ -445,13 +532,39 @@ const CadastroCliente = () => {
                                         keepMounted
                                         onClose={handleClose}
                                         aria-describedby="alert-dialog-slide-description"
+                                        sx={styledDialog}
                                     >
-                                        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+                                        <DialogTitle>{"Termos de uso da Skillhub"}</DialogTitle>
                                         <DialogContent>
-                                            <DialogContentText id="alert-dialog-slide-description">
-                                                Let Google help apps determine location. This means sending anonymous
-                                                location data to Google, even when no apps are running.
-                                            </DialogContentText>
+                                            <DialogContentText>Estes Termos de Uso regem o uso deste site <a href="https://skillhub-phi.vercel.app/">skillhub-phi.vercel.app</a> e quaisquer serviços oferecidos pela SkillHub. <br />Ao acessar ou usar o Site, você concorda com estes Termos. Se você não concorda com estes Termos, por favor, não use o Site.</DialogContentText>
+                                            <DialogContentText className="sh-termos-subtitulos">1. Aceitação dos Termos</DialogContentText>
+                                            <DialogContentText>1.1. Concordância: Ao acessar ou usar o Site, você concorda em cumprir estes Termos e todas as leis e regulamentos aplicáveis.</DialogContentText>
+                                            <DialogContentText>1.2. Menores de Idade: Este Site não é destinado a menores de 18 anos. Se você é menor de idade, deve obter permissão de seus pais ou responsável antes de usar o Site.</DialogContentText>
+                                            <DialogContentText className="sh-termos-subtitulos">2. Uso do Site</DialogContentText>
+                                            <DialogContentText>2.1. Licença de Uso: Concedemos a você uma licença limitada, não exclusiva e não transferível para acessar e usar o Site para seus fins pessoais e não comerciais.</DialogContentText>
+                                            <DialogContentText>2.2. Conteúdo do Usuário: Se você enviar, postar ou exibir conteúdo no Site, você nos concede uma licença mundial, não exclusiva, livre de royalties para usar, modificar, exibir e distribuir esse conteúdo.</DialogContentText>
+                                            <DialogContentText className="sh-termos-subtitulos">3. Contas de Usuário</DialogContentText>
+                                            <DialogContentText>3.1. Registro: Alguns recursos do Site podem exigir registro. Ao se registrar, você concorda em fornecer informações precisas e completas. Você é responsável por manter a confidencialidade de sua conta e senha.</DialogContentText>
+                                            <DialogContentText>3.2. Responsabilidade pela Conta: Você é responsável por todas as atividades que ocorram em sua conta. Se houver qualquer uso não autorizado de sua conta, você deve nos notificar imediatamente.</DialogContentText>
+                                            <DialogContentText className="sh-termos-subtitulos">4. Propriedade Intelectual</DialogContentText>
+                                            <DialogContentText>4.1. Direitos de Propriedade: Todo o conteúdo do Site, incluindo textos, gráficos, logotipos, imagens, clipes de áudio e software, é protegido por direitos autorais e outras leis de propriedade intelectual.</DialogContentText>
+                                            <DialogContentText>4.2. Uso Restrito: Você concorda em não reproduzir, distribuir, modificar, exibir, executar, publicar ou criar obras derivadas a partir do conteúdo do Site sem nossa permissão prévia por escrito.</DialogContentText>
+                                            <DialogContentText className="sh-termos-subtitulos">5. Proteção de Dados e LGPD</DialogContentText>
+                                            <DialogContentText>5.1. Coleta de Dados: Ao utilizar o Site, podemos coletar informações pessoais conforme descrito em nossa Política de Privacidade. Ao fornecer informações pessoais, você concorda com nossa coleta e uso conforme permitido pela legislação aplicável.</DialogContentText>
+                                            <DialogContentText>5.2. Direitos do Titular dos Dados: Você tem o direito de acessar, corrigir ou excluir suas informações pessoais. Para exercer esses direitos, entre em contato conosco conforme indicado na seção de Contato.</DialogContentText>
+                                            <DialogContentText>5.3. Segurança dos Dados: Implementamos medidas de segurança para proteger suas informações pessoais. No entanto, não podemos garantir a segurança completa das informações transmitidas pela internet.</DialogContentText>
+                                            <DialogContentText className="sh-termos-subtitulos">6. Isenção de Responsabilidade</DialogContentText>
+                                            <DialogContentText>6.1. Uso por Sua Conta e Risco: Você concorda que o uso do Site é por sua conta e risco. Não garantimos que o Site estará livre de erros ou interrupções.</DialogContentText>
+                                            <DialogContentText>6.2. Limitação de Responsabilidade: Em nenhuma circunstância seremos responsáveis por quaisquer danos diretos, indiretos, incidentais, especiais, consequenciais ou punitivos decorrentes do uso ou incapacidade de usar o Site.</DialogContentText>
+                                            <DialogContentText className="sh-termos-subtitulos">7. Links para Terceiros</DialogContentText>
+                                            <DialogContentText>7.1. Links Externos: O Site pode conter links para sites de terceiros. Nós não endossamos e não somos responsáveis pelo conteúdo ou práticas de privacidade desses sites.</DialogContentText>
+                                            <DialogContentText className="sh-termos-subtitulos">8. Alterações nos Termos</DialogContentText>
+                                            <DialogContentText>8.1. Atualizações: Reservamo-nos o direito de modificar estes Termos a qualquer momento. As alterações entram em vigor imediatamente após a publicação no Site.</DialogContentText>
+                                            <DialogContentText>8.2. Notificação de Alterações: É sua responsabilidade revisar periodicamente estes Termos para ficar informado sobre as atualizações. Ao continuar a usar o Site após as alterações, você está concordando com os Termos revisados.</DialogContentText>
+                                            <DialogContentText className="sh-termos-subtitulos">9. Disposições Gerais</DialogContentText>
+                                            <DialogContentText>9.1. Lei Aplicável: Estes Termos são regidos e interpretados de acordo com as leis do Brasil sem consideração aos seus conflitos de disposições legais.</DialogContentText>
+                                            <DialogContentText>9.2. Divisibilidade: Se qualquer disposição destes Termos for considerada inválida ou inexequível, tal disposição será eliminada e as disposições restantes permanecerão em pleno vigor e efeito.</DialogContentText>
+                                            <DialogContentText>9.3. Contato: Se você tiver dúvidas sobre estes Termos, entre em contato conosco em skillhub@gmail.com.</DialogContentText>
                                         </DialogContent>
                                         <DialogActions>
                                             <Button onClick={handleClose}>Fechar</Button>
@@ -484,6 +597,12 @@ const CadastroCliente = () => {
                     </button>
                 </article>
             </form>
+
+            {mostrarAlert &&
+                <div className="sh-alerts">
+                    <ShAlert />
+                </div>
+            }
         </main>
     )
 }
