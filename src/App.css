@@ -477,7 +477,7 @@
   }
 
   & .sh-footer {
-    background-color: var(--sh-index-cor-background-components);
+    background-color: var(--sh-index-cor-background-footer);
   }
 }
 
