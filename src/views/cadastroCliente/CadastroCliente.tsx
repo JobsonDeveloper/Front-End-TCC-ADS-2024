@@ -202,7 +202,7 @@ const CadastroCliente = () => {
     });
 
     async function cadastraCliente(e: any) {
-        e.preventDefault();
+        // e.preventDefault();
 
         if ((email != "") && (senha != "") && (confirmSenha != "")) {
             if (senha != confirmSenha) {
@@ -229,6 +229,7 @@ const CadastroCliente = () => {
                 }
                 else {
                     try {
+                        
                         setLoading(true);
                         const shDate = new Date(nascimento);
                         let nascimentoDia = `${shDate.getDate()}`;
