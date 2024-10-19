@@ -1,0 +1,214 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --sh-cadastro-font-family: "Nunito", sans-serif;
+
+    --sh-cadastro-cor-primaria: #fff;
+    --sh-cadastro-cor-secundaria: #0075FF;
+    --sh-cadastro-cor-terciaria: #000;
+    --sh-cadastro-cor-quaternaria: #35FF62;
+    --sh-cadastro-cor-textos: #494949;
+    --sh-cadastro-cor-background: #26466B;
+    --sh-cadastro-cor-background-dois: #0089e0;
+
+    --sh-cadastro-padding: 0 10px;
+    --sh-cadastro-margin: 30px 0;
+
+
+    --sh-cadastro-font-size-titulos: 1.4rem;
+    --sh-cadastro-font-size-subtitulos: 1.2rem;
+    --sh-cadastro-font-size-textos: 1rem;
+}
+
+@keyframes alertsAnim {
+    from {
+        right: -100%;
+    }
+    10% {
+        right: 0;
+    }
+    90% {
+        right: 0;
+    }
+    to {
+        right: -100%;
+    }
+}
+
+.sh-cadastroCliente {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url('../../assets/CadastroCliente/background/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+
+    & .sh-cadastro-formulario {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        background-color: var(--sh-cadastro-cor-primaria);
+        min-width: 310px;
+        border-radius: 10px;
+        overflow: hidden;
+
+        & .sh-cadastro-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0 0 5px;
+
+            & .sh-cadastro-logoImg {
+                width: 120px;
+            }
+
+            & .sh-cadastro-tituloPagina {
+                width: 130px;
+                border-radius: 0 10px 0 0;
+            }
+
+        }
+
+        & .sh-stepersForm {
+            width: max-content;
+            width: 90%;
+
+            & .sh-formulario-inputs {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2px;
+                width: 100%;
+                padding: 15px 5px;
+                height: 295px;
+
+                & .sh-dados {
+                    display: grid;
+                    gap: 20px;
+                    height: max-content;
+                    padding: 2px;
+                }
+
+                & .sh-dados-iniciais {
+                    display: grid;
+                }
+
+                & .sh-dados-localizacao {
+                    list-style-type: none;
+                    padding: 0;
+                    display: grid;
+
+                    & .sh-dados-localizacao-item {
+                        display: flex;
+                        gap: 10px;
+
+                        & .sh-dados-simples {
+                            width: 60px;
+                        }
+                    }
+
+                    & .sh-cadastro-rua {}
+
+                    & .sh-cadastro-numero {}
+
+                    & .sh-cadastro-cidade {}
+
+                    & .sh-cadastro-estado {}
+
+                    & .sh-cadastro-ddd {}
+
+                    & .sh-cadastro-telefone {}
+                }
+
+                & .sh-dados-seguranca {
+                    
+                    & .sh-termosDeServico {
+                        display: flex;
+                        
+                        & .sh-termosDeUso-checkbox {
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            & .sh-termosDeUso-checkbox-link {
+                                color: var(--sh-cadastro-cor-textos);
+                                background-color: transparent;
+                                border: none;
+                                outline: none;
+                                font-weight: 250;
+
+                                & strong {
+                                    color: #1346ff;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        & .sh-cadastro-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0 0;
+            align-items: end;
+            width: 100%;
+
+            & .sh-cadastro-button-link {
+                & .sh-cadastro-button-home {
+                    width: 45px;
+
+                    &:hover {
+                        filter: drop-shadow(0px 0px 3px #000);
+                    }
+                }
+            }
+
+            & .sh-cadastro-button-elemento{
+                border: none;
+                outline: none;
+                background-color: transparent;
+
+                & .sh-cadastro-button-anterior,
+                & .sh-cadastro-button-proximo {
+                    width: 45px;
+                    cursor: pointer;
+    
+                    &:hover {
+                        filter: drop-shadow(0px 0px 3px #000);
+                    }
+                }
+            }
+
+            & .sh-cadastro-button-concluir {
+                width: 106px;
+                cursor: pointer;
+
+                &:hover {
+                    filter: drop-shadow(0px 0px 3px #000);
+                }
+            }
+        }
+    }
+
+    & .sh-alerts {
+        width: max-content;
+        padding: 2px;
+        position: absolute;
+        top: 0;
+        right: -100%;
+        z-index: 1000;
+        animation: alertsAnim 4s linear;
+    }
+}

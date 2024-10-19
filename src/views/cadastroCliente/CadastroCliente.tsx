@@ -172,7 +172,7 @@ const CadastroCliente = () => {
     const [senha, setSenha] = useState('');
     const [confirmSenha, setConfirmSenha] = useState('');
     const [termosAceitos, setTermosAceitos] = useState(false);
-    const [mostrarAlert, setmostrarAlert] = useState(false);
+    const [mostrarAlert, setMostrarAlert] = useState(false);
 
     const alteraTermosAceitos = () => {
         if (termosAceitos === true) {
@@ -201,128 +201,120 @@ const CadastroCliente = () => {
         }, 2000);
     });
 
-    async function cadastraCliente(e: any) {
-        // e.preventDefault();
+    async function cadastraCliente() {
+        if ((email === "") || (senha === "") || (confirmSenha === "")) {
+            tipoAlert = 2;
+            mensagemAlert = "Preencha todos os campos!"
+            setMostrarAlert(true);
 
-        if ((email != "") && (senha != "") && (confirmSenha != "")) {
-            if (senha != confirmSenha) {
-                tipoAlert = 2;
-                mensagemAlert = "As senhas estão diferentes!"
-                setmostrarAlert(true);
+            setTimeout(() => {
+                setMostrarAlert(false);
+                return;
+            }, 4000);
+        }
+        else if (senha != confirmSenha) {
+            tipoAlert = 2;
+            mensagemAlert = "As senhas estão diferentes!"
+            setMostrarAlert(true);
 
-                setTimeout(() => {
-                    setmostrarAlert(false);
-                    return;
-                }, 4000);
+            setTimeout(() => {
+                setMostrarAlert(false);
+                return;
+            }, 4000);
+        }
+        else if (!termosAceitos) {
+            tipoAlert = 2;
+            mensagemAlert = "É preciso aceitar os termos de uso!"
+
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+                return;
+            }, 4000);
+        }
+        else {
+            const shDate = new Date(nascimento);
+            let nascimentoDia = `${shDate.getDate()}`;
+            let nascimentoMes = `${shDate.getMonth() + 1}`;
+            let nascimentoAno = `${shDate.getFullYear()}`;
+
+            if (nascimentoDia.length < 2) {
+                nascimentoDia = `0${nascimentoDia}`;
             }
-            else {
-                if (!termosAceitos) {
-                    tipoAlert = 2;
-                    mensagemAlert = "É preciso aceitar os termos de uso!"
 
-                    setmostrarAlert(true);
+            if (nascimentoMes.length < 2) {
+                nascimentoMes = `0${nascimentoMes}`;
+            }
+
+            try {
+                setLoading(true);
+                const formData = new FormData();
+                formData.append('acao', 'cadastro');
+                formData.append('nome', nome);
+                formData.append('sobrenome', sobrenome);
+                formData.append('cpf', cpfCnpj);
+                formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
+                formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
+                formData.append('numero', `(${ddd}) ${telefone}`);
+                formData.append('email', email);
+                formData.append('senha', senha);
+
+                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                });
+
+                const response = await request.json();
+
+                if (response.status === 201) {
+                    tipoAlert = 0;
+                    mensagemAlert = "Cadastro realizado!"
+                    setMostrarAlert(true);
 
                     setTimeout(() => {
-                        setmostrarAlert(false);
-                        return;
+                        setMostrarAlert(false);
+                        setLoading(false);
+                        pagina('/login');
+                    }, 4000);
+
+                }
+                else if (response.status === 400) {
+                    tipoAlert = 2;
+                    mensagemAlert = "CPF inválido!"
+                    setMostrarAlert(true);
+                    
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        setLoading(false);
                     }, 4000);
                 }
                 else {
-                    try {
-                        
-                        setLoading(true);
-                        const shDate = new Date(nascimento);
-                        let nascimentoDia = `${shDate.getDate()}`;
-                        let nascimentoMes = `${shDate.getMonth() + 1}`;
-                        let nascimentoAno = `${shDate.getFullYear()}`;
-
-                        if (nascimentoDia.length < 2) {
-                            nascimentoDia = `0${nascimentoDia}`;
-                        }
-
-                        if (nascimentoMes.length < 2) {
-                            nascimentoMes = `0${nascimentoMes}`;
-                        }
-
-                        const formData = new FormData();
-                        formData.append('acao', 'cadastro');
-                        formData.append('nome', nome);
-                        formData.append('sobrenome', sobrenome);
-                        formData.append('cpf', cpfCnpj);
-                        formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
-                        formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
-                        formData.append('numero', `(${ddd}) ${telefone}`);
-                        formData.append('email', email);
-                        formData.append('senha', senha);
-
-                        const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-                            method: 'POST',
-                            mode: 'cors',
-                            body: formData
-                        });
-
-                        const response = await request.json();
-
-                        if (response.status === 201) {
-                            tipoAlert = 0;
-                            mensagemAlert = "Cadastro realizado!"
-                            setmostrarAlert(true);
-
-                            setTimeout(() => {
-                                setmostrarAlert(false);
-                                setLoading(false);
-                                pagina('/login');
-                            }, 4000);
-
-                        }
-                        else if (response.status === 400) {
-                            tipoAlert = 2;
-                            mensagemAlert = "CPF inválido!"
-                            setmostrarAlert(true);
-
-                            setTimeout(() => {
-                                setmostrarAlert(false);
-                                setLoading(false);
-                            }, 4000);
-                        }
-                        else {
-                            console.log(response.status)
-                            tipoAlert = 3;
-                            mensagemAlert = "Erro ao cadastrar!"
-                            setmostrarAlert(true);
-
-                            setTimeout(() => {
-                                setmostrarAlert(false);
-                                setLoading(false);
-                            }, 4000);
-                        }
-
-
-                    }
-                    catch (error) {
-                        tipoAlert = 3;
-                        mensagemAlert = "Erro de requisição!"
-                        setmostrarAlert(true);
-
-                        setTimeout(() => {
-                            setmostrarAlert(false);
-                            setLoading(false);
-                        }, 4000);
-                        console.error(error);
-                    }
+                    console.log(response.status)
+                    tipoAlert = 3;
+                    mensagemAlert = "Erro ao cadastrar!"
+                    setMostrarAlert(true);
+                    
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        setLoading(false);
+                    }, 4000);
                 }
+
+
             }
-
-        }
-        else {
-            tipoAlert = 2;
-            mensagemAlert = "Preencha todos os campos!"
-            setmostrarAlert(true);
-
-            setTimeout(() => {
-                setmostrarAlert(false);
-                return;
-            }, 4000);
+            catch (error) {
+                tipoAlert = 3;
+                mensagemAlert = "Erro de requisição!"
+                setMostrarAlert(true);
+                
+                setTimeout(() => {
+                    setMostrarAlert(false);
+                    setLoading(false);
+                }, 4000);
+                console.error(error);
+            }
         }
     }
 
@@ -337,10 +329,10 @@ const CadastroCliente = () => {
                 if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
                     tipoAlert = 2;
                     mensagemAlert = "Preencha todos os campos!"
-                    setmostrarAlert(true);
+                    setMostrarAlert(true);
 
                     setTimeout(() => {
-                        setmostrarAlert(false);
+                        setMostrarAlert(false);
                         return;
                     }, 4000);
                 }
@@ -354,10 +346,10 @@ const CadastroCliente = () => {
                 if ((rua === "") || (numero === "") || (cidade === "") || (ddd === "") || (telefone === "")) {
                     tipoAlert = 2;
                     mensagemAlert = "Preencha todos os campos!"
-                    setmostrarAlert(true);
+                    setMostrarAlert(true);
 
                     setTimeout(() => {
-                        setmostrarAlert(false);
+                        setMostrarAlert(false);
                         return;
                     }, 4000);
                 }

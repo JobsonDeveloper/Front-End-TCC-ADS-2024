@@ -91,8 +91,6 @@ const Login = () => {
                     tipoAlert = 0;
                     mensagemAlert = "Bem vindo!"
                     setMostrarAlert(true);
-                    setCpf('');
-                    setSenha(''); 
                     
                     setTimeout(() => {
                         setMostrarAlert(false);
