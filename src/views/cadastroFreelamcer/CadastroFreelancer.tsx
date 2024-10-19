@@ -1,19 +1,19 @@
 import './CadastroFreelancer.css'
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Alert, Autocomplete, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, FormControlLabel, IconButton, Input, InputAdornment, InputLabel, Slide, Step, StepLabel, Stepper, TextField } from "@mui/material";
-import { color, fontFamily, fontSize, fontWeight, Stack } from "@mui/system";
+import { Alert, Autocomplete, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, IconButton, Input, InputAdornment, InputLabel, Slide, Step, StepLabel, Stepper, TextField } from "@mui/material";
+import { Stack } from "@mui/system";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 // IMPORTAÇÃO DE COMPONENTES
-import logoImg from '../../assets/CadastroCliente/icons/logo.svg';
-import homeImg from '../../assets/CadastroCliente/icons/home.png'
-import proximoImg from '../../assets/CadastroCliente/icons/proximo.png'
-import anteriorImg from '../../assets/CadastroCliente/icons/anterior.png'
-import concluirImg from '../../assets/CadastroCliente/icons/concluir.png'
-import tituloPaginaImg from '../../assets/CadastroCliente/icons/cadastroCliente.png'
+import logoImg from '../../assets/CadastroFreelancer/icons/logo.svg';
+import homeImg from '../../assets/CadastroFreelancer/icons/home.png'
+import proximoImg from '../../assets/CadastroFreelancer/icons/proximo.png'
+import anteriorImg from '../../assets/CadastroFreelancer/icons/anterior.png'
+import concluirImg from '../../assets/CadastroFreelancer/icons/concluir.png'
+import tituloPaginaImg from '../../assets/CadastroFreelancer/icons/cadastroFreelancer.png'
 import Loading from "../../components/loading/Loading";
 import dayjs from "dayjs";
 import { TransitionProps } from "@mui/material/transitions";
@@ -115,7 +115,7 @@ let tipoAlert = 0;
 
 // --------------- PÁGINA DE CADASTRO
 
-const CadastroCliente = () => {
+const CadastroFreelancer = () => {
     const [loading, setLoading] = useState(true);
     const [activeStep, setActiveStep] = useState(0);
     const pagina = useNavigate();
@@ -161,6 +161,40 @@ const CadastroCliente = () => {
     const [telefone, setTelefone] = useState('')
     const capturaValoresSelect = { options: todosOsEstados.map((option) => option) };
 
+    // Do form de imagens
+    const [imagemRg, setImagemRg] = useState('');
+    const pegaImagem = (e: any) => {
+        let imgFrenteRg = e.target.files;
+        let tipoImgFrenteRg = imgFrenteRg[0].type;
+
+        if (imgFrenteRg < 1) {
+            tipoAlert = 3;
+            mensagemAlert = "A imagem não foi fornecida!"
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+            }, 4000);
+        }
+        else if (
+            (tipoImgFrenteRg != 'image/png')
+            && (tipoImgFrenteRg != 'image/jpeg')
+            && (tipoImgFrenteRg != 'image/webp')
+            && (tipoImgFrenteRg != 'image/svg')
+        ) {
+            tipoAlert = 3;
+            mensagemAlert = "Formatos aceitos: png, jpeg, svg ou webp"
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+            }, 4000);
+        }
+        else {
+            console.log(imgFrenteRg);
+        }
+    }
+
     // Do form de seguranca
     const selecaoMudarSenha = () => setMostrarSenha((show) => !show);
     const selecaoMudarConfirmSenha = () => setMostrarConfirmSenha((show) => !show);
@@ -201,7 +235,7 @@ const CadastroCliente = () => {
         }, 2000);
     });
 
-    async function cadastraCliente() {
+    async function cadastroFreelancer() {
         if ((email === "") || (senha === "") || (confirmSenha === "")) {
             tipoAlert = 2;
             mensagemAlert = "Preencha todos os campos!"
@@ -247,116 +281,120 @@ const CadastroCliente = () => {
                 nascimentoMes = `0${nascimentoMes}`;
             }
 
-            try {
-                setLoading(true);
-                const formData = new FormData();
-                formData.append('acao', 'cadastro');
-                formData.append('nome', nome);
-                formData.append('sobrenome', sobrenome);
-                formData.append('cpf', cpfCnpj);
-                formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
-                formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
-                formData.append('numero', `(${ddd}) ${telefone}`);
-                formData.append('email', email);
-                formData.append('senha', senha);
+            // try {
+            //     setLoading(true);
+            //     const formData = new FormData();
+            //     formData.append('acao', 'cadastro');
+            //     formData.append('nome', nome);
+            //     formData.append('sobrenome', sobrenome);
+            //     formData.append('cpf', cpfCnpj);
+            //     formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
+            //     formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
+            //     formData.append('numero', `(${ddd}) ${telefone}`);
+            //     formData.append('email', email);
+            //     formData.append('senha', senha);
 
-                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-                    method: 'POST',
-                    mode: 'cors',
-                    body: formData
-                });
+            //     const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+            //         method: 'POST',
+            //         mode: 'cors',
+            //         body: formData
+            //     });
 
-                const response = await request.json();
+            //     const response = await request.json();
 
-                if (response.status === 201) {
-                    tipoAlert = 0;
-                    mensagemAlert = "Cadastro realizado!"
-                    setMostrarAlert(true);
+            //     if (response.status === 201) {
+            //         tipoAlert = 0;
+            //         mensagemAlert = "Cadastro realizado!"
+            //         setMostrarAlert(true);
 
-                    setTimeout(() => {
-                        setMostrarAlert(false);
-                        setLoading(false);
-                        pagina('/login');
-                    }, 4000);
+            //         setTimeout(() => {
+            //             setMostrarAlert(false);
+            //             setLoading(false);
+            //             pagina('/login');
+            //         }, 4000);
 
-                }
-                else if (response.status === 400) {
-                    tipoAlert = 2;
-                    mensagemAlert = "CPF inválido!"
-                    setMostrarAlert(true);
-                    
-                    setTimeout(() => {
-                        setMostrarAlert(false);
-                        setLoading(false);
-                    }, 4000);
-                }
-                else {
-                    console.log(response.status)
-                    tipoAlert = 3;
-                    mensagemAlert = "Erro ao cadastrar!"
-                    setMostrarAlert(true);
-                    
-                    setTimeout(() => {
-                        setMostrarAlert(false);
-                        setLoading(false);
-                    }, 4000);
-                }
+            //     }
+            //     else if (response.status === 400) {
+            //         tipoAlert = 2;
+            //         mensagemAlert = "CPF inválido!"
+            //         setMostrarAlert(true);
+
+            //         setTimeout(() => {
+            //             setMostrarAlert(false);
+            //             setLoading(false);
+            //         }, 4000);
+            //     }
+            //     else {
+            //         console.log(response.status)
+            //         tipoAlert = 3;
+            //         mensagemAlert = "Erro ao cadastrar!"
+            //         setMostrarAlert(true);
+
+            //         setTimeout(() => {
+            //             setMostrarAlert(false);
+            //             setLoading(false);
+            //         }, 4000);
+            //     }
 
 
-            }
-            catch (error) {
-                tipoAlert = 3;
-                mensagemAlert = "Erro de requisição!"
-                setMostrarAlert(true);
-                
-                setTimeout(() => {
-                    setMostrarAlert(false);
-                    setLoading(false);
-                }, 4000);
-                console.error(error);
-            }
+            // }
+            // catch (error) {
+            //     tipoAlert = 3;
+            //     mensagemAlert = "Erro de requisição!"
+            //     setMostrarAlert(true);
+
+            //     setTimeout(() => {
+            //         setMostrarAlert(false);
+            //         setLoading(false);
+            //     }, 4000);
+            //     console.error(error);
+            // }
         }
     }
 
     const mudarStep = (variante: string) => {
 
         if (variante === 'proximo') {
-            if (activeStep >= 2) {
-                return;
-            }
+            // if (activeStep === 0) {
+            //     if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
+            //         tipoAlert = 2;
+            //         mensagemAlert = "Preencha todos os campos!"
+            //         setMostrarAlert(true);
 
-            if (activeStep === 0) {
-                if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
-                    tipoAlert = 2;
-                    mensagemAlert = "Preencha todos os campos!"
-                    setMostrarAlert(true);
+            //         setTimeout(() => {
+            //             setMostrarAlert(false);
+            //             return;
+            //         }, 4000);
+            //     }
+            //     else {
+            setActiveStep((currentStep) => currentStep + 1);
+            //     }
+            // }
 
-                    setTimeout(() => {
-                        setMostrarAlert(false);
-                        return;
-                    }, 4000);
-                }
-                else {
-                    setActiveStep((currentStep) => currentStep + 1);
-                }
-            }
+            // if (activeStep === 1) {
+            //     if ((rua === "") || (numero === "") || (cidade === "") || (ddd === "") || (telefone === "")) {
+            //         tipoAlert = 2;
+            //         mensagemAlert = "Preencha todos os campos!"
+            //         setMostrarAlert(true);
 
+            //         setTimeout(() => {
+            //             setMostrarAlert(false);
+            //             return;
+            //         }, 4000);
+            //     }
+            //     else {
+            //         setActiveStep((currentStep) => currentStep + 1);
+            //     }
+            // }
 
-            if (activeStep === 1) {
-                if ((rua === "") || (numero === "") || (cidade === "") || (ddd === "") || (telefone === "")) {
-                    tipoAlert = 2;
-                    mensagemAlert = "Preencha todos os campos!"
-                    setMostrarAlert(true);
+            // if(activeStep === 2) {
 
-                    setTimeout(() => {
-                        setMostrarAlert(false);
-                        return;
-                    }, 4000);
-                }
-                else {
-                    setActiveStep((currentStep) => currentStep + 1);
-                }
-            }
+            // }
+
+            // if (activeStep >= 3) {
+            //     alert('fff');
+            //     return;
+            // }
 
         }
         else {
@@ -370,7 +408,7 @@ const CadastroCliente = () => {
     }
 
     return (
-        <main className="sh-cadastroCliente">
+        <main className="sh-cadastroFreelancer">
             {loading && <Loading />}
 
             <form onSubmit={pegarDataNascimento} className="sh-cadastro-formulario">
@@ -381,6 +419,7 @@ const CadastroCliente = () => {
 
                 <div className="sh-stepersForm">
                     <Stepper activeStep={activeStep} className="sh-steper-cadastro" alternativeLabel>
+                        <Step> <StepLabel /> </Step>
                         <Step> <StepLabel /> </Step>
                         <Step> <StepLabel /> </Step>
                         <Step> <StepLabel /> </Step>
@@ -539,8 +578,18 @@ const CadastroCliente = () => {
                             </ul>
                         }
 
-                        {/* E-mail e senha */}
+                        {/* Antecendentes criminais e RG */}
                         {activeStep == 2 &&
+                            <article className='sh-dados sh-dados-fotos'>
+                                <label htmlFor="frenteRG">Frente do RG</label>
+                                <input type="file" className='sh-dados-fotos-input' id='frenteRG' onChange={pegaImagem} />
+                                <input type="file" className='sh-dados-fotos-input' />
+                                <input type="file" className='sh-dados-fotos-input' />
+                            </article>
+                        }
+
+                        {/* E-mail e senha */}
+                        {activeStep == 3 &&
                             <article className="sh-dados sh-dados-seguranca">
                                 <TextField
                                     id="standard-basic-email"
@@ -664,14 +713,11 @@ const CadastroCliente = () => {
                     </button>
 
                     <button type="submit" className="sh-cadastro-button-elemento">
-                        {activeStep === 0 &&
-                            <img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
+                        {activeStep < 3 &&
+                            <img src={proximoImg} alt="Butão para próximo step" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
                         }
-                        {activeStep === 1 &&
-                            <img src={proximoImg} alt="Butão para voltar para a home" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
-                        }
-                        {activeStep === 2 &&
-                            <img src={concluirImg} alt="Butão para voltar para a home" className="sh-cadastro-button-concluir" onClick={cadastraCliente} />
+                        {activeStep === 3 &&
+                            <img src={concluirImg} alt="Butão para concluir cadastro" className="sh-cadastro-button-concluir" onClick={cadastroFreelancer} />
                         }
                     </button>
                 </article>
@@ -686,4 +732,4 @@ const CadastroCliente = () => {
     )
 }
 
-export default CadastroCliente;
+export default CadastroFreelancer;
