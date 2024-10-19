@@ -269,6 +269,7 @@ const CadastroCliente = () => {
 
                             setTimeout(() => {
                                 setmostrarAlert(false);
+                                setLoading(false);
                                 pagina('/login');
                             }, 4000);
 
@@ -280,6 +281,7 @@ const CadastroCliente = () => {
 
                             setTimeout(() => {
                                 setmostrarAlert(false);
+                                setLoading(false);
                             }, 4000);
                         }
                         else {
@@ -290,6 +292,7 @@ const CadastroCliente = () => {
 
                             setTimeout(() => {
                                 setmostrarAlert(false);
+                                setLoading(false);
                             }, 4000);
                         }
 
@@ -297,11 +300,12 @@ const CadastroCliente = () => {
                     }
                     catch (error) {
                         tipoAlert = 3;
-                        mensagemAlert = "Erro no servidor!"
+                        mensagemAlert = "Erro de requisição!"
                         setmostrarAlert(true);
 
                         setTimeout(() => {
                             setmostrarAlert(false);
+                            setLoading(false);
                         }, 4000);
                         console.error(error);
                     }

@@ -1,0 +1,56 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --sh-home-font-family: "Nunito", sans-serif;
+
+    --sh-home-cor-primaria: #fff;
+    --sh-home-cor-secundaria: #0075FF;
+    --sh-home-cor-terciaria: #000;
+    --sh-home-cor-quaternaria: #35FF62;
+    --sh-home-cor-textos: #494949;
+    --sh-home-cor-background: #26466B;
+    --sh-home-cor-background-dois: #0089e0;
+
+    --sh-home-padding: 0 10px;
+    --sh-home-margin: 30px 0;
+
+
+    --sh-home-font-size-titulos: 1.4rem;
+    --sh-home-font-size-subtitulos: 1.2rem;
+    --sh-home-font-size-textos: 1rem;
+}
+
+@keyframes alertsAnim {
+    from {
+        right: -100%;
+    }
+    10% {
+        right: 0;
+    }
+    90% {
+        right: 0;
+    }
+    to {
+        right: -100%;
+    }
+}
+
+& .sh-main {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+
+    & .sh-alerts {
+        width: max-content;
+        padding: 2px;
+        position: absolute;
+        top: 0;
+        right: -100%;
+        z-index: 1000;
+        animation: alertsAnim 4s linear;
+    }
+}

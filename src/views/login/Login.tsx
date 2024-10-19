@@ -3,111 +3,207 @@ import { Link, useNavigate } from "react-router-dom";
 import './Login.css';
 
 // Components
-import logo from '../../assets/icons/logoLogin.svg';
+import logoImg from '../../assets/login/icons/logo.svg';
 import imgDescricao from '../../assets/icons/descricao.svg';
+import tituloPaginaImg from '../../assets/login/icons/tituloLogin.svg'
+import entrarButtom from '../../assets/login/icons/entrar.svg';
+import homeImg from '../../assets/login/icons/home.svg';
 import imgLogin from '../../assets/icons/btn-login.svg';
 import Loading from "../../components/loading/Loading";
-import { Box, Button, ButtonBase, FilledInput, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, SxProps, TextField, Theme } from "@mui/material";
+import { Alert, Box, Button, ButtonBase, FilledInput, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, SxProps, TextField, Theme } from "@mui/material";
 import { Edit, Visibility, VisibilityOff } from "@mui/icons-material";
 
+const styledTextField = {
+    '& .MuiInputBase-input': {
+        fontSize: '1rem',
+        fontFamily: '"Nunito", sans-serif;',
+        color: '#000'
+    },
+};
+
+const ShAlert = () => {
+    return (
+        <>
+            {tipoAlert === 0 &&
+                <Alert severity="success">
+                    {mensagemAlert}
+                </Alert>
+            }
+
+            {tipoAlert === 1 &&
+                <Alert severity="info">
+                    {mensagemAlert}
+                </Alert>
+            }
+
+            {tipoAlert === 2 &&
+                <Alert severity="warning">
+                    {mensagemAlert}
+                </Alert>
+            }
+
+            {tipoAlert === 3 &&
+                <Alert severity="error">
+                    {mensagemAlert}
+                </Alert>
+            }
+        </>
+    )
+}
+
+let mensagemAlert = "";
+let tipoAlert = 0;
+
+
 const Login = () => {
-    const [removeLoading, setRemoveLoading] = useState(false);
-    const [identificador, setIdentificador] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
     const pagina = useNavigate();
-
-    const mudarIndentificador = (event: any) => {
-        setIdentificador(event.target.value);
-    }
-
-    const mudarSenha = (event: any) => {
-        setSenha(event.target.value);
-    }
+    const [mostrarAlert, setMostrarAlert] = useState(false);
 
     async function login() {
-        const formData = new FormData();
-        formData.append('acao', 'login');
-        formData.append('cpf', identificador);
-        formData.append('senha', senha);
+        if ((cpf == '') || (senha == '')) {
+            tipoAlert = 2;
+            mensagemAlert = "Preencha todos os campos!"
+            setMostrarAlert(true);
+            setTimeout(() => {
+                setMostrarAlert(false);
+            }, 4000);
+        }
+        else {
+            try {
+                setLoading(true);
+                const formData = new FormData();
+                formData.append('acao', 'login');
+                formData.append('cpf', `${cpf}`);
+                formData.append('senha', senha);
 
-        fetch('https://jobsondeveloper.site/cadastro_login.php', {
-            method: 'POST',
-            mode: 'cors',
-            body: formData
-        })
-            .then((resp) => resp.json())
-            .then((data) => {
-                console.log(data);
+                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                });
 
-                if (data.status === 201) {
-                    localStorage.setItem('usuário', data.data.Usuarioid);
+                const response = await request.json();
 
-                    if (data.data.type === 0) {
-                        pagina('/home-cliente');
-                    }
+                if (response.status === 202) {
+                    tipoAlert = 0;
+                    mensagemAlert = "Bem vindo!"
+                    setMostrarAlert(true);
+                    setCpf('');
+                    setSenha(''); 
+                    
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        setLoading(false);
 
-                    if (data.data.type === 1) {
-                        pagina('/home-freelancer');
-                    }
+                        sessionStorage.setItem('shUserLogId', `${response.data.id}`);
+                        sessionStorage.setItem('shUserLogTipo', `${response.data.tipo}`);
+
+                        if(response.data.tipo === '1') {
+                            pagina('/home-cliente');
+                        }
+                        else {
+                            pagina('/home-freelancer');
+                        }
+                    }, 4000);
+
+                }
+                else if (response.status === 400) {
+                    tipoAlert = 2;
+                    mensagemAlert = "Usuário ou senha incorretos!"
+                    setMostrarAlert(true);
+
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        setLoading(false);
+                    }, 4000);
+                }
+                else {
+                    console.log(response.status)
+                    tipoAlert = 3;
+                    mensagemAlert = "Erro ao logar no site!"
+                    setMostrarAlert(true);
+
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        setLoading(false);
+                    }, 4000);
                 }
 
-                setRemoveLoading(true);
-            });
+
+            }
+            catch (error) {
+                tipoAlert = 3;
+                mensagemAlert = "Erro de requisição!"
+                setMostrarAlert(true);
+
+                setTimeout(() => {
+                    setMostrarAlert(false);
+                    setLoading(false);
+                }, 4000);
+                console.error(error);
+            }
+        }
     }
 
     useEffect(() => {
         setTimeout(() => {
-            setRemoveLoading(true);
+            setLoading(false);
         }, 2000);
     }, []);
 
-    const [showPassword, setShowPassword] = React.useState(false);
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
-
-    const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
-
     return (
-        <section className="sh-login">
-            {!removeLoading && <Loading />}
+        <main className="sh-login">
+            {loading && <Loading />}
 
-            <ul className="sh-login-formulario">
-                <li className="sh-formulario-item sh-formulario-header">
+            <section className="sh-formulario-login">
+                <article className="sh-login-header">
+                    <Link to="/"><img src={logoImg} alt="" className="sh-login-logoImg" /></Link>
+                    <img src={tituloPaginaImg} alt="" className="sh-login-tituloPagina" />
+                </article>
 
-                    <div className="sh-header-logo">
-                        <Link to="/">
-                            <img src={logo} alt="" className="sh-header-logo-img" />
-                        </Link>
-                    </div>
-
-                    <div className="sh-header-descricao">
-                        <img src={imgDescricao} alt="" className="sh-descricao-img" />
-                    </div>
-                </li>
-
-                <li className="sh-formulario-item sh-formulario-main">
+                <div className="sh-dados-login">
                     <div className="sh-formulario-main-content">
-                        <TextField id="sh_user" label="CPF/CNPJ" variant="standard" className="sh-formulario-data-text" />
+                        <TextField
+                            id="sh_user"
+                            label="CPF"
+                            variant="standard"
+                            className="sh-formulario-data-text"
+                            sx={styledTextField}
+                            onChange={((e) => { setCpf(e.target.value) })}
+                            defaultValue=""
+                        />
                     </div>
-
                     <div className="sh-formulario-main-content">
-                        <TextField id="sh_password" label="Senha" variant="standard" type="password" className="sh-formulario-data-text" />
+                        <TextField
+                            id="sh_password"
+                            label="Senha"
+                            variant="standard"
+                            type="password"
+                            className="sh-formulario-data-text"
+                            sx={styledTextField}
+                            onChange={((e) => { setSenha(e.target.value) })}
+                            defaultValue=""
+                        />
                     </div>
-                </li>
+                </div>
 
-                <li className="sh-formulario-item sh-formulario-footer">
-                    <button type="button" className="sh-footer-btn" onClick={login}>
-                        <img src={imgLogin} alt="" className="sh-footer-btn-img" />
+                <article className="sh-login-buttons">
+                    <Link to="/" className="sh-login-button-home-link"> <img src={homeImg} alt="Butão para voltar para a home" className="sh-login-button-home" /> </Link>
+                    <button type="button" className="sh-login-button" onClick={login}>
+                        <img src={entrarButtom} alt="" className="sh-footer-btn-img" />
                     </button>
-                </li>
-            </ul>
-        </section>
+                </article>
+            </section>
+
+            {mostrarAlert &&
+                <div className="sh-alerts">
+                    <ShAlert />
+                </div>
+            }
+        </main>
     )
 }
 
