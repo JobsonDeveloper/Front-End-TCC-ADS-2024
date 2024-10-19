@@ -204,7 +204,7 @@ const CadastroCliente = () => {
     async function cadastraCliente(e: any) {
         e.preventDefault();
 
-        if ((email && senha && confirmSenha) != "") {
+        if ((email != "") && (senha != "") && (confirmSenha != "")) {
             if (senha != confirmSenha) {
                 tipoAlert = 2;
                 mensagemAlert = "As senhas estão diferentes!"
@@ -333,7 +333,7 @@ const CadastroCliente = () => {
             }
 
             if (activeStep === 0) {
-                if ((nome || sobrenome || cpfCnpj || nascimento) === "") {
+                if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
                     tipoAlert = 2;
                     mensagemAlert = "Preencha todos os campos!"
                     setmostrarAlert(true);
@@ -350,7 +350,7 @@ const CadastroCliente = () => {
 
 
             if (activeStep === 1) {
-                if ((rua || numero || cidade || ddd || telefone) === "") {
+                if ((rua === "") || (numero === "") || (cidade === "") || (ddd === "") || (telefone === "")) {
                     tipoAlert = 2;
                     mensagemAlert = "Preencha todos os campos!"
                     setmostrarAlert(true);
