@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './CadastroCliente.css';
 import { Alert, Autocomplete, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, FormControlLabel, IconButton, Input, InputAdornment, InputLabel, Slide, Step, StepLabel, Stepper, TextField } from "@mui/material";
 import { color, fontFamily, fontSize, fontWeight, Stack } from "@mui/system";
@@ -75,19 +75,19 @@ const ShAlert = () => {
                     {mensagemAlert}
                 </Alert>
             }
-            
+
             {tipoAlert === 1 &&
                 <Alert severity="info">
                     {mensagemAlert}
                 </Alert>
             }
-            
+
             {tipoAlert === 2 &&
                 <Alert severity="warning">
                     {mensagemAlert}
                 </Alert>
             }
-            
+
             {tipoAlert === 3 &&
                 <Alert severity="error">
                     {mensagemAlert}
@@ -118,6 +118,7 @@ let tipoAlert = 0;
 const CadastroCliente = () => {
     const [loading, setLoading] = useState(true);
     const [activeStep, setActiveStep] = useState(0);
+    const pagina = useNavigate();
 
     // Form de dados básicos
     const [nome, setNome] = useState('');
@@ -203,73 +204,121 @@ const CadastroCliente = () => {
     async function cadastraCliente(e: any) {
         e.preventDefault();
 
-        if (termosAceitos) {
-            tipoAlert = 0;
-            mensagemAlert = "Usuário cadastrado!"
+        if ((email && senha && confirmSenha) != "") {
+            if (senha != confirmSenha) {
+                tipoAlert = 2;
+                mensagemAlert = "As senhas estão diferentes!"
+                setmostrarAlert(true);
 
-            setmostrarAlert(true);
+                setTimeout(() => {
+                    setmostrarAlert(false);
+                    return;
+                }, 4000);
+            }
+            else {
+                if (!termosAceitos) {
+                    tipoAlert = 2;
+                    mensagemAlert = "É preciso aceitar os termos de uso!"
 
-            setTimeout(() => {
-                setmostrarAlert(false);
-            }, 4000);
+                    setmostrarAlert(true);
+
+                    setTimeout(() => {
+                        setmostrarAlert(false);
+                        return;
+                    }, 4000);
+                }
+                else {
+                    try {
+                        setLoading(true);
+                        const shDate = new Date(nascimento);
+                        let nascimentoDia = `${shDate.getDate()}`;
+                        let nascimentoMes = `${shDate.getMonth() + 1}`;
+                        let nascimentoAno = `${shDate.getFullYear()}`;
+
+                        if (nascimentoDia.length < 2) {
+                            nascimentoDia = `0${nascimentoDia}`;
+                        }
+
+                        if (nascimentoMes.length < 2) {
+                            nascimentoMes = `0${nascimentoMes}`;
+                        }
+
+                        const formData = new FormData();
+                        formData.append('acao', 'cadastro');
+                        formData.append('nome', nome);
+                        formData.append('sobrenome', sobrenome);
+                        formData.append('cpf', cpfCnpj);
+                        formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
+                        formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
+                        formData.append('numero', `(${ddd}) ${telefone}`);
+                        formData.append('email', email);
+                        formData.append('senha', senha);
+
+                        const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                            method: 'POST',
+                            mode: 'cors',
+                            body: formData
+                        });
+
+                        const response = await request.json();
+
+                        if (response.status === 201) {
+                            tipoAlert = 0;
+                            mensagemAlert = "Cadastro realizado!"
+                            setmostrarAlert(true);
+
+                            setTimeout(() => {
+                                setmostrarAlert(false);
+                                pagina('/login');
+                            }, 4000);
+
+                        }
+                        else if (response.status === 400) {
+                            tipoAlert = 2;
+                            mensagemAlert = "CPF inválido!"
+                            setmostrarAlert(true);
+
+                            setTimeout(() => {
+                                setmostrarAlert(false);
+                            }, 4000);
+                        }
+                        else {
+                            console.log(response.status)
+                            tipoAlert = 3;
+                            mensagemAlert = "Erro ao cadastrar!"
+                            setmostrarAlert(true);
+
+                            setTimeout(() => {
+                                setmostrarAlert(false);
+                            }, 4000);
+                        }
+
+
+                    }
+                    catch (error) {
+                        tipoAlert = 3;
+                        mensagemAlert = "Erro no servidor!"
+                        setmostrarAlert(true);
+
+                        setTimeout(() => {
+                            setmostrarAlert(false);
+                        }, 4000);
+                        console.error(error);
+                    }
+                }
+            }
+
         }
-
-        if (!termosAceitos) {
+        else {
             tipoAlert = 2;
-            mensagemAlert = "É preciso aceitar os termos de uso!"
-
+            mensagemAlert = "Preencha todos os campos!"
             setmostrarAlert(true);
 
             setTimeout(() => {
                 setmostrarAlert(false);
+                return;
             }, 4000);
         }
-
-        // try {
-        //     const shDate = new Date(nascimento);
-        //     let nascimentoDia = `${shDate.getDate()}`;
-        //     let nascimentoMes = `${shDate.getMonth() + 1}`;
-        //     let nascimentoAno = `${shDate.getFullYear()}`;
-
-        //     if (nascimentoDia.length < 2) {
-        //         nascimentoDia = `0${nascimentoDia}`;
-        //     }
-
-        //     if (nascimentoMes.length < 2) {
-        //         nascimentoMes = `0${nascimentoMes}`;
-        //     }
-
-        //     const formData = new FormData();
-        //     formData.append('acao', 'cadastro');
-        //     formData.append('nome', nome);
-        //     formData.append('sobrenome', sobrenome);
-        //     formData.append('cpf', cpfCnpj);
-        //     formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
-        //     formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
-        //     formData.append('numero', `(${ddd}) ${telefone}`);
-        //     formData.append('email', email);
-        //     formData.append('senha', senha);
-
-        //     const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-        //         method: 'POST',
-        //         mode: 'cors',
-        //         body: formData
-        //     });
-
-        //     const response = await request.json();
-
-        //     if (response.status === 201) {
-        //         console.log(response.status);
-        //         console.log(response.data);
-        //     }
-        //     else {
-        //         console.log(console.log('O cadastro não pôde ser realizado.'))
-        //     }
-
-        // }
-        // catch (error) {
-        //     console.error(error);
-        // }
     }
 
     const mudarStep = (variante: string) => {
@@ -279,7 +328,39 @@ const CadastroCliente = () => {
                 return;
             }
 
-            setActiveStep((currentStep) => currentStep + 1);
+            if (activeStep === 0) {
+                if ((nome || sobrenome || cpfCnpj || nascimento) === "") {
+                    tipoAlert = 2;
+                    mensagemAlert = "Preencha todos os campos!"
+                    setmostrarAlert(true);
+
+                    setTimeout(() => {
+                        setmostrarAlert(false);
+                        return;
+                    }, 4000);
+                }
+                else {
+                    setActiveStep((currentStep) => currentStep + 1);
+                }
+            }
+
+
+            if (activeStep === 1) {
+                if ((rua || numero || cidade || ddd || telefone) === "") {
+                    tipoAlert = 2;
+                    mensagemAlert = "Preencha todos os campos!"
+                    setmostrarAlert(true);
+
+                    setTimeout(() => {
+                        setmostrarAlert(false);
+                        return;
+                    }, 4000);
+                }
+                else {
+                    setActiveStep((currentStep) => currentStep + 1);
+                }
+            }
+
         }
         else {
             if (activeStep <= 0) {
@@ -521,7 +602,8 @@ const CadastroCliente = () => {
 
                                 <div className="sh-termosDeServico">
                                     <div className="sh-termosDeUso-checkbox">
-                                        <Checkbox onChange={alteraTermosAceitos} />
+                                        {termosAceitos && <Checkbox defaultChecked onChange={alteraTermosAceitos} />}
+                                        {!termosAceitos && <Checkbox onChange={alteraTermosAceitos} />}
                                         <button onClick={handleClickOpen} className="sh-termosDeUso-checkbox-link">Aceito os <strong>termos de uso</strong></button>
                                     </div>
 

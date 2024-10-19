@@ -209,6 +209,7 @@
         position: absolute;
         top: 0;
         right: -100%;
+        z-index: 1000;
         animation: alertsAnim 4s linear;
     }
 }
