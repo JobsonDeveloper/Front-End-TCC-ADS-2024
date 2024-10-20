@@ -14,6 +14,7 @@
     --sh-cadastro-cor-textos: #494949;
     --sh-cadastro-cor-background: #26466B;
     --sh-cadastro-cor-background-dois: #0089e0;
+    --sh-cadastro-cor-background-components: #356FB0;
 
     --sh-cadastro-padding: 0 10px;
     --sh-cadastro-margin: 30px 0;
@@ -28,12 +29,15 @@
     from {
         right: -100%;
     }
+
     10% {
         right: 0;
     }
+
     90% {
         right: 0;
     }
+
     to {
         right: -100%;
     }
@@ -131,18 +135,49 @@
                 }
 
                 & .sh-dados-fotos {
-                    background-color: red;
-                    
-                    & .sh-dados-fotos-input {
-                        display: none;
+                    display: grid;
+                    gap: 20px;
+                    list-style-type: none;
+                    padding: 0;
+                    column-gap: 10px;
+
+                    & .sh-dados-foto-item {
+                        display: flex;
+                        align-items: center;
+                        column-gap: 15px;
+                        border-bottom: 1px solid var(--sh-cadastro-cor-textos);
+
+                        & .sh-dados-icon-upload {
+                            color: rgba(0, 0, 0, 0.38);
+                            cursor: pointer;
+                        }
+
+                        & .sh-dados-icon-upload-complete {
+                            color: #1976d2;
+                            cursor: pointer;
+                        }
+
+                        & .sh-dados-fotos-label {
+                            padding: 3px;
+                            height: 60px;
+                            display: flex;
+                            align-items: center;
+                            border-radius: 10px;
+                            color: var(--sh-cadastro-cor-textos);
+                            cursor: pointer;
+                        }
+
+                        & .sh-dados-fotos-input {
+                            display: none;
+                        }
                     }
                 }
 
                 & .sh-dados-seguranca {
-                    
+
                     & .sh-termosDeServico {
                         display: flex;
-                        
+
                         & .sh-termosDeUso-checkbox {
                             width: 100%;
                             display: flex;
@@ -183,7 +218,7 @@
                 }
             }
 
-            & .sh-cadastro-button-elemento{
+            & .sh-cadastro-button-elemento {
                 border: none;
                 outline: none;
                 background-color: transparent;
@@ -192,7 +227,7 @@
                 & .sh-cadastro-button-proximo {
                     width: 45px;
                     cursor: pointer;
-    
+
                     &:hover {
                         filter: drop-shadow(0px 0px 3px #000);
                     }

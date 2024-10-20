@@ -1,7 +1,7 @@
 import './CadastroFreelancer.css'
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Alert, Autocomplete, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, IconButton, Input, InputAdornment, InputLabel, Slide, Step, StepLabel, Stepper, TextField } from "@mui/material";
+import { Alert, Autocomplete, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, IconButton, Input, InputAdornment, InputLabel, Slide, Step, StepLabel, Stepper, SvgIcon, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -17,6 +17,13 @@ import tituloPaginaImg from '../../assets/CadastroFreelancer/icons/cadastroFreel
 import Loading from "../../components/loading/Loading";
 import dayjs from "dayjs";
 import { TransitionProps } from "@mui/material/transitions";
+
+// Icons Material UI
+import UploadIcon from '@mui/icons-material/Upload';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { IMaskInput } from 'react-imask';
+
 
 // --------------- ESTILIZAÇÃO DE COMPONENTES DO MATERIAL UI
 
@@ -142,7 +149,7 @@ const CadastroFreelancer = () => {
                 mes = `0${mes}`;
             }
 
-            dataNascimento = `${dia}/${mes}/${ano}`;
+            dataNascimento = `${mes}/${dia}/${ano}`;
 
         }
 
@@ -162,13 +169,16 @@ const CadastroFreelancer = () => {
     const capturaValoresSelect = { options: todosOsEstados.map((option) => option) };
 
     // Do form de imagens
-    const [imagemRg, setImagemRg] = useState('');
-    const pegaImagem = (e: any) => {
-        let imgFrenteRg = e.target.files;
+    const [imgFrentRg, setImgFrentRg] = useState('');
+    const [imgVersoRg, setImgVersoRg] = useState('');
+    const [imgAntecedentes, setImgAntecedentes] = useState('');
+
+    const pegaImgRgFrente = (documento: any) => {
+        let imgFrenteRg = documento.target.files;
         let tipoImgFrenteRg = imgFrenteRg[0].type;
 
         if (imgFrenteRg < 1) {
-            tipoAlert = 3;
+            tipoAlert = 2;
             mensagemAlert = "A imagem não foi fornecida!"
             setMostrarAlert(true);
 
@@ -179,11 +189,9 @@ const CadastroFreelancer = () => {
         else if (
             (tipoImgFrenteRg != 'image/png')
             && (tipoImgFrenteRg != 'image/jpeg')
-            && (tipoImgFrenteRg != 'image/webp')
-            && (tipoImgFrenteRg != 'image/svg')
         ) {
-            tipoAlert = 3;
-            mensagemAlert = "Formatos aceitos: png, jpeg, svg ou webp"
+            tipoAlert = 2;
+            mensagemAlert = "Formatos aceitos: PNG ou JPEG"
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -191,8 +199,70 @@ const CadastroFreelancer = () => {
             }, 4000);
         }
         else {
+            setImgFrentRg(imgFrenteRg);
             console.log(imgFrenteRg);
         }
+    }
+    const pegaImgRgVerso = (documento: any) => {
+        let imgVersoRg = documento.target.files;
+        let tipoImgVersoRg = imgVersoRg[0].type;
+
+        if (imgVersoRg < 1) {
+            tipoAlert = 2;
+            mensagemAlert = "A imagem não foi fornecida!"
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+            }, 4000);
+        }
+        else if (
+            (tipoImgVersoRg != 'image/png')
+            && (tipoImgVersoRg != 'image/jpeg')
+        ) {
+            tipoAlert = 3;
+            mensagemAlert = "Formatos aceitos: PNG ou JPEG"
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+            }, 4000);
+        }
+        else {
+            setImgVersoRg(imgVersoRg);
+            console.log(imgVersoRg);
+        }
+    }
+    const pegaImgAntecedentes = (documento: any) => {
+        let imgAntecedentes = documento.target.files;
+        let tipoImgAntecedentes = imgAntecedentes[0].type;
+
+        if (imgAntecedentes < 1) {
+            tipoAlert = 3;
+            mensagemAlert = "A imagem não foi fornecida!"
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+            }, 4000);
+        }
+        else if (
+            (tipoImgAntecedentes != 'image/png')
+            && (tipoImgAntecedentes != 'image/jpeg')
+        ) {
+            tipoAlert = 3;
+            mensagemAlert = "Formatos aceitos: PNG ou JPEG"
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+            }, 4000);
+        }
+        else {
+            setImgAntecedentes(imgAntecedentes);
+            console.log(imgAntecedentes);
+        }
+
     }
 
     // Do form de seguranca
@@ -281,6 +351,10 @@ const CadastroFreelancer = () => {
                 nascimentoMes = `0${nascimentoMes}`;
             }
 
+            console.log(imgFrentRg);
+            console.log(imgVersoRg);
+            console.log(imgAntecedentes);
+
             // try {
             //     setLoading(true);
             //     const formData = new FormData();
@@ -355,46 +429,113 @@ const CadastroFreelancer = () => {
     const mudarStep = (variante: string) => {
 
         if (variante === 'proximo') {
-            // if (activeStep === 0) {
-            //     if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
-            //         tipoAlert = 2;
-            //         mensagemAlert = "Preencha todos os campos!"
-            //         setMostrarAlert(true);
+            if (activeStep === 0) {
+                if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
+                    tipoAlert = 2;
+                    mensagemAlert = "Preencha todos os campos!"
+                    setMostrarAlert(true);
 
-            //         setTimeout(() => {
-            //             setMostrarAlert(false);
-            //             return;
-            //         }, 4000);
-            //     }
-            //     else {
-            setActiveStep((currentStep) => currentStep + 1);
-            //     }
-            // }
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        return;
+                    }, 4000);
+                }
+                else {
+                    const hoje = new Date();
+                    const diaAtual = hoje.getDate();
+                    const mesAtual = hoje.getMonth() + 1;
+                    const anoDeVerificacao = hoje.getFullYear() - 18;
 
-            // if (activeStep === 1) {
-            //     if ((rua === "") || (numero === "") || (cidade === "") || (ddd === "") || (telefone === "")) {
-            //         tipoAlert = 2;
-            //         mensagemAlert = "Preencha todos os campos!"
-            //         setMostrarAlert(true);
+                    let dataNascimento = new Date(nascimento);
+                    let diaNascimento = dataNascimento.getDate();
+                    let mesNascimento = dataNascimento.getMonth() + 1;
+                    let anoNascimento = dataNascimento.getFullYear();
 
-            //         setTimeout(() => {
-            //             setMostrarAlert(false);
-            //             return;
-            //         }, 4000);
-            //     }
-            //     else {
-            //         setActiveStep((currentStep) => currentStep + 1);
-            //     }
-            // }
+                    if (anoNascimento === anoDeVerificacao) {
+                        if (mesNascimento === mesAtual) {
+                            if (diaNascimento === diaAtual) {
+                                setActiveStep((currentStep) => currentStep + 1);
+                                return;
+                            }
+                            else {
+                                tipoAlert = 2;
+                                mensagemAlert = "Você é menor de idade!"
+                                setMostrarAlert(true);
 
-            // if(activeStep === 2) {
+                                setTimeout(() => {
+                                    setMostrarAlert(false);
+                                    return;
+                                }, 4000);
+                            }
+                        }
+                        else if (mesNascimento < mesAtual) {
+                            setActiveStep((currentStep) => currentStep + 1);
+                            return;
+                        }
+                        else {
+                            tipoAlert = 2;
+                            mensagemAlert = "Você é menor de idade!"
+                            setMostrarAlert(true);
 
-            // }
+                            setTimeout(() => {
+                                setMostrarAlert(false);
+                                return;
+                            }, 4000);
+                        }
+                    }
+                    else if (anoNascimento < anoDeVerificacao) {
+                        setActiveStep((currentStep) => currentStep + 1);
+                        return;
+                    }
+                    else {
+                        tipoAlert = 2;
+                        mensagemAlert = "Você é menor de idade!"
+                        setMostrarAlert(true);
 
-            // if (activeStep >= 3) {
-            //     alert('fff');
-            //     return;
-            // }
+                        setTimeout(() => {
+                            setMostrarAlert(false);
+                            return;
+                        }, 4000);
+                    }
+                }
+            }
+
+            if (activeStep === 1) {
+                if ((rua === "") || (numero === "") || (cidade === "") || (ddd === "") || (telefone === "")) {
+                    tipoAlert = 2;
+                    mensagemAlert = "Preencha todos os campos!"
+                    setMostrarAlert(true);
+
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        return;
+                    }, 4000);
+                }
+                else {
+                    setActiveStep((currentStep) => currentStep + 1);
+                }
+            }
+
+            if (activeStep === 2) {
+                if ((imgFrentRg === "") || (imgVersoRg === "") || (imgAntecedentes === "")) {
+                    tipoAlert = 2;
+                    mensagemAlert = "Forneça as fotos solicitadas!"
+                    setMostrarAlert(true);
+
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        return;
+                    }, 4000);
+                }
+                else {
+                    setActiveStep((currentStep) => currentStep + 1);
+                }
+            }
+
+            if (activeStep >= 3) {
+                alert('fff');
+                return;
+            }
 
         }
         else {
@@ -431,7 +572,6 @@ const CadastroFreelancer = () => {
                             <article className="sh-dados sh-dados-iniciais">
 
                                 <TextField
-                                    id="standard-basic-nome"
                                     label="Nome"
                                     variant="standard"
                                     type="text"
@@ -441,7 +581,6 @@ const CadastroFreelancer = () => {
                                 />
 
                                 <TextField
-                                    id="standard-basic-sobrenome"
                                     label="Sobrenome"
                                     variant="standard"
                                     type="text"
@@ -451,7 +590,6 @@ const CadastroFreelancer = () => {
                                 />
 
                                 <TextField
-                                    id="standard-basic-cpfCnpj"
                                     label="CPF/CNPJ"
                                     variant="standard"
                                     type="number"
@@ -463,7 +601,6 @@ const CadastroFreelancer = () => {
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     {dataNascimento &&
                                         <DateField
-                                            id="TESTEEEEE"
                                             label="Nascimento"
                                             variant="standard"
                                             format="DD/MM/YYYY"
@@ -580,19 +717,46 @@ const CadastroFreelancer = () => {
 
                         {/* Antecendentes criminais e RG */}
                         {activeStep == 2 &&
-                            <article className='sh-dados sh-dados-fotos'>
-                                <label htmlFor="frenteRG">Frente do RG</label>
-                                <input type="file" className='sh-dados-fotos-input' id='frenteRG' onChange={pegaImagem} />
-                                <input type="file" className='sh-dados-fotos-input' />
-                                <input type="file" className='sh-dados-fotos-input' />
-                            </article>
+                            <ul className='sh-dados sh-dados-fotos'>
+                                <li className='sh-dados-foto-item'>
+                                    {imgFrentRg &&
+                                        <CheckCircleIcon className='sh-dados-icon-upload-complete' />
+                                    }
+                                    {!imgFrentRg &&
+                                        <AddAPhotoIcon className='sh-dados-icon-upload' />
+                                    }
+                                    <label htmlFor="frenteRG" className='sh-dados-fotos-label'>Foto da frente do RG</label>
+                                    <input type="file" className='sh-dados-fotos-input' onChange={pegaImgRgFrente} />
+                                </li>
+
+                                <li className='sh-dados-foto-item'>
+                                    {imgVersoRg &&
+                                        <CheckCircleIcon className='sh-dados-icon-upload-complete' />
+                                    }
+                                    {!imgVersoRg &&
+                                        <AddAPhotoIcon className='sh-dados-icon-upload' />
+                                    }
+                                    <label htmlFor="versoRG" className='sh-dados-fotos-label'>Foto do verso do RG</label>
+                                    <input type="file" className='sh-dados-fotos-input' onChange={pegaImgRgVerso} />
+                                </li>
+
+                                <li className='sh-dados-foto-item'>
+                                    {imgAntecedentes &&
+                                        <CheckCircleIcon className='sh-dados-icon-upload-complete' />
+                                    }
+                                    {!imgAntecedentes &&
+                                        <AddAPhotoIcon className='sh-dados-icon-upload' />
+                                    }
+                                    <label htmlFor="antecedCriminais" className='sh-dados-fotos-label'>Antecedentes criminais</label>
+                                    <input type="file" className='sh-dados-fotos-input' onChange={pegaImgAntecedentes} />
+                                </li>
+                            </ul>
                         }
 
                         {/* E-mail e senha */}
                         {activeStep == 3 &&
                             <article className="sh-dados sh-dados-seguranca">
                                 <TextField
-                                    id="standard-basic-email"
                                     label="E-mail"
                                     variant="standard"
                                     type="email"
@@ -604,7 +768,6 @@ const CadastroFreelancer = () => {
                                 <FormControl variant="standard">
                                     <InputLabel htmlFor="sh_label_senha_input">Senha</InputLabel>
                                     <Input
-                                        id="sh_label_senha_input"
                                         type={mostrarSenha ? 'text' : 'password'}
                                         defaultValue={senha}
                                         onChange={((e) => { setSenha(e.target.value) })}
@@ -623,11 +786,9 @@ const CadastroFreelancer = () => {
                                     />
                                 </FormControl>
 
-
                                 <FormControl variant="standard">
                                     <InputLabel htmlFor="sh_label_confirm_senha_input">Confirmar senha</InputLabel>
                                     <Input
-                                        id="sh_label_confirm_senha_input"
                                         type={mostrarConfirmSenha ? 'text' : 'password'}
                                         defaultValue={confirmSenha}
                                         onChange={((e) => { setConfirmSenha(e.target.value) })}
