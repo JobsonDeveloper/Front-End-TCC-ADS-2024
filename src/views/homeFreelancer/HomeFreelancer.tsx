@@ -8,9 +8,22 @@ import ClientesEmDestaque from "../../components/clientesEmDestaque/ClientesEmDe
 import Servicos from '../../components/servicos/Servicos';
 import Duvidas from "../duvidas/Duvidas";
 import { Accordion } from "react-bootstrap";
-import { Paper } from "@mui/material";
+import { Paper, TextField } from "@mui/material";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
+import backgroundApresentacaoUm from '../../assets/FreelaHome/backgrounds/background-apresentacao-lg.webp'
+import backgroundApresentacaoDois from '../../assets/FreelaHome/backgrounds/imagem-apresentacao.webp'
+import backgroundApresentacaoMd from '../../assets/FreelaHome/backgrounds/background-apresentacaoMd.png'
+import { Link } from "react-router-dom";
+import ServicosDisponiveis from "../../components/servicosdisponiveis/ServicosDisponiveis";
+
+const styledTextField = {
+    '& .MuiInputBase-input': {
+        fontSize: '1rem',
+        fontFamily: '"Nunito", sans-serif;',
+        color: '#000'
+    },
+};
 
 const ultimosServicos = [
     {
@@ -131,6 +144,33 @@ const cliDestaque = [
     },
 ];
 
+const servicosAdequados = [
+    {
+        id: '1',
+        imgCliente: 'base64',
+        tag: 'Serviços gerais',
+        descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
+        remuneracao: '250,00',
+        tipoDeRemuneracao: 'Diária',
+        data: '2024-12-10',
+        endereco: 'Rua porto alegre numero 12 paulista - PE'
+    },
+    {
+        id: '2',
+        imgCliente: 'base64',
+        tag: 'Serviços gerais',
+        descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
+        remuneracao: '250,00',
+        tipoDeRemuneracao: 'Diária',
+        data: '2024-12-10',
+        endereco: 'Rua porto alegre numero 12 paulista - PE'
+    },
+];
+
+function teste(dados: any) {
+    console.log(dados.id);
+}
+
 const HomeFreelancer = () => {
     const [loading, setLoading] = useState(true);
 
@@ -146,6 +186,47 @@ const HomeFreelancer = () => {
 
             <article className="sh-freela-header-apresentacao">
                 {!loading && <Header usuario={2} />}
+
+                <article className='sh-apresentacao'>
+                    <article className="sh-apresentacao-um">
+                        <img src={backgroundApresentacaoUm} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-lg-none" />
+                        <img src={backgroundApresentacaoMd} alt="Foto de pessoa segurando um notebook" className="sh-apresentacao-img d-none d-lg-flex" />
+                    </article>
+
+                    <article className="sh-apresentacao-textos d-lg-none">
+                        <h2 className="sh-apresentacao-titulos">Faça sua carreira decolar! <br /> Conquiste o mercado conosco</h2>
+                        <p className="sh-apresentacao-paragrafos">
+                            Aqui você tem a oportunidade de encontrar novos clientes, se tornar prestigiado e requisitado por muitas pessoas.
+                        </p>
+                        <p className="sh-apresentacao-paragrafos">
+                            Encontre o serviço certo e seja mais um Freelancer de sucesso!
+                        </p>
+                    </article>
+
+                    {/* Button para freelancers */}
+                    <article className="sh-apresentacao-button d-sm-none">
+                        <div className="sh-apresentacao-button-item sh-apresentacao-button">
+                            <a href='#sh_ultimas_postagens' className='sh-apresentacao-button-cadastro'>Serviços</a>
+                        </div>
+                    </article>
+
+                    {/* Secundo post */}
+                    <article className="sh-apresentacao-dois d-lg-none">
+                        <div className="sh-apresentacao-dois-container-img" data-aos="fade-right">
+                            <Link to='/cadastro-cliente'><img src={backgroundApresentacaoDois} alt="" className="sh-apresentacao-dois-img d-lg-none" /></Link>
+                        </div>
+
+                        <div className="sh-apresentacao-textos" data-aos="fade-left">
+                            <h1 className="sh-apresentacao-dois-titulos"> Torne-se um cliente reconhecido! </h1>
+                            <p className="sh-apresentacao-dois-textos">
+                                Cadastre já um serviço e economize o seu tempo, nossos freelancers estão prontos para te atender.
+                            </p>
+                            <p className="sh-apresentacao-dois-textos">
+                                Receba avaliações por parte dos nossos freelancer e torne-se uma estrela na Skillhub.
+                            </p>
+                        </div>
+                    </article>
+                </article>
             </article>
 
             <article className="sh-freela-main">
@@ -174,12 +255,20 @@ const HomeFreelancer = () => {
                     <h2 className="sh-show sh-todos-os-servicos-titulo" data-aos="zoom-in">Serviços</h2>
 
                     <div className="sh-todos-os-servicos-info">
-                        <div className="sh-todos-servicos-filtro">Filtro</div>
-                        <ul className="sh-todos-servicos-list">
-                            <li className="sh-todos-os-servicos-item">Servico</li>
-                            <li className="sh-todos-os-servicos-item">Servico</li>
-                            <li className="sh-todos-os-servicos-item">Servico</li>
-                        </ul>
+                        <div className="sh-servicos-filtro">
+                            <TextField
+                                id="sh_user"
+                                label="Filtro"
+                                variant="standard"
+                                className="sh-formulario-data-text"
+                                sx={styledTextField}
+                                // onChange={((e) => { setCpf(e.target.value) })}
+                                defaultValue=""
+                            />
+
+                            <button type="button" className="sh-filtro-button">Pesquisar</button>
+                        </div>
+                        <ServicosDisponiveis data={servicosAdequados}/>
                     </div>
                 </article>
 

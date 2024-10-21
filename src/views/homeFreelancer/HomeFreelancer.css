@@ -29,7 +29,112 @@
     font-family: var(--sh-freelancer-font-family);
 
     & .sh-freela-header-apresentacao {
-        background-color: rgb(184, 184, 249);
+        padding-bottom: 20px;
+
+
+        & .sh-apresentacao {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 0 0 10px 0;
+
+            & .sh-apresentacao-um {
+                width: 100%;
+
+                & .sh-apresentacao-img {
+                    width: 100%;
+                }
+            }
+
+            & .sh-apresentacao-textos {
+                display: flex;
+                flex-direction: column;
+                padding: var(--sh-index-padding);
+                gap: 5px;
+
+                & .sh-apresentacao-titulos {
+                    font-size: var(--sh-index-font-size-titulos);
+                    color: var(--sh-index-cor-terciaria);
+                }
+
+                & .sh-apresentacao-paragrafos {
+                    font-size: var(--sh-index-font-size-textos);
+                    color: var(--sh-index-cor-textos);
+                    margin: 0;
+                }
+            }
+
+            & .sh-apresentacao-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+
+                & .sh-apresentacao-button-item {
+                    & .sh-apresentacao-button-icon {
+                        width: 20px;
+                    }
+
+                    & .sh-invert {
+                        rotate: 180deg;
+                    }
+                }
+
+                & .sh-apresentacao-button {
+                    background-color: var(--sh-index-cor-background-components);
+                    width: 100%;
+
+                    & .sh-apresentacao-button-cadastro {
+                        text-decoration: none;
+                        font-size: var(--sh-index-font-size-titulos);
+                        color: var(--sh-index-cor-primaria);
+                        font-weight: 400;
+                    }
+                }
+            }
+
+            & .sh-apresentacao-dois {
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                margin-top: 20px;
+                overflow-x: hidden;
+
+                & .sh-apresentacao-dois-container-img {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    & .sh-apresentacao-dois-img {
+                        width: 100%;
+                    }
+                }
+
+                & .sh-apresentacao-textos {
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 10px;
+                    padding: var(--sh-index-padding);
+                    gap: 5px;
+
+                    & .sh-apresentacao-dois-titulos {
+                        margin: 0;
+                        padding: 0;
+                        font-size: var(--sh-index-font-size-titulos);
+                        color: var(--sh-index-cor-terciaria);
+                    }
+
+                    & .sh-apresentacao-dois-textos {
+                        padding: 0;
+                        font-size: var(--sh-index-font-size-textos);
+                        color: var(--sh-index-cor-textos);
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
     }
 
     & .sh-freela-main {
@@ -94,7 +199,6 @@
         }
 
         & .sh-todos-servicos {
-            background-color: red;
             display: flex;
             flex-direction: column;
 
@@ -105,7 +209,56 @@
             }
 
             & .sh-todos-os-servicos-info {
-                background-color: gold;
+                display: flex;
+                flex-direction: column;
+                row-gap: 20px;
+                overflow: hidden;
+
+                & .sh-servicos-filtro {
+                    display: flex;
+                    justify-content: end;
+                    height: max-content;
+                    align-items: end;
+                    column-gap: 15px;
+
+                    & .sh-filtro-button {
+                        background-color: var(--sh-freelancer-cor-background-components);
+                        border: none;
+                        border-radius: 5px;
+                        height: max-content;
+                        padding: 5px;
+                        border: 1px solid transparent;
+
+                        &:hover {
+                            border-color: var(--sh-freelancer-cor-terciaria);
+                            color: var(--sh-freelancer-cor-primaria);
+                        }
+                    }
+
+
+                }
+
+                & .sh-todos-servicos-list {
+                    list-style-type: none;
+                    padding: 5px 5px 25px;
+                    margin: 0;
+                    display: grid;
+                    gap: 15px;
+                    justify-content: center;
+
+                    & .sh-todos-os-servicos-item {
+                        text-decoration: none;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+                        padding: 10px;
+                        width: 285px;
+                        height: max-content;
+                        background-color: var(--sh-servicos-cor-primaria);
+                        border-radius: 5px;
+                        box-shadow: #555555 3px 3px 9px;
+                    }
+                }
             }
         }
 

@@ -1,0 +1,89 @@
+:root {
+    --sh-servicosFreela-cor-primaria: #fff;
+    --sh-servicosFreela-cor-secundaria: #0075FF;
+    --sh-servicosFreela-cor-marcadores: #5584E0;
+    --sh-servicosFreela-cor-cards-background-hover: #e3e3e3;
+    --sh-servicosFreela-cor-terciaria: #000;
+    --sh-servicosFreela-cor-quaternaria: #35FF62;
+    --sh-servicosFreela-cor-textos: #494949;
+    --sh-servicosFreela-cor-background-components: #356FB0;
+
+    --sh-servicosFreela-padding: 0 5px;
+    --sh-servicosFreela-margin: 20px 0;
+
+
+    --sh-servicosFreela-font-size-textos: 1rem;
+}
+
+& .sh-servicosFreela-lista {
+    list-style-type: none;
+    padding: 5px 5px 25px;
+    margin: 0;
+    display: flex;
+    overflow-x: auto;
+    justify-content: space-between;
+    gap: 15px;
+    background-image: url('../../assets/index/backgrounds/background-servicos.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        height: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+
+    & .sh-servicosFreela-itens {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        width: max-content;
+        height: 100%;
+        background-color: var(--sh-servicosFreela-cor-primaria);
+        border-radius: 5px;
+        box-shadow: #555555 3px 3px 9px;
+
+        &:hover {
+            background-color: var(--sh-servicosFreela-cor-cards-background-hover);
+        }
+
+        & .sh-itens-data {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 10px;
+            width: 265px;
+
+            & .sh-servicosFreela-img-perfil {
+                width: 30px;
+            }
+
+            & .sh-servicosFreela-data-marcador {
+                margin: 0;
+                background-color: var(--sh-servicosFreela-cor-background-components);
+                font-size: var(--sh-servicosFreela-font-size-textos);
+                color: var(--sh-servicosFreela-cor-primaria);
+                padding: 2px 8px;
+                border-radius: 5px;
+            }
+
+            & .sh-servicosFreela-data-descricao {
+                color: var(--sh-servicosFreela-cor-terciaria);
+                font-size: var(--sh-servicosFreela-font-size-textos);
+                margin: 0;
+
+                /* Limitar tamanho de texto */
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+            }
+        }
+    }
+}
