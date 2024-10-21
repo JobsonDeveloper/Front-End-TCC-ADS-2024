@@ -274,11 +274,11 @@ const CadastroCliente = () => {
                     tipoAlert = 0;
                     mensagemAlert = "Cadastro realizado!"
                     setMostrarAlert(true);
+                    pagina('/login');
 
                     setTimeout(() => {
                         setMostrarAlert(false);
                         setLoading(false);
-                        pagina('/login');
                     }, 4000);
 
                 }

@@ -338,9 +338,11 @@ const CadastroFreelancer = () => {
     };
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
+        if(!requisicao) {
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
+        }
     });
 
     function cadastroFreelancer(e:any) {
@@ -425,6 +427,7 @@ const CadastroFreelancer = () => {
 
                                 try {
                                     setLoading(true);
+                                    setRequisicao(true);
                                     const formData = new FormData();
                                     formData.append('acao', 'cadfreela');
                                     formData.append('nome', nome);
@@ -452,11 +455,12 @@ const CadastroFreelancer = () => {
                                         tipoAlert = 0;
                                         mensagemAlert = "Cadastro realizado!"
                                         setMostrarAlert(true);
+                                        setRequisicao(false);
+                                        pagina('/login');
 
                                         setTimeout(() => {
                                             setMostrarAlert(false);
                                             setLoading(false);
-                                            pagina('/login');
                                         }, 4000);
 
                                     }
@@ -464,6 +468,7 @@ const CadastroFreelancer = () => {
                                         tipoAlert = 2;
                                         mensagemAlert = "CPF inválido!"
                                         setMostrarAlert(true);
+                                        setRequisicao(false);
 
                                         setTimeout(() => {
                                             setMostrarAlert(false);
@@ -475,6 +480,7 @@ const CadastroFreelancer = () => {
                                         tipoAlert = 3;
                                         mensagemAlert = "Erro ao cadastrar!"
                                         setMostrarAlert(true);
+                                        setRequisicao(false);
 
                                         setTimeout(() => {
                                             setMostrarAlert(false);
@@ -488,6 +494,7 @@ const CadastroFreelancer = () => {
                                     tipoAlert = 3;
                                     mensagemAlert = "Erro de requisição!"
                                     setMostrarAlert(true);
+                                    setRequisicao(false);
 
                                     setTimeout(() => {
                                         setMostrarAlert(false);
