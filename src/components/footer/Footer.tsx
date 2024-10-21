@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import WhatsAppImg from '../../assets/index/icons/icon-whatsapp.png';
 import InstagramImg from '../../assets/index/icons/icon-instagram.png';
 
-const Footer = () => {
+const Footer = ({usuario}:any) => {
 
   const year = new Date().getFullYear();
 
@@ -47,9 +47,9 @@ const Footer = () => {
               {/* <Link to='/' >Home</Link> */}
             </li>
 
-            <li className="sh-footer-mapa-item">
+            {usuario === 0 && <li className="sh-footer-mapa-item">
               <a href="#sh_planos" className="sh-mapa-link">Planos</a>
-            </li>
+            </li>}
 
             <li className="sh-footer-mapa-item">
               <a href="#sh_profissionais_emDestaque" className="sh-mapa-link">Profissionais em destaque</a>
@@ -59,37 +59,41 @@ const Footer = () => {
               <a href="#sh_clientes_emDestaque" className="sh-mapa-link">Clientes em destaque</a>
             </li>
 
-            <li className="sh-footer-mapa-item">
+            {usuario === 0 && <li className="sh-footer-mapa-item">
               <a href="#sh_vantagens" className="sh-mapa-link">Vantagens de ser nosso cliente</a>
-            </li>
+            </li>}
 
-            <li className="sh-footer-mapa-item">
+            {usuario != 1 &&<li className="sh-footer-mapa-item">
               <a href="#sh_ultimas_postagens" className="sh-mapa-link">Últimos serviços postados</a>
-            </li>
+            </li>}
 
-            <li className="sh-footer-mapa-item">
+            {usuario === 0 && <li className="sh-footer-mapa-item">
               <a href="#sh_comecar" className="sh-mapa-link">Como começar</a>
-            </li>
+            </li>}
             
-            <li className="sh-footer-mapa-item">
+            {usuario === 0 && <li className="sh-footer-mapa-item">
               <a href="#sh_sobre_a_skillhub" className="sh-mapa-link">Oque é a Skillhub</a>
-            </li>
+            </li>}
             
             <li className="sh-footer-mapa-item">
               <a href='#sh_duvidas' className="sh-mapa-link">Dúvidas frequentes</a>
             </li>
 
-            <li className="sh-footer-mapa-item">
+            {usuario === 2 && <li className="sh-footer-mapa-item">
+              <Link to='#' className="sh-mapa-link">Lista de serviços</Link>
+            </li>}
+
+            {usuario === 0 && <li className="sh-footer-mapa-item">
               <Link to='/login' className="sh-mapa-link">Login</Link>
-            </li>
+            </li>}
 
-            <li className="sh-footer-mapa-item">
+            {usuario === 0 && <li className="sh-footer-mapa-item">
               <Link to='/cadastro-freelancer' className="sh-mapa-link">Tornar-se um Freelancer</Link>
-            </li>
+            </li>}
 
-            <li className="sh-footer-mapa-item">
+            {usuario === 0 && <li className="sh-footer-mapa-item">
               <Link to='/cadastro-cliente' className="sh-mapa-link">Tornar-se um Cliente</Link>
-            </li>
+            </li>}
           </ul>
         </li>
 

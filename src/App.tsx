@@ -194,7 +194,7 @@ function App() {
       {loading && <Loading />}
 
       <section className="sh-header-apresentacao" id='sh_home_header'>
-        {sideBar && <Header />}
+        {sideBar && <Header usuario={0} />}
 
         <article className='sh-apresentacao'>
           <article className="sh-apresentacao-um">
@@ -418,7 +418,7 @@ function App() {
       </section>
 
       <section className="sh-footer">
-        <Footer />
+        <Footer usuario={0} />
       </section>
     </main>
   );

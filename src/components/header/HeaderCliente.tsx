@@ -1,5 +1,5 @@
 import React from 'react';
-import './header.css'
+import './HeaderCliente.css'
 import Logo from '../../assets/index/backgrounds/logo.svg';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ import serClienteImg from '../../assets/index/backgrounds/serCliente.png';
 import Options from '../../assets/index/icons/icon-options.png'
 import { Modal } from 'react-bootstrap';
 
-const Header = ({usuario}:any) => {
+const HeaderCliente = () => {
   // ---- Const Bootstrap
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -67,13 +67,9 @@ const Header = ({usuario}:any) => {
           <img src={Logo} alt="Logo da SkillHub" className='sh-lg-logo-img' />
         </li>
 
-        {usuario === 0 && <li className="sh-options-itens">
+        <li className="sh-options-itens">
           <Link to='/login' className='sh-options-login'>Login</Link>
-        </li>}
-
-        {usuario != 0 && <li className="sh-options-itens">
-          <Link to='#' className='sh-options-login'>Perfil</Link>
-        </li>}
+        </li>
       </ul>
 
       <Offcanvas show={show} onHide={handleClose} responsive="lg" className='sh-header-offcanvas'>
@@ -92,13 +88,13 @@ const Header = ({usuario}:any) => {
 
         <Offcanvas.Body className='sh-header-offcanvas-body'>
           <ul className="mb-0 sh-header-navegacao">
-            <li className="sh-navegacao-item d-lg-none">
+          <li className="sh-navegacao-item d-lg-none">
               <a href='#sh_home_header' className='sh-item-text'>Home</a>
             </li>
 
-            {usuario === 0 && <li className="sh-navegacao-item">
+            <li className="sh-navegacao-item">
               <a href='#sh_planos' className='sh-item-text'>Planos</a>
-            </li>}
+            </li>
 
             <li className="sh-navegacao-item">
               <a href='#sh_profissionais_emDestaque' className='sh-item-text'>Profissionais em destaque</a>
@@ -108,50 +104,37 @@ const Header = ({usuario}:any) => {
               <a href='#sh_clientes_emDestaque' className='sh-item-text'>Clientes em destaque</a>
             </li>
 
-            {usuario === 0 && <li className="sh-navegacao-item d-lg-none">
+            <li className="sh-navegacao-item d-lg-none">
               <a href='#sh_vantagens' className='sh-item-text'>Vantagens de ser nosso cliente</a>
-            </li>}
+            </li>
 
-            {usuario != 1 && <li className="sh-navegacao-item d-lg-none">
+            <li className="sh-navegacao-item d-lg-none">
               <a href='#sh_ultimas_postagens' className='sh-item-text'>Últimos servicos postados</a>
-            </li>}
+            </li>
 
-            {usuario ===2 && <li className="sh-navegacao-item d-lg-none">
-              <a href='#' className='sh-item-text'>Lista de serviços</a>
-            </li>}
-
-            {usuario === 0 && <li className="sh-navegacao-item">
+            <li className="sh-navegacao-item">
               <a href='#sh_comecar' className='sh-item-text'>Como começar</a>
-            </li>}
+            </li>
 
-            {usuario === 0 && <li className="sh-navegacao-item d-lg-none">
+            <li className="sh-navegacao-item d-lg-none">
               <a href="#sh_sobre_a_skillhub" className='sh-item-text'>Oque é a Skillhub</a>
-            </li>}
+            </li>
 
             <li className="sh-navegacao-item">
               <a href='#sh_duvidas' className='sh-item-text'>Dúvidas Frequentes</a>
             </li>
 
-            {usuario != 0 && <li className="sh-navegacao-item d-lg-none">
-              <a href='#' className='sh-item-text'>Fale conosco</a>
-            </li>}
-
-            {usuario === 0 && <li className="sh-navegacao-item d-lg-none">
+            <li className="sh-navegacao-item d-lg-none">
               <Link to='/login' className='sh-item-text'>Login</Link>
-            </li>}
+            </li>
 
-            {usuario === 0 && <li className="d-lg-none sh-navegacao-item">
+            <li className="d-lg-none sh-navegacao-item">
               <Link to='/cadastro-cliente' className='sh-item-text'>Torne-se um cliente</Link>
-            </li>}
+            </li>
 
-            {usuario === 0 && <li className="d-lg-none sh-navegacao-item">
+            <li className="d-lg-none sh-navegacao-item">
               <Link to='/cadastro-freelancer' className='sh-item-text'>Torne-se um Freelancer</Link>
-            </li>}
-
-            
-            {usuario != 0 && <li className="d-lg-none sh-navegacao-item">
-              <Link to='#' className='sh-item-text'>Sair</Link>
-            </li>}
+            </li>
           </ul>
         </Offcanvas.Body>
 
@@ -171,7 +154,7 @@ const Header = ({usuario}:any) => {
   )
 }
 
-export default Header;
+export default HeaderCliente;
 
 // ----------------------------------------
 

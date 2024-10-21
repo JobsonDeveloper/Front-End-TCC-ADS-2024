@@ -1,0 +1,205 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --sh-freelancer-font-family: "Nunito", sans-serif;
+
+    --sh-freelancer-cor-primaria: #fff;
+    --sh-freelancer-cor-secundaria: #0075FF;
+    --sh-freelancer-cor-terciaria: #000;
+    --sh-freelancer-cor-quaternaria: #35FF62;
+    --sh-freelancer-cor-textos: #494949;
+    --sh-freelancer-cor-background-footer: #26466B;
+    --sh-footer-cor-background-skillhub: #0089e0;
+    --sh-freelancer-cor-background-components: #356FB0;
+
+    --sh-freelancer-padding: 0 10px;
+    --sh-freelancer-margin: 30px 0;
+
+    --sh-freelancer-font-size-titulos: 1.4rem;
+    --sh-freelancer-font-size-subtitulos: 1.2rem;
+    --sh-freelancer-font-size-textos: 1rem;
+}
+
+.sh-freela {
+    min-height: 100vh;
+    font-family: var(--sh-freelancer-font-family);
+
+    & .sh-freela-header-apresentacao {
+        background-color: rgb(184, 184, 249);
+    }
+
+    & .sh-freela-main {
+
+
+        & .sh-profissionaisEmDestaque {
+            & .sh-profissionaisEmDestaque-titulo {
+                text-align: center;
+                font-size: var(--sh-index-font-size-titulos);
+                color: var(--sh-index-cor-terciaria);
+            }
+
+            & .sh-profissionalEmDestaque-lista {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                /* background-image: url('./assets/index/backgrounds/background-profissoes.webp');
+                background-repeat: no-repeat;
+                background-size: cover; */
+            }
+        }
+
+        & .sh-clientesEmDestaque {
+            display: flex;
+            flex-direction: column;
+            margin: var(--sh-index-margin);
+            gap: 20px;
+            width: 100%;
+
+            & .sh-clientesEmDestaque-titulo {
+                text-align: center;
+                font-size: var(--sh-index-font-size-titulos);
+                color: var(--sh-index-cor-terciaria);
+            }
+
+            & .sh-clientesEmDestaque-lista {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                /* background-image: url('./assets/index/backgrounds/background-profissoes.webp');
+        background-repeat: no-repeat;
+        background-size: cover; */
+            }
+        }
+
+        & .sh-main-servicos {
+            margin: var(--sh-index-margin);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            & .sh-servicos-titulo {
+                text-align: center;
+                color: var(--sh-index-cor-terciaria);
+                font-size: var(--sh-index-font-size-titulos);
+            }
+
+            & .sh-servicos-lista-container {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        & .sh-todos-servicos {
+            background-color: red;
+            display: flex;
+            flex-direction: column;
+
+            & .sh-todos-os-servicos-titulo {
+                text-align: center;
+                color: var(--sh-index-cor-terciaria);
+                font-size: var(--sh-index-font-size-titulos);
+            }
+
+            & .sh-todos-os-servicos-info {
+                background-color: gold;
+            }
+        }
+
+        & .sh-freela-duvidas {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: var(--sh-freelancer-cor-background-components);
+            margin: 45px 0;
+            padding: 30px 10px;
+            border-radius: 25px;
+            margin-left: 5px;
+            margin-right: 5px;
+
+            & .sh-duvidas-titulo {
+                text-align: center;
+                color: var(--sh-freelancer-cor-primaria);
+                font-size: var(--sh-freelancer-font-size-titulos);
+            }
+
+            & .sh-duvidas-acordeon {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                & .sh-duvidas-acordeon-item {
+                    border: none;
+                    background-color: transparent;
+
+                    & .sh-duvidas-header {
+
+                        & .accordion-button {
+                            color: var(--sh-freelancer-cor-primaria);
+                            font-size: var(--sh-freelancer-font-size-textos);
+                            font-weight: 650;
+                            gap: 5px;
+                            padding: 0;
+                            outline: none;
+                            border: none;
+                            align-items: normal;
+                            background-color: transparent;
+
+                            &:not(.collapsed) {
+                                color: var(--sh-freelancer-cor-primaria);
+                                background-color: transparent;
+                                box-shadow: none;
+                                border: none;
+                            }
+
+                            &:focus {
+                                box-shadow: none;
+                            }
+
+                            &::after {
+                                order: -1;
+                                margin: 0;
+
+                                background-image: url('../../assets/FreelaHome/icons/seta.png');
+                            }
+                        }
+                    }
+
+                    & .sh-acordeon-body {
+                        color: var(--sh-freelancer-cor-primaria);
+                        font-size: var(--sh-freelancer-font-size-textos);
+                    }
+                }
+            }
+        }
+    }
+
+    & .sh-freela-footer {
+        background-color: var(--sh-freelancer-cor-background-footer);
+    }
+}
+
+@media (min-width: 1400px) {
+    & .sh-freela-header-apresentacao {
+        background-color: rgb(184, 184, 249);
+        padding: 3px;
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    & .sh-freela-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    & .sh-freela-footer {
+        display: flex;
+        justify-content: center;
+    }
+}
