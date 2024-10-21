@@ -173,6 +173,26 @@
                     }
                 }
 
+                & .sh-dados-servicos {
+                    list-style-type: none;
+                    padding: 0;
+                    width: 80%;
+                    display: grid;
+                    gap: 15px;
+
+                    & .sh-dados-servicos-item {
+                        /* background-color: red; */
+                        text-align: center;
+                        font-size: var(--sh-cadastro-font-size-textos);
+                        color: var(--sh-cadastro-cor-textos);
+                    }
+
+                    & .sh-servicos-title {
+                        font-weight: bold;
+                        margin-bottom: 15px;
+                    }
+                }
+
                 & .sh-dados-seguranca {
 
                     & .sh-termosDeServico {

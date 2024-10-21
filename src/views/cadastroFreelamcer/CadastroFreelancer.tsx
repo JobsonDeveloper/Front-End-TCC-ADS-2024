@@ -2,7 +2,7 @@ import './CadastroFreelancer.css'
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Autocomplete, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, IconButton, Input, InputAdornment, InputLabel, Slide, Step, StepLabel, Stepper, SvgIcon, TextField } from "@mui/material";
-import { Stack } from "@mui/system";
+import { color, fontFamily, fontSize, Stack } from "@mui/system";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -41,6 +41,22 @@ const styledSelect = {
     },
     '& .css-1umw9bq-MuiSvgIcon-root': {
         display: 'none'
+    }
+}
+
+const styledSelectServicos = {
+    '& .MuiSelect-select': {
+        width: '100px',
+    },
+
+    '& .css-1umw9bq-MuiSvgIcon-root': {
+        display: 'none'
+    },
+
+    '& .MuiInputBase-input': {
+        color: '#494949',
+        fontFamily: '"Nunito", sans-serif',
+        fontSize: '1rem'
     }
 }
 
@@ -116,7 +132,7 @@ const Transition = React.forwardRef(
 );
 
 let dataNascimento = '';
-let estadoOndeMora = '';
+let estado = '';
 let mensagemAlert = "";
 let tipoAlert = 0;
 
@@ -132,7 +148,7 @@ const CadastroFreelancer = () => {
     const [sobrenome, setSobrenome] = useState('');
     const [cpfCnpj, setCpfCnpj] = useState('');
     const [nascimento, setNascimento] = useState('');
-    const pegarDataNascimento = (e: any) => {
+    const pegarDadosForm = (e: any) => {
         e.preventDefault();
 
         if (nascimento) {
@@ -153,13 +169,31 @@ const CadastroFreelancer = () => {
 
         }
 
-        if (estado) {
-            estadoOndeMora = estado;
-        }
+        // if (estado) {
+        //     estado = estado;
+        // }
     }
 
     // Form de localização e contato
-    const todosOsEstados = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
+    const todosOsEstados = [
+        'AC', 'AL', 'AP', 'AM', 'BA',
+        'CE', 'ES', 'GO', 'MA', 'MT',
+        'MS', 'MG', 'PA', 'PB', 'PR',
+        'PE', 'PI', 'RJ', 'RN', 'RS',
+        'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+    ];
+    const dadosServicos = [
+        'Manutenção de Computadores e Notebooks',
+        'Conserto de Smartphones e Tablets',
+        'Reparo de Televisores e Monitores',
+        'Manutenção de Eletrodomésticos',
+        'Instalação e Manutenção de Equipamentos de Áudio e Vídeo',
+        'Serviços de Automação Residencial',
+        'Conserto de Consoles de Videogames',
+        'Instalação de Redes e Equipamentos de Internet',
+        'Reparo de Drones e Equipamentos de Fotografia',
+        'Manutenção de Equipamentos Biomédicos'
+    ];
     const [rua, setRua] = useState('')
     const [numero, setNumero] = useState('')
     const [cidade, setCidade] = useState('')
@@ -167,11 +201,12 @@ const CadastroFreelancer = () => {
     const [ddd, setDdd] = useState('')
     const [telefone, setTelefone] = useState('')
     const capturaValoresSelect = { options: todosOsEstados.map((option) => option) };
+    const capturaServicos = { options: dadosServicos.map((option) => option) };
 
     // Do form de imagens
-    const [imgFrentRg, setImgFrentRg] = useState('');
-    const [imgVersoRg, setImgVersoRg] = useState('');
-    const [imgAntecedentes, setImgAntecedentes] = useState('');
+    const [imgFrentRg, setImgFrentRg] = useState();
+    const [imgVersoRg, setImgVersoRg] = useState();
+    const [imgAntecedentes, setImgAntecedentes] = useState();
 
     const pegaImgRgFrente = (documento: any) => {
         let imgFrenteRg = documento.target.files;
@@ -200,7 +235,6 @@ const CadastroFreelancer = () => {
         }
         else {
             setImgFrentRg(imgFrenteRg);
-            console.log(imgFrenteRg);
         }
     }
     const pegaImgRgVerso = (documento: any) => {
@@ -230,7 +264,6 @@ const CadastroFreelancer = () => {
         }
         else {
             setImgVersoRg(imgVersoRg);
-            console.log(imgVersoRg);
         }
     }
     const pegaImgAntecedentes = (documento: any) => {
@@ -260,10 +293,14 @@ const CadastroFreelancer = () => {
         }
         else {
             setImgAntecedentes(imgAntecedentes);
-            console.log(imgAntecedentes);
         }
 
     }
+
+    // Serviços
+    const [servicoUm, setServicoUm] = useState<string | null>();
+    const [servicoDois, setServicoDois] = useState<string | null>();
+    const [servicoTres, setServicoTres] = useState<string | null>();
 
     // Do form de seguranca
     const selecaoMudarSenha = () => setMostrarSenha((show) => !show);
@@ -277,6 +314,7 @@ const CadastroFreelancer = () => {
     const [confirmSenha, setConfirmSenha] = useState('');
     const [termosAceitos, setTermosAceitos] = useState(false);
     const [mostrarAlert, setMostrarAlert] = useState(false);
+    const [requisicao, setRequisicao] = useState(false);
 
     const alteraTermosAceitos = () => {
         if (termosAceitos === true) {
@@ -305,7 +343,7 @@ const CadastroFreelancer = () => {
         }, 2000);
     });
 
-    async function cadastroFreelancer() {
+    function cadastroFreelancer() {
         if ((email === "") || (senha === "") || (confirmSenha === "")) {
             tipoAlert = 2;
             mensagemAlert = "Preencha todos os campos!"
@@ -342,6 +380,7 @@ const CadastroFreelancer = () => {
             let nascimentoDia = `${shDate.getDate()}`;
             let nascimentoMes = `${shDate.getMonth() + 1}`;
             let nascimentoAno = `${shDate.getFullYear()}`;
+            let listaServicos = "";
 
             if (nascimentoDia.length < 2) {
                 nascimentoDia = `0${nascimentoDia}`;
@@ -351,78 +390,124 @@ const CadastroFreelancer = () => {
                 nascimentoMes = `0${nascimentoMes}`;
             }
 
-            console.log(imgFrentRg);
-            console.log(imgVersoRg);
-            console.log(imgAntecedentes);
+            if (servicoUm != undefined) {
+                listaServicos += `${servicoUm}`;
+            }
 
-            // try {
-            //     setLoading(true);
-            //     const formData = new FormData();
-            //     formData.append('acao', 'cadastro');
-            //     formData.append('nome', nome);
-            //     formData.append('sobrenome', sobrenome);
-            //     formData.append('cpf', cpfCnpj);
-            //     formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
-            //     formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
-            //     formData.append('numero', `(${ddd}) ${telefone}`);
-            //     formData.append('email', email);
-            //     formData.append('senha', senha);
+            if (servicoDois != undefined) {
+                listaServicos += `-${servicoDois}`;
+            }
 
-            //     const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-            //         method: 'POST',
-            //         mode: 'cors',
-            //         body: formData
-            //     });
+            if (servicoTres != undefined) {
+                listaServicos += `-${servicoTres}`;
+            }
 
-            //     const response = await request.json();
+            let base64FrenteRG = "";
+            let base64VersoRG = "";
+            let base64Anteced = "";
 
-            //     if (response.status === 201) {
-            //         tipoAlert = 0;
-            //         mensagemAlert = "Cadastro realizado!"
-            //         setMostrarAlert(true);
+            if (imgFrentRg && imgVersoRg && imgAntecedentes) {
+                let lerImagemUm = new FileReader();
+                let lerImagemDois = new FileReader();
+                let lerImagemTres = new FileReader();
 
-            //         setTimeout(() => {
-            //             setMostrarAlert(false);
-            //             setLoading(false);
-            //             pagina('/login');
-            //         }, 4000);
+                lerImagemUm.onload = function (arquivo: any) {
+                    base64FrenteRG = arquivo.target.result;
 
-            //     }
-            //     else if (response.status === 400) {
-            //         tipoAlert = 2;
-            //         mensagemAlert = "CPF inválido!"
-            //         setMostrarAlert(true);
+                    lerImagemDois.onload = function (arquivo: any) {
+                        base64VersoRG = arquivo.target.result;
 
-            //         setTimeout(() => {
-            //             setMostrarAlert(false);
-            //             setLoading(false);
-            //         }, 4000);
-            //     }
-            //     else {
-            //         console.log(response.status)
-            //         tipoAlert = 3;
-            //         mensagemAlert = "Erro ao cadastrar!"
-            //         setMostrarAlert(true);
+                        lerImagemTres.onload = function (arquivo: any) {
+                            base64Anteced = arquivo.target.result;
 
-            //         setTimeout(() => {
-            //             setMostrarAlert(false);
-            //             setLoading(false);
-            //         }, 4000);
-            //     }
+                            async function requisicao() {
+                                try {
+                                    setLoading(true);
+                                    const formData = new FormData();
+                                    formData.append('acao', 'cadfreela');
+                                    formData.append('nome', nome);
+                                    formData.append('sobrenome', sobrenome);
+                                    formData.append('cpf', cpfCnpj);
+                                    formData.append('data_nascimento', `${nascimentoAno}-${nascimentoMes}-${nascimentoDia}`);
+                                    formData.append('endereco', `${rua}, numero ${numero}, ${cidade} - ${estado}`);
+                                    formData.append('numero', `(${ddd}) ${telefone}`);
+                                    formData.append('servicos', JSON.stringify(listaServicos));
+                                    formData.append('rg_frente', base64FrenteRG);
+                                    formData.append('rg_verso', base64VersoRG);
+                                    formData.append('antecedentes_criminais', base64Anteced);
+                                    formData.append('email', email);
+                                    formData.append('senha', senha);
+
+                                    const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                                        method: 'POST',
+                                        mode: 'cors',
+                                        body: formData
+                                    });
+
+                                    const response = await request.json();
+
+                                    if (response.status === 201) {
+                                        tipoAlert = 0;
+                                        mensagemAlert = "Cadastro realizado!"
+                                        setMostrarAlert(true);
+
+                                        setTimeout(() => {
+                                            setMostrarAlert(false);
+                                            setLoading(false);
+                                            pagina('/login');
+                                        }, 4000);
+
+                                    }
+                                    else if (response.status === 400) {
+                                        tipoAlert = 2;
+                                        mensagemAlert = "CPF inválido!"
+                                        setMostrarAlert(true);
+
+                                        setTimeout(() => {
+                                            setMostrarAlert(false);
+                                            setLoading(false);
+                                        }, 4000);
+                                    }
+                                    else {
+                                        console.log(response.status)
+                                        tipoAlert = 3;
+                                        mensagemAlert = "Erro ao cadastrar!"
+                                        setMostrarAlert(true);
+
+                                        setTimeout(() => {
+                                            setMostrarAlert(false);
+                                            setLoading(false);
+                                        }, 4000);
+                                    }
 
 
-            // }
-            // catch (error) {
-            //     tipoAlert = 3;
-            //     mensagemAlert = "Erro de requisição!"
-            //     setMostrarAlert(true);
+                                }
+                                catch (error) {
+                                    tipoAlert = 3;
+                                    mensagemAlert = "Erro de requisição!"
+                                    setMostrarAlert(true);
 
-            //     setTimeout(() => {
-            //         setMostrarAlert(false);
-            //         setLoading(false);
-            //     }, 4000);
-            //     console.error(error);
-            // }
+                                    setTimeout(() => {
+                                        setMostrarAlert(false);
+                                        setLoading(false);
+                                    }, 4000);
+                                    console.error(error);
+                                }
+                            }
+
+                            requisicao();
+                        }
+
+                        lerImagemTres.readAsDataURL(imgAntecedentes[0]);
+
+                    }
+
+                    lerImagemDois.readAsDataURL(imgVersoRg[0]);
+
+                }
+
+                lerImagemUm.readAsDataURL(imgFrentRg[0]);
+            }
         }
     }
 
@@ -430,90 +515,90 @@ const CadastroFreelancer = () => {
 
         if (variante === 'proximo') {
             if (activeStep === 0) {
-                if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
-                    tipoAlert = 2;
-                    mensagemAlert = "Preencha todos os campos!"
-                    setMostrarAlert(true);
+                // if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
+                //     tipoAlert = 2;
+                //     mensagemAlert = "Preencha todos os campos!"
+                //     setMostrarAlert(true);
 
-                    setTimeout(() => {
-                        setMostrarAlert(false);
-                        return;
-                    }, 4000);
-                }
-                else {
-                    const hoje = new Date();
-                    const diaAtual = hoje.getDate();
-                    const mesAtual = hoje.getMonth() + 1;
-                    const anoDeVerificacao = hoje.getFullYear() - 18;
+                //     setTimeout(() => {
+                //         setMostrarAlert(false);
+                //         return;
+                //     }, 4000);
+                // }
+                // else {
+                //     const hoje = new Date();
+                //     const diaAtual = hoje.getDate();
+                //     const mesAtual = hoje.getMonth() + 1;
+                //     const anoDeVerificacao = hoje.getFullYear() - 18;
 
-                    let dataNascimento = new Date(nascimento);
-                    let diaNascimento = dataNascimento.getDate();
-                    let mesNascimento = dataNascimento.getMonth() + 1;
-                    let anoNascimento = dataNascimento.getFullYear();
+                //     let dataNascimento = new Date(nascimento);
+                //     let diaNascimento = dataNascimento.getDate();
+                //     let mesNascimento = dataNascimento.getMonth() + 1;
+                //     let anoNascimento = dataNascimento.getFullYear();
 
-                    if (anoNascimento === anoDeVerificacao) {
-                        if (mesNascimento === mesAtual) {
-                            if (diaNascimento === diaAtual) {
-                                setActiveStep((currentStep) => currentStep + 1);
-                                return;
-                            }
-                            else {
-                                tipoAlert = 2;
-                                mensagemAlert = "Você é menor de idade!"
-                                setMostrarAlert(true);
+                //     if (anoNascimento === anoDeVerificacao) {
+                //         if (mesNascimento === mesAtual) {
+                //             if (diaNascimento === diaAtual) {
+                setActiveStep((currentStep) => currentStep + 1);
+                //                 return;
+                //             }
+                //             else {
+                //                 tipoAlert = 2;
+                //                 mensagemAlert = "Você é menor de idade!"
+                //                 setMostrarAlert(true);
 
-                                setTimeout(() => {
-                                    setMostrarAlert(false);
-                                    return;
-                                }, 4000);
-                            }
-                        }
-                        else if (mesNascimento < mesAtual) {
-                            setActiveStep((currentStep) => currentStep + 1);
-                            return;
-                        }
-                        else {
-                            tipoAlert = 2;
-                            mensagemAlert = "Você é menor de idade!"
-                            setMostrarAlert(true);
+                //                 setTimeout(() => {
+                //                     setMostrarAlert(false);
+                //                     return;
+                //                 }, 4000);
+                //             }
+                //         }
+                //         else if (mesNascimento < mesAtual) {
+                //             setActiveStep((currentStep) => currentStep + 1);
+                //             return;
+                //         }
+                //         else {
+                //             tipoAlert = 2;
+                //             mensagemAlert = "Você é menor de idade!"
+                //             setMostrarAlert(true);
 
-                            setTimeout(() => {
-                                setMostrarAlert(false);
-                                return;
-                            }, 4000);
-                        }
-                    }
-                    else if (anoNascimento < anoDeVerificacao) {
-                        setActiveStep((currentStep) => currentStep + 1);
-                        return;
-                    }
-                    else {
-                        tipoAlert = 2;
-                        mensagemAlert = "Você é menor de idade!"
-                        setMostrarAlert(true);
+                //             setTimeout(() => {
+                //                 setMostrarAlert(false);
+                //                 return;
+                //             }, 4000);
+                //         }
+                //     }
+                //     else if (anoNascimento < anoDeVerificacao) {
+                //         setActiveStep((currentStep) => currentStep + 1);
+                //         return;
+                //     }
+                //     else {
+                //         tipoAlert = 2;
+                //         mensagemAlert = "Você é menor de idade!"
+                //         setMostrarAlert(true);
 
-                        setTimeout(() => {
-                            setMostrarAlert(false);
-                            return;
-                        }, 4000);
-                    }
-                }
+                //         setTimeout(() => {
+                //             setMostrarAlert(false);
+                //             return;
+                //         }, 4000);
+                //     }
+                // }
             }
 
             if (activeStep === 1) {
-                if ((rua === "") || (numero === "") || (cidade === "") || (ddd === "") || (telefone === "")) {
-                    tipoAlert = 2;
-                    mensagemAlert = "Preencha todos os campos!"
-                    setMostrarAlert(true);
+                // if ((rua === "") || (numero === "") || (cidade === "") || (estado === undefined) || (ddd === "") || (telefone === "")) {
+                //     tipoAlert = 2;
+                //     mensagemAlert = "Preencha todos os campos!"
+                //     setMostrarAlert(true);
 
-                    setTimeout(() => {
-                        setMostrarAlert(false);
-                        return;
-                    }, 4000);
-                }
-                else {
-                    setActiveStep((currentStep) => currentStep + 1);
-                }
+                //     setTimeout(() => {
+                //         setMostrarAlert(false);
+                //         return;
+                //     }, 4000);
+                // }
+                // else {
+                setActiveStep((currentStep) => currentStep + 1);
+                // }
             }
 
             if (activeStep === 2) {
@@ -533,7 +618,22 @@ const CadastroFreelancer = () => {
             }
 
             if (activeStep >= 3) {
-                alert('fff');
+                // if ((servicoUm != undefined) || (servicoUm != undefined) || (servicoUm != undefined)) {
+                setActiveStep((currentStep) => currentStep + 1);
+                // }
+                // else {
+                //     tipoAlert = 2;
+                //     mensagemAlert = "Nenhum serviço selecionado!"
+                //     setMostrarAlert(true);
+
+                //     setTimeout(() => {
+                //         setMostrarAlert(false);
+                //         return;
+                //     }, 4000);
+                // }
+            }
+
+            if (activeStep >= 4) {
                 return;
             }
 
@@ -552,7 +652,7 @@ const CadastroFreelancer = () => {
         <main className="sh-cadastroFreelancer">
             {loading && <Loading />}
 
-            <form onSubmit={pegarDataNascimento} className="sh-cadastro-formulario">
+            <form onSubmit={pegarDadosForm} className="sh-cadastro-formulario">
                 <article className="sh-cadastro-header">
                     <Link to="/"><img src={logoImg} alt="" className="sh-cadastro-logoImg" /></Link>
                     <img src={tituloPaginaImg} alt="" className="sh-cadastro-tituloPagina" />
@@ -560,6 +660,7 @@ const CadastroFreelancer = () => {
 
                 <div className="sh-stepersForm">
                     <Stepper activeStep={activeStep} className="sh-steper-cadastro" alternativeLabel>
+                        <Step> <StepLabel /> </Step>
                         <Step> <StepLabel /> </Step>
                         <Step> <StepLabel /> </Step>
                         <Step> <StepLabel /> </Step>
@@ -657,14 +758,14 @@ const CadastroFreelancer = () => {
                                         onChange={(e) => setCidade(e.target.value)}
                                     />
 
-                                    {estadoOndeMora && <Stack spacing={1} sx={styledSelect}>
+                                    {estado && <Stack spacing={1} sx={styledSelect}>
                                         <Autocomplete
                                             {...capturaValoresSelect}
                                             disableClearable
-                                            value={estadoOndeMora}
+                                            value={estado}
                                             onChange={(event: any, newValue: string | null) => {
                                                 setEstado(newValue);
-                                                pegarDataNascimento(event)
+                                                pegarDadosForm(event)
                                             }}
                                             renderInput={(parametros) => (
                                                 <TextField {...parametros}
@@ -674,13 +775,13 @@ const CadastroFreelancer = () => {
                                         />
                                     </ Stack>}
 
-                                    {!estadoOndeMora && <Stack spacing={1} sx={styledSelect}>
+                                    {!estado && <Stack spacing={1} sx={styledSelect}>
                                         <Autocomplete
                                             {...capturaValoresSelect}
                                             disableClearable
                                             onChange={(event: any, newValue: string | null) => {
                                                 setEstado(newValue);
-                                                pegarDataNascimento(event)
+                                                pegarDadosForm(event)
                                             }}
                                             renderInput={(parametros) => (
                                                 <TextField {...parametros}
@@ -726,7 +827,7 @@ const CadastroFreelancer = () => {
                                         <AddAPhotoIcon className='sh-dados-icon-upload' />
                                     }
                                     <label htmlFor="frenteRG" className='sh-dados-fotos-label'>Foto da frente do RG</label>
-                                    <input type="file" className='sh-dados-fotos-input' onChange={pegaImgRgFrente} />
+                                    <input type="file" id='frenteRG' className='sh-dados-fotos-input' onChange={pegaImgRgFrente} />
                                 </li>
 
                                 <li className='sh-dados-foto-item'>
@@ -737,7 +838,7 @@ const CadastroFreelancer = () => {
                                         <AddAPhotoIcon className='sh-dados-icon-upload' />
                                     }
                                     <label htmlFor="versoRG" className='sh-dados-fotos-label'>Foto do verso do RG</label>
-                                    <input type="file" className='sh-dados-fotos-input' onChange={pegaImgRgVerso} />
+                                    <input type="file" id='versoRG' className='sh-dados-fotos-input' onChange={pegaImgRgVerso} />
                                 </li>
 
                                 <li className='sh-dados-foto-item'>
@@ -748,13 +849,124 @@ const CadastroFreelancer = () => {
                                         <AddAPhotoIcon className='sh-dados-icon-upload' />
                                     }
                                     <label htmlFor="antecedCriminais" className='sh-dados-fotos-label'>Antecedentes criminais</label>
-                                    <input type="file" className='sh-dados-fotos-input' onChange={pegaImgAntecedentes} />
+                                    <input type="file" id='antecedCriminais' className='sh-dados-fotos-input' onChange={pegaImgAntecedentes} />
+                                </li>
+                            </ul>
+                        }
+
+                        {activeStep == 3 &&
+                            <ul className='sh-dados sh-dados-servicos'>
+                                <li className='sh-dados-servicos-item sh-servicos-title'>Serviços fornecidos</li>
+
+                                <li className="sh-dados-servicos-item">
+                                    {servicoUm && <Stack spacing={1} sx={styledSelectServicos}>
+                                        <Autocomplete
+                                            {...capturaServicos}
+                                            disableClearable
+                                            value={servicoUm}
+                                            onChange={(event: any, newValue: string | null) => {
+                                                setServicoUm(newValue);
+                                                pegarDadosForm(event)
+                                            }}
+                                            renderInput={(parametros) => (
+                                                <TextField {...parametros}
+                                                    label=""
+                                                    variant="standard" />
+                                            )}
+                                        />
+                                    </ Stack>}
+
+                                    {!servicoUm && <Stack spacing={1} sx={styledSelectServicos}>
+                                        <Autocomplete
+                                            {...capturaServicos}
+                                            disableClearable
+                                            onChange={(event: any, newValue: string | null) => {
+                                                setServicoUm(newValue);
+                                                pegarDadosForm(event)
+                                            }}
+                                            renderInput={(parametros) => (
+                                                <TextField {...parametros}
+                                                    label=""
+                                                    variant="standard" />
+                                            )}
+                                        />
+                                    </ Stack>}
+                                </li>
+
+                                <li className="sh-dados-servicos-item">
+                                    {servicoDois && <Stack spacing={1} sx={styledSelectServicos}>
+                                        <Autocomplete
+                                            {...capturaServicos}
+                                            disableClearable
+                                            value={servicoDois}
+                                            onChange={(event: any, newValue: string | null) => {
+                                                setServicoDois(newValue);
+                                                pegarDadosForm(event)
+                                            }}
+                                            renderInput={(parametros) => (
+                                                <TextField {...parametros}
+                                                    label=""
+                                                    variant="standard" />
+                                            )}
+                                        />
+                                    </ Stack>}
+
+                                    {!servicoDois && <Stack spacing={1} sx={styledSelectServicos}>
+                                        <Autocomplete
+                                            {...capturaServicos}
+                                            disableClearable
+                                            onChange={(event: any, newValue: string | null) => {
+                                                setServicoDois(newValue);
+                                                pegarDadosForm(event)
+                                            }}
+                                            renderInput={(parametros) => (
+                                                <TextField {...parametros}
+                                                    label=""
+                                                    variant="standard" />
+                                            )}
+                                        />
+                                    </ Stack>}
+                                </li>
+
+                                <li className="sh-dados-servicos-item">
+                                    {servicoTres && <Stack spacing={1} sx={styledSelectServicos}>
+                                        <Autocomplete
+                                            {...capturaServicos}
+                                            disableClearable
+                                            value={servicoTres}
+                                            onChange={(event: any, newValue: string | null) => {
+                                                setServicoTres(newValue);
+                                                pegarDadosForm(event)
+                                            }}
+                                            renderInput={(parametros) => (
+                                                <TextField {...parametros}
+                                                    label=""
+                                                    variant="standard" />
+                                            )}
+                                        />
+                                    </ Stack>}
+
+                                    {!servicoTres && <Stack spacing={1} sx={styledSelectServicos}>
+                                        <Autocomplete
+                                            {...capturaServicos}
+                                            disableClearable
+                                            onChange={(event: any, newValue: string | null) => {
+                                                setServicoTres(newValue);
+                                                pegarDadosForm(event)
+                                            }}
+                                            renderInput={(parametros) => (
+                                                <TextField {...parametros}
+                                                    label=""
+                                                    variant="standard" />
+                                            )}
+                                        />
+                                    </ Stack>}
                                 </li>
                             </ul>
                         }
 
                         {/* E-mail e senha */}
-                        {activeStep == 3 &&
+                        {activeStep == 4 &&
                             <article className="sh-dados sh-dados-seguranca">
                                 <TextField
                                     label="E-mail"
@@ -768,6 +980,7 @@ const CadastroFreelancer = () => {
                                 <FormControl variant="standard">
                                     <InputLabel htmlFor="sh_label_senha_input">Senha</InputLabel>
                                     <Input
+                                        id='sh_label_senha_input'
                                         type={mostrarSenha ? 'text' : 'password'}
                                         defaultValue={senha}
                                         onChange={((e) => { setSenha(e.target.value) })}
@@ -789,6 +1002,7 @@ const CadastroFreelancer = () => {
                                 <FormControl variant="standard">
                                     <InputLabel htmlFor="sh_label_confirm_senha_input">Confirmar senha</InputLabel>
                                     <Input
+                                        id='sh_label_confirm_senha_input'
                                         type={mostrarConfirmSenha ? 'text' : 'password'}
                                         defaultValue={confirmSenha}
                                         onChange={((e) => { setConfirmSenha(e.target.value) })}
@@ -862,6 +1076,7 @@ const CadastroFreelancer = () => {
                                 </div>
                             </article>
                         }
+
                     </div>
                 </div>
 
@@ -874,10 +1089,10 @@ const CadastroFreelancer = () => {
                     </button>
 
                     <button type="submit" className="sh-cadastro-button-elemento">
-                        {activeStep < 3 &&
+                        {activeStep < 4 &&
                             <img src={proximoImg} alt="Butão para próximo step" className="sh-cadastro-button-proximo" onClick={() => { mudarStep('proximo') }} />
                         }
-                        {activeStep === 3 &&
+                        {activeStep === 4 &&
                             <img src={concluirImg} alt="Butão para concluir cadastro" className="sh-cadastro-button-concluir" onClick={cadastroFreelancer} />
                         }
                     </button>

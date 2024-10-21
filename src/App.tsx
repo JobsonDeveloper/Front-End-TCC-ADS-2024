@@ -164,9 +164,9 @@ function App() {
   //   try {
 
   //     const formData = new FormData();
-  //     formData.append('acao', 'login');
-  //     formData.append('cpf', '092.612.214-24');
-  //     formData.append('senha', '12345678');
+  //     formData.append('acao', 'obter_dados_frela');
+  //     formData.append('cpf', '');
+  //     formData.append('senha', '');
 
   //     const requsicao = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
   //       method: 'POST',
