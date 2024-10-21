@@ -201,7 +201,9 @@ const CadastroCliente = () => {
         }, 2000);
     });
 
-    async function cadastraCliente() {
+    async function cadastraCliente(e:any) {
+        e.preventDefault();
+        
         if ((email === "") || (senha === "") || (confirmSenha === "")) {
             tipoAlert = 2;
             mensagemAlert = "Preencha todos os campos!"

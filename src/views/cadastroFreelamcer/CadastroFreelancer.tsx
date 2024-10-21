@@ -343,7 +343,7 @@ const CadastroFreelancer = () => {
         }, 2000);
     });
 
-    function cadastroFreelancer() {
+    function cadastroFreelancer(e:any) {
         if ((email === "") || (senha === "") || (confirmSenha === "")) {
             tipoAlert = 2;
             mensagemAlert = "Preencha todos os campos!"
@@ -420,7 +420,9 @@ const CadastroFreelancer = () => {
                         lerImagemTres.onload = function (arquivo: any) {
                             base64Anteced = arquivo.target.result;
 
-                            async function requisicao() {
+                            async function requisicao(e:any) {
+                                e.preventDefault();
+
                                 try {
                                     setLoading(true);
                                     const formData = new FormData();
@@ -495,7 +497,7 @@ const CadastroFreelancer = () => {
                                 }
                             }
 
-                            requisicao();
+                            requisicao(e);
                         }
 
                         lerImagemTres.readAsDataURL(imgAntecedentes[0]);
