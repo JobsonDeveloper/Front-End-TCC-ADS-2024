@@ -367,7 +367,6 @@
 
 @media (min-width: 1400px) {
     & .sh-freela-header-apresentacao {
-        background-color: rgb(184, 184, 249);
         padding: 3px;
         padding-bottom: 20px;
         display: flex;

@@ -27,32 +27,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 
 // ------------ Monta do banco ----------
-const ultimosServicos = [
-  {
-    tag: 'Serviços gerais',
-    descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
-    remuneracao: '250,00',
-    tipoDeRemuneracao: 'Diária'
-  },
-  {
-    tag: 'Professor',
-    descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
-    remuneracao: '1.200,00',
-    tipoDeRemuneracao: 'Mensal'
-  },
-  {
-    tag: 'Pedreiro',
-    descricao: 'Preciso de uma pessoa para dar andamento ao projeto da minha casa, começando o trabalho de segunda a quarta, das 08:00 da manhã até as 16:00 da tarde.',
-    remuneracao: '60,00',
-    tipoDeRemuneracao: 'Diária'
-  },
-  {
-    tag: 'Jardineiro',
-    descricao: 'Preciso de uma pessoa para limpar o jardim da minha casa até no máximo as 16:00 horas do dia 30/12/2024.',
-    remuneracao: '300,00',
-    tipoDeRemuneracao: 'Diária'
-  }
-];
+let ultimosServicos: any = [];
 
 const profDestaque = [
   {
@@ -63,48 +38,7 @@ const profDestaque = [
     servicoTres: 'Tatuador',
     dataCadastro: '05/2024',
     estrelas: 103
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'Marcos Amorim da Silva',
-    servicoUm: 'Músico',
-    servicoDois: 'Professor',
-    servicoTres: 'Tatuador',
-    dataCadastro: '05/2024',
-    estrelas: 87
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'Victor Amaral  de souza',
-    servicoUm: 'Músico',
-    servicoDois: 'Professor',
-    servicoTres: 'Tatuador',
-    dataCadastro: '05/2024',
-    estrelas: 65
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'André Coutinho Andrade',
-    servicoUm: 'Músico',
-    servicoDois: 'Professor',
-    servicoTres: 'Tatuador',
-    dataCadastro: '05/2024',
-    estrelas: 49
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'André Felipe Silva',
-    servicoDois: 'Suporte técnico',
-    dataCadastro: '05/2024',
-    estrelas: 30
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'André Felipe Silva',
-    servicoDois: 'Suporte técnico',
-    dataCadastro: '05/2024',
-    estrelas: 30
-  },
+  }
 ];
 
 const cliDestaque = [
@@ -113,44 +47,17 @@ const cliDestaque = [
     nome: 'João Paulo César',
     dataCadastro: '05/2024',
     estrelas: 103
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',
-    dataCadastro: '05/2024',
-    estrelas: 90
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',
-    dataCadastro: '05/2024',
-    estrelas: 87
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',
-    dataCadastro: '05/2024',
-    estrelas: 78
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',
-    dataCadastro: '05/2024',
-    estrelas: 76
-  },
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',
-    dataCadastro: '05/2024',
-    estrelas: 76
-  },
+  }
 ];
+
+let consulta = false;
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [sideBar, setSideBar] = useState(false);
 
   useEffect(() => {
+    pegarDados();
     setTimeout(() => {
       setLoading(false);
       setSideBar(true);
@@ -160,32 +67,48 @@ function App() {
   }, []);
 
 
-  // async function pegarDados() {
-  //   try {
+  async function pegarDados() {
+    if (!consulta) {
+      consulta = true;
 
-  //     const formData = new FormData();
-  //     formData.append('acao', 'obter_dados_frela');
-  //     formData.append('cpf', '');
-  //     formData.append('senha', '');
+      try {
 
-  //     const requsicao = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-  //       method: 'POST',
-  //       mode: 'cors',
-  //       body: formData
-  //     });
+        const formData = new FormData();
+        formData.append('acao', 'dados_apresentacao');
 
-  //     const resposta = await requsicao.json();
+        const requsicao = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+          method: 'POST',
+          mode: 'cors',
+          body: formData
+        });
 
-  //     let status = resposta.status;
-  //     let dados = resposta.data;
+        const response = await requsicao.json();
 
-  //     console.log(status, dados);
-  //     setLoading(true);
+        if (response) {
+          const servicos = response.dataServico;
+          const freelancers = response.dataFreelancers;
+          const clientes = response.dataClientes;
 
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+          servicos.map((dados: any) => {
+            ultimosServicos.push({
+              tag: dados.tipo,
+              descricao: dados.descricao
+            });
+          })
+
+          console.log(ultimosServicos);
+        }
+
+        // console.log(response.dataServico);
+        // console.log(response.dataFreelancers);
+        // console.log(response.dataClientes);
+
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 
 
 

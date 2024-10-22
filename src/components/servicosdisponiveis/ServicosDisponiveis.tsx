@@ -51,7 +51,8 @@ const styledDialogService = {
 
 async function aceitaServico(e: any) {
     e.preventDefault();
-    console.log(sessionStorage.getItem('shUserLogId'));
+    let userId = sessionStorage.getItem('shUserLogId');
+    console.log(userId);
     console.log(id);
 }
 
@@ -69,7 +70,7 @@ const ServicosDisponiveis = ({ data }: any) => {
         remuneracao = servico.remuneracao;
         tipoRemuneracao = servico.tipoDeRemuneracao
 
-        setOpen(true)
+        setOpen(true);
     };
 
     const handleClose = () => {
@@ -144,7 +145,7 @@ const ServicosDisponiveis = ({ data }: any) => {
                     <Button autoFocus onClick={handleClose}>
                         Voltar
                     </Button>
-                    <Button onClick={((e) => { aceitaServico(e) })}>
+                    <Button onClick={((e) => { aceitaServico(e, ) })}>
                         Aceitar
                     </Button>
                 </DialogActions>

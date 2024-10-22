@@ -21,10 +21,6 @@ const Servicos = ({ data }: any) => {
         <div className="sh-itens-data">
           <p className="sh-servicos-data-descricao">{servico.descricao}</p>
         </div>
-        {/* <div className="sh-itens-data sh-itens-remuneracao">
-        <p className="sh-servicos-data-remuneracao">Remuneração:</p>
-        <p className="sh-servicos-data-valor">R${servico.remuneracao} - {servico.tipoDeRemuneracao}</p>
-      </div> */}
       </Link>
     </li>
   );

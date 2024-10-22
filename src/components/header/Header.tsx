@@ -159,7 +159,7 @@ const Header = ({ usuario }: any) => {
               <a href='#sh_profissionais_emDestaque' className='sh-item-text'>Profissionais em destaque</a>
             </li>
 
-            <li className="sh-navegacao-item d-lg-none">
+            <li className="sh-navegacao-item">
               <a href='#sh_clientes_emDestaque' className='sh-item-text'>Clientes em destaque</a>
             </li>
 
@@ -171,8 +171,8 @@ const Header = ({ usuario }: any) => {
               <a href='#sh_ultimas_postagens' className='sh-item-text'>Últimos servicos postados</a>
             </li>}
 
-            {usuario === 2 && <li className="sh-navegacao-item d-lg-none">
-              <a href='#' className='sh-item-text'>Lista de serviços</a>
+            {usuario === 2 && <li className="sh-navegacao-item">
+              <a href='#' className='sh-item-text'>Serviços</a>
             </li>}
 
             {usuario === 0 && <li className="sh-navegacao-item">
@@ -187,7 +187,7 @@ const Header = ({ usuario }: any) => {
               <a href='#sh_duvidas' className='sh-item-text'>Dúvidas Frequentes</a>
             </li>
 
-            {usuario != 0 && <li className="sh-navegacao-item d-lg-none">
+            {usuario != 0 && <li className="sh-navegacao-item">
               <a href='#' className='sh-item-text'>Fale conosco</a>
             </li>}
 
@@ -211,12 +211,22 @@ const Header = ({ usuario }: any) => {
         </Offcanvas.Body>
 
         <ul className='d-none d-lg-flex sh-header-option-dois'>
-          <li className="sh-navegacao-item">
-            <button className='sh-item-text' onClick={() => setModalRegistro(true)}>Registre-se</button>
-          </li>
-          <li className="sh-navegacao-item">
-            <Link to='/login' className='sh-item-text'>Login</Link>
-          </li>
+          {usuario === 0 &&
+            <li className="sh-navegacao-item">
+              <button className='sh-item-text' onClick={() => setModalRegistro(true)}>Registre-se</button>
+            </li>
+          }
+          {usuario === 0 &&
+            <li className="sh-navegacao-item">
+              <Link to='/login' className='sh-item-text'>Login</Link>
+            </li>
+          }
+
+          {usuario != 0 &&
+            <Link to='/perfil' className='sh-options-login'>
+              <PersonIcon />
+            </Link>
+          }
         </ul>
 
         <ModalTipoDeCadastro show={modalRegistro} onHide={() => setModalRegistro(false)} />
