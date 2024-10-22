@@ -14,7 +14,8 @@ const ClientesEmDestaque = ({ dados }: any) => {
 
         <li key={index} className="sh-cliEmDestaque-item" data-aos="flip-left">
             <div className="sh-cliEmDestaque-item-dados">
-                <img src={imgCliente} alt="Foto de perfil" className="sh-cliEmDestaque-imagemProfissional" />
+                {!cliente.imagem_perfil && <img src={imgCliente} alt="Foto de perfil" className="sh-cliEmDestaque-imagemProfissional" />}
+                {cliente.imagem_perfil && <img src={cliente.imagem_perfil} alt="Foto de perfil" className="sh-cliEmDestaque-imagemProfissional" />}
                 <p className="sh-cliEmDestaque-cliente-nome">{cliente.nome}</p>
             </div>
 

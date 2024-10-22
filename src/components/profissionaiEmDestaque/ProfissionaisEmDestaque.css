@@ -81,12 +81,18 @@
             gap: 10px;
 
             & .sh-servicos-list {
-                color: var(--sh-profissionais-cor-primaria);
+                margin: 0;
                 background-color: var(--sh-profissionais-cor-background-components);
-                padding: 1px 5px;
+                font-size: .9rem;
+                color: var(--sh-profissionais-cor-primaria);
+                padding: 2px 8px;
                 border-radius: 5px;
-                font-size: var(--sh-profissionais-font-size-textos);
-                text-wrap: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                max-width: 100%;
             }
         }
 

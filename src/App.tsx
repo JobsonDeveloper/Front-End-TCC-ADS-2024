@@ -29,26 +29,9 @@ import "aos/dist/aos.css";
 // ------------ Monta do banco ----------
 let ultimosServicos: any = [];
 
-const profDestaque = [
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',
-    servicoUm: 'Músico',
-    servicoDois: 'Professor',
-    servicoTres: 'Tatuador',
-    dataCadastro: '05/2024',
-    estrelas: 103
-  }
-];
+const profDestaque: any = [];
 
-const cliDestaque = [
-  {
-    fotoUrl: '../../assets/profissionais/profissional.png',
-    nome: 'João Paulo César',
-    dataCadastro: '05/2024',
-    estrelas: 103
-  }
-];
+const cliDestaque: any = [];
 
 let consulta = false;
 
@@ -65,6 +48,23 @@ function App() {
 
     Aos.init({ duration: 500 });
   }, []);
+
+  function formatData(data: any) {
+    let dataFormatUm = new Date(data);
+    let dia = `${dataFormatUm.getDate()}`;
+    let mes = `${dataFormatUm.getMonth() + 1}`;
+    let ano = dataFormatUm.getFullYear();
+
+    if (dia.length < 2) {
+      dia = `0${dia}`;
+    }
+
+    if (mes.length < 2) {
+      mes = `0${mes}`;
+    }
+
+    return (`${dia}/${mes}/${ano}`);
+  }
 
 
   async function pegarDados() {
@@ -96,7 +96,37 @@ function App() {
             });
           })
 
-          console.log(ultimosServicos);
+
+          freelancers.map((dados: any) => {
+            let servicosSplit = dados.servicos.split(",");
+
+            profDestaque.push({
+              fotoUrl: dados.imagem_perfil,
+              nome: `${dados.nome} ${dados.sobrenome}`,
+              servico: servicosSplit[0],
+              dataCadastro: formatData(dados.data_de_criacao),
+              estrelas: dados.classificacao
+            });
+          })
+
+          clientes.map((dados: any) => {
+            cliDestaque.push({
+              fotoUrl: dados.imagem_perfil,
+              nome: `${dados.nome} ${dados.sobrenome}`,
+              dataCadastro: formatData(dados.data_de_criacao),
+              estrelas: dados.classificacao
+            });
+          })
+
+
+
+          // servicos.map((dados: any) => {
+          //   ultimosServicos.push({
+          //     tag: dados.tipo,
+          //     descricao: dados.descricao
+          //   });
+          // })
+
         }
 
         // console.log(response.dataServico);

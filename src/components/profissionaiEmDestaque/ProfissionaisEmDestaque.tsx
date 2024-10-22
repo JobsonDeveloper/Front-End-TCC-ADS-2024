@@ -15,14 +15,13 @@ const ProfissionaisEmDestaque = ({ dados }: any) => {
 
     <li key={index} className="sh-EmDestaque-item" data-aos="flip-left">
       <div className="sh-EmDestaque-item-dados">
-        <img src={imgProfissional} alt="Foto de perfil" className="sh-EmDestaque-imagemProfissional" />
+        {!profissional.fotoUrl && <img src={imgProfissional} alt="Foto de perfil" className="sh-EmDestaque-imagemProfissional" />}
+        {profissional.fotoUrl && <img src={profissional.fotoUrl} alt="Foto de perfil" className="sh-EmDestaque-imagemProfissional" />}
         <p className="sh-EmDestaque-profissonal-nome">{profissional.nome}</p>
       </div>
 
       <ul className="sh-EmDestaque-servicos">
-        { profissional.servicoUm && <li className="sh-servicos-list">{profissional.servicoUm}</li> }
-        { profissional.servicoDois && <li className="sh-servicos-list">{profissional.servicoDois}</li> }
-        { profissional.servicoTres && <li className="sh-servicos-list">{profissional.servicoTres}</li> }
+        <li className="sh-servicos-list">{profissional.servico}</li> 
       </ul>
 
       <p className="sh-EmDestaque-item-dataCadastro">Desde {profissional.dataCadastro}</p>
