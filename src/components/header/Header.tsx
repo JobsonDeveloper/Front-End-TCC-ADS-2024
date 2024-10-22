@@ -1,11 +1,11 @@
 import React from 'react';
 import './header.css'
 import Logo from '../../assets/index/backgrounds/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // ---- Bootstrap
 import { useState } from 'react';
-import Alert from 'react-bootstrap/Alert';
+// import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,13 +14,65 @@ import serFreelancerImg from '../../assets/index/backgrounds/serFreelancer.png';
 import serClienteImg from '../../assets/index/backgrounds/serCliente.png';
 import Options from '../../assets/index/icons/icon-options.png'
 import { Modal } from 'react-bootstrap';
+import PersonIcon from '@mui/icons-material/Person';
+import { Alert } from '@mui/material';
 
-const Header = ({usuario}:any) => {
+
+const ShAlert = () => {
+  return (
+    <>
+      {tipoAlert === 0 &&
+        <Alert severity="success">
+          {mensagemAlert}
+        </Alert>
+      }
+
+      {tipoAlert === 1 &&
+        <Alert severity="info">
+          {mensagemAlert}
+        </Alert>
+      }
+
+      {tipoAlert === 2 &&
+        <Alert severity="warning">
+          {mensagemAlert}
+        </Alert>
+      }
+
+      {tipoAlert === 3 &&
+        <Alert severity="error">
+          {mensagemAlert}
+        </Alert>
+      }
+    </>
+  )
+}
+
+let mensagemAlert = "asdasdasda";
+let tipoAlert = 0;
+
+const Header = ({ usuario }: any) => {
   // ---- Const Bootstrap
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [modalRegistro, setModalRegistro] = useState(false);
+  const pagina = useNavigate();
+  const [mostrarAlert, setMostrarAlert] = useState(false);
+
+
+  const logout = () => {
+    tipoAlert = 0;
+    mensagemAlert = "Volte sempre!"
+    handleClose();
+    setMostrarAlert(true);
+
+    setTimeout(() => {
+      setMostrarAlert(true);
+      sessionStorage.clear();
+      pagina('/login');
+    }, 4000);
+  }
 
   function ModalTipoDeCadastro(props: any) {
     return (
@@ -72,8 +124,12 @@ const Header = ({usuario}:any) => {
         </li>}
 
         {usuario != 0 && <li className="sh-options-itens">
-          <Link to='#' className='sh-options-login'>Perfil</Link>
+          <Link to='/perfil' className='sh-options-login'>
+            <PersonIcon />
+          </Link>
         </li>}
+
+
       </ul>
 
       <Offcanvas show={show} onHide={handleClose} responsive="lg" className='sh-header-offcanvas'>
@@ -85,7 +141,6 @@ const Header = ({usuario}:any) => {
 
         <Offcanvas.Header closeButton className='sh-offcanvas-element'>
           <Offcanvas.Title className='sh-lg-header-title'>
-            {/* <img src={Logo} alt="Logo da SkillHub" className='sh-logo-img' /> */}
             Navegue pelo nosso site
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -116,7 +171,7 @@ const Header = ({usuario}:any) => {
               <a href='#sh_ultimas_postagens' className='sh-item-text'>Últimos servicos postados</a>
             </li>}
 
-            {usuario ===2 && <li className="sh-navegacao-item d-lg-none">
+            {usuario === 2 && <li className="sh-navegacao-item d-lg-none">
               <a href='#' className='sh-item-text'>Lista de serviços</a>
             </li>}
 
@@ -148,16 +203,15 @@ const Header = ({usuario}:any) => {
               <Link to='/cadastro-freelancer' className='sh-item-text'>Torne-se um Freelancer</Link>
             </li>}
 
-            
+
             {usuario != 0 && <li className="d-lg-none sh-navegacao-item">
-              <Link to='#' className='sh-item-text'>Sair</Link>
+              <p className='sh-item-text' onClick={logout}>Sair</p>
             </li>}
           </ul>
         </Offcanvas.Body>
 
         <ul className='d-none d-lg-flex sh-header-option-dois'>
           <li className="sh-navegacao-item">
-            {/* <Link to='/duvidas' className='sh-item-text'>Registre-se</Link> */}
             <button className='sh-item-text' onClick={() => setModalRegistro(true)}>Registre-se</button>
           </li>
           <li className="sh-navegacao-item">
@@ -167,6 +221,12 @@ const Header = ({usuario}:any) => {
 
         <ModalTipoDeCadastro show={modalRegistro} onHide={() => setModalRegistro(false)} />
       </Offcanvas>
+
+      {mostrarAlert &&
+        <div className="sh-alerts">
+          <ShAlert />
+        </div>
+      }
     </section>
   )
 }

@@ -24,9 +24,29 @@
     --sh-freelancer-font-size-textos: 1rem;
 }
 
+@keyframes alertsAnim {
+    from {
+        right: -100%;
+    }
+
+    10% {
+        right: 0;
+    }
+
+    90% {
+        right: 0;
+    }
+
+    to {
+        right: -100%;
+    }
+}
+
 .sh-freela {
     min-height: 100vh;
     font-family: var(--sh-freelancer-font-family);
+    position: relative;
+    overflow: hidden;
 
     & .sh-freela-header-apresentacao {
         padding-bottom: 20px;
@@ -332,6 +352,16 @@
 
     & .sh-freela-footer {
         background-color: var(--sh-freelancer-cor-background-footer);
+    }
+
+    & .sh-alerts {
+        width: max-content;
+        padding: 2px;
+        position: absolute;
+        top: 0;
+        right: -100%;
+        z-index: 1046;
+        animation: alertsAnim 4s linear;
     }
 }
 

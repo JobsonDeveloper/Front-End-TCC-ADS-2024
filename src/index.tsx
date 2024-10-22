@@ -8,6 +8,7 @@ import Inicial from './App';
 import Login from './views/login/Login';
 import SobreNos from './views/sobreNos/SobreNos';
 import Duvidas from './views/duvidas/Duvidas';
+import Perfil from './views/perfil/Perfil';
 
 // Rotas de clientes
 import CadastroCliente from './views/cadastroCliente/CadastroCliente';
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
   { path: '/sobrenos', element: <SobreNos /> },
   { path: '/duvidas', element: <Duvidas /> },
+  { path: '/perfil', element: <Perfil /> },
 
   // Rotas de clientes
   { path: '/cadastro-cliente', element: <CadastroCliente /> },

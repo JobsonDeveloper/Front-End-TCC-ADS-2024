@@ -21,6 +21,7 @@ let tipo = "";
 let diaServico = "";
 let descricao = "";
 let remuneracao = "";
+let tipoRemuneracao = "";
 let local = "";
 
 const styledDialogService = {
@@ -30,22 +31,28 @@ const styledDialogService = {
         fontFamily: '"Nunito", sans-serif'
     },
 
-'& .sh-servico-dialog-dados': {
-    display: 'flex',
-    flexDirection: 'column',
-    rowGap: '10px',
+    '& .sh-servico-dialog-dados': {
+        display: 'flex',
+        flexDirection: 'column',
+        rowGap: '10px',
 
-    '& .sh-servico-subtitulos': {
-        fontSize: '1.1rem',
-        color: '#000',
-    },
-    
-    '& .sh-servico-dados': {
-        fontSize: '.9rem',
-        color: '#494949',
+        '& .sh-servico-subtitulos': {
+            fontSize: '1.1rem',
+            color: '#000',
+        },
+
+        '& .sh-servico-dados': {
+            fontSize: '.9rem',
+            color: '#494949',
+        }
     }
+
 }
 
+async function aceitaServico(e: any) {
+    e.preventDefault();
+    console.log(sessionStorage.getItem('shUserLogId'));
+    console.log(id);
 }
 
 const ServicosDisponiveis = ({ data }: any) => {
@@ -60,6 +67,7 @@ const ServicosDisponiveis = ({ data }: any) => {
         diaServico = servico.data;
         local = servico.endereco;
         remuneracao = servico.remuneracao;
+        tipoRemuneracao = servico.tipoDeRemuneracao
 
         setOpen(true)
     };
@@ -128,16 +136,16 @@ const ServicosDisponiveis = ({ data }: any) => {
                         Remuneração
                     </DialogContentText>
                     <DialogContentText className="sh-servico-dados">
-                        {remuneracao}
+                        R${remuneracao} reais - {tipoRemuneracao}
                     </DialogContentText>
                 </DialogContent>
 
                 <DialogActions>
                     <Button autoFocus onClick={handleClose}>
-                        Disagree
+                        Voltar
                     </Button>
-                    <Button onClick={handleClose} autoFocus>
-                        Agree
+                    <Button onClick={((e) => { aceitaServico(e) })}>
+                        Aceitar
                     </Button>
                 </DialogActions>
             </Dialog>

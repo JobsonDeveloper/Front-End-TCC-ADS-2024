@@ -8,13 +8,13 @@ import ClientesEmDestaque from "../../components/clientesEmDestaque/ClientesEmDe
 import Servicos from '../../components/servicos/Servicos';
 import Duvidas from "../duvidas/Duvidas";
 import { Accordion } from "react-bootstrap";
-import { Paper, TextField } from "@mui/material";
+import { Alert, Paper, TextField } from "@mui/material";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 import backgroundApresentacaoUm from '../../assets/FreelaHome/backgrounds/background-apresentacao-lg.webp'
 import backgroundApresentacaoDois from '../../assets/FreelaHome/backgrounds/imagem-apresentacao.webp'
 import backgroundApresentacaoMd from '../../assets/FreelaHome/backgrounds/background-apresentacaoMd.png'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ServicosDisponiveis from "../../components/servicosdisponiveis/ServicosDisponiveis";
 
 const styledTextField = {
@@ -166,18 +166,143 @@ const servicosAdequados = [
     },
 ];
 
-function teste(dados: any) {
-    console.log(dados.id);
+const ShAlert = () => {
+    return (
+        <>
+            {tipoAlert === 0 &&
+                <Alert severity="success">
+                    {mensagemAlert}
+                </Alert>
+            }
+
+            {tipoAlert === 1 &&
+                <Alert severity="info">
+                    {mensagemAlert}
+                </Alert>
+            }
+
+            {tipoAlert === 2 &&
+                <Alert severity="warning">
+                    {mensagemAlert}
+                </Alert>
+            }
+
+            {tipoAlert === 3 &&
+                <Alert severity="error">
+                    {mensagemAlert}
+                </Alert>
+            }
+        </>
+    )
 }
 
+let mensagemAlert = "asdasdasda";
+let tipoAlert = 0;
+
 const HomeFreelancer = () => {
+    const pagina = useNavigate();
+    const [mostrarAlert, setMostrarAlert] = useState(false);
     const [loading, setLoading] = useState(true);
 
+    function formatData(data: any) {
+        let dataFormatUm = new Date(data);
+        let dia = `${dataFormatUm.getDate()}`;
+        let mes = `${dataFormatUm.getMonth() + 1}`;
+        let ano = dataFormatUm.getFullYear();
+
+        if(dia.length < 2) {
+            dia = `0${dia}`;
+        }
+
+        if(mes.length < 2) {
+            mes = `0${mes}`;
+        }
+
+        return(`${dia}/${mes}/${ano}`);
+    }
+
+    async function coletaDados() {
+        // if (!sessionStorage.getItem('shFreelaId')) {
+        try {
+            const formData = new FormData();
+            formData.append('acao', 'obter_dados_frela');
+            formData.append('id', `${sessionStorage.getItem('shUserLogId')}`);
+
+            const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                method: 'POST',
+                mode: 'cors',
+                body: formData
+            });
+
+            const response = await request.json();
+            const dadosFreela = response.data;
+
+            if (response) {
+
+                const dataCriacao = formatData(dadosFreela.data_de_criacao);
+                const splitNascimento = dadosFreela.nascimento.split('-');
+                const dataNascimento = `${splitNascimento[2]}/${splitNascimento[1]}/${splitNascimento[0]}`;
+
+
+                sessionStorage.setItem('shFreelaId', dadosFreela.id);
+                sessionStorage.setItem('shFreelaNome', dadosFreela.nome);
+                sessionStorage.setItem('shFreelaSobrenome', dadosFreela.sobrenome);
+                sessionStorage.setItem('shFreelaNascimento', dataNascimento);
+                sessionStorage.setItem('shFreelaEndereco', dadosFreela.endereco);
+                sessionStorage.setItem('shFreelaTelefone', dadosFreela.telefone);
+                sessionStorage.setItem('shFreelaServicos', dadosFreela.servicos);
+                sessionStorage.setItem('shFreelaEmail', dadosFreela.email);
+                sessionStorage.setItem('shFreelaClassificacao', dadosFreela.classificacao);
+                sessionStorage.setItem('shFreelaDataCriacao', dataCriacao);
+                sessionStorage.setItem('shFreelaPerfil', dadosFreela.imagem_perfil);
+                sessionStorage.setItem('shFreelaTipo', dadosFreela.tipo);
+
+                setLoading(false);
+            }
+            else {
+                setLoading(false);
+            }
+        }
+        catch (error) {
+            tipoAlert = 3;
+            mensagemAlert = "Erro de requisição!"
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+                setLoading(false);
+            }, 4000);
+            console.error(error);
+        }
+        // }
+    }
+
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 4000);
-    })
+        if (!sessionStorage.getItem('shUserLogId')) {
+            tipoAlert = 3;
+            mensagemAlert = "Faça login antes!";
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+                pagina('/login');
+            }, 4000);
+        }
+        else if (sessionStorage.getItem('shUserLogTipo') != '0') {
+            tipoAlert = 3;
+            mensagemAlert = "Faça login antes!";
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+                pagina('/login');
+            }, 4000);
+        }
+        else {
+            coletaDados();
+        }
+    });
+
 
     return (
         <section className="sh-freela">
@@ -267,7 +392,7 @@ const HomeFreelancer = () => {
 
                             <button type="button" className="sh-filtro-button">Pesquisar</button>
                         </div>
-                        <ServicosDisponiveis data={servicosAdequados}/>
+                        <ServicosDisponiveis data={servicosAdequados} />
                     </div>
                 </article>
 
@@ -314,6 +439,13 @@ const HomeFreelancer = () => {
             <article className="sh-freela-footer">
                 <Footer usuario={2} />
             </article>
+
+            {/* Alerts */}
+            {mostrarAlert &&
+                <div className="sh-alerts">
+                    <ShAlert />
+                </div>
+            }
         </section >
     )
 };

@@ -87,18 +87,17 @@ const Login = () => {
 
                 const response = await request.json();
 
-                if (response.status === 202) {
+                if (response.status === 201) {
                     tipoAlert = 0;
                     mensagemAlert = "Bem vindo!"
                     setMostrarAlert(true);
                     
                     setTimeout(() => {
-                        setMostrarAlert(false);
-                        setLoading(false);
-
                         sessionStorage.setItem('shUserLogId', `${response.data.id}`);
                         sessionStorage.setItem('shUserLogTipo', `${response.data.tipo}`);
-
+                        setMostrarAlert(false);
+                        setLoading(false);
+                        
                         if(response.data.tipo === '1') {
                             pagina('/home-cliente');
                         }
@@ -108,7 +107,7 @@ const Login = () => {
                     }, 4000);
 
                 }
-                else if (response.status === 400) {
+                else if (response.status === 401) {
                     tipoAlert = 2;
                     mensagemAlert = "Usuário ou senha incorretos!"
                     setMostrarAlert(true);
@@ -121,7 +120,7 @@ const Login = () => {
                 else {
                     console.log(response.status)
                     tipoAlert = 3;
-                    mensagemAlert = "Erro ao logar no site!"
+                    mensagemAlert = "Usuário ou senha incorretos!"
                     setMostrarAlert(true);
 
                     setTimeout(() => {
