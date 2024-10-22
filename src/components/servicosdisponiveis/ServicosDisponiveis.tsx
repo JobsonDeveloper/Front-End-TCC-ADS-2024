@@ -3,8 +3,9 @@ import Aos from 'aos';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import fotoPadrao from '../../assets/FreelaHome/icons/icon-perfil.png';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, useMediaQuery, useTheme } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
+import { Padding } from '@mui/icons-material';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -15,19 +16,52 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
+let id = "";
+let tipo = "";
+let diaServico = "";
 let descricao = "";
+let remuneracao = "";
+let local = "";
+
+const styledDialogService = {
+    '& .sh-servico-dialog-titulo': {
+        color: '#000',
+        fontSize: '1.4rem',
+        fontFamily: '"Nunito", sans-serif'
+    },
+
+'& .sh-servico-dialog-dados': {
+    display: 'flex',
+    flexDirection: 'column',
+    rowGap: '10px',
+
+    '& .sh-servico-subtitulos': {
+        fontSize: '1.1rem',
+        color: '#000',
+    },
+    
+    '& .sh-servico-dados': {
+        fontSize: '.9rem',
+        color: '#494949',
+    }
+}
+
+}
 
 const ServicosDisponiveis = ({ data }: any) => {
     const [open, setOpen] = useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const mostrarDetalhes = (servico: any) => {
+        id = servico.id;
+        tipo = servico.tag;
         descricao = servico.descricao;
+        diaServico = servico.data;
+        local = servico.endereco;
+        remuneracao = servico.remuneracao;
 
-        setTimeout(() => {
-            console.log(descricao);
-            setOpen(true)
-        }, 500);
-
+        setOpen(true)
     };
 
     const handleClose = () => {
@@ -41,8 +75,7 @@ const ServicosDisponiveis = ({ data }: any) => {
     const listaServicos = data.map((servico: any, index: any) =>
         <li key={index} className="sh-servicosFreela-itens" data-aos="flip-left" onClick={(() => { mostrarDetalhes(servico) })}>
             <div className="sh-itens-data">
-                {servico.imgCliente && <img src={servico.imgCliente} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />}
-                {!servico.imgCliente && <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />}
+                <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />
                 <p className="sh-servicosFreela-data-marcador">{servico.tag}</p>
             </div>
             <div className="sh-itens-data">
@@ -56,24 +89,56 @@ const ServicosDisponiveis = ({ data }: any) => {
             {listaServicos}
 
             <Dialog
+                fullScreen={fullScreen}
                 open={open}
-                TransitionComponent={Transition}
-                keepMounted
                 onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
+                aria-labelledby="responsive-dialog-title"
+                sx={styledDialogService}
             >
-                <DialogTitle>{"Use Google's location service?"}</DialogTitle>
-                <DialogContent>
+                <DialogTitle id="responsive-dialog-title" className='sh-servico-dialog-titulo'>
+                    {tipo}
+                </DialogTitle>
 
-
-                    <DialogContentText id="alert-dialog-slide-description">
+                <DialogContent className='sh-servico-dialog-dados'>
+                    <DialogContentText className="sh-servico-subtitulos">
+                        Descrição
+                    </DialogContentText>
+                    <DialogContentText className="sh-servico-dados">
                         {descricao}
                     </DialogContentText>
 
+
+                    <DialogContentText className="sh-servico-subtitulos">
+                        Data
+                    </DialogContentText>
+                    <DialogContentText className="sh-servico-dados">
+                        {diaServico}
+                    </DialogContentText>
+
+
+                    <DialogContentText className="sh-servico-subtitulos">
+                        Endereço
+                    </DialogContentText>
+                    <DialogContentText className="sh-servico-dados">
+                        {local}
+                    </DialogContentText>
+
+
+                    <DialogContentText className="sh-servico-subtitulos">
+                        Remuneração
+                    </DialogContentText>
+                    <DialogContentText className="sh-servico-dados">
+                        {remuneracao}
+                    </DialogContentText>
                 </DialogContent>
+
                 <DialogActions>
-                    <Button onClick={handleClose}>Sair</Button>
-                    <Button>Aceitar</Button>
+                    <Button autoFocus onClick={handleClose}>
+                        Disagree
+                    </Button>
+                    <Button onClick={handleClose} autoFocus>
+                        Agree
+                    </Button>
                 </DialogActions>
             </Dialog>
         </ul>

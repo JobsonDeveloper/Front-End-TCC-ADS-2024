@@ -147,7 +147,6 @@ const cliDestaque = [
 const servicosAdequados = [
     {
         id: '1',
-        imgCliente: 'base64',
         tag: 'Serviços gerais',
         descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
         remuneracao: '250,00',
@@ -158,7 +157,7 @@ const servicosAdequados = [
     {
         id: '2',
         imgCliente: 'base64',
-        tag: 'Serviços gerais',
+        tag: 'Jardinagem',
         descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
         remuneracao: '250,00',
         tipoDeRemuneracao: 'Diária',
