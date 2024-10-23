@@ -43,7 +43,7 @@
         gap: 5px;
         padding: 10px;
         width: max-content;
-        height: 100%;
+        min-height: 100%;
         background-color: var(--sh-servicosFreela-cor-primaria);
         border-radius: 5px;
         box-shadow: #555555 3px 3px 9px;
@@ -83,6 +83,14 @@
                 display: -webkit-box;
                 -webkit-line-clamp: 4;
                 -webkit-box-orient: vertical;
+            }
+
+            & .sh-servicos-data-remuneracao {
+                color: var(--sh-servicos-cor-terciaria);
+                font-size: var(--sh-servicos-font-size-textos);
+                margin: 0;
+                width: max-content;
+                font-weight: 600;
             }
         }
     }

@@ -95,6 +95,8 @@ const Login = () => {
                     setTimeout(() => {
                         sessionStorage.setItem('shUserLogId', `${response.data.id}`);
                         sessionStorage.setItem('shUserLogTipo', `${response.data.tipo}`);
+                        let servicoPrimario = response.data.servicos.split(',');
+                        sessionStorage.setItem('shUserServico', servicoPrimario[0]);
                         setMostrarAlert(false);
                         setLoading(false);
                         

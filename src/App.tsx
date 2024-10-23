@@ -118,15 +118,7 @@ function App() {
             });
           })
 
-
-
-          // servicos.map((dados: any) => {
-          //   ultimosServicos.push({
-          //     tag: dados.tipo,
-          //     descricao: dados.descricao
-          //   });
-          // })
-
+          console.log(profDestaque);
         }
 
         // console.log(response.dataServico);

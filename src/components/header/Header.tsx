@@ -129,7 +129,6 @@ const Header = ({ usuario }: any) => {
           </Link>
         </li>}
 
-
       </ul>
 
       <Offcanvas show={show} onHide={handleClose} responsive="lg" className='sh-header-offcanvas'>
@@ -223,10 +222,15 @@ const Header = ({ usuario }: any) => {
           }
 
           {usuario != 0 &&
+            <p className='sh-item-text' onClick={logout}>Sair</p>
+          }
+
+          {usuario != 0 &&
             <Link to='/perfil' className='sh-options-login'>
-              <PersonIcon />
+              <PersonIcon className='sh-perfil-icon'/>
             </Link>
           }
+
         </ul>
 
         <ModalTipoDeCadastro show={modalRegistro} onHide={() => setModalRegistro(false)} />

@@ -25,146 +25,13 @@ const styledTextField = {
     },
 };
 
-const ultimosServicos = [
-    {
-        tag: 'Serviços gerais',
-        descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
-        remuneracao: '250,00',
-        tipoDeRemuneracao: 'Diária'
-    },
-    {
-        tag: 'Professor',
-        descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
-        remuneracao: '1.200,00',
-        tipoDeRemuneracao: 'Mensal'
-    },
-    {
-        tag: 'Pedreiro',
-        descricao: 'Preciso de uma pessoa para dar andamento ao projeto da minha casa, começando o trabalho de segunda a quarta, das 08:00 da manhã até as 16:00 da tarde.',
-        remuneracao: '60,00',
-        tipoDeRemuneracao: 'Diária'
-    },
-    {
-        tag: 'Jardineiro',
-        descricao: 'Preciso de uma pessoa para limpar o jardim da minha casa até no máximo as 16:00 horas do dia 30/12/2024.',
-        remuneracao: '300,00',
-        tipoDeRemuneracao: 'Diária'
-    }
-];
+const ultimosServicos: any = [];
 
-const profDestaque = [
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'João Paulo César',
-        servicoUm: 'Músico',
-        servicoDois: 'Professor',
-        servicoTres: 'Tatuador',
-        dataCadastro: '05/2024',
-        estrelas: 103
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'Marcos Amorim da Silva',
-        servicoUm: 'Músico',
-        servicoDois: 'Professor',
-        servicoTres: 'Tatuador',
-        dataCadastro: '05/2024',
-        estrelas: 87
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'Victor Amaral  de souza',
-        servicoUm: 'Músico',
-        servicoDois: 'Professor',
-        servicoTres: 'Tatuador',
-        dataCadastro: '05/2024',
-        estrelas: 65
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'André Coutinho Andrade',
-        servicoUm: 'Músico',
-        servicoDois: 'Professor',
-        servicoTres: 'Tatuador',
-        dataCadastro: '05/2024',
-        estrelas: 49
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'André Felipe Silva',
-        servicoDois: 'Suporte técnico',
-        dataCadastro: '05/2024',
-        estrelas: 30
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'André Felipe Silva',
-        servicoDois: 'Suporte técnico',
-        dataCadastro: '05/2024',
-        estrelas: 30
-    },
-];
+const profDestaque: any = [];
 
-const cliDestaque = [
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'João Paulo César',
-        dataCadastro: '05/2024',
-        estrelas: 103
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'João Paulo César',
-        dataCadastro: '05/2024',
-        estrelas: 90
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'João Paulo César',
-        dataCadastro: '05/2024',
-        estrelas: 87
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'João Paulo César',
-        dataCadastro: '05/2024',
-        estrelas: 78
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'João Paulo César',
-        dataCadastro: '05/2024',
-        estrelas: 76
-    },
-    {
-        fotoUrl: '../../assets/profissionais/profissional.png',
-        nome: 'João Paulo César',
-        dataCadastro: '05/2024',
-        estrelas: 76
-    },
-];
+const cliDestaque: any = [];
 
-const servicosAdequados = [
-    {
-        id: '1',
-        tag: 'Serviços gerais',
-        descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
-        remuneracao: '250,00',
-        tipoDeRemuneracao: 'Diária',
-        data: '2024-12-10',
-        endereco: 'Rua porto alegre numero 12 paulista - PE'
-    },
-    {
-        id: '2',
-        imgCliente: 'base64',
-        tag: 'Jardinagem',
-        descricao: 'Preciso de uma pessoa para ajudar meu filho com matemática, dando aulas a ele dois dias por semana, durante a parte da tarde.',
-        remuneracao: '250,00',
-        tipoDeRemuneracao: 'Diária',
-        data: '2024-12-10',
-        endereco: 'Rua porto alegre numero 12 paulista - PE'
-    },
-];
+const servicosAdequados: any = [];
 
 const ShAlert = () => {
     return (
@@ -198,6 +65,7 @@ const ShAlert = () => {
 
 let mensagemAlert = "asdasdasda";
 let tipoAlert = 0;
+let consulta = false;
 
 const HomeFreelancer = () => {
     const pagina = useNavigate();
@@ -210,71 +78,114 @@ const HomeFreelancer = () => {
         let mes = `${dataFormatUm.getMonth() + 1}`;
         let ano = dataFormatUm.getFullYear();
 
-        if(dia.length < 2) {
+        if (dia.length < 2) {
             dia = `0${dia}`;
         }
 
-        if(mes.length < 2) {
+        if (mes.length < 2) {
             mes = `0${mes}`;
         }
 
-        return(`${dia}/${mes}/${ano}`);
+        return (`${dia}/${mes}/${ano}`);
     }
 
     async function coletaDados() {
-        // if (!sessionStorage.getItem('shFreelaId')) {
-        try {
-            const formData = new FormData();
-            formData.append('acao', 'obter_dados_frela');
-            formData.append('id', `${sessionStorage.getItem('shUserLogId')}`);
+        if (!consulta) {
+            consulta = true;
 
-            const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-                method: 'POST',
-                mode: 'cors',
-                body: formData
-            });
+            try {
+                const formData = new FormData();
+                formData.append('acao', 'obter_dados_frela');
+                formData.append('id', `${sessionStorage.getItem('shUserLogId')}`);
+                formData.append('servicoAdequado', `${sessionStorage.getItem('shUserServico')}`);
 
-            const response = await request.json();
-            const dadosFreela = response.data;
+                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                });
 
-            if (response) {
+                const response = await request.json();
+                const dadosFreela = response.dadosFreela[0];
 
-                const dataCriacao = formatData(dadosFreela.data_de_criacao);
-                const splitNascimento = dadosFreela.nascimento.split('-');
-                const dataNascimento = `${splitNascimento[2]}/${splitNascimento[1]}/${splitNascimento[0]}`;
+                if (response) {
+                    const dataCriacao = formatData(dadosFreela.data_de_criacao);
+                    const splitNascimento = dadosFreela.nascimento.split('-');
+                    const dataNascimento = `${splitNascimento[2]}/${splitNascimento[1]}/${splitNascimento[0]}`;
+
+                    sessionStorage.setItem('shFreelaId', dadosFreela.id);
+                    sessionStorage.setItem('shFreelaNome', dadosFreela.nome);
+                    sessionStorage.setItem('shFreelaSobrenome', dadosFreela.sobrenome);
+                    sessionStorage.setItem('shFreelaNascimento', dataNascimento);
+                    sessionStorage.setItem('shFreelaEndereco', dadosFreela.endereco);
+                    sessionStorage.setItem('shFreelaTelefone', dadosFreela.telefone);
+                    sessionStorage.setItem('shFreelaServicos', dadosFreela.servicos);
+                    sessionStorage.setItem('shFreelaEmail', dadosFreela.email);
+                    sessionStorage.setItem('shFreelaClassificacao', dadosFreela.classificacao);
+                    sessionStorage.setItem('shFreelaDataCriacao', dataCriacao);
+                    sessionStorage.setItem('shFreelaPerfil', dadosFreela.imagem_perfil);
+                    sessionStorage.setItem('shFreelaTipo', dadosFreela.tipo);
+                    setLoading(false);
+
+                    response.dataServico.map((dados: any) => {
+                        ultimosServicos.push({
+                            id: dados.id,
+                            tag: dados.tipo,
+                            descricao: dados.descricao
+                        });
+
+                        console.log(dados.id);
+                    })
 
 
-                sessionStorage.setItem('shFreelaId', dadosFreela.id);
-                sessionStorage.setItem('shFreelaNome', dadosFreela.nome);
-                sessionStorage.setItem('shFreelaSobrenome', dadosFreela.sobrenome);
-                sessionStorage.setItem('shFreelaNascimento', dataNascimento);
-                sessionStorage.setItem('shFreelaEndereco', dadosFreela.endereco);
-                sessionStorage.setItem('shFreelaTelefone', dadosFreela.telefone);
-                sessionStorage.setItem('shFreelaServicos', dadosFreela.servicos);
-                sessionStorage.setItem('shFreelaEmail', dadosFreela.email);
-                sessionStorage.setItem('shFreelaClassificacao', dadosFreela.classificacao);
-                sessionStorage.setItem('shFreelaDataCriacao', dataCriacao);
-                sessionStorage.setItem('shFreelaPerfil', dadosFreela.imagem_perfil);
-                sessionStorage.setItem('shFreelaTipo', dadosFreela.tipo);
+                    response.dataFreelancers.map((dados: any) => {
+                        let servicosSplit = dados.servicos.split(",");
 
-                setLoading(false);
+                        profDestaque.push({
+                            fotoUrl: dados.imagem_perfil,
+                            nome: `${dados.nome} ${dados.sobrenome}`,
+                            servico: servicosSplit[0],
+                            dataCadastro: formatData(dados.data_de_criacao),
+                            estrelas: dados.classificacao
+                        });
+                    })
+
+                    response.dataClientes.map((dados: any) => {
+                        cliDestaque.push({
+                            fotoUrl: dados.imagem_perfil,
+                            nome: `${dados.nome} ${dados.sobrenome}`,
+                            dataCadastro: formatData(dados.data_de_criacao),
+                            estrelas: dados.classificacao
+                        });
+                    })
+
+                    if (response.servicosAdequados) {
+                        response.servicosAdequados.map((dados: any) => {
+                            servicosAdequados.push({
+                                id: dados.id,
+                                tag: dados.tipo,
+                                descricao: dados.descricao,
+                                remuneracao: dados.remuneracao
+                            });
+                        })
+                    }
+                }
+                else {
+                    setLoading(false);
+                }
             }
-            else {
-                setLoading(false);
+            catch (error) {
+                tipoAlert = 3;
+                mensagemAlert = "Erro de requisição!"
+                setMostrarAlert(true);
+
+                setTimeout(() => {
+                    setMostrarAlert(false);
+                    setLoading(false);
+                }, 4000);
+                console.error(error);
             }
         }
-        catch (error) {
-            tipoAlert = 3;
-            mensagemAlert = "Erro de requisição!"
-            setMostrarAlert(true);
-
-            setTimeout(() => {
-                setMostrarAlert(false);
-                setLoading(false);
-            }, 4000);
-            console.error(error);
-        }
-        // }
     }
 
     useEffect(() => {
@@ -369,9 +280,9 @@ const HomeFreelancer = () => {
                 </article>
 
                 <article className="sh-main-servicos" id='sh_ultimas_postagens'>
-                    <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Últimos serviços postados</h2>
+                    <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Para você</h2>
                     <div className="sh-servicos-lista-container">
-                        <Servicos data={ultimosServicos} />
+                        <ServicosDisponiveis data={servicosAdequados} />
                     </div>
                 </article>
 
@@ -392,7 +303,7 @@ const HomeFreelancer = () => {
 
                             <button type="button" className="sh-filtro-button">Pesquisar</button>
                         </div>
-                        <ServicosDisponiveis data={servicosAdequados} />
+                        <ServicosDisponiveis data={ultimosServicos} />
                     </div>
                 </article>
 

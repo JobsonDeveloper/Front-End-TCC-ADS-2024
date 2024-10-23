@@ -168,10 +168,6 @@ const CadastroFreelancer = () => {
             dataNascimento = `${mes}/${dia}/${ano}`;
 
         }
-
-        // if (estado) {
-        //     estado = estado;
-        // }
     }
 
     // Form de localização e contato
@@ -183,16 +179,16 @@ const CadastroFreelancer = () => {
         'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
     ];
     const dadosServicos = [
-        'Manutenção de Computadores e Notebooks',
-        'Conserto de Smartphones e Tablets',
-        'Reparo de Televisores e Monitores',
-        'Manutenção de Eletrodomésticos',
-        'Instalação e Manutenção de Equipamentos de Áudio e Vídeo',
-        'Serviços de Automação Residencial',
-        'Conserto de Consoles de Videogames',
-        'Instalação de Redes e Equipamentos de Internet',
-        'Reparo de Drones e Equipamentos de Fotografia',
-        'Manutenção de Equipamentos Biomédicos'
+        'Reparo de Televisor',
+        'Reparo de Notebook',
+        'Reparo de Computador',
+        'Reparo de Ar-condicionado',
+        'Reparo de Smartphone',
+        'Instalação de Ar-condicionado',
+        'Instalação de Câmera',
+        'Reparo de Geladeira',
+        'Reparo de Microondas',
+        'Reparo de Console'
     ];
     const [rua, setRua] = useState('')
     const [numero, setNumero] = useState('')
@@ -338,14 +334,14 @@ const CadastroFreelancer = () => {
     };
 
     useEffect(() => {
-        if(!requisicao) {
+        if (!requisicao) {
             setTimeout(() => {
                 setLoading(false);
             }, 2000);
         }
     });
 
-    function cadastroFreelancer(e:any) {
+    function cadastroFreelancer(e: any) {
         if ((email === "") || (senha === "") || (confirmSenha === "")) {
             tipoAlert = 2;
             mensagemAlert = "Preencha todos os campos!"
@@ -397,11 +393,21 @@ const CadastroFreelancer = () => {
             }
 
             if (servicoDois != undefined) {
-                listaServicos += `-${servicoDois}`;
+                if(servicoUm === undefined) {
+                    listaServicos += `${servicoDois}`;
+                }
+                else {
+                    listaServicos += `,${servicoDois}`;
+                }
             }
 
             if (servicoTres != undefined) {
-                listaServicos += `-${servicoTres}`;
+                if((servicoUm === undefined) && (servicoDois === undefined)) {
+                    listaServicos += `${servicoTres}`;
+                }
+                else {
+                    listaServicos += `,${servicoTres}`;
+                }
             }
 
             let base64FrenteRG = "";
@@ -422,7 +428,7 @@ const CadastroFreelancer = () => {
                         lerImagemTres.onload = function (arquivo: any) {
                             base64Anteced = arquivo.target.result;
 
-                            async function requisicao(e:any) {
+                            async function requisicao(e: any) {
                                 e.preventDefault();
 
                                 try {
@@ -524,90 +530,90 @@ const CadastroFreelancer = () => {
 
         if (variante === 'proximo') {
             if (activeStep === 0) {
-                // if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
-                //     tipoAlert = 2;
-                //     mensagemAlert = "Preencha todos os campos!"
-                //     setMostrarAlert(true);
+                if ((nome === "") || (sobrenome === "") || (cpfCnpj === "") || (nascimento === "")) {
+                    tipoAlert = 2;
+                    mensagemAlert = "Preencha todos os campos!"
+                    setMostrarAlert(true);
 
-                //     setTimeout(() => {
-                //         setMostrarAlert(false);
-                //         return;
-                //     }, 4000);
-                // }
-                // else {
-                //     const hoje = new Date();
-                //     const diaAtual = hoje.getDate();
-                //     const mesAtual = hoje.getMonth() + 1;
-                //     const anoDeVerificacao = hoje.getFullYear() - 18;
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        return;
+                    }, 4000);
+                }
+                else {
+                    const hoje = new Date();
+                    const diaAtual = hoje.getDate();
+                    const mesAtual = hoje.getMonth() + 1;
+                    const anoDeVerificacao = hoje.getFullYear() - 18;
 
-                //     let dataNascimento = new Date(nascimento);
-                //     let diaNascimento = dataNascimento.getDate();
-                //     let mesNascimento = dataNascimento.getMonth() + 1;
-                //     let anoNascimento = dataNascimento.getFullYear();
+                    let dataNascimento = new Date(nascimento);
+                    let diaNascimento = dataNascimento.getDate();
+                    let mesNascimento = dataNascimento.getMonth() + 1;
+                    let anoNascimento = dataNascimento.getFullYear();
 
-                //     if (anoNascimento === anoDeVerificacao) {
-                //         if (mesNascimento === mesAtual) {
-                //             if (diaNascimento === diaAtual) {
-                setActiveStep((currentStep) => currentStep + 1);
-                //                 return;
-                //             }
-                //             else {
-                //                 tipoAlert = 2;
-                //                 mensagemAlert = "Você é menor de idade!"
-                //                 setMostrarAlert(true);
+                    if (anoNascimento === anoDeVerificacao) {
+                        if (mesNascimento === mesAtual) {
+                            if (diaNascimento === diaAtual) {
+                                setActiveStep((currentStep) => currentStep + 1);
+                                return;
+                            }
+                            else {
+                                tipoAlert = 2;
+                                mensagemAlert = "Você é menor de idade!"
+                                setMostrarAlert(true);
 
-                //                 setTimeout(() => {
-                //                     setMostrarAlert(false);
-                //                     return;
-                //                 }, 4000);
-                //             }
-                //         }
-                //         else if (mesNascimento < mesAtual) {
-                //             setActiveStep((currentStep) => currentStep + 1);
-                //             return;
-                //         }
-                //         else {
-                //             tipoAlert = 2;
-                //             mensagemAlert = "Você é menor de idade!"
-                //             setMostrarAlert(true);
+                                setTimeout(() => {
+                                    setMostrarAlert(false);
+                                    return;
+                                }, 4000);
+                            }
+                        }
+                        else if (mesNascimento < mesAtual) {
+                            setActiveStep((currentStep) => currentStep + 1);
+                            return;
+                        }
+                        else {
+                            tipoAlert = 2;
+                            mensagemAlert = "Você é menor de idade!"
+                            setMostrarAlert(true);
 
-                //             setTimeout(() => {
-                //                 setMostrarAlert(false);
-                //                 return;
-                //             }, 4000);
-                //         }
-                //     }
-                //     else if (anoNascimento < anoDeVerificacao) {
-                //         setActiveStep((currentStep) => currentStep + 1);
-                //         return;
-                //     }
-                //     else {
-                //         tipoAlert = 2;
-                //         mensagemAlert = "Você é menor de idade!"
-                //         setMostrarAlert(true);
+                            setTimeout(() => {
+                                setMostrarAlert(false);
+                                return;
+                            }, 4000);
+                        }
+                    }
+                    else if (anoNascimento < anoDeVerificacao) {
+                        setActiveStep((currentStep) => currentStep + 1);
+                        return;
+                    }
+                    else {
+                        tipoAlert = 2;
+                        mensagemAlert = "Você é menor de idade!"
+                        setMostrarAlert(true);
 
-                //         setTimeout(() => {
-                //             setMostrarAlert(false);
-                //             return;
-                //         }, 4000);
-                //     }
-                // }
+                        setTimeout(() => {
+                            setMostrarAlert(false);
+                            return;
+                        }, 4000);
+                    }
+                }
             }
 
             if (activeStep === 1) {
-                // if ((rua === "") || (numero === "") || (cidade === "") || (estado === undefined) || (ddd === "") || (telefone === "")) {
-                //     tipoAlert = 2;
-                //     mensagemAlert = "Preencha todos os campos!"
-                //     setMostrarAlert(true);
+                if ((rua === "") || (numero === "") || (cidade === "") || (estado === undefined) || (ddd === "") || (telefone === "")) {
+                    tipoAlert = 2;
+                    mensagemAlert = "Preencha todos os campos!"
+                    setMostrarAlert(true);
 
-                //     setTimeout(() => {
-                //         setMostrarAlert(false);
-                //         return;
-                //     }, 4000);
-                // }
-                // else {
-                setActiveStep((currentStep) => currentStep + 1);
-                // }
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        return;
+                    }, 4000);
+                }
+                else {
+                    setActiveStep((currentStep) => currentStep + 1);
+                }
             }
 
             if (activeStep === 2) {
@@ -627,19 +633,19 @@ const CadastroFreelancer = () => {
             }
 
             if (activeStep >= 3) {
-                // if ((servicoUm != undefined) || (servicoUm != undefined) || (servicoUm != undefined)) {
-                setActiveStep((currentStep) => currentStep + 1);
-                // }
-                // else {
-                //     tipoAlert = 2;
-                //     mensagemAlert = "Nenhum serviço selecionado!"
-                //     setMostrarAlert(true);
+                if ((servicoUm != undefined) || (servicoUm != undefined) || (servicoUm != undefined)) {
+                    setActiveStep((currentStep) => currentStep + 1);
+                }
+                else {
+                    tipoAlert = 2;
+                    mensagemAlert = "Nenhum serviço selecionado!"
+                    setMostrarAlert(true);
 
-                //     setTimeout(() => {
-                //         setMostrarAlert(false);
-                //         return;
-                //     }, 4000);
-                // }
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        return;
+                    }, 4000);
+                }
             }
 
             if (activeStep >= 4) {

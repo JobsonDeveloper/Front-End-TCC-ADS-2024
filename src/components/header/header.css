@@ -132,6 +132,17 @@
       }
     }
   }
+
+  & .sh-item-text {
+    margin: 0;
+    color: var(--sh-header-cor-textos);
+    font-size: var(--sh-header-font-size-textos);
+    cursor: pointer;
+  }
+
+  & .sh-perfil-icon {
+    color: var(--sh-header-cor-terciaria);
+  }
 }
 
 @media (min-width: 576px) {
@@ -238,6 +249,7 @@
       padding: 0;
       margin: 0;
       column-gap: 26px;
+      align-items: center;
 
       & .sh-navegacao-item {
         font-size: var(--sh-font-size-textos-header);

@@ -16,7 +16,7 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-let id = "";
+let idServico = "";
 let tipo = "";
 let diaServico = "";
 let descricao = "";
@@ -51,9 +51,35 @@ const styledDialogService = {
 
 async function aceitaServico(e: any) {
     e.preventDefault();
-    let userId = sessionStorage.getItem('shUserLogId');
-    console.log(userId);
-    console.log(id);
+
+    try {
+        const formData = new FormData();
+        formData.append('acao', 'freelaAceitaServico');
+        formData.append('idServico', idServico);
+        formData.append('idFreela', `${sessionStorage.getItem('shUserLogId')}`);
+
+        // console.log(formData.get('idServico'));
+        // console.log(formData.get('idFreela'));
+
+        const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+            method: 'POST',
+            mode: 'cors',
+            body: formData
+        });
+
+        const response = await request.json();
+        // const dadosFreela = response.dadosFreela[0];
+
+        if (response) {
+            // window.location.reload();
+            console.log('aceito');
+        }
+    }
+    catch (error) {
+        
+        console.error(error);
+    }
+
 }
 
 const ServicosDisponiveis = ({ data }: any) => {
@@ -62,13 +88,15 @@ const ServicosDisponiveis = ({ data }: any) => {
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const mostrarDetalhes = (servico: any) => {
-        id = servico.id;
+        idServico = servico.id;
         tipo = servico.tag;
         descricao = servico.descricao;
         diaServico = servico.data;
         local = servico.endereco;
         remuneracao = servico.remuneracao;
-        tipoRemuneracao = servico.tipoDeRemuneracao
+        tipoRemuneracao = servico.tipoDeRemuneracao;
+
+        console.log(servico.id);
 
         setOpen(true);
     };
@@ -90,6 +118,9 @@ const ServicosDisponiveis = ({ data }: any) => {
             <div className="sh-itens-data">
                 <p className="sh-servicosFreela-data-descricao">{servico.descricao}</p>
             </div>
+            {servico.remuneracao && <div className="sh-itens-data">
+                <p className="sh-servicos-data-remuneracao">R${servico.remuneracao},00 reais</p>
+            </div>}
         </li>
     );
 
@@ -145,7 +176,7 @@ const ServicosDisponiveis = ({ data }: any) => {
                     <Button autoFocus onClick={handleClose}>
                         Voltar
                     </Button>
-                    <Button onClick={((e) => { aceitaServico(e, ) })}>
+                    <Button onClick={((e) => { aceitaServico(e) })}>
                         Aceitar
                     </Button>
                 </DialogActions>
