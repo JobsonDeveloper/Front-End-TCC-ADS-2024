@@ -131,7 +131,8 @@ const HomeFreelancer = () => {
                         ultimosServicos.push({
                             id: dados.id,
                             tag: dados.tipo,
-                            descricao: dados.descricao
+                            descricao: dados.descricao,
+                            remuneracao: dados.remuneracao
                         });
 
                         console.log(dados.id);
@@ -297,7 +298,6 @@ const HomeFreelancer = () => {
                                 variant="standard"
                                 className="sh-formulario-data-text"
                                 sx={styledTextField}
-                                // onChange={((e) => { setCpf(e.target.value) })}
                                 defaultValue=""
                             />
 

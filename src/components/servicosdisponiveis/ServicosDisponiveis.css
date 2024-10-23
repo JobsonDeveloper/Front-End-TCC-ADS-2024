@@ -21,11 +21,12 @@
     margin: 0;
     display: flex;
     overflow-x: auto;
-    justify-content: space-between;
+    justify-content: center;
     gap: 15px;
     background-image: url('../../assets/index/backgrounds/background-servicos.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    width: 100%;
 
     &::-webkit-scrollbar {
         background-color: transparent;
@@ -47,6 +48,7 @@
         background-color: var(--sh-servicosFreela-cor-primaria);
         border-radius: 5px;
         box-shadow: #555555 3px 3px 9px;
+        justify-content: space-between;
 
         &:hover {
             background-color: var(--sh-servicosFreela-cor-cards-background-hover);

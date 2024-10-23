@@ -205,6 +205,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            width: 100%;
 
             & .sh-servicos-titulo {
                 text-align: center;
@@ -215,12 +216,14 @@
             & .sh-servicos-lista-container {
                 display: flex;
                 justify-content: center;
+                width: 100%;
             }
         }
 
         & .sh-todos-servicos {
             display: flex;
             flex-direction: column;
+            width: 100%;
 
             & .sh-todos-os-servicos-titulo {
                 text-align: center;
@@ -233,6 +236,7 @@
                 flex-direction: column;
                 row-gap: 20px;
                 overflow: hidden;
+                width: 100%;
 
                 & .sh-servicos-filtro {
                     display: flex;
