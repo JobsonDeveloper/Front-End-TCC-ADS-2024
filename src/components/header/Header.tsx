@@ -158,7 +158,7 @@ const Header = ({ usuario }: any) => {
               <a href='#sh_profissionais_emDestaque' className='sh-item-text'>Profissionais em destaque</a>
             </li>
 
-            <li className="sh-navegacao-item">
+            <li className="sh-navegacao-item d-lg-none">
               <a href='#sh_clientes_emDestaque' className='sh-item-text'>Clientes em destaque</a>
             </li>
 

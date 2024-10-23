@@ -296,6 +296,7 @@
             border-radius: 25px;
             margin-left: 5px;
             margin-right: 5px;
+            width: 100%;
 
             & .sh-duvidas-titulo {
                 text-align: center;
@@ -369,23 +370,59 @@
     }
 }
 
+@media (min-width: 992px) {
+    .sh-freela {
+        & .sh-freela-main {
+            & .sh-todos-servicos {
+                align-items: center;
+            }
+
+            & .sh-freela-duvidas {
+                width: 1400px;
+
+                & .sh-duvidas-acordeon {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+        }
+    }
+}
+
 @media (min-width: 1400px) {
-    & .sh-freela-header-apresentacao {
-        padding: 3px;
-        padding-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    .sh-freela {
 
-    & .sh-freela-main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        & .sh-freela-header-apresentacao {
+            padding: 3px;
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    & .sh-freela-footer {
-        display: flex;
-        justify-content: center;
+        & .sh-freela-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            & .sh-todos-servicos {
+                & .sh-todos-os-servicos-info {
+                    align-items: center;
+                }
+            }
+
+            & .sh-freela-duvidas {
+                width: 1400px;
+
+                & .sh-duvidas-acordeon {
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                }
+            }
+        }
+
+        & .sh-freela-footer {
+            display: flex;
+            justify-content: center;
+        }
     }
 }

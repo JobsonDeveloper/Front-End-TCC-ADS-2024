@@ -114,6 +114,8 @@
       & .sh-navegacao-item {
         font-size: var(--sh-font-size-textos-header);
         color: var(--sh-cor-textos);
+        align-items: center;
+        display: flex;
 
         & .sh-item-text {
           width: max-content;

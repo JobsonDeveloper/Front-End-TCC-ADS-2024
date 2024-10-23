@@ -91,16 +91,20 @@ const Login = () => {
                     tipoAlert = 0;
                     mensagemAlert = "Bem vindo!"
                     setMostrarAlert(true);
-                    
+
                     setTimeout(() => {
                         sessionStorage.setItem('shUserLogId', `${response.data.id}`);
                         sessionStorage.setItem('shUserLogTipo', `${response.data.tipo}`);
-                        let servicoPrimario = response.data.servicos.split(',');
-                        sessionStorage.setItem('shUserServico', servicoPrimario[0]);
+                        
+                        if (response.data.tipo === "2") {
+                            let servicoPrimario = response.data.servicos.split(',');
+                            sessionStorage.setItem('shUserServico', servicoPrimario[0]);
+                        }
+
                         setMostrarAlert(false);
                         setLoading(false);
-                        
-                        if(response.data.tipo === '1') {
+
+                        if (response.data.tipo === '1') {
                             pagina('/home-cliente');
                         }
                         else {

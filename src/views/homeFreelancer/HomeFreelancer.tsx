@@ -17,14 +17,6 @@ import backgroundApresentacaoMd from '../../assets/FreelaHome/backgrounds/backgr
 import { Link, useNavigate } from "react-router-dom";
 import ServicosDisponiveis from "../../components/servicosdisponiveis/ServicosDisponiveis";
 
-const styledTextField = {
-    '& .MuiInputBase-input': {
-        fontSize: '1rem',
-        fontFamily: '"Nunito", sans-serif;',
-        color: '#000'
-    },
-};
-
 const ultimosServicos: any = [];
 
 const profDestaque: any = [];
@@ -72,6 +64,7 @@ const HomeFreelancer = () => {
     const [mostrarAlert, setMostrarAlert] = useState(false);
     const [loading, setLoading] = useState(true);
 
+
     function formatData(data: any) {
         let dataFormatUm = new Date(data);
         let dia = `${dataFormatUm.getDate()}`;
@@ -90,43 +83,42 @@ const HomeFreelancer = () => {
     }
 
     async function coletaDados() {
-        if (!consulta) {
-            consulta = true;
+        try {
+            const formData = new FormData();
+            formData.append('acao', 'obter_dados_frela');
+            formData.append('id', `${sessionStorage.getItem('shUserLogId')}`);
+            formData.append('servicoAdequado', `${sessionStorage.getItem('shUserServico')}`);
 
-            try {
-                const formData = new FormData();
-                formData.append('acao', 'obter_dados_frela');
-                formData.append('id', `${sessionStorage.getItem('shUserLogId')}`);
-                formData.append('servicoAdequado', `${sessionStorage.getItem('shUserServico')}`);
+            const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                method: 'POST',
+                mode: 'cors',
+                body: formData
+            });
 
-                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-                    method: 'POST',
-                    mode: 'cors',
-                    body: formData
-                });
+            const response = await request.json();
+            const dadosFreela = response.dadosFreela[0];
 
-                const response = await request.json();
-                const dadosFreela = response.dadosFreela[0];
+            if (response) {
+                const dataCriacao = formatData(dadosFreela.data_de_criacao);
+                const splitNascimento = dadosFreela.nascimento.split('-');
+                const dataNascimento = `${splitNascimento[2]}/${splitNascimento[1]}/${splitNascimento[0]}`;
 
-                if (response) {
-                    const dataCriacao = formatData(dadosFreela.data_de_criacao);
-                    const splitNascimento = dadosFreela.nascimento.split('-');
-                    const dataNascimento = `${splitNascimento[2]}/${splitNascimento[1]}/${splitNascimento[0]}`;
+                sessionStorage.setItem('shFreelaId', dadosFreela.id);
+                sessionStorage.setItem('shFreelaNome', dadosFreela.nome);
+                sessionStorage.setItem('shFreelaSobrenome', dadosFreela.sobrenome);
+                sessionStorage.setItem('shFreelaNascimento', dataNascimento);
+                sessionStorage.setItem('shFreelaEndereco', dadosFreela.endereco);
+                sessionStorage.setItem('shFreelaTelefone', dadosFreela.telefone);
+                sessionStorage.setItem('shFreelaServicos', dadosFreela.servicos);
+                sessionStorage.setItem('shFreelaEmail', dadosFreela.email);
+                sessionStorage.setItem('shFreelaClassificacao', dadosFreela.classificacao);
+                sessionStorage.setItem('shFreelaDataCriacao', dataCriacao);
+                sessionStorage.setItem('shFreelaPerfil', dadosFreela.imagem_perfil);
+                sessionStorage.setItem('shFreelaTipo', dadosFreela.tipo);
+                setLoading(false);
 
-                    sessionStorage.setItem('shFreelaId', dadosFreela.id);
-                    sessionStorage.setItem('shFreelaNome', dadosFreela.nome);
-                    sessionStorage.setItem('shFreelaSobrenome', dadosFreela.sobrenome);
-                    sessionStorage.setItem('shFreelaNascimento', dataNascimento);
-                    sessionStorage.setItem('shFreelaEndereco', dadosFreela.endereco);
-                    sessionStorage.setItem('shFreelaTelefone', dadosFreela.telefone);
-                    sessionStorage.setItem('shFreelaServicos', dadosFreela.servicos);
-                    sessionStorage.setItem('shFreelaEmail', dadosFreela.email);
-                    sessionStorage.setItem('shFreelaClassificacao', dadosFreela.classificacao);
-                    sessionStorage.setItem('shFreelaDataCriacao', dataCriacao);
-                    sessionStorage.setItem('shFreelaPerfil', dadosFreela.imagem_perfil);
-                    sessionStorage.setItem('shFreelaTipo', dadosFreela.tipo);
-                    setLoading(false);
-
+                
+                if(ultimosServicos[0] === undefined) {
                     response.dataServico.map((dados: any) => {
                         ultimosServicos.push({
                             id: dados.id,
@@ -134,11 +126,11 @@ const HomeFreelancer = () => {
                             descricao: dados.descricao,
                             remuneracao: dados.remuneracao
                         });
-
-                        console.log(dados.id);
                     })
+                }
 
 
+                if(profDestaque[0] === undefined) {
                     response.dataFreelancers.map((dados: any) => {
                         let servicosSplit = dados.servicos.split(",");
 
@@ -150,7 +142,9 @@ const HomeFreelancer = () => {
                             estrelas: dados.classificacao
                         });
                     })
+                }
 
+                if(cliDestaque[0] === undefined) {
                     response.dataClientes.map((dados: any) => {
                         cliDestaque.push({
                             fotoUrl: dados.imagem_perfil,
@@ -159,8 +153,10 @@ const HomeFreelancer = () => {
                             estrelas: dados.classificacao
                         });
                     })
+                }
 
-                    if (response.servicosAdequados) {
+                if(servicosAdequados[0] === undefined) {
+                    if (response.servicosAdequados != 'Sem Serviços!') {
                         response.servicosAdequados.map((dados: any) => {
                             servicosAdequados.push({
                                 id: dados.id,
@@ -171,22 +167,25 @@ const HomeFreelancer = () => {
                         })
                     }
                 }
-                else {
-                    setLoading(false);
-                }
-            }
-            catch (error) {
-                tipoAlert = 3;
-                mensagemAlert = "Erro de requisição!"
-                setMostrarAlert(true);
 
-                setTimeout(() => {
-                    setMostrarAlert(false);
-                    setLoading(false);
-                }, 4000);
-                console.error(error);
+                console.log(response.servicosAdequados);
+            }
+            else {
+                setLoading(false);
             }
         }
+        catch (error) {
+            tipoAlert = 3;
+            mensagemAlert = "Erro de requisição!"
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+                setLoading(false);
+            }, 4000);
+            console.error(error);
+        }
+
     }
 
     useEffect(() => {
@@ -280,29 +279,19 @@ const HomeFreelancer = () => {
                     </div>
                 </article>
 
-                <article className="sh-main-servicos" id='sh_ultimas_postagens'>
-                    <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Para você</h2>
-                    <div className="sh-servicos-lista-container">
-                        <ServicosDisponiveis data={servicosAdequados} />
-                    </div>
-                </article>
+                {servicosAdequados[0] &&
+                    <article className="sh-main-servicos" id='sh_ultimas_postagens'>
+                        <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Para você</h2>
+                        <div className="sh-servicos-lista-container">
+                            <ServicosDisponiveis data={servicosAdequados} />
+                        </div>
+                    </article>
+                }
 
                 <article className="sh-todos-servicos">
                     <h2 className="sh-show sh-todos-os-servicos-titulo" data-aos="zoom-in">Serviços</h2>
 
                     <div className="sh-todos-os-servicos-info">
-                        <div className="sh-servicos-filtro">
-                            <TextField
-                                id="sh_user"
-                                label="Filtro"
-                                variant="standard"
-                                className="sh-formulario-data-text"
-                                sx={styledTextField}
-                                defaultValue=""
-                            />
-
-                            <button type="button" className="sh-filtro-button">Pesquisar</button>
-                        </div>
                         <ServicosDisponiveis data={ultimosServicos} />
                     </div>
                 </article>

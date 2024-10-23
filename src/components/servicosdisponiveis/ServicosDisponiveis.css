@@ -15,85 +15,137 @@
     --sh-servicosFreela-font-size-textos: 1rem;
 }
 
-& .sh-servicosFreela-lista {
-    list-style-type: none;
-    padding: 5px 5px 25px;
-    margin: 0;
+& .sh-span-servicos-filtro {
     display: flex;
-    overflow-x: auto;
-    justify-content: center;
-    gap: 15px;
-    background-image: url('../../assets/index/backgrounds/background-servicos.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
 
-    &::-webkit-scrollbar {
-        background-color: transparent;
-        height: 2px;
-    }
+    & .sh-servicosAdequados-filtro {}
 
-    &::-webkit-scrollbar-thumb {
-        background-color: transparent;
-    }
-
-    & .sh-servicosFreela-itens {
-        text-decoration: none;
+    & .sh-servicosFreela-lista {
+        list-style-type: none;
+        padding: 5px 5px 25px;
+        margin: 0;
         display: flex;
-        flex-direction: column;
-        gap: 5px;
-        padding: 10px;
-        width: max-content;
-        min-height: 100%;
-        background-color: var(--sh-servicosFreela-cor-primaria);
-        border-radius: 5px;
-        box-shadow: #555555 3px 3px 9px;
-        justify-content: space-between;
+        overflow-x: auto;
+        gap: 15px;
+        background-image: url('../../assets/index/backgrounds/background-servicos.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        min-height: 210px;
 
-        &:hover {
-            background-color: var(--sh-servicosFreela-cor-cards-background-hover);
+        &::-webkit-scrollbar {
+            background-color: transparent;
+            height: 2px;
         }
 
-        & .sh-itens-data {
+        &::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+
+        & .sh-servicosFreela-itens {
+            text-decoration: none;
             display: flex;
-            justify-content: start;
-            align-items: center;
-            gap: 10px;
-            width: 265px;
+            flex-direction: column;
+            gap: 5px;
+            padding: 10px;
+            width: max-content;
+            min-height: 100%;
+            background-color: var(--sh-servicosFreela-cor-primaria);
+            border-radius: 5px;
+            box-shadow: #555555 3px 3px 9px;
+            justify-content: space-between;
 
-            & .sh-servicosFreela-img-perfil {
-                width: 30px;
+            &:hover {
+                background-color: var(--sh-servicosFreela-cor-cards-background-hover);
             }
 
-            & .sh-servicosFreela-data-marcador {
-                margin: 0;
+            & .sh-itens-data {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                gap: 10px;
+                width: 265px;
+
+                & .sh-servicosFreela-img-perfil {
+                    width: 30px;
+                }
+
+                & .sh-servicosFreela-data-marcador {
+                    margin: 0;
+                    background-color: var(--sh-servicosFreela-cor-background-components);
+                    font-size: var(--sh-servicosFreela-font-size-textos);
+                    color: var(--sh-servicosFreela-cor-primaria);
+                    padding: 2px 8px;
+                    border-radius: 5px;
+                }
+
+                & .sh-servicosFreela-data-descricao {
+                    color: var(--sh-servicosFreela-cor-terciaria);
+                    font-size: var(--sh-servicosFreela-font-size-textos);
+                    margin: 0;
+
+                    /* Limitar tamanho de texto */
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 4;
+                    -webkit-box-orient: vertical;
+                }
+
+                & .sh-servicos-data-remuneracao {
+                    color: var(--sh-servicos-cor-terciaria);
+                    font-size: var(--sh-servicos-font-size-textos);
+                    margin: 0;
+                    width: max-content;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        & .sh-servicosAdequados-filtro {}
+    }
+}
+
+@media (min-width: 992px) {
+    & .sh-span-servicos-filtro {
+        & .sh-servicosFreela-lista {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            overflow-x: hidden;
+            overflow-y: auto;
+            max-height: 400px;
+            justify-content: center;
+
+            &::-webkit-scrollbar {
+                background-color: #ffffff62;
+                width: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
                 background-color: var(--sh-servicosFreela-cor-background-components);
-                font-size: var(--sh-servicosFreela-font-size-textos);
-                color: var(--sh-servicosFreela-cor-primaria);
-                padding: 2px 8px;
-                border-radius: 5px;
             }
+        }
+    }
+}
 
-            & .sh-servicosFreela-data-descricao {
-                color: var(--sh-servicosFreela-cor-terciaria);
-                font-size: var(--sh-servicosFreela-font-size-textos);
-                margin: 0;
+@media (min-width: 992px) {
+    & .sh-span-servicos-filtro {
+        & .sh-servicosFreela-lista {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+    }
+}
 
-                /* Limitar tamanho de texto */
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: -webkit-box;
-                -webkit-line-clamp: 4;
-                -webkit-box-orient: vertical;
-            }
+@media (min-width: 1400px) {
+    & .sh-span-servicos-filtro {
 
-            & .sh-servicos-data-remuneracao {
-                color: var(--sh-servicos-cor-terciaria);
-                font-size: var(--sh-servicos-font-size-textos);
-                margin: 0;
-                width: max-content;
-                font-weight: 600;
-            }
+        & .sh-servicosFreela-lista {
+            width: 1400px;
+            border-radius: 5px;
+            justify-items: center;
         }
     }
 }
