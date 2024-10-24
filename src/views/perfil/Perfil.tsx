@@ -14,7 +14,8 @@ import Loading from "../../components/loading/Loading";
 import { Alert, Box, Button, ButtonBase, FilledInput, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, SxProps, TextField, Theme } from "@mui/material";
 import { Edit, Visibility, VisibilityOff } from "@mui/icons-material";
 import ServicosAdequados from "../../components/servicosAdequados/ServicosAdequados";
-
+import fotoPerfil from '../../assets/perfil/icons/perfil.png';
+import imgEstrelas from '../../assets/perfil/icons/estrela.svg';
 
 const ShAlert = () => {
     return (
@@ -64,6 +65,7 @@ let userId: string | null = "";
 let userTipo: string | null = "";
 
 const servicosAceitos: any = [];
+const servicosFinalizados: any = [];
 
 
 const Perfil = () => {
@@ -71,10 +73,9 @@ const Perfil = () => {
     const [mostrarAlert, setMostrarAlert] = useState(false);
     const pagina = useNavigate();
 
-    useEffect(() => {   
+    useEffect(() => {
         pegaDados();
     }, []);
-    
 
     const logout = () => {
         tipoAlert = 0;
@@ -106,27 +107,6 @@ const Perfil = () => {
     }
 
     async function pegaDados() {
-        // try {
-        //     freelaId = sessionStorage.getItem('shFreelaId');
-        //     freelaNome = sessionStorage.getItem('shFreelaNome');
-        //     freelaSobrenome = sessionStorage.getItem('shFreelaSobrenome');
-        //     freelaNascimento = sessionStorage.getItem('shFreelaNascimento');
-        //     freelaEndereco = sessionStorage.getItem('shFreelaEndereco');
-        //     freelaTelefone = sessionStorage.getItem('shFreelaTelefone');
-        //     freelaServico = sessionStorage.getItem('shFreelaServicos');
-        //     freelaEmail = sessionStorage.getItem('shFreelaEmail');
-        //     freelaClassificacao = sessionStorage.getItem('shFreelaClassificacao');
-        //     freelaDataCriacao = sessionStorage.getItem('shFreelaDataCriacao');
-        //     freelaPefil = sessionStorage.getItem('shFreelaPerfil');
-        //     freelaTipo = sessionStorage.getItem('shFreelaTipo');
-        //     freelaLimit = sessionStorage.getItem('shFreelaLimite');
-
-        // } catch (error) {
-        //     tipoAlert = 4;
-        //     mensagemAlert = "Dados não encontrados"
-        //     console.log(error);
-        // }
-
         userId = sessionStorage.getItem('shUserLogId');
         userTipo = sessionStorage.getItem('shUserLogTipo');
 
@@ -137,12 +117,9 @@ const Perfil = () => {
 
             if (userTipo === "0") {
                 formData.append('idfre', `${userId}`);
-                console.log('freelancer');
-                console.log(formData.get('idfre'));
             }
             else {
                 formData.append('idcliente', `${userId}`);
-                console.log('cliente');
             }
 
             const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
@@ -154,7 +131,8 @@ const Perfil = () => {
             const response = await request.json();
             const dadosUsuario = response.dadosUser;
             const servicosAceitosData = response.servAceitos;
-
+            const servicosFinalizadosData = response.servConc;
+            console.log(response);
 
             if (response.status === 200) {
                 // console.log(response);
@@ -186,9 +164,23 @@ const Perfil = () => {
                         });
                     })
                 }
+
+                if (servicosFinalizados[0] === undefined) {
+                    servicosFinalizadosData.map((dados: any) => {
+                        servicosFinalizados.push({
+                            id: dados.id,
+                            clienteId: dados.cliente_id,
+                            tag: dados.tipo,
+                            data: dados.data_servico,
+                            endereco: dados.local_servico,
+                            descricao: dados.descricao,
+                            remuneracao: dados.remuneracao,
+                            // status: dados.status
+                        });
+                    })
+                }
             }
             else {
-                console.log(response.status)
                 tipoAlert = 3;
                 mensagemAlert = "Dados não retornados!"
                 setMostrarAlert(true);
@@ -234,62 +226,79 @@ const Perfil = () => {
             </header>
             <main className="sh-perfil-main">
                 <ul className="sh-dados-lista">
-                    <li className="sh-dados-item">
-                        img perfil
+                    <li className="sh-dados-item perfil-foto-nome">
+                        <div className="sh-dados-perfil-img">
+                            {
+                                freelaPefil &&
+                                <img src={`${freelaPefil}`} alt="" />
+                            }
+                            {
+                                !freelaPefil &&
+                                <img src={fotoPerfil} alt="" />
+                            }
+                        </div>
+                        <div>
+                            <p className="sh-dados-item-text">{freelaNome} {freelaSobrenome}</p>
+                        </div>
                     </li>
-                    <li className="sh-dados-item">
-                        <h5 className="sh-dadis-item-titulo">Nome</h5>
-                        <p className="sh-dados-item-text">{freelaNome} {freelaSobrenome}</p>
+                    <li className="sh-dados-item sh-dados-dadosBase">
+                        <div className="sh-dadosBase-item">
+                            <img src={imgEstrelas} />
+                            <p className="sh-dados-item-text">{freelaClassificacao}</p>
+                        </div>
+                        <div className="sh-dadosBase-item">
+                            <HandymanIcon />
+                            <p className="sh-dados-item-text">{freelaLimit}</p>
+                        </div>
                     </li>
-                    <li className="sh-dados-item">
-                        <h5 className="sh-dadis-item-titulo">Classificação</h5>
-                        <p className="sh-dados-item-text">{freelaClassificacao}</p>
-                    </li>
-                    <li className="sh-dados-item">
-                        <h5 className="sh-dadis-item-titulo">Data de nasciment0</h5>
+                    <li className="sh-dados-item sh-nascimento">
+                        <h6 className="sh-dados-item-titulo">Data de nascimento</h6>
                         <p className="sh-dados-item-text">{freelaNascimento}</p>
                     </li>
                     <li className="sh-dados-item">
-                        <h5 className="sh-dadis-item-titulo">Endereço</h5>
+                        <h6 className="sh-dados-item-titulo">Endereço</h6>
                         <p className="sh-dados-item-text">{freelaEndereco}</p>
                     </li>
                     <li className="sh-dados-item">
-                        <h5 className="sh-dadis-item-titulo">Telefone</h5>
+                        <h6 className="sh-dados-item-titulo">Telefone</h6>
                         <p className="sh-dados-item-text">{freelaTelefone}</p>
                     </li>
                     <li className="sh-dados-item">
-                        <h5 className="sh-dadis-item-titulo">Servicos</h5>
+                        <h6 className="sh-dados-item-titulo">Servicos</h6>
                         <p className="sh-dados-item-text">{freelaServico}</p>
                     </li>
                     <li className="sh-dados-item">
-                        <h5 className="sh-dadis-item-titulo">Email</h5>
+                        <h6 className="sh-dados-item-titulo">Email</h6>
                         <p className="sh-dados-item-text">{freelaEmail}</p>
                     </li>
                     <li className="sh-dados-item">
-                        <h5 className="sh-dadis-item-titulo">Data de criação da conta</h5>
+                        <h6 className="sh-dados-item-titulo">Data de criação da conta</h6>
                         <p className="sh-dados-item-text">{freelaDataCriacao}</p>
                     </li>
-                    <li className="sh-dados-item">
+                    {/* <li className="sh-dados-item">
                         <HandymanIcon />
                         <p className="sh-dados-item-text">{freelaLimit}</p>
-                    </li>
+                    </li> */}
                 </ul>
 
                 {
-                    servicosAceitos[0] && <article className="sh-perfil-servicos-aceitos">
-                        <ServicosAdequados data={servicosAceitos} />
-                    </article>
+                    servicosAceitos[0] && 
+                    <div className="sh-servicos-aceitos">
+                        <h2 className="sh-servicos-titulo">Servicos aceitos</h2>
+                        <article className="sh-perfil-servicos-aceitos">
+                            <ServicosAdequados data={servicosAceitos} />
+                        </article>
+                    </div>
                 }
-
-                <div>
-                    <h1>dddd</h1>
-                    <h1>dddd</h1>
-                    <h1>dddd</h1>
-                    <h1>dddd</h1>
-                    <h1>dddd</h1>
-                    <h1>dddd</h1>
-                    <h1>dddd</h1>
-                </div>
+                {
+                    servicosAceitos[0] && 
+                    <div className="sh-servicos-aceitos">
+                        <h2 className="sh-servicos-titulo">Servicos realizados</h2>
+                        <article className="sh-perfil-servicos-aceitos">
+                            <ServicosAdequados data={servicosFinalizados} />
+                        </article>
+                    </div>
+                }
             </main>
 
             {mostrarAlert &&

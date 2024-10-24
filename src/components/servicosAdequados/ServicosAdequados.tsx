@@ -3,7 +3,7 @@ import Aos from 'aos';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import fotoPadrao from '../../assets/FreelaHome/icons/icon-perfil.png';
-import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField, useMediaQuery, useTheme } from '@mui/material';
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Rating, Slide, TextField, useMediaQuery, useTheme } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { Padding } from '@mui/icons-material';
 import Loading from '../loading/Loading';
@@ -74,11 +74,13 @@ const styledDialogService = {
 
 const ServicosAdequados = ({ data }: any) => {
     const [open, setOpen] = useState(false);
+    const [openAvaliacao, setOpenAvaliacao] = useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const usuario = sessionStorage.getItem('shUserLogTipo');
     const [busca, setBusca] = useState('');
     const pagina = useNavigate();
+    const [avaliacao, setAValiacao] = useState<number | null>(0);
 
     async function aceitaServico(e: any) {
         e.preventDefault();
@@ -106,7 +108,9 @@ const ServicosAdequados = ({ data }: any) => {
                 if (response) {
                     sessionStorage.setItem('shFreelaLimite', response.data);
                     localStorage.setItem('ServicoAceito', 'true');
-                    pagina('/perfil');
+                    setTimeout(() => {
+                        pagina('/perfil');
+                    }, 500);
                 }
             }
             catch (error) {
@@ -169,7 +173,6 @@ const ServicosAdequados = ({ data }: any) => {
 
                 const response = await request.json();
 
-                console.log(response);
                 if (response) {
                     clienteClassificacao = response.data.classificacao;
                     clienteDataCriacao = formatData(response.data.data_de_criacao);
@@ -185,12 +188,37 @@ const ServicosAdequados = ({ data }: any) => {
 
     };
 
-    async function conclueServico() {
-        console.log('Servico concluido');
+    async function concluirServico() {
+        try {
+            const formData = new FormData();
+            formData.append('acao', 'conclui_servico');
+            formData.append('avaliacaoFreela', `${avaliacao}`);
+            formData.append('idServico', `${idServico}`);
+            formData.append('colaboradorId', `${clienteId}`);
+
+            const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                method: 'POST',
+                mode: 'cors',
+                body: formData
+            });
+
+            const response = await request.json();
+
+            if (response) {
+                console.log(response);
+                window.location.reload();
+            }
+        }
+        catch (error) {
+            console.error(error);
+            setOpenAvaliacao(false);
+            setOpen(false);
+        }
     }
 
     const handleClose = () => {
         setOpen(false);
+        setAValiacao(0);
     };
 
     useEffect(() => {
@@ -327,10 +355,44 @@ const ServicosAdequados = ({ data }: any) => {
                         </Button>
                     }
                     {statusServico !== "" &&
-                        <Button autoFocus onClick={((e) => { conclueServico() })}>
+                        <Button autoFocus onClick={((e) => { setOpenAvaliacao(true) })}>
                             Concluido
                         </Button>
                     }
+                </DialogActions>
+            </Dialog>
+
+            <Dialog
+                open={openAvaliacao}
+                onClose={handleClose}
+                aria-labelledby="responsive-dialog-avaliacao-title"
+                sx={styledDialogService}
+            >
+                <DialogTitle id="responsive-dialog-avaliacao-title" className='sh-servico-dialog-titulo'>
+                    {tipo}
+                </DialogTitle>
+                <DialogContent className='sh-servico-dialog-dados'>
+                    <DialogContentText className="sh-servico-subtitulos">
+                        Avalie o cliente
+                    </DialogContentText>
+                    <DialogContentText className="sh-servico-dados">
+                        <Rating
+                            name="simple-controlled"
+                            value={avaliacao}
+                            onChange={(event, newValue) => {
+                                setAValiacao(newValue);
+                            }}
+                        />
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={(() => { setOpenAvaliacao(false); setAValiacao(0); })}>
+                        Voltar
+                    </Button>
+                    <Button autoFocus onClick={((e) => { concluirServico() })}>
+                        Avaliar
+                    </Button>
+
                 </DialogActions>
             </Dialog>
         </ul>

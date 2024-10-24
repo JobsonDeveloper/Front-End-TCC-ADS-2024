@@ -122,7 +122,10 @@ const ServicosDisponiveis = ({ data }: any, { tipolista }: any) => {
                 if (response) {
                     sessionStorage.setItem('shFreelaLimite', response.data);
                     localStorage.setItem('ServicoAceito', 'true');
-                    pagina('/perfil');
+
+                    setTimeout(() => {
+                        pagina('/perfil');
+                    }, 500);
                 }
             }
             catch (error) {
