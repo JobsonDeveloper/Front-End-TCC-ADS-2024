@@ -16,6 +16,7 @@ import backgroundApresentacaoDois from '../../assets/FreelaHome/backgrounds/imag
 import backgroundApresentacaoMd from '../../assets/FreelaHome/backgrounds/background-apresentacaoMd.png'
 import { Link, useNavigate } from "react-router-dom";
 import ServicosDisponiveis from "../../components/servicosdisponiveis/ServicosDisponiveis";
+import ServicosAdequados from "../../components/servicosAdequados/ServicosAdequados";
 
 const ultimosServicos: any = [];
 
@@ -57,7 +58,6 @@ const ShAlert = () => {
 
 let mensagemAlert = "asdasdasda";
 let tipoAlert = 0;
-let consulta = false;
 
 const HomeFreelancer = () => {
     const pagina = useNavigate();
@@ -89,6 +89,7 @@ const HomeFreelancer = () => {
             formData.append('id', `${sessionStorage.getItem('shUserLogId')}`);
             formData.append('servicoAdequado', `${sessionStorage.getItem('shUserServico')}`);
 
+
             const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
                 method: 'POST',
                 mode: 'cors',
@@ -115,22 +116,10 @@ const HomeFreelancer = () => {
                 sessionStorage.setItem('shFreelaDataCriacao', dataCriacao);
                 sessionStorage.setItem('shFreelaPerfil', dadosFreela.imagem_perfil);
                 sessionStorage.setItem('shFreelaTipo', dadosFreela.tipo);
+                sessionStorage.setItem('shFreelaLimite', dadosFreela.limite);
                 setLoading(false);
 
-                
-                if(ultimosServicos[0] === undefined) {
-                    response.dataServico.map((dados: any) => {
-                        ultimosServicos.push({
-                            id: dados.id,
-                            tag: dados.tipo,
-                            descricao: dados.descricao,
-                            remuneracao: dados.remuneracao
-                        });
-                    })
-                }
-
-
-                if(profDestaque[0] === undefined) {
+                if (profDestaque[0] === undefined) {
                     response.dataFreelancers.map((dados: any) => {
                         let servicosSplit = dados.servicos.split(",");
 
@@ -144,7 +133,7 @@ const HomeFreelancer = () => {
                     })
                 }
 
-                if(cliDestaque[0] === undefined) {
+                if (cliDestaque[0] === undefined) {
                     response.dataClientes.map((dados: any) => {
                         cliDestaque.push({
                             fotoUrl: dados.imagem_perfil,
@@ -155,12 +144,15 @@ const HomeFreelancer = () => {
                     })
                 }
 
-                if(servicosAdequados[0] === undefined) {
+                if (servicosAdequados[0] === undefined) {
                     if (response.servicosAdequados != 'Sem Serviços!') {
                         response.servicosAdequados.map((dados: any) => {
                             servicosAdequados.push({
                                 id: dados.id,
+                                clienteId: dados.cliente_id,
                                 tag: dados.tipo,
+                                data: dados.data_servico,
+                                endereco: dados.local_servico,
                                 descricao: dados.descricao,
                                 remuneracao: dados.remuneracao
                             });
@@ -168,7 +160,19 @@ const HomeFreelancer = () => {
                     }
                 }
 
-                console.log(response.servicosAdequados);
+                if (ultimosServicos[0] === undefined) {
+                    response.dataServico.map((dados: any) => {
+                        ultimosServicos.push({
+                            id: dados.id,
+                            clienteId: dados.cliente_id,
+                            tag: dados.tipo,
+                            data: dados.data_servico,
+                            endereco: dados.local_servico,
+                            descricao: dados.descricao,
+                            remuneracao: dados.remuneracao
+                        });
+                    })
+                }
             }
             else {
                 setLoading(false);
@@ -210,7 +214,15 @@ const HomeFreelancer = () => {
             }, 4000);
         }
         else {
-            coletaDados();
+            if (localStorage.getItem('ServicoAceito') === 'true') {
+                setTimeout(() => {
+                    localStorage.removeItem('ServicoAceito');
+                    coletaDados();
+                }, 1000);
+            }
+            else {
+                coletaDados();
+            }
         }
     });
 
@@ -283,7 +295,7 @@ const HomeFreelancer = () => {
                     <article className="sh-main-servicos" id='sh_ultimas_postagens'>
                         <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Para você</h2>
                         <div className="sh-servicos-lista-container">
-                            <ServicosDisponiveis data={servicosAdequados} />
+                            <ServicosAdequados data={servicosAdequados} />
                         </div>
                     </article>
                 }

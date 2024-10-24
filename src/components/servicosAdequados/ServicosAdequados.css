@@ -1,0 +1,152 @@
+:root {
+    --sh-servicosAdequadosFreela-cor-primaria: #fff;
+    --sh-servicosAdequadosFreela-cor-secundaria: #0075FF;
+    --sh-servicosAdequadosFreela-cor-marcadores: #5584E0;
+    --sh-servicosAdequadosFreela-cor-cards-background-hover: #e3e3e3;
+    --sh-servicosAdequadosFreela-cor-terciaria: #000;
+    --sh-servicosAdequadosFreela-cor-quaternaria: #35FF62;
+    --sh-servicosAdequadosFreela-cor-textos: #494949;
+    --sh-servicosAdequadosFreela-cor-background-components: #356FB0;
+
+    --sh-servicosAdequadosFreela-padding: 0 5px;
+    --sh-servicosAdequadosFreela-margin: 20px 0;
+
+
+    --sh-servicosAdequadosFreela-font-size-textos: 1rem;
+}
+
+& .sh-servicosFreela-lista {
+    list-style-type: none;
+    padding: 5px 5px 25px;
+    margin: 0;
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    background-image: url('../../assets/index/backgrounds/background-servicos.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 210px;
+
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        height: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+
+    & .sh-servicosFreela-itens {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        width: max-content;
+        height: 177px;
+        background-color: var(--sh-servicosAdequadosFreela-cor-primaria);
+        border-radius: 5px;
+        box-shadow: #555555 3px 3px 9px;
+        justify-content: space-between;
+
+        &:hover {
+            background-color: var(--sh-servicosAdequadosFreela-cor-cards-background-hover);
+        }
+
+        & .sh-itens-data {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 10px;
+            width: 265px;
+
+            & .sh-servicosFreela-img-perfil {
+                width: 30px;
+            }
+
+            & .sh-servicosFreela-data-marcador {
+                margin: 0;
+                background-color: var(--sh-servicosAdequadosFreela-cor-background-components);
+                font-size: var(--sh-servicosAdequadosFreela-font-size-textos);
+                color: var(--sh-servicosAdequadosFreela-cor-primaria);
+                padding: 2px 8px;
+                border-radius: 5px;
+            }
+
+            & .sh-servicosFreela-data-descricao {
+                color: var(--sh-servicosAdequadosFreela-cor-terciaria);
+                font-size: var(--sh-servicosAdequadosFreela-font-size-textos);
+                margin: 0;
+
+                /* Limitar tamanho de texto */
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+            }
+
+            & .sh-servicos-data-remuneracao {
+                color: var(--sh-servicos-cor-terciaria);
+                font-size: var(--sh-servicos-font-size-textos);
+                margin: 0;
+                width: max-content;
+                font-weight: 600;
+            }
+        }
+    }
+
+    & .sh-servicosAdequados-filtro {}
+}
+
+@media (min-width: 992px) {
+    & .sh-servicosFreela-lista {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: 400px;
+        justify-content: center;
+
+        &::-webkit-scrollbar {
+            background-color: #ffffff62;
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--sh-servicosAdequadosFreela-cor-background-components);
+        }
+    }
+}
+
+& .sh-alerts {
+    width: max-content;
+    padding: 2px;
+    position: absolute;
+    top: 0;
+    right: -100%;
+    z-index: 1046;
+    animation: alertsAnim 4s linear;
+}
+
+@media (min-width: 992px) {
+    & .sh-servicosFreela-lista {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1200px) {
+    & .sh-servicosFreela-lista {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1400px) {
+
+    & .sh-servicosFreela-lista {
+        width: 1400px;
+        border-radius: 5px;
+        justify-items: center;
+    }
+}

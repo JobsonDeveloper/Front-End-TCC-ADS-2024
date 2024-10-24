@@ -131,6 +131,16 @@
     }
 }
 
+& .sh-alerts {
+    width: max-content;
+    padding: 2px;
+    position: absolute;
+    top: 0;
+    right: -100%;
+    z-index: 1046;
+    animation: alertsAnim 4s linear;
+}
+
 @media (min-width: 992px) {
     & .sh-span-servicos-filtro {
         & .sh-servicosFreela-lista {

@@ -214,8 +214,6 @@
             }
 
             & .sh-servicos-lista-container {
-                display: flex;
-                justify-content: center;
                 width: 100%;
             }
         }
@@ -408,6 +406,14 @@
             & .sh-todos-servicos {
                 & .sh-todos-os-servicos-info {
                     align-items: center;
+                }
+            }
+
+            & .sh-main-servicos {
+                & .sh-servicos-lista-container {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
                 }
             }
 

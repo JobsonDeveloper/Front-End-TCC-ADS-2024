@@ -96,7 +96,7 @@ const Login = () => {
                         sessionStorage.setItem('shUserLogId', `${response.data.id}`);
                         sessionStorage.setItem('shUserLogTipo', `${response.data.tipo}`);
                         
-                        if (response.data.tipo === "2") {
+                        if (response.data.tipo === "0") {
                             let servicoPrimario = response.data.servicos.split(',');
                             sessionStorage.setItem('shUserServico', servicoPrimario[0]);
                         }
