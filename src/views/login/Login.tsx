@@ -124,7 +124,6 @@ const Login = () => {
                     }, 4000);
                 }
                 else {
-                    console.log(response.status)
                     tipoAlert = 3;
                     mensagemAlert = "Usuário ou senha incorretos!"
                     setMostrarAlert(true);

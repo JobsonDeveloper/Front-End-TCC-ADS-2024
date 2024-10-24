@@ -154,7 +154,8 @@ const HomeFreelancer = () => {
                                 data: dados.data_servico,
                                 endereco: dados.local_servico,
                                 descricao: dados.descricao,
-                                remuneracao: dados.remuneracao
+                                remuneracao: dados.remuneracao,
+                                status: ""
                             });
                         })
                     }

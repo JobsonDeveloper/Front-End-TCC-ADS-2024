@@ -118,12 +118,7 @@ function App() {
             });
           })
 
-          console.log(profDestaque);
         }
-
-        // console.log(response.dataServico);
-        // console.log(response.dataFreelancers);
-        // console.log(response.dataClientes);
 
 
       } catch (error) {

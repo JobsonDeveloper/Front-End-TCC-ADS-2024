@@ -36,6 +36,9 @@ let local = "";
 let clienteId = "";
 let clienteClassificacao = "";
 let clienteDataCriacao = "";
+let statusServico = "";
+let telefoneCliente = "";
+let emailCliente = "";
 
 const styledDialogService = {
     '& .sh-servico-dialog-titulo': {
@@ -81,25 +84,25 @@ const ServicosAdequados = ({ data }: any) => {
         e.preventDefault();
         setOpen(false);
 
-        if(sessionStorage.getItem('shFreelaLimite') != "0") {
+        if (sessionStorage.getItem('shFreelaLimite') != "0") {
             try {
-                let limiteSession:any = sessionStorage.getItem('shFreelaLimite');
-                let limite:any = parseInt(limiteSession) - 1;
+                let limiteSession: any = sessionStorage.getItem('shFreelaLimite');
+                let limite: any = parseInt(limiteSession) - 1;
 
                 const formData = new FormData();
                 formData.append('acao', 'freelaAceitaServico');
                 formData.append('idServico', idServico);
                 formData.append('idFreela', `${sessionStorage.getItem('shUserLogId')}`);
                 formData.append('limiteFreela', `${limite}`);
-    
+
                 const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
                     method: 'POST',
                     mode: 'cors',
                     body: formData
                 });
-    
+
                 const response = await request.json();
-    
+
                 if (response) {
                     sessionStorage.setItem('shFreelaLimite', response.data);
                     localStorage.setItem('ServicoAceito', 'true');
@@ -137,11 +140,17 @@ const ServicosAdequados = ({ data }: any) => {
         idServico = servico.id;
         tipo = servico.tag;
         descricao = servico.descricao;
-        if(servico.data) {diaServico = formatData(servico.data)}
+        if (servico.data) { diaServico = formatData(servico.data) }
         local = servico.endereco;
         remuneracao = servico.remuneracao;
         tipoRemuneracao = servico.tipoDeRemuneracao;
         clienteId = servico.clienteId;
+        statusServico = servico.status;
+        if (servico.status) {
+            statusServico = servico.status;
+
+        }
+
 
         dadosCliente();
 
@@ -160,9 +169,12 @@ const ServicosAdequados = ({ data }: any) => {
 
                 const response = await request.json();
 
+                console.log(response);
                 if (response) {
                     clienteClassificacao = response.data.classificacao;
                     clienteDataCriacao = formatData(response.data.data_de_criacao);
+                    telefoneCliente = response.data.telefone;
+                    emailCliente = response.data.email;
                     setOpen(true);
                 }
             }
@@ -173,6 +185,10 @@ const ServicosAdequados = ({ data }: any) => {
 
     };
 
+    async function conclueServico() {
+        console.log('Servico concluido');
+    }
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -182,18 +198,37 @@ const ServicosAdequados = ({ data }: any) => {
     })
 
     const listaServicos = data.map((servico: any, index: any) =>
-        <li key={index} className="sh-servicosFreela-itens" data-aos="flip-left" onClick={(() => { mostrarDetalhes(servico) })}>
-            <div className="sh-itens-data">
-                <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />
-                <p className="sh-servicosFreela-data-marcador">{servico.tag}</p>
-            </div>
-            <div className="sh-itens-data">
-                <p className="sh-servicosFreela-data-descricao">{servico.descricao}</p>
-            </div>
-            {servico.remuneracao && <div className="sh-itens-data">
-                <p className="sh-servicos-data-remuneracao">R${servico.remuneracao},00 reais</p>
-            </div>}
-        </li>
+        <>
+            {servico.status === "" &&
+                <li key={`${servico.id} ${servico.clienteId}${index}`} className="sh-servicosFreela-itens" data-aos="flip-left" onClick={(() => { mostrarDetalhes(servico) })}>
+                    <div className="sh-itens-data">
+                        <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />
+                        <p className="sh-servicosFreela-data-marcador">{servico.tag}</p>
+                    </div>
+                    <div className="sh-itens-data">
+                        <p className="sh-servicosFreela-data-descricao">{servico.descricao}</p>
+                    </div>
+                    {servico.remuneracao && <div className="sh-itens-data">
+                        <p className="sh-servicos-data-remuneracao">R${servico.remuneracao},00 reais</p>
+                    </div>}
+                </li>
+            }
+            {servico.status !== "" &&
+                <li key={`${servico.id} ${servico.clienteId}${index}`} className="sh-servicosFreela-itens" onClick={(() => { mostrarDetalhes(servico) })}>
+                    <div className="sh-itens-data">
+                        <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />
+                        <p className="sh-servicosFreela-data-marcador">{servico.tag}</p>
+                    </div>
+                    <div className="sh-itens-data">
+                        <p className="sh-servicosFreela-data-descricao">{servico.descricao}</p>
+                    </div>
+                    {servico.remuneracao && <div className="sh-itens-data">
+                        <p className="sh-servicos-data-remuneracao">R${servico.remuneracao},00 reais</p>
+                    </div>}
+                </li>
+            }
+        </>
+
     );
 
     return (
@@ -261,14 +296,41 @@ const ServicosAdequados = ({ data }: any) => {
                     <DialogContentText className="sh-servico-dados">
                         <img src={imgEstrelas} className='sh-dialog-estrelas' />{clienteClassificacao}
                     </DialogContentText>
+                    {statusServico !== "" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            Telefone do cliente
+                        </DialogContentText>
+                    }
+                    {statusServico !== "" &&
+                        <DialogContentText className="sh-servico-dados">
+                            {telefoneCliente}
+                        </DialogContentText>
+                    }
+                    {statusServico !== "" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            E-mail do cliente
+                        </DialogContentText>
+                    }
+                    {statusServico !== "" &&
+                        <DialogContentText className="sh-servico-dados">
+                            {emailCliente}
+                        </DialogContentText>
+                    }
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>
                         Voltar
                     </Button>
-                    <Button autoFocus onClick={((e) => { aceitaServico(e) })}>
-                        Aceitar
-                    </Button>
+                    {statusServico === "" &&
+                        <Button autoFocus onClick={((e) => { aceitaServico(e) })}>
+                            Aceitar
+                        </Button>
+                    }
+                    {statusServico !== "" &&
+                        <Button autoFocus onClick={((e) => { conclueServico() })}>
+                            Concluido
+                        </Button>
+                    }
                 </DialogActions>
             </Dialog>
         </ul>
