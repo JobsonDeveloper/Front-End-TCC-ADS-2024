@@ -85,10 +85,11 @@
     }
 
     & .sh-perfil-main {
-        padding: 15px 5px 0;
+        padding: 15px 5px;
         display: flex;
         flex-direction: column;
         row-gap: 30px;
+        height: inherit;
 
         & .sh-dados-lista {
             list-style-type: none;
@@ -106,7 +107,7 @@
                 }
 
                 & .sh-dados-item-titulo {
-                    font-size: var(--sh-perfil-fontSize-titulos);
+                    font-size: var(--sh-perfil-fontSize-text);
                     color: var(--sh-perfil-cor-terciaria);
 
                 }
@@ -119,45 +120,72 @@
                 border-bottom: 1px solid var(--sh-perfil-cor-background-components);
                 padding: 5px 0;
 
-                & .sh-dados-item-text {
-                    color: var(--sh-perfil-cor-terciaria);
-                    font-size: var(--sh-perfil-fontSize-titulos);
-                }
-            }
 
-            & .sh-dados-dadosBase {
-                display: flex;
-                gap: 20px;
-
-                & .sh-dadosBase-item {
-                    display: flex;
-                    column-gap: 10px;
-                    align-items: end;
+                & .sh-dados-perfil-img {
 
                     & img {
-                        width: 28px;
+                        width: 55px;
+                        opacity: .5;
                     }
-                    
                 }
 
-            }
+                & .sh-dados-headerDois {
+                    display: flex;
+                    flex-direction: column;
 
-            & .sh-dados-perfil-img {
+                    & .sh-dados-item-text {
+                        color: var(--sh-perfil-cor-terciaria);
+                        font-size: var(--sh-perfil-fontSize-text);
+                    }
 
-                & img {
-                    width: 70px;
+                    & .sh-dados-adicionais {
+                        display: flex;
+                        gap: 20px;
+
+                        & .sh-dadosBase-item {
+                            display: flex;
+                            column-gap: 10px;
+                            flex-direction: row;
+                            align-items: center;
+
+                            & img {
+                                width: 23px;
+                            }
+
+                        }
+                    }
                 }
             }
 
-            
+            & .sh-dados-item perfil-foto-nome {}
 
             & .sh-nascimento {
                 margin-top: 10px;
             }
+
+            & .sh-perfil-buttons {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+
+                & .sh-perfil-button {
+                    background-color: var(--sh-perfil-cor-background-skillhub);
+                    font-size: var(--sh-perfil-fontSize-text);
+                    padding: 3px 5px;
+                    border-radius: 5px;
+                    color: var(--sh-perfil-cor-primaria);
+                    border: none;
+                    outline: none;
+                }
+
+                & .button-excluir {
+                    color: rgb(255, 0, 0);
+                    background-color: transparent;
+                }
+            }
         }
 
         & .sh-servicos-aceitos {
-            background-color: red;
             display: flex;
             flex-direction: column;
             width: 100%;
@@ -171,6 +199,13 @@
         }
     }
 
+    & .sh-perfil-footer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        background-color: var(--sh-perfil-cor-background-footer);
+    }
+
     & .sh-alerts {
         width: max-content;
         padding: 2px;
@@ -179,5 +214,100 @@
         right: -100%;
         z-index: 1000;
         animation: alertsAnim 4s linear;
+    }
+}
+
+@media (min-width: 768px) {
+    .sh-perfil {
+        & .sh-perfil-main {
+            & .sh-dados-lista {
+                display: grid;
+                grid-template-areas:
+                    "header header"
+                    "nascimento endereco"
+                    "telefone servico"
+                    "email criacao"
+                    "buttons buttons";
+            }
+
+            & .perfil-foto-nome {
+                grid-area: header;
+            }
+
+            & .sh-nascimento {
+                grid-area: nascimento;
+            }
+
+            & .sh-endereco {
+                grid-area: endereco;
+            }
+
+            & .sh-telefone {
+                grid-area: telefone;
+            }
+
+            & .sh-servicos {
+                grid-area: servico;
+            }
+
+            & .sh-email {
+                grid-area: email;
+            }
+
+            & .sh-criacao {
+                grid-area: criacao;
+            }
+
+            & .sh-buttons {
+                grid-area: buttons;
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .sh-perfil {
+        & .sh-perfil-main {
+            & .sh-dados-lista {
+                grid-template-areas:
+                    "header header header header"
+                    "nascimento endereco telefone servico"
+                    "email email criacao criacao"
+                    "buttons buttons buttons buttons";
+
+                    & .sh-nascimento {
+                        margin-top: 0;
+                    }
+            }
+        }
+    }
+}
+
+@media (min-width: 1400px) {
+    .sh-perfil {
+        align-items: center;
+        & .sh-perfil-header {
+            width: 1400px;
+        }
+        
+        & .sh-perfil-main {
+            & .sh-dados-lista {
+                grid-template-areas:
+                    "header header header header header header"
+                    "nascimento endereco telefone servico email criacao"
+                    "buttons buttons buttons buttons buttons buttons";
+
+                    & .sh-nascimento {
+                        margin-top: 0;
+                    }
+            }
+        }
+
+
+        & .sh-perfil-footer {
+            & .sh-footer {
+                width: 1400px;
+            }
+        }
     }
 }

@@ -152,7 +152,6 @@ const ServicosAdequados = ({ data }: any) => {
         statusServico = servico.status;
         if (servico.status) {
             statusServico = servico.status;
-
         }
 
 
@@ -242,7 +241,7 @@ const ServicosAdequados = ({ data }: any) => {
                 </li>
             }
             {servico.status !== "" &&
-                <li key={`${servico.id} ${servico.clienteId}${index}`} className="sh-servicosFreela-itens" onClick={(() => { mostrarDetalhes(servico) })}>
+                <li key={`${servico.id}${servico.clienteId}${index}`} className="sh-servicosFreela-itens" onClick={(() => { mostrarDetalhes(servico) })}>
                     <div className="sh-itens-data">
                         <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />
                         <p className="sh-servicosFreela-data-marcador">{servico.tag}</p>
@@ -349,12 +348,13 @@ const ServicosAdequados = ({ data }: any) => {
                     <Button onClick={handleClose}>
                         Voltar
                     </Button>
-                    {statusServico === "" &&
+                    
+                    {statusServico === "aberto" &&
                         <Button autoFocus onClick={((e) => { aceitaServico(e) })}>
                             Aceitar
                         </Button>
                     }
-                    {statusServico !== "" &&
+                    {statusServico === "em-andamento" &&
                         <Button autoFocus onClick={((e) => { setOpenAvaliacao(true) })}>
                             Concluido
                         </Button>

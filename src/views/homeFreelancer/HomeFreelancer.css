@@ -218,6 +218,32 @@
             }
         }
 
+        & .sh-main-planos {
+            padding: var(--sh-index-padding);
+            margin: var(--sh-index-margin);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+
+            & .sh-planos-titulos {
+
+                & .sh-planos-titulo {
+                    text-align: center;
+                    color: var(--sh-index-cor-terciaria);
+                    font-size: var(--sh-index-font-size-titulos);
+                    margin: 0;
+                }
+
+                & .sh-planos-subtitulo {
+                    color: var(--sh-index-cor-textos);
+                    font-size: var(--sh-index-font-size-subtitulos);
+                    margin: 0;
+                }
+            }
+        }
+
         & .sh-todos-servicos {
             display: flex;
             flex-direction: column;

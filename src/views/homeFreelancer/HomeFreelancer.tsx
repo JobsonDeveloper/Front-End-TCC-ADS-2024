@@ -17,6 +17,7 @@ import backgroundApresentacaoMd from '../../assets/FreelaHome/backgrounds/backgr
 import { Link, useNavigate } from "react-router-dom";
 import ServicosDisponiveis from "../../components/servicosdisponiveis/ServicosDisponiveis";
 import ServicosAdequados from "../../components/servicosAdequados/ServicosAdequados";
+import Planos from "../../components/planos/Planos";
 
 const ultimosServicos: any = [];
 
@@ -139,7 +140,8 @@ const HomeFreelancer = () => {
                             fotoUrl: dados.imagem_perfil,
                             nome: `${dados.nome} ${dados.sobrenome}`,
                             dataCadastro: formatData(dados.data_de_criacao),
-                            estrelas: dados.classificacao
+                            estrelas: dados.classificacao,
+                            status: dados.statos
                         });
                     })
                 }
@@ -155,7 +157,7 @@ const HomeFreelancer = () => {
                                 endereco: dados.local_servico,
                                 descricao: dados.descricao,
                                 remuneracao: dados.remuneracao,
-                                status: ""
+                                status: dados.status
                             });
                         })
                     }
@@ -170,7 +172,8 @@ const HomeFreelancer = () => {
                             data: dados.data_servico,
                             endereco: dados.local_servico,
                             descricao: dados.descricao,
-                            remuneracao: dados.remuneracao
+                            remuneracao: dados.remuneracao,
+                            status: dados.status
                         });
                     })
                 }
@@ -300,6 +303,15 @@ const HomeFreelancer = () => {
                         </div>
                     </article>
                 }
+
+                <article className="sh-show sh-main-planos" id='sh_planos'>
+                    <div className='sh-planos-titulos' data-aos="zoom-in">
+                        <h2 className="sh-planos-titulo">Deseja mais clientes?</h2>
+                        <h2 className="sh-planos-subtitulo">Mude de plano e adquira já!</h2>
+                    </div>
+
+                    <Planos />
+                </article>
 
                 <article className="sh-todos-servicos">
                     <h2 className="sh-show sh-todos-os-servicos-titulo" data-aos="zoom-in">Serviços</h2>
