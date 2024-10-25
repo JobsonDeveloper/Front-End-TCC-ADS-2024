@@ -27,6 +27,7 @@
     background-image: url('../../assets/index/backgrounds/background-profissoes.webp');
     background-repeat: no-repeat;
     background-size: cover;
+    width: 100%;
 
     &::-webkit-scrollbar {
         background-color: transparent;

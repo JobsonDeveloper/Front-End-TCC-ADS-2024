@@ -21,6 +21,7 @@
     padding: 25px 20px;
     justify-items: center;
     overflow-x: auto;
+    width: 100%;
     gap: 30px;
     justify-items: center;
     background-image: url('../../assets/index/backgrounds/background-profissoes.webp');

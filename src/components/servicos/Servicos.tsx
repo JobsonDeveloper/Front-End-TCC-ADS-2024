@@ -21,6 +21,11 @@ const Servicos = ({ data }: any) => {
         <div className="sh-itens-data">
           <p className="sh-servicos-data-descricao">{servico.descricao}</p>
         </div>
+        {servico.remuneracao &&
+          <div className="sh-itens-data">
+            <p className="sh-servicos-data-descricao">{servico.remuneracao}</p>
+          </div>
+        }
       </Link>
     </li>
   );

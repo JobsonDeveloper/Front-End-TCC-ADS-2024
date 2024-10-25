@@ -11,13 +11,15 @@ import entrarButtom from '../../assets/login/icons/entrar.svg';
 import homeImg from '../../assets/login/icons/home.svg';
 import imgLogin from '../../assets/icons/btn-login.svg';
 import Loading from "../../components/loading/Loading";
-import { Alert, Box, Button, ButtonBase, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, fabClasses, FilledInput, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, SxProps, TextField, Theme, useMediaQuery, useTheme } from "@mui/material";
+import { Alert, Autocomplete, Box, Button, ButtonBase, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, fabClasses, FilledInput, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, Stack, SxProps, TextField, Theme, useMediaQuery, useTheme } from "@mui/material";
 import { Edit, Padding, Visibility, VisibilityOff } from "@mui/icons-material";
 import ServicosAdequados from "../../components/servicosAdequados/ServicosAdequados";
 import fotoPerfil from '../../assets/perfil/icons/perfil.png';
 import imgEstrelas from '../../assets/perfil/icons/estrela.svg';
 import Servicos from "../../components/servicos/Servicos";
 import Footer from "../../components/footer/Footer";
+import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const ShAlert = () => {
     return (
@@ -117,16 +119,32 @@ const styledTextField = {
     }
 }
 
-let freelaNome: string | null = "";
-let freelaSobrenome: string | null = "";
-let freelaNascimento: string | null = "";
-let freelaClassificacao: string | null = "";
-let freelaEndereco: string | null = "";
-let freelaTelefone: string | null = "";
+const styledSelectServicos = {
+    '& .MuiSelect-select': {
+        width: '100px',
+    },
+
+    '& .css-1umw9bq-MuiSvgIcon-root': {
+        display: 'none'
+    },
+
+    '& .MuiInputBase-input': {
+        color: '#494949',
+        fontFamily: '"Nunito", sans-serif',
+        fontSize: '1rem'
+    }
+}
+
+let userNome: string | null = "";
+let userSobrenome: string | null = "";
+let userNascimento: string | null = "";
+let userClassificacao: string | null = "";
+let userEndereco: string | null = "";
+let userTelefone: string | null = "";
 let freelaServico: string | null = "";
-let freelaEmail: string | null = "";
-let freelaDataCriacao: string | null = "";
-let freelaPefil: string | null = "";
+let userEmail: string | null = "";
+let userDataCriacao: string | null = "";
+let userFotoPerfil: string | null = "";
 let freelaLimit: string | null = ""
 
 let mensagemAlert = "";
@@ -136,6 +154,7 @@ let userTipo: string | null = "";
 
 const servicosAceitos: any = [];
 const servicosFinalizados: any = [];
+const servicosRegistrados: any = [];
 
 const Perfil = () => {
     const [loading, setLoading] = useState(true);
@@ -155,10 +174,46 @@ const Perfil = () => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const [imgPerfil, setImgPerfil] = useState();
+    const [openNovoServico, setOpenNovoServico] = useState(false);
+
+    const dadosServicos = [
+        'Reparo de Televisor',
+        'Reparo de Notebook',
+        'Reparo de Computador',
+        'Reparo de Ar-condicionado',
+        'Reparo de Smartphone',
+        'Instalação de Ar-condicionado',
+        'Instalação de Câmera',
+        'Reparo de Geladeira',
+        'Reparo de Microondas',
+        'Reparo de Console'
+    ];
+    const [servicoTipo, setServicoTipo] = useState('');
+    const [servicoData, setServicoData] = useState('');
+    const [servicoDescricao, setServicoDescricao] = useState('');
+    const [servicoRemuneracao, setServicoRemuneracao] = useState('');
+    const [servicoEndereco, setServicoEndereço] = useState('');
+    const [servicoTipoValor, setServicoTipoValor] = useState<string | null>('Tipo');
+    const capturaServicos = { options: dadosServicos.map((option) => option) };
+    const [dataServico, setDataServico] = useState('');
 
     useEffect(() => {
-        pegaDados();
+        if ((!sessionStorage.getItem('shUserLogId')) || (!sessionStorage.getItem('shUserLogTipo'))) {
+            tipoAlert = 3;
+            mensagemAlert = "Faça login antes!";
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+                pagina('/login');
+            }, 4000);
+        }
+        else {
+            pegaDados();
+        }
     }, []);
+
+
 
     const logout = () => {
         tipoAlert = 0;
@@ -212,23 +267,52 @@ const Perfil = () => {
             });
 
             const response = await request.json();
-            const dadosUsuario = response.dadosUser;
-            const servicosAceitosData = response.servAceitos;
-            const servicosFinalizadosData = response.servConc;
 
             if (response.status === 200) {
+                const dadosUsuario = response.dadosUser;
+                const servicosAceitosData = response.servAceitos;
+                const servicosFinalizadosData = response.servConc;
 
-                freelaNome = dadosUsuario[0].nome;
-                freelaSobrenome = dadosUsuario[0].sobrenome;
-                freelaNascimento = formatData(dadosUsuario[0].nascimento);
-                freelaClassificacao = dadosUsuario[0].classificacao;
-                freelaEndereco = dadosUsuario[0].endereco;
-                freelaTelefone = dadosUsuario[0].telefone;
-                freelaServico = dadosUsuario[0].servicos;
-                freelaEmail = dadosUsuario[0].email;
-                freelaDataCriacao = formatData(dadosUsuario[0].data_de_criacao);
-                freelaPefil = dadosUsuario[0].imagem_perfil;
-                freelaLimit = dadosUsuario[0].limite;
+                if (userTipo === "1") {
+                    const servicosRegistradosData = response.servRegist;
+
+                    if (servicosRegistrados[0] === undefined) {
+                        servicosRegistradosData.map((dados: any) => {
+                            servicosRegistrados.push({
+                                id: dados.id,
+                                tag: dados.tipo,
+                                descricao: dados.descricao,
+                                remuneracao: dados.remuneracao,
+                            });
+                        })
+
+                    }
+
+                }
+                else {
+                    userNome = dadosUsuario[0].nome;
+                    userSobrenome = dadosUsuario[0].sobrenome;
+                    userNascimento = formatData(dadosUsuario[0].nascimento);
+                    userClassificacao = dadosUsuario[0].classificacao;
+                    userEndereco = dadosUsuario[0].endereco;
+                    userTelefone = dadosUsuario[0].telefone;
+                    userEmail = dadosUsuario[0].email;
+                    userDataCriacao = formatData(dadosUsuario[0].data_de_criacao);
+                    userFotoPerfil = dadosUsuario[0].imagem_perfil;
+                    freelaServico = dadosUsuario[0].servicos;
+                    freelaLimit = dadosUsuario[0].limite;
+                }
+
+                userNome = dadosUsuario.nome;
+                userSobrenome = dadosUsuario.sobrenome;
+                userNascimento = formatData(dadosUsuario.nascimento);
+                userClassificacao = dadosUsuario.classificacao;
+                userEndereco = dadosUsuario.endereco;
+                userTelefone = dadosUsuario.telefone;
+                userEmail = dadosUsuario.email;
+                userDataCriacao = formatData(dadosUsuario.data_de_criacao);
+                userFotoPerfil = dadosUsuario.imagem_perfil;
+
                 setLoading(false);
 
                 if (servicosAceitos[0] === undefined) {
@@ -346,6 +430,9 @@ const Perfil = () => {
     const handleCloseEditPerfil = () => {
         setOpenDelete(false);
     };
+    const handleCloseNovoServico = () => {
+        setOpenNovoServico(false);
+    }
 
     async function editPerfil(e: any) {
         e.preventDefault();
@@ -378,9 +465,6 @@ const Perfil = () => {
 
             lerImagemUm.onload = function (arquivo: any) {
                 base64Img = arquivo.target.result;
-                setTimeout(() => {
-                    console.log(base64Img);
-                }, 1000);
             }
 
             if (imgPerfil) {
@@ -421,6 +505,84 @@ const Perfil = () => {
                 setLoading(false);
             }, 4000);
             console.error(error);
+        }
+    }
+
+    async function novoServico(e: any) {
+        e.preventDefault();
+
+        if ((servicoTipo != "Tipo") && (servicoDescricao != "") && (servicoRemuneracao != "")) {
+            try {
+                setLoading(true);
+                const formData = new FormData();
+                formData.append('acao', 'cadserv');
+                formData.append('cliente', `${userId}`);
+
+                if (servicoData === "NaN/NaN/NaN") {
+                    formData.append('data', '');
+                } else {
+                    formData.append('data', `${dataServico}`);
+                }
+
+                if (servicoEndereco === "") {
+                    formData.append('local', `${userEndereco}`);
+                }
+                else {
+                    formData.append('local', `${servicoEndereco}`);
+                }
+
+                formData.append('desc', `${servicoDescricao}`);
+                formData.append('grana', `${servicoRemuneracao}`);
+                formData.append('tipo', `${servicoTipoValor}`);
+
+                // console.log(data);
+
+                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                });
+
+                const response = await request.json();
+
+                if (response.status === 201) {
+                    window.location.reload();
+                    setLoading(false);
+                }
+                else {
+                    tipoAlert = 3;
+                    mensagemAlert = "Dados não retornados!"
+                    setMostrarAlert(true);
+
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        setLoading(false);
+                    }, 4000);
+                }
+
+
+            }
+            catch (error) {
+                tipoAlert = 3;
+                mensagemAlert = "Erro de requisição!"
+                setMostrarAlert(true);
+
+                setTimeout(() => {
+                    setMostrarAlert(false);
+                    setLoading(false);
+                }, 4000);
+                console.error(error);
+            }
+
+
+        } else {
+            tipoAlert = 3;
+            mensagemAlert = "Preencha todos os campos!"
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+            }, 4000);
         }
     }
 
@@ -477,20 +639,20 @@ const Perfil = () => {
                     <li className="sh-dados-item perfil-foto-nome">
                         <div className="sh-dados-perfil-img">
                             {
-                                freelaPefil &&
-                                <img src={`${freelaPefil}`} alt="" />
+                                userFotoPerfil &&
+                                <img src={`${userFotoPerfil}`} alt="" />
                             }
                             {
-                                !freelaPefil &&
+                                !userFotoPerfil &&
                                 <img src={fotoPerfil} alt="" />
                             }
                         </div>
                         <div className="sh-dados-headerDois">
-                            <p className="sh-dados-item-text">{freelaNome} {freelaSobrenome}</p>
+                            <p className="sh-dados-item-text">{userNome} {userSobrenome}</p>
                             <div className="sh-dados-adicionais">
                                 <div className="sh-dadosBase-item">
                                     <img src={imgEstrelas} />
-                                    <p className="sh-dados-item-text">{freelaClassificacao}</p>
+                                    <p className="sh-dados-item-text">{userClassificacao}</p>
                                 </div>
                                 <div className="sh-dadosBase-item">
                                     <HandymanIcon />
@@ -501,15 +663,15 @@ const Perfil = () => {
                     </li>
                     <li className="sh-dados-item sh-nascimento">
                         <h6 className="sh-dados-item-titulo">Data de nascimento</h6>
-                        <p className="sh-dados-item-text">{freelaNascimento}</p>
+                        <p className="sh-dados-item-text">{userNascimento}</p>
                     </li>
                     <li className="sh-dados-item sh-endereco">
                         <h6 className="sh-dados-item-titulo">Endereço</h6>
-                        <p className="sh-dados-item-text">{freelaEndereco}</p>
+                        <p className="sh-dados-item-text">{userEndereco}</p>
                     </li>
                     <li className="sh-dados-item sh-telefone">
                         <h6 className="sh-dados-item-titulo">Telefone</h6>
-                        <p className="sh-dados-item-text">{freelaTelefone}</p>
+                        <p className="sh-dados-item-text">{userTelefone}</p>
                     </li>
                     <li className="sh-dados-item sh-servicos">
                         <h6 className="sh-dados-item-titulo">Servicos</h6>
@@ -517,11 +679,11 @@ const Perfil = () => {
                     </li>
                     <li className="sh-dados-item sh-email">
                         <h6 className="sh-dados-item-titulo">Email</h6>
-                        <p className="sh-dados-item-text">{freelaEmail}</p>
+                        <p className="sh-dados-item-text">{userEmail}</p>
                     </li>
                     <li className="sh-dados-item sh-criacao">
                         <h6 className="sh-dados-item-titulo">Data de criação da conta</h6>
-                        <p className="sh-dados-item-text">{freelaDataCriacao}</p>
+                        <p className="sh-dados-item-text">{userDataCriacao}</p>
                     </li>
                     <li className="sh-perfil-buttons sh-buttons">
                         <button type="button" onClick={(() => { setOpenEditPerfil(true) })} className="sh-perfil-button">Editar perfil</button>
@@ -530,7 +692,16 @@ const Perfil = () => {
                 </ul>
 
                 {
-                    servicosAceitos[0] &&
+                    servicosRegistrados[0] &&
+                    <div className="sh-servicos-aceitos">
+                        <h2 className="sh-servicos-titulo">Servicos cadastrados</h2>
+                        <article className="sh-perfil-servicos-aceitos">
+                            <ServicosAdequados data={servicosRegistrados} />
+                        </article>
+                    </div>
+                }
+                {
+                    servicosAceitos[0] && userTipo === "0" &&
                     <div className="sh-servicos-aceitos">
                         <h2 className="sh-servicos-titulo">Servicos aceitos</h2>
                         <article className="sh-perfil-servicos-aceitos">
@@ -539,12 +710,18 @@ const Perfil = () => {
                     </div>
                 }
                 {
-                    servicosAceitos[0] &&
+                    servicosFinalizados[0] &&
                     <div className="sh-servicos-aceitos">
-                        <h2 className="sh-servicos-titulo">Servicos realizados</h2>
+                        <h2 className="sh-servicos-titulo">Servicos concluidos</h2>
                         <article className="sh-perfil-servicos-aceitos">
                             <ServicosAdequados data={servicosFinalizados} />
                         </article>
+                    </div>
+                }
+
+                {userTipo === "1" &&
+                    <div className="sh-adicionar-servico">
+                        <button onClick={(() => { setOpenNovoServico(true) })}>Novo serviço</button>
                     </div>
                 }
             </main>
@@ -590,7 +767,7 @@ const Perfil = () => {
                                 type="text"
                                 sx={styledTextField}
                                 className="sh-cadastro-nome"
-                                defaultValue={freelaNome}
+                                defaultValue={userNome}
                                 onChange={(e) => setNovNome(e.target.value)}
                             />
                         </DialogContentText>
@@ -601,7 +778,7 @@ const Perfil = () => {
                                 type="text"
                                 sx={styledTextField}
                                 className="sh-cadastro-nome"
-                                defaultValue={freelaSobrenome}
+                                defaultValue={userSobrenome}
                                 onChange={(e) => setNovSobrenome(e.target.value)}
                             />
                         </DialogContentText>
@@ -612,7 +789,7 @@ const Perfil = () => {
                                 type="text"
                                 sx={styledTextField}
                                 className="sh-cadastro-nome"
-                                defaultValue={freelaEmail}
+                                defaultValue={userEmail}
                                 onChange={(e) => setNovEmail(e.target.value)}
                             />
                         </DialogContentText>
@@ -623,7 +800,7 @@ const Perfil = () => {
                                 type="text"
                                 sx={styledTextField}
                                 className="sh-cadastro-nome"
-                                defaultValue={freelaTelefone}
+                                defaultValue={userTelefone}
                                 onChange={(e) => setNovTelefone(e.target.value)}
                             />
                         </DialogContentText>
@@ -634,7 +811,7 @@ const Perfil = () => {
                                 type="text"
                                 sx={styledTextField}
                                 className="sh-cadastro-nome"
-                                defaultValue={freelaNascimento}
+                                defaultValue={userNascimento}
                                 onChange={(e) => setNovNascimento(e.target.value)}
                             />
                         </DialogContentText>
@@ -645,7 +822,7 @@ const Perfil = () => {
                                 type="text"
                                 sx={styledTextField}
                                 className="sh-cadastro-nome"
-                                defaultValue={freelaEndereco}
+                                defaultValue={userEndereco}
                                 onChange={(e) => setNovEndereco(e.target.value)}
                             />
                         </DialogContentText>
@@ -671,6 +848,94 @@ const Perfil = () => {
                         </Button>
                         <Button type="submit">
                             Salvar
+                        </Button>
+
+                    </DialogActions>
+                </form>
+            </Dialog>
+
+            <Dialog
+                open={openNovoServico}
+                onClose={handleCloseNovoServico}
+                // fullScreen={fullScreen}
+                aria-labelledby="responsive-dialog-avaliacao-title"
+                sx={styledDialogService}
+            >
+                <form onSubmit={novoServico}>
+                    <DialogTitle id="responsive-dialog-title" className='sh-servico-dialog-titulo'>
+                        Adicionar novo serviço
+                    </DialogTitle>
+                    <DialogContent className='sh-servico-dialog-dados sh-dados-atualizar'>
+                        <DialogContentText className="sh-servico-subtitulos">
+                            <Stack spacing={1} sx={styledSelectServicos}>
+                                <Autocomplete
+                                    {...capturaServicos}
+                                    disableClearable
+                                    value={`${servicoTipoValor}`}
+                                    onChange={(event: any, newValue: string | null) => {
+                                        setServicoTipoValor(newValue);
+                                        // pegarDadosForm(event)
+                                    }}
+                                    renderInput={(parametros) => (
+                                        <TextField {...parametros}
+                                            label=""
+                                            variant="standard" />
+                                    )}
+                                />
+                            </ Stack>
+                        </DialogContentText>
+                        <DialogContentText className="sh-servico-subtitulos">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                                <DateField
+                                    label="Data (Opcional)"
+                                    variant="standard"
+                                    format="DD/MM/YYYY"
+                                    sx={styledTextField}
+                                    onChange={(e: any) => setDataServico(e)}
+                                />
+                            </LocalizationProvider>
+                        </DialogContentText>
+                        <DialogContentText className="sh-servico-subtitulos">
+                            <TextField
+                                label="Descrição"
+                                variant="standard"
+                                type="text"
+                                sx={styledTextField}
+                                className="sh-cadastro-nome"
+                                defaultValue={servicoDescricao}
+                                onChange={(e) => setServicoDescricao(e.target.value)}
+                            />
+                        </DialogContentText>
+                        <DialogContentText className="sh-servico-subtitulos">
+                            <TextField
+                                label="Remuneração"
+                                variant="standard"
+                                type="number"
+                                sx={styledTextField}
+                                className="sh-cadastro-nome"
+                                defaultValue={servicoRemuneracao}
+                                onChange={(e) => setServicoRemuneracao(e.target.value)}
+                            />
+                        </DialogContentText>
+                        <DialogContentText className="sh-servico-subtitulos">
+                            <TextField
+                                label="Endereço (Opcional)"
+                                variant="standard"
+                                type="text"
+                                sx={styledTextField}
+                                className="sh-cadastro-nome"
+                                defaultValue={servicoEndereco}
+                                onChange={(e) => setServicoEndereço(e.target.value)}
+                            />
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button autoFocus onClick={(() => { setOpenNovoServico(false) })}>
+                            Voltar
+                        </Button>
+                        <Button type="submit">
+                            Registrar
                         </Button>
 
                     </DialogActions>
