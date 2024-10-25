@@ -26,6 +26,7 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
+let userTipo: any = "";
 let idServico = "";
 let tipo = "";
 let diaServico = "";
@@ -39,6 +40,11 @@ let clienteDataCriacao = "";
 let statusServico = "";
 let telefoneCliente = "";
 let emailCliente = "";
+let freelaId = "";
+let freelaTelefone = "";
+let freelaEmail = "";
+let freelaClassificacao = "";
+let freelaNome = "";
 
 const styledDialogService = {
     '& .sh-servico-dialog-titulo': {
@@ -150,10 +156,11 @@ const ServicosAdequados = ({ data }: any) => {
         tipoRemuneracao = servico.tipoDeRemuneracao;
         clienteId = servico.clienteId;
         statusServico = servico.status;
+        freelaId = servico.freelaId;
+
         if (servico.status) {
             statusServico = servico.status;
         }
-
 
         dadosCliente();
 
@@ -162,7 +169,13 @@ const ServicosAdequados = ({ data }: any) => {
             try {
                 const formData = new FormData();
                 formData.append('acao', 'dados_cliente_servico');
-                formData.append('cliId', clienteId);
+                formData.append('userTipo', userTipo);
+
+                if (userTipo === "0") {
+                    formData.append('cliId', clienteId);
+                } else {
+                    formData.append('freelaId', freelaId);
+                }
 
                 const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
                     method: 'POST',
@@ -170,14 +183,27 @@ const ServicosAdequados = ({ data }: any) => {
                     body: formData
                 });
 
+
                 const response = await request.json();
 
                 if (response) {
-                    clienteClassificacao = response.data.classificacao;
-                    clienteDataCriacao = formatData(response.data.data_de_criacao);
-                    telefoneCliente = response.data.telefone;
-                    emailCliente = response.data.email;
-                    setOpen(true);
+                    if (userTipo === "0") {
+                        clienteClassificacao = response.data.classificacao;
+                        clienteDataCriacao = formatData(response.data.data_de_criacao);
+                        telefoneCliente = response.data.telefone;
+                        emailCliente = response.data.email;
+
+                        setOpen(true);
+                    }
+                    else {
+                        freelaTelefone = response.data.telefone;
+                        freelaEmail = response.data.email;
+                        freelaClassificacao = response.data.classificacao;
+                        freelaNome = `${response.data.nome} ${response.data.sobrenome}`;
+                        setOpen(true);
+                        // console.log(response);
+
+                    }
                 }
             }
             catch (error) {
@@ -188,31 +214,61 @@ const ServicosAdequados = ({ data }: any) => {
     };
 
     async function concluirServico() {
-        try {
-            const formData = new FormData();
-            formData.append('acao', 'conclui_servico');
-            formData.append('avaliacaoFreela', `${avaliacao}`);
-            formData.append('idServico', `${idServico}`);
-            formData.append('colaboradorId', `${clienteId}`);
-
-            const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-                method: 'POST',
-                mode: 'cors',
-                body: formData
-            });
-
-            const response = await request.json();
-
-            if (response) {
-                console.log(response);
-                window.location.reload();
-            }
+if(userTipo === "0"){
+    try {
+        const formData = new FormData();
+        formData.append('acao', 'conclui_servico');
+        formData.append('avaliacaoFreela', `${avaliacao}`);
+        formData.append('idServico', `${idServico}`);
+        formData.append('colaboradorId', `${clienteId}`);
+    
+        const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+            method: 'POST',
+            mode: 'cors',
+            body: formData
+        });
+    
+        const response = await request.json();
+    
+        if (response) {
+            console.log(response);
+            window.location.reload();
         }
-        catch (error) {
-            console.error(error);
-            setOpenAvaliacao(false);
-            setOpen(false);
+    }
+    catch (error) {
+        console.error(error);
+        setOpenAvaliacao(false);
+        setOpen(false);
+    }
+}
+else {
+    try {
+        const formData = new FormData();
+        formData.append('acao', 'conclui_servico');
+        formData.append('avaliacaoCliente', `${avaliacao}`);
+        formData.append('idServico', `${idServico}`);
+        formData.append('colaboradorId', `${freelaId}`);
+    
+        const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+            method: 'POST',
+            mode: 'cors',
+            body: formData
+        });
+    
+        const response = await request.json();
+    
+        if (response) {
+            console.log(response);
+            window.location.reload();
         }
+    }
+    catch (error) {
+        console.error(error);
+        setOpenAvaliacao(false);
+        setOpen(false);
+    }
+}
+
     }
 
     const handleClose = () => {
@@ -222,6 +278,7 @@ const ServicosAdequados = ({ data }: any) => {
 
     useEffect(() => {
         Aos.init({ duration: 500 });
+        userTipo = sessionStorage.getItem('shUserLogTipo');
     })
 
     const listaServicos = data.map((servico: any, index: any) =>
@@ -310,37 +367,91 @@ const ServicosAdequados = ({ data }: any) => {
                         R${remuneracao} reais
                     </DialogContentText>
 
-                    <DialogContentText className="sh-servico-subtitulos">
-                        Cliente desde
-                    </DialogContentText>
-                    <DialogContentText className="sh-servico-dados">
-                        {clienteDataCriacao}
-                    </DialogContentText>
+                    {userTipo === "0" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            Cliente desde
+                        </DialogContentText>
+                    }
+                    {userTipo === "0" &&
+                        <DialogContentText className="sh-servico-dados">
+                            {clienteDataCriacao}
+                        </DialogContentText>
+                    }
 
-                    <DialogContentText className="sh-servico-subtitulos">
-                        Classificação
-                    </DialogContentText>
-                    <DialogContentText className="sh-servico-dados">
-                        <img src={imgEstrelas} className='sh-dialog-estrelas' />{clienteClassificacao}
-                    </DialogContentText>
-                    {statusServico !== "" &&
+                    {userTipo === "1" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            Nome do freelancer
+                        </DialogContentText>
+                    }
+                    {userTipo === "1" &&
+                        <DialogContentText className="sh-servico-dados">
+                            {freelaNome}
+                        </DialogContentText>
+                    }
+
+                    {userTipo === "0" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            Classificação
+                        </DialogContentText>
+                    }
+                    {userTipo === "0" &&
+                        <DialogContentText className="sh-servico-dados">
+                            <img src={imgEstrelas} className='sh-dialog-estrelas' />{clienteClassificacao}
+                        </DialogContentText>
+                    }
+
+                    {userTipo === "1" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            Classificação
+                        </DialogContentText>
+                    }
+                    {userTipo === "1" &&
+                        <DialogContentText className="sh-servico-dados">
+                            <img src={imgEstrelas} className='sh-dialog-estrelas' />{freelaClassificacao}
+                        </DialogContentText>
+                    }
+
+                    {statusServico !== "" && userTipo === "0" &&
                         <DialogContentText className="sh-servico-subtitulos">
                             Telefone do cliente
                         </DialogContentText>
                     }
-                    {statusServico !== "" &&
+                    {statusServico !== "" && userTipo === "0" &&
                         <DialogContentText className="sh-servico-dados">
                             {telefoneCliente}
                         </DialogContentText>
                     }
-                    {statusServico !== "" &&
+
+                    {statusServico !== "" && userTipo === "1" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            Telefone do freelancer
+                        </DialogContentText>
+                    }
+                    {statusServico !== "" && userTipo === "1" &&
+                        <DialogContentText className="sh-servico-dados">
+                            {freelaTelefone}
+                        </DialogContentText>
+                    }
+
+                    {statusServico !== "" && userTipo === "0" &&
                         <DialogContentText className="sh-servico-subtitulos">
                             E-mail do cliente
                         </DialogContentText>
                     }
-                    {statusServico !== "" &&
+                    {statusServico !== "" && userTipo === "0" &&
                         <DialogContentText className="sh-servico-dados">
                             {emailCliente}
+                        </DialogContentText>
+                    }
+
+                    {statusServico !== "" && userTipo === "1" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            E-mail do freelancer
+                        </DialogContentText>
+                    }
+                    {statusServico !== "" && userTipo === "1" &&
+                        <DialogContentText className="sh-servico-dados">
+                            {freelaEmail}
                         </DialogContentText>
                     }
                 </DialogContent>
@@ -348,8 +459,8 @@ const ServicosAdequados = ({ data }: any) => {
                     <Button onClick={handleClose}>
                         Voltar
                     </Button>
-                    
-                    {statusServico === "aberto" &&
+
+                    {statusServico === "aberto" && userTipo === "0" &&
                         <Button autoFocus onClick={((e) => { aceitaServico(e) })}>
                             Aceitar
                         </Button>
@@ -372,9 +483,17 @@ const ServicosAdequados = ({ data }: any) => {
                     {tipo}
                 </DialogTitle>
                 <DialogContent className='sh-servico-dialog-dados'>
-                    <DialogContentText className="sh-servico-subtitulos">
-                        Avalie o cliente
-                    </DialogContentText>
+                    {userTipo === "0" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            Avalie o cliente
+                        </DialogContentText>
+                    }
+                    {userTipo === "1" &&
+                        <DialogContentText className="sh-servico-subtitulos">
+                            Avalie o Freelancer
+                        </DialogContentText>
+                    }
+
                     <DialogContentText className="sh-servico-dados">
                         <Rating
                             name="simple-controlled"

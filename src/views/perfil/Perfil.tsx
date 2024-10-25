@@ -273,6 +273,8 @@ const Perfil = () => {
                 const servicosAceitosData = response.servAceitos;
                 const servicosFinalizadosData = response.servConc;
 
+                console.log(response);
+
                 if (userTipo === "1") {
                     const servicosRegistradosData = response.servRegist;
 
@@ -285,8 +287,17 @@ const Perfil = () => {
                                 remuneracao: dados.remuneracao,
                             });
                         })
-
                     }
+
+                    userNome = dadosUsuario.nome;
+                    userSobrenome = dadosUsuario.sobrenome;
+                    userNascimento = formatData(dadosUsuario.nascimento);
+                    userClassificacao = dadosUsuario.classificacao;
+                    userEndereco = dadosUsuario.endereco;
+                    userTelefone = dadosUsuario.telefone;
+                    userEmail = dadosUsuario.email;
+                    userDataCriacao = formatData(dadosUsuario.data_de_criacao);
+                    userFotoPerfil = dadosUsuario.imagem_perfil;
 
                 }
                 else {
@@ -303,16 +314,6 @@ const Perfil = () => {
                     freelaLimit = dadosUsuario[0].limite;
                 }
 
-                userNome = dadosUsuario.nome;
-                userSobrenome = dadosUsuario.sobrenome;
-                userNascimento = formatData(dadosUsuario.nascimento);
-                userClassificacao = dadosUsuario.classificacao;
-                userEndereco = dadosUsuario.endereco;
-                userTelefone = dadosUsuario.telefone;
-                userEmail = dadosUsuario.email;
-                userDataCriacao = formatData(dadosUsuario.data_de_criacao);
-                userFotoPerfil = dadosUsuario.imagem_perfil;
-
                 setLoading(false);
 
                 if (servicosAceitos[0] === undefined) {
@@ -320,6 +321,7 @@ const Perfil = () => {
                         servicosAceitos.push({
                             id: dados.id,
                             clienteId: dados.cliente_id,
+                            freelaId: dados.freelancer_id,
                             tag: dados.tipo,
                             data: dados.data_servico,
                             endereco: dados.local_servico,
@@ -340,10 +342,12 @@ const Perfil = () => {
                             endereco: dados.local_servico,
                             descricao: dados.descricao,
                             remuneracao: dados.remuneracao,
-                            status: dados.status
+                            status: dados.status,
+                            freelaId: dados.freelancer_id
                         });
                     })
                 }
+
             }
             else {
                 tipoAlert = 3;
@@ -654,35 +658,39 @@ const Perfil = () => {
                                     <img src={imgEstrelas} />
                                     <p className="sh-dados-item-text">{userClassificacao}</p>
                                 </div>
-                                <div className="sh-dadosBase-item">
-                                    <HandymanIcon />
-                                    <p className="sh-dados-item-text">{freelaLimit}</p>
-                                </div>
+                                {userTipo === '0' &&
+                                    <div className="sh-dadosBase-item">
+                                        <HandymanIcon />
+                                        <p className="sh-dados-item-text">{freelaLimit}</p>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </li>
                     <li className="sh-dados-item sh-nascimento">
-                        <h6 className="sh-dados-item-titulo">Data de nascimento</h6>
+                        <h6 className="sh-dados-item-titulo">Data de nascimento:</h6>
                         <p className="sh-dados-item-text">{userNascimento}</p>
                     </li>
                     <li className="sh-dados-item sh-endereco">
-                        <h6 className="sh-dados-item-titulo">Endereço</h6>
+                        <h6 className="sh-dados-item-titulo">Endereço:</h6>
                         <p className="sh-dados-item-text">{userEndereco}</p>
                     </li>
                     <li className="sh-dados-item sh-telefone">
-                        <h6 className="sh-dados-item-titulo">Telefone</h6>
+                        <h6 className="sh-dados-item-titulo">Telefone:</h6>
                         <p className="sh-dados-item-text">{userTelefone}</p>
                     </li>
-                    <li className="sh-dados-item sh-servicos">
-                        <h6 className="sh-dados-item-titulo">Servicos</h6>
-                        <p className="sh-dados-item-text">{freelaServico}</p>
-                    </li>
+                    {userTipo === "0" &&
+                        <li className="sh-dados-item sh-servicos">
+                            <h6 className="sh-dados-item-titulo">Servicos:</h6>
+                            <p className="sh-dados-item-text">{freelaServico}</p>
+                        </li>
+                    }
                     <li className="sh-dados-item sh-email">
-                        <h6 className="sh-dados-item-titulo">Email</h6>
+                        <h6 className="sh-dados-item-titulo">Email:</h6>
                         <p className="sh-dados-item-text">{userEmail}</p>
                     </li>
                     <li className="sh-dados-item sh-criacao">
-                        <h6 className="sh-dados-item-titulo">Data de criação da conta</h6>
+                        <h6 className="sh-dados-item-titulo">Data de criação da conta:</h6>
                         <p className="sh-dados-item-text">{userDataCriacao}</p>
                     </li>
                     <li className="sh-perfil-buttons sh-buttons">
@@ -692,7 +700,7 @@ const Perfil = () => {
                 </ul>
 
                 {
-                    servicosRegistrados[0] &&
+                    userTipo === "1" &&
                     <div className="sh-servicos-aceitos">
                         <h2 className="sh-servicos-titulo">Servicos cadastrados</h2>
                         <article className="sh-perfil-servicos-aceitos">
@@ -701,7 +709,7 @@ const Perfil = () => {
                     </div>
                 }
                 {
-                    servicosAceitos[0] && userTipo === "0" &&
+                    servicosAceitos[0] &&
                     <div className="sh-servicos-aceitos">
                         <h2 className="sh-servicos-titulo">Servicos aceitos</h2>
                         <article className="sh-perfil-servicos-aceitos">
@@ -710,7 +718,7 @@ const Perfil = () => {
                     </div>
                 }
                 {
-                    servicosFinalizados[0] &&
+                    // servicosFinalizados[0] &&
                     <div className="sh-servicos-aceitos">
                         <h2 className="sh-servicos-titulo">Servicos concluidos</h2>
                         <article className="sh-perfil-servicos-aceitos">
