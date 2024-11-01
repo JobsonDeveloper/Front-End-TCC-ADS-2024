@@ -214,60 +214,60 @@ const ServicosAdequados = ({ data }: any) => {
     };
 
     async function concluirServico() {
-if(userTipo === "0"){
-    try {
-        const formData = new FormData();
-        formData.append('acao', 'conclui_servico');
-        formData.append('avaliacaoFreela', `${avaliacao}`);
-        formData.append('idServico', `${idServico}`);
-        formData.append('colaboradorId', `${clienteId}`);
-    
-        const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-            method: 'POST',
-            mode: 'cors',
-            body: formData
-        });
-    
-        const response = await request.json();
-    
-        if (response) {
-            console.log(response);
-            window.location.reload();
+        if (userTipo === "0") {
+            try {
+                const formData = new FormData();
+                formData.append('acao', 'conclui_servico');
+                formData.append('avaliacaoFreela', `${avaliacao}`);
+                formData.append('idServico', `${idServico}`);
+                formData.append('colaboradorId', `${clienteId}`);
+
+                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                });
+
+                const response = await request.json();
+
+                if (response) {
+                    console.log(response);
+                    window.location.reload();
+                }
+            }
+            catch (error) {
+                console.error(error);
+                setOpenAvaliacao(false);
+                setOpen(false);
+            }
         }
-    }
-    catch (error) {
-        console.error(error);
-        setOpenAvaliacao(false);
-        setOpen(false);
-    }
-}
-else {
-    try {
-        const formData = new FormData();
-        formData.append('acao', 'conclui_servico');
-        formData.append('avaliacaoCliente', `${avaliacao}`);
-        formData.append('idServico', `${idServico}`);
-        formData.append('colaboradorId', `${freelaId}`);
-    
-        const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-            method: 'POST',
-            mode: 'cors',
-            body: formData
-        });
-    
-        const response = await request.json();
-    
-        if (response) {
-            console.log(response);
-            window.location.reload();
+        else {
+            try {
+                const formData = new FormData();
+                formData.append('acao', 'conclui_servico');
+                formData.append('avaliacaoCliente', `${avaliacao}`);
+                formData.append('idServico', `${idServico}`);
+                formData.append('colaboradorId', `${freelaId}`);
+
+                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                });
+
+                const response = await request.json();
+
+                if (response) {
+                    console.log(response);
+                    window.location.reload();
+                }
+            }
+            catch (error) {
+                console.error(error);
+                setOpenAvaliacao(false);
+                setOpen(false);
+            }
         }
-    }
-    catch (error) {
-        console.error(error);
-        setOpenAvaliacao(false);
-        setOpen(false);
-    }
-}
 
     }
 

@@ -25,6 +25,7 @@ import { duration } from '@mui/material';
 
 import Aos from "aos";
 import "aos/dist/aos.css";
+import ListaServicos from './components/listaServicos/ListaServicos';
 
 // ------------ Monta do banco ----------
 let ultimosServicos: any = [];
@@ -83,6 +84,7 @@ function App() {
         });
 
         const response = await requsicao.json();
+        
 
         if (response) {
           const servicos = response.dataServico;
@@ -91,11 +93,20 @@ function App() {
 
           servicos.map((dados: any) => {
             ultimosServicos.push({
+              id: dados.id,
+              freelancer_id: dados.frefreelancer_id,
+              cliente_id: dados.cliente_id,
+              servico_foto: dados.servico_foto,
+              cliente_foto: dados.imagem_perfil,
+              cliente_nome: dados.nome,
+              cliente_sobrenome: dados.sobrenome,
+              cliente_classificacao: dados.classificacao,
               tag: dados.tipo,
-              descricao: dados.descricao
+              descricao: dados.descricao,
+              remuneracao: dados.remuneracao,
+              servico_status: 'aberto'
             });
           })
-
 
           freelancers.map((dados: any) => {
             let servicosSplit = dados.servicos.split(",");
@@ -181,6 +192,14 @@ function App() {
       </section>
 
       <section className="sh-main">
+        {/* Servicos */}
+        {/* <ListaServicos
+          servicos={ultimosServicos}
+          tituloDaSessao="Últimos serviços postados"
+          setLoading={setLoading}
+          setMostraAlert={false}
+        /> */}
+
         {/* Oque é a Skillhun */}
         <div className="sh-skillhub-info" id='sh_sobre_a_skillhub'>
           <article className="sh-show sh-main-skillhub" id='sh_main_skillhub'>

@@ -38,3 +38,16 @@ const Servicos = ({ data }: any) => {
 }
 
 export default Servicos;
+/*
+id
+freelancer_id
+cliente_id
+servico_foto
+cliente_foto
+cliente_nome
+cliente_sobrenome
+cliente_classificacao
+tag
+descricao
+remuneracao
+*/
