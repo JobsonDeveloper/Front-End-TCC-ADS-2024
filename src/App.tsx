@@ -192,14 +192,6 @@ function App() {
       </section>
 
       <section className="sh-main">
-        {/* Servicos */}
-        {/* <ListaServicos
-          servicos={ultimosServicos}
-          tituloDaSessao="Últimos serviços postados"
-          setLoading={setLoading}
-          setMostraAlert={false}
-        /> */}
-
         {/* Oque é a Skillhun */}
         <div className="sh-skillhub-info" id='sh_sobre_a_skillhub'>
           <article className="sh-show sh-main-skillhub" id='sh_main_skillhub'>
@@ -328,13 +320,21 @@ function App() {
         </article>
 
         {/* Últimos serviços postados */}
-        <article className="sh-main-servicos" id='sh_ultimas_postagens'>
+        {/* <article className="sh-main-servicos" id='sh_ultimas_postagens'>
           <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Últimos serviços postados</h2>
 
           <div className="sh-servicos-lista-container">
             <Servicos data={ultimosServicos} />
           </div>
-        </article>
+        </article> */}
+        
+        {/* Servicos */}
+        <ListaServicos
+          servicos={ultimosServicos}
+          tituloDaSessao="Últimos serviços postados"
+          setLoading={setLoading}
+          setMostraAlert={false}
+        />
 
         {/* Dúvidas frequentes  */}
         <article className="sh-main-duvidas" id='sh_duvidas'>

@@ -5,23 +5,28 @@ import imgPadrao from '../../assets/index/icons/icon-perfil.png';
 import imgPerfilTeste from '../../assets/index/icons/profissional.png';
 import imgClassificacaoEstrela from '../../assets/icons/estrela.svg';
 import background from '../../assets/index/backgrounds/background-servicos.svg';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }) => {
     const id_usuario = sessionStorage.getItem('shUserLogId');
     const tipo_usuario = sessionStorage.getItem('shUserLogTipo');
+    const pagina = useNavigate();
 
     useEffect(() => {
         setTimeout(() => {
         }, 4000);
     });
 
+    function redirectLogin() {
+        pagina('/login');
+    }
+
     const montaServicos = servicos.map((servico) =>
         <>
             {servico.servico_status === 'aberto' && !tipo_usuario &&
-                <li className="sh-servicosItem" key={servico.id}>
+                <li className="sh-servicosItem" key={servico.id} onClick={redirectLogin}>
                     <ul className="sh-servicosItem-lista">
-                        <li className="sh-servicosLista-item">
+                        <li className="sh-servicosLista-item sh-servicosLista-fotoServico">
                             {servico.servico_foto &&
                                 <img src={servico.servico_foto} className="sh-servicosLista-imagem" alt="Imgagem do serviço a ser realizado" />
                             }
