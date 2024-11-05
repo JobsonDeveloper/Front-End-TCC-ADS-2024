@@ -18,6 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ServicosDisponiveis from "../../components/servicosdisponiveis/ServicosDisponiveis";
 import ServicosAdequados from "../../components/servicosAdequados/ServicosAdequados";
 import Planos from "../../components/planos/Planos";
+import ListaServicos from "../../components/listaServicos/ListaServicos";
 
 const ultimosServicos: any = [];
 
@@ -151,13 +152,19 @@ const HomeFreelancer = () => {
                         response.servicosAdequados.map((dados: any) => {
                             servicosAdequados.push({
                                 id: dados.id,
-                                clienteId: dados.cliente_id,
+                                freelancer_id: dados.frefreelancer_id,
+                                cliente_id: dados.cliente_id,
+                                data_servico: dados.data_servico,
+                                endereco_servico: dados.local_servico,
+                                servico_foto: dados.servico_foto,
+                                cliente_foto: dados.imagem_perfil,
+                                cliente_nome: dados.nome,
+                                cliente_sobrenome: dados.sobrenome,
+                                cliente_classificacao: dados.classificacao,
                                 tag: dados.tipo,
-                                data: dados.data_servico,
-                                endereco: dados.local_servico,
                                 descricao: dados.descricao,
                                 remuneracao: dados.remuneracao,
-                                status: dados.status
+                                servico_status: 'aberto'
                             });
                         })
                     }
@@ -295,13 +302,22 @@ const HomeFreelancer = () => {
                     </div>
                 </article>
 
+                {/* Servicos */}
                 {servicosAdequados[0] &&
-                    <article className="sh-main-servicos" id='sh_ultimas_postagens'>
-                        <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Para você</h2>
-                        <div className="sh-servicos-lista-container">
-                            <ServicosAdequados data={servicosAdequados} />
-                        </div>
-                    </article>
+                    // <article className="sh-main-servicos" id='sh_ultimas_postagens'>
+                    //     <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Para você</h2>
+                    //     <div className="sh-servicos-lista-container">
+                    //         <ServicosAdequados data={servicosAdequados} />
+                    //     </div>
+                    // </article>
+
+
+                    < ListaServicos
+                        servicos={servicosAdequados}
+                        tituloDaSessao="Para você"
+                        setLoading={setLoading}
+                        setMostraAlert={false}
+                    />
                 }
 
                 <article className="sh-show sh-main-planos" id='sh_planos'>
