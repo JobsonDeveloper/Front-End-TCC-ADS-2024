@@ -84,7 +84,7 @@ function App() {
         });
 
         const response = await requsicao.json();
-        
+
 
         if (response) {
           const servicos = response.dataServico;
@@ -104,7 +104,8 @@ function App() {
               tag: dados.tipo,
               descricao: dados.descricao,
               remuneracao: dados.remuneracao,
-              servico_status: 'aberto'
+              servico_status: 'aberto',
+              tipo_servico: 'ultimos'
             });
           })
 
@@ -327,7 +328,7 @@ function App() {
             <Servicos data={ultimosServicos} />
           </div>
         </article> */}
-        
+
         {/* Servicos */}
         <ListaServicos
           servicos={ultimosServicos}

@@ -10,7 +10,6 @@ import Duvidas from "../duvidas/Duvidas";
 import { Accordion } from "react-bootstrap";
 import { Alert, Paper, TextField } from "@mui/material";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-
 import backgroundApresentacaoUm from '../../assets/FreelaHome/backgrounds/background-apresentacao-lg.webp'
 import backgroundApresentacaoDois from '../../assets/FreelaHome/backgrounds/imagem-apresentacao.webp'
 import backgroundApresentacaoMd from '../../assets/FreelaHome/backgrounds/background-apresentacaoMd.png'
@@ -20,12 +19,9 @@ import ServicosAdequados from "../../components/servicosAdequados/ServicosAdequa
 import Planos from "../../components/planos/Planos";
 import ListaServicos from "../../components/listaServicos/ListaServicos";
 
-const ultimosServicos: any = [];
-
+const todosOsServicos: any = [];
 const profDestaque: any = [];
-
 const cliDestaque: any = [];
-
 const servicosAdequados: any = [];
 
 const ShAlert = () => {
@@ -65,7 +61,6 @@ const HomeFreelancer = () => {
     const pagina = useNavigate();
     const [mostrarAlert, setMostrarAlert] = useState(false);
     const [loading, setLoading] = useState(true);
-
 
     function formatData(data: any) {
         let dataFormatUm = new Date(data);
@@ -164,23 +159,29 @@ const HomeFreelancer = () => {
                                 tag: dados.tipo,
                                 descricao: dados.descricao,
                                 remuneracao: dados.remuneracao,
-                                servico_status: 'aberto'
+                                servico_status: 'aberto',
                             });
                         })
                     }
                 }
 
-                if (ultimosServicos[0] === undefined) {
+                if (todosOsServicos[0] === undefined) {
                     response.dataServico.map((dados: any) => {
-                        ultimosServicos.push({
+                        todosOsServicos.push({
                             id: dados.id,
-                            clienteId: dados.cliente_id,
+                            freelancer_id: dados.frefreelancer_id,
+                            cliente_id: dados.cliente_id,
+                            data_servico: dados.data_servico,
+                            endereco_servico: dados.local_servico,
+                            servico_foto: dados.servico_foto,
+                            cliente_foto: dados.imagem_perfil,
+                            cliente_nome: dados.nome,
+                            cliente_sobrenome: dados.sobrenome,
+                            cliente_classificacao: dados.classificacao,
                             tag: dados.tipo,
-                            data: dados.data_servico,
-                            endereco: dados.local_servico,
                             descricao: dados.descricao,
                             remuneracao: dados.remuneracao,
-                            status: dados.status
+                            servico_status: 'aberto',
                         });
                     })
                 }
@@ -304,14 +305,6 @@ const HomeFreelancer = () => {
 
                 {/* Servicos */}
                 {servicosAdequados[0] &&
-                    // <article className="sh-main-servicos" id='sh_ultimas_postagens'>
-                    //     <h2 className="sh-show sh-servicos-titulo" data-aos="zoom-in">Para você</h2>
-                    //     <div className="sh-servicos-lista-container">
-                    //         <ServicosAdequados data={servicosAdequados} />
-                    //     </div>
-                    // </article>
-
-
                     < ListaServicos
                         servicos={servicosAdequados}
                         tituloDaSessao="Para você"
@@ -333,7 +326,7 @@ const HomeFreelancer = () => {
                     <h2 className="sh-show sh-todos-os-servicos-titulo" data-aos="zoom-in">Serviços</h2>
 
                     <div className="sh-todos-os-servicos-info">
-                        <ServicosDisponiveis data={ultimosServicos} />
+                        <ServicosDisponiveis data={todosOsServicos} />
                     </div>
                 </article>
 

@@ -140,8 +140,6 @@ const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }:
     };
 
     useEffect(() => {
-        setTimeout(() => {
-        }, 4000);
     });
 
     function redirectLogin() {
@@ -247,7 +245,7 @@ const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }:
                 </li>
             }
 
-            {/* Serviços sujeridos/todos os servicos (Freelancer) */}
+            {/* Serviços adequados */}
             {servico.servico_status === 'aberto' && tipo_usuario === '0' &&
                 <li className="sh-servicosItem" key={servico.id} onClick={(e) => detalhesServico(e, servico.id)}>
                     <ul className="sh-servicosItem-lista">
@@ -284,8 +282,6 @@ const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }:
                     </ul>
                 </li>
             }
-
-
         </>
     );
 

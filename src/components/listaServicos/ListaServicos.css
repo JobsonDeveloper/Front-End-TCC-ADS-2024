@@ -24,6 +24,9 @@
 & .sh-servicos {
   width: 100%;
   margin: var(--sh-ListaServicos-margin);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
   & .sh-servicos-titulo {
     text-align: center;

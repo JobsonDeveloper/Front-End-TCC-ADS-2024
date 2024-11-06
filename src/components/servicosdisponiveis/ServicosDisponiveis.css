@@ -25,7 +25,7 @@
 
     & .sh-servicosFreela-lista {
         list-style-type: none;
-        padding: 5px 5px 25px;
+        padding: 15px;
         margin: 0;
         display: flex;
         overflow-x: auto;
@@ -34,7 +34,6 @@
         background-repeat: no-repeat;
         background-size: cover;
         width: 100%;
-        min-height: 210px;
 
         &::-webkit-scrollbar {
             background-color: transparent;
@@ -45,7 +44,7 @@
             background-color: transparent;
         }
 
-        & .sh-servicosFreela-itens {
+        /* & .sh-servicosFreela-itens {
             text-decoration: none;
             display: flex;
             flex-direction: column;
@@ -87,7 +86,6 @@
                     font-size: var(--sh-servicosFreela-font-size-textos);
                     margin: 0;
 
-                    /* Limitar tamanho de texto */
                     overflow: hidden;
                     text-overflow: ellipsis;
                     display: -webkit-box;
@@ -103,9 +101,128 @@
                     font-weight: 600;
                 }
             }
+        } */
+        & .sh-todosServicosItem {
+            width: 300px;
+            /* overflow: hidden; */
+            border-radius: 5px;
+            box-shadow: 3px 3px 7px #000;
+            cursor: pointer;
+
+
+            & .sh-todosServicosItem-lista {
+                background-color: var(--sh-ListaServicos-cor-primaria);
+                list-style-type: none;
+                padding: 0;
+                border-radius: 5px;
+                height: 100%;
+
+                & .sh-servicosLista-item {
+
+                    & .sh-servicosLista-imagem {
+                        width: 300px;
+                        border-radius: 5px 5px 0 0;
+
+                    }
+                }
+
+                & .sh-servicosLista-fotoServico {
+                    height: 170px;
+                    overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    border-radius: 5px 5px 0 0;
+                }
+
+                & .sh-servicosLista-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 2px 5px;
+
+                    & .sh-servicosLista-fotoNome {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+
+                        & .sh-servicosLista-clienteImg {
+                            width: 40px;
+                        }
+
+                        & .sh-servicosLista-nomeCliente {
+                            margin: 0;
+                            /* Limitar tamanho de texto */
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
+                            max-width: 180px;
+                            height: max-content;
+                        }
+                    }
+
+
+                    & .sh-servicosLista-classificacao {
+                        height: max-content;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        & .sh-servicosLista-classificacaoImg {
+                            width: 23px;
+                        }
+
+                        & .sh-servicosLista-classificacaoNumero {
+                            margin: 0;
+                        }
+                    }
+                }
+
+                & .sh-servicosLista-main {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px 5px;
+                    height: 140px;
+
+                    & .sh-servicosLista-tipoServico {
+                        margin: 0;
+                        font-size: var(--sh-ListaServicos-font-size-textos);
+                        color: var(--sh-ListaServicos-cor-terciaria);
+                        font-weight: bold;
+                    }
+
+                    & .sh-servicosLista-descricaoServico {
+                        margin: 0;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 4;
+                        -webkit-box-orient: vertical;
+                        max-width: 100%;
+                        height: max-content;
+                    }
+                }
+
+                & .sh-servicosLista-footer {
+                    display: flex;
+                    padding: 5px;
+                    background-color: var(--sh-ListaServicos-cor-background-components);
+                    border-radius: 0 0 5px 5px;
+
+                    & .sh-servicosLista-remuneracao {
+                        margin: 0;
+                        font-size: var(--sh-ListaServicos-font-size-textos);
+                        font-weight: 500;
+                        color: var(--sh-ListaServicos-cor-primaria);
+                    }
+                }
+            }
         }
 
-        & .sh-servicosAdequados-filtro {}
+        & .sh-todosServicosItem:hover {
+            box-shadow: none;
+        }
     }
 }
 
@@ -116,16 +233,16 @@
             grid-template-columns: 1fr 1fr 1fr;
             overflow-x: hidden;
             overflow-y: auto;
-            max-height: 400px;
             justify-content: center;
+            max-height: 820px;
 
             &::-webkit-scrollbar {
-                background-color: #ffffff62;
+                background-color: transparent;
                 width: 10px;
             }
 
             &::-webkit-scrollbar-thumb {
-                background-color: var(--sh-servicosFreela-cor-background-components);
+                background-color: #bcbcbc68;
             }
         }
     }
@@ -141,14 +258,6 @@
     animation: alertsAnim 4s linear;
 }
 
-@media (min-width: 992px) {
-    & .sh-span-servicos-filtro {
-        & .sh-servicosFreela-lista {
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-        }
-    }
-}
-
 @media (min-width: 1400px) {
     & .sh-span-servicos-filtro {
 
@@ -156,6 +265,7 @@
             width: 1400px;
             border-radius: 5px;
             justify-items: center;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
         }
     }
 }

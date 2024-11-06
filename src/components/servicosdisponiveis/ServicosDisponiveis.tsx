@@ -8,7 +8,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import { Padding } from '@mui/icons-material';
 import Loading from '../loading/Loading';
 import imgEstrelas from '../../assets/icons/estrela.svg';
-
+import { ArrayBindingElement } from 'typescript';
 
 const styledTextField = {
     '& .MuiInputBase-input': {
@@ -70,13 +70,14 @@ const styledDialogService = {
 
 }
 
-const ServicosDisponiveis = ({ data }: any, { tipolista }: any) => {
+const ServicosDisponiveis = ({ data }: any) => {
     const [open, setOpen] = useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const usuario = sessionStorage.getItem('shUserLogTipo');
     const [busca, setBusca] = useState('');
     const pagina = useNavigate();
+    let dadosFiltrados: Array<object> = [];
 
     function formatData(data: any) {
         let dataFormatUm = new Date(data);
@@ -139,10 +140,9 @@ const ServicosDisponiveis = ({ data }: any, { tipolista }: any) => {
         tipo = servico.tag;
         descricao = servico.descricao;
         if (servico.data) { diaServico = formatData(servico.data) }
-        local = servico.endereco;
+        local = servico.endereco_servico;
         remuneracao = servico.remuneracao;
-        tipoRemuneracao = servico.tipoDeRemuneracao;
-        clienteId = servico.clienteId;
+        clienteId = servico.cliente_id;
 
         dadosCliente();
 
@@ -151,7 +151,7 @@ const ServicosDisponiveis = ({ data }: any, { tipolista }: any) => {
             try {
                 const formData = new FormData();
                 formData.append('acao', 'dados_cliente_servico');
-                formData.append('cliId', clienteId);
+                formData.append('cliId', `${clienteId}`);
 
                 const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
                     method: 'POST',
@@ -162,9 +162,10 @@ const ServicosDisponiveis = ({ data }: any, { tipolista }: any) => {
                 const response = await request.json();
 
                 if (response) {
-                    clienteClassificacao = response.data.classificacao;
-                    clienteDataCriacao = formatData(response.data.data_de_criacao);
-                    setOpen(true);
+                    // clienteClassificacao = response.data.classificacao;
+                    // clienteDataCriacao = formatData(response.data.data_de_criacao);
+                    // setOpen(true);
+                    console.log(response)
                 }
             }
             catch (error) {
@@ -177,26 +178,26 @@ const ServicosDisponiveis = ({ data }: any, { tipolista }: any) => {
         setOpen(false);
     };
 
-    const dadosFiltrados = data.filter((info: any) => info.tag.toLowerCase().includes(busca.toLowerCase()));
+    dadosFiltrados = data.filter((info: any) => info.tag.toLowerCase().includes(busca.toLowerCase()));
 
     useEffect(() => {
         Aos.init({ duration: 500 });
     })
 
-    const listaServicos = data.map((servico: any, index: any) =>
-        <li key={index} className="sh-servicosFreela-itens" data-aos="flip-left" onClick={(() => { mostrarDetalhes(servico) })}>
-            <div className="sh-itens-data">
-                <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />
-                <p className="sh-servicosFreela-data-marcador">{servico.tag}</p>
-            </div>
-            <div className="sh-itens-data">
-                <p className="sh-servicosFreela-data-descricao">{servico.descricao}</p>
-            </div>
-            {servico.remuneracao && <div className="sh-itens-data">
-                <p className="sh-servicos-data-remuneracao">R${servico.remuneracao},00 reais</p>
-            </div>}
-        </li>
-    );
+    // const listaServicos = data.map((servico: any, index: any) =>
+    //     <li key={index} className="sh-servicosFreela-itens" data-aos="flip-left" onClick={(() => { mostrarDetalhes(servico) })}>
+    //         <div className="sh-itens-data">
+    //             <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />
+    //             <p className="sh-servicosFreela-data-marcador">{servico.tag}</p>
+    //         </div>
+    //         <div className="sh-itens-data">
+    //             <p className="sh-servicosFreela-data-descricao">{servico.descricao}</p>
+    //         </div>
+    //         {servico.remuneracao && <div className="sh-itens-data">
+    //             <p className="sh-servicos-data-remuneracao">R${servico.remuneracao},00 reais</p>
+    //         </div>}
+    //     </li>
+    // );
 
     return (
         <>
@@ -217,18 +218,39 @@ const ServicosDisponiveis = ({ data }: any, { tipolista }: any) => {
                 <ul className="sh-show sh-servicosFreela-lista">
 
                     {dadosFiltrados.map((dado: any) =>
-                        <li key={`${dado.tag} ${dado.id}`} className="sh-servicosFreela-itens" data-aos="flip-left" onClick={(() => { mostrarDetalhes(dado) })}>
-                            <div className="sh-itens-data">
-                                <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />
-                                <p className="sh-servicosFreela-data-marcador">{dado.tag}</p>
-                            </div>
-                            <div className="sh-itens-data">
-                                <p className="sh-servicosFreela-data-descricao">{dado.descricao}</p>
-                            </div>
-                            {dado.remuneracao && <div className="sh-itens-data">
-                                <p className="sh-servicos-data-remuneracao">R${dado.remuneracao},00 reais</p>
-                            </div>}
-                        </li>
+                        <>
+                             <li className="sh-todosServicosItem" key={`${dado.tag} ${dado.id}`} onClick={(() => { mostrarDetalhes(dado) })}>
+                                <ul className="sh-todosServicosItem-lista">
+                                    <li className="sh-servicosLista-item sh-servicosLista-fotoServico">
+                                        {dado.servico_foto &&
+                                            <img src={dado.servico_foto} className="sh-servicosLista-imagem" alt="Imgagem do serviço a ser realizado" />
+                                        }
+                                    </li>
+                                    <li className="sh-servicosLista-item sh-servicosLista-header">
+                                        <div className="sh-servicosLista-fotoNome">
+                                            {dado.cliente_foto &&
+                                                <img src={dado.cliente_foto} alt="Imagem de perfil do cliente" className="sh-servicosLista-clienteImg" />
+                                            }
+                                            {!dado.cliente_foto &&
+                                                <img src={fotoPadrao} alt="Imagem de perfil do cliente" className="sh-servicosLista-clienteImg" />
+                                            }
+                                            <p className="sh-servicosLista-nomeCliente">{dado.cliente_nome} {dado.cliente_sobrenome}</p>
+                                        </div>
+                                        <div className="sh-servicosLista-classificacao">
+                                            <img src={imgEstrelas} alt="" className="sh-servicosLista-classificacaoImg" />
+                                            <p className="sh-servicosLista-classificacaoNumero">{dado.cliente_classificacao}</p>
+                                        </div>
+                                    </li>
+                                    <li className="sh-servicosLista-item sh-servicosLista-main">
+                                        <p className="sh-servicosLista-tipoServico">{dado.tag}</p>
+                                        <p className="sh-servicosLista-descricaoServico">{dado.descricao}</p>
+                                    </li>
+                                    <li className="sh-servicosLista-item sh-servicosLista-footer">
+                                        <p className="sh-servicosLista-remuneracao">R${dado.remuneracao},00 reais</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </>
                     )}
 
                     <Dialog
