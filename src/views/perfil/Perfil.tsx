@@ -20,6 +20,7 @@ import Servicos from "../../components/servicos/Servicos";
 import Footer from "../../components/footer/Footer";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import HeaderPerfilFreela from "../../components/headerPerfilFreela/HeaderPerfilFreela";
 
 const ShAlert = () => {
     return (
@@ -151,6 +152,7 @@ let mensagemAlert = "";
 let tipoAlert = 0;
 let userId: string | null = "";
 let userTipo: string | null = "";
+let tipoUsuario:string | null = "";
 
 const servicosAceitos: any = [];
 const servicosFinalizados: any = [];
@@ -188,6 +190,7 @@ const Perfil = () => {
         'Reparo de Microondas',
         'Reparo de Console'
     ];
+
     const [servicoTipo, setServicoTipo] = useState('');
     const [servicoData, setServicoData] = useState('');
     const [servicoDescricao, setServicoDescricao] = useState('');
@@ -209,11 +212,10 @@ const Perfil = () => {
             }, 4000);
         }
         else {
+            tipoUsuario = sessionStorage.getItem('shUserLogTipo');
             pegaDados();
         }
     }, []);
-
-
 
     const logout = () => {
         tipoAlert = 0;
@@ -624,7 +626,11 @@ const Perfil = () => {
         <main className="sh-perfil">
             {loading && <Loading />}
 
-            <header className="sh-perfil-header">
+            <HeaderPerfilFreela 
+            setMostrarAlert={setMostrarAlert} 
+            />
+
+            {/* <header className="sh-perfil-header">
                 <div className="sh-perfil-header-logo">
                     <img src={logoImg} alt="" />
                 </div>
@@ -954,7 +960,7 @@ const Perfil = () => {
                 <div className="sh-footer">
                     <Footer />
                 </div>
-            </footer>
+            </footer> */}
 
             {mostrarAlert &&
                 <div className="sh-alerts">

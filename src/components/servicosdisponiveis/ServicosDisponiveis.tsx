@@ -1,6 +1,6 @@
 import './ServicosDisponiveis.css';
 import Aos from 'aos';
-import React, { useEffect, useState } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import fotoPadrao from '../../assets/FreelaHome/icons/icon-perfil.png';
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField, useMediaQuery, useTheme } from '@mui/material';
@@ -17,6 +17,124 @@ const styledTextField = {
         color: '#000'
     },
 };
+
+let dadosServico = {
+    servico_id: '',
+    servico_tipo: '',
+    servico_foto: '',
+    servico_descricao: '',
+    servico_remuneracao: '',
+    servico_local: '',
+    cliente_id: '',
+    cliente_foto: '',
+    cliente_nome: '',
+    cliente_sobrenome: '',
+    cliente_classificacao: ''
+};
+
+const servicosAdequadosStyle = {
+    '& .sh-servico-dialog-dados': {
+
+        '& .sh-dialog-imagem': {
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+
+            '& .sh-dialog-imagem-servico': {
+                width: '260px'
+            },
+
+            '& .sh-dialog-dados': {
+                display: 'flex',
+                flexDirection: 'column',
+                listStyleType: 'none',
+                padding: '0',
+
+                '& .sh-dialog-dados-tipo-servico': {
+                    fontSize: '1.2rem',
+                    marginBottom: '15px',
+                    fontWeight: '600'
+                },
+
+                '& .sh-dialog-dados-titulo': {
+                    fontSize: '1.1rem',
+                    fontWeight: '500'
+                },
+
+                '& .sh-dialog-dados-texto': {
+                    fontSize: '.9rem',
+                    fontWeight: '400',
+                    marginBottom: '20px'
+                }
+            }
+        },
+
+        '& .sh-servico-dados-cliente': {
+            display: 'flex',
+            gap: '20px',
+            marginBottom: '20px',
+            // borderBottom: '1px solid #bdbdbd',
+            paddingBottom: '8px',
+
+            '& .sh-dialog-imagem-cliente': {
+                width: '35px'
+            },
+
+            '& .sh-dialog-nome-cliente': {
+                display: 'flex',
+                alignItems: 'center'
+            },
+
+            '& .sh-dialog-classificacao-cliente': {
+                display: 'flex',
+                gap: '5px',
+
+                '& .sh-dialog-classificacao-img': {
+                    width: '20px'
+                },
+
+                '& .sh-dialog-classificacao-numero': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontSize: '.9rem',
+                }
+            }
+        },
+
+        '& .sh-servico-subtitulo': {
+            fontSize: '1.1rem',
+            fontWeight: '500'
+        }
+    },
+
+    '@media (min-width: 992px)': {
+        '& .sh-servico-dialog-dados': {
+
+            '& .sh-dialog-imagem': {
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '10px',
+
+                '& .sh-dialog-dados': {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    listStyleType: 'none',
+                    padding: '0',
+
+                    '& .sh-dialog-dados-titulo': {
+                        fontSize: '1.1rem',
+                        fontWeight: '500'
+                    },
+
+                    '& .sh-dialog-dados-texto': {
+                        fontSize: '.9rem',
+                        fontWeight: '400'
+                    },
+                }
+            }
+        }
+    }
+}
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -96,21 +214,21 @@ const ServicosDisponiveis = ({ data }: any) => {
         return (`${dia}/${mes}/${ano}`);
     }
 
-    async function aceitaServico(e: any) {
+    async function aceitaServico(e:MouseEvent, servicoId:string) {
         e.preventDefault();
         setOpen(false);
-        if (sessionStorage.getItem('shFreelaLimite') != "0") {
 
+        if (sessionStorage.getItem('shFreelaLimite') != "0") {
             try {
                 let limiteSession: any = sessionStorage.getItem('shFreelaLimite');
-                let limite: any = parseInt(limiteSession);
+                let limite: any = parseInt(limiteSession) - 1;
+                let freelaId = sessionStorage.getItem('shUserLogId');
 
                 const formData = new FormData();
                 formData.append('acao', 'freelaAceitaServico');
-                formData.append('idServico', idServico);
-                formData.append('idFreela', `${sessionStorage.getItem('shUserLogId')}`);
-                formData.append('limiteFreela', `${limite - 1}`);
-
+                formData.append('idServico', `${servicoId}`);
+                formData.append('idFreela', `${freelaId}`);
+                formData.append('limiteFreela', `${limite}`);
 
                 const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
                     method: 'POST',
@@ -133,46 +251,93 @@ const ServicosDisponiveis = ({ data }: any) => {
                 console.error(error);
             }
         }
+        else {
+            window.location.reload();
+        }
+
     }
 
-    const mostrarDetalhes = (servico: any) => {
-        idServico = servico.id;
-        tipo = servico.tag;
-        descricao = servico.descricao;
-        if (servico.data) { diaServico = formatData(servico.data) }
-        local = servico.endereco_servico;
-        remuneracao = servico.remuneracao;
-        clienteId = servico.cliente_id;
+    // const mostrarDetalhes = (servico: any) => {
+    //     idServico = servico.id;
+    //     tipo = servico.tag;
+    //     descricao = servico.descricao;
+    //     if (servico.data) { diaServico = formatData(servico.data) }
+    //     local = servico.endereco_servico;
+    //     remuneracao = servico.remuneracao;
+    //     clienteId = servico.cliente_id;
 
-        dadosCliente();
+    //     dadosCliente();
 
-        async function dadosCliente() {
+    //     async function dadosCliente() {
 
-            try {
-                const formData = new FormData();
-                formData.append('acao', 'dados_cliente_servico');
-                formData.append('cliId', `${clienteId}`);
+    //         try {
+    //             const formData = new FormData();
+    //             formData.append('acao', 'dados_cliente_servico');
+    //             formData.append('cliId', `${clienteId}`);
 
-                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-                    method: 'POST',
-                    mode: 'cors',
-                    body: formData
-                });
+    //             const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+    //                 method: 'POST',
+    //                 mode: 'cors',
+    //                 body: formData
+    //             });
 
-                const response = await request.json();
+    //             const response = await request.json();
 
-                if (response) {
-                    // clienteClassificacao = response.data.classificacao;
-                    // clienteDataCriacao = formatData(response.data.data_de_criacao);
-                    // setOpen(true);
-                    console.log(response)
-                }
+    //             if (response) {
+    //                 // clienteClassificacao = response.data.classificacao;
+    //                 // clienteDataCriacao = formatData(response.data.data_de_criacao);
+    //                 // setOpen(true);
+    //                 console.log(response)
+    //             }
+    //         }
+    //         catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    // };
+
+    async function detalhesServico(e: MouseEvent, servicoId: number) {
+        e.preventDefault();
+
+        try {
+            const formData = new FormData();
+            formData.append('acao', 'dados_servico_aberto');
+            formData.append('servicoId', `${servicoId}`);
+
+            const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                method: 'POST',
+                mode: 'cors',
+                body: formData
+            });
+
+            const response = await request.json();
+
+            if (response) {
+                const dados = response.data;
+
+                dadosServico = {
+                    servico_id: dados.id,
+                    servico_tipo: dados.tipo,
+                    servico_foto: dados.servico_foto,
+                    servico_descricao: dados.descricao,
+                    servico_remuneracao: dados.remuneracao,
+                    servico_local: dados.local_servico,
+                    cliente_id: dados.cliente_id,
+                    cliente_foto: dados.imagem_perfil,
+                    cliente_nome: dados.nome,
+                    cliente_sobrenome: dados.sobrenome,
+                    cliente_classificacao: dados.classificacao
+                };
             }
-            catch (error) {
-                console.error(error);
+            else {
+                console.log('Erro de requisição!');
             }
+        } catch (error) {
+            console.log(error)
         }
-    };
+
+        setOpen(true);
+    }
 
     const handleClose = () => {
         setOpen(false);
@@ -219,7 +384,7 @@ const ServicosDisponiveis = ({ data }: any) => {
 
                     {dadosFiltrados.map((dado: any) =>
                         <>
-                             <li className="sh-todosServicosItem" key={`${dado.tag} ${dado.id}`} onClick={(() => { mostrarDetalhes(dado) })}>
+                            <li className="sh-todosServicosItem" key={`${dado.tag} ${dado.id}`} onClick={((e) => { detalhesServico(e, dado.id) })}>
                                 <ul className="sh-todosServicosItem-lista">
                                     <li className="sh-servicosLista-item sh-servicosLista-fotoServico">
                                         {dado.servico_foto &&
@@ -258,66 +423,58 @@ const ServicosDisponiveis = ({ data }: any) => {
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="responsive-dialog-title"
-                        sx={styledDialogService}
+                        sx={servicosAdequadosStyle}
                     >
-                        <DialogTitle id="responsive-dialog-title" className='sh-servico-dialog-titulo'>
-                            {tipo}
-                        </DialogTitle>
+                        {/* <DialogTitle id="responsive-dialog-title" className='sh-servico-dialog-titulo'>
+                        {dadosServico.servico_tipo}
+                    </DialogTitle> */}
                         <DialogContent className='sh-servico-dialog-dados'>
-                            <DialogContentText className="sh-servico-subtitulos">
-                                Descrição
-                            </DialogContentText>
-                            <DialogContentText className="sh-servico-dados">
-                                {descricao}
+
+                            <DialogContentText className="sh-servico-subtitulos sh-dialog-imagem">
+                                <img src={dadosServico.servico_foto} alt="Foto do serviço" className="sh-dialog-imagem-servico" />
+
+                                <ul className="sh-dialog-dados">
+                                    <li className="sh-dialog-dados-tipo-servico">{dadosServico.servico_tipo}</li>
+                                    <li className="sh-dialog-dados-titulo">Local do serviço</li>
+                                    <li className="sh-dialog-dados-texto">{dadosServico.servico_local}</li>
+                                    <li className="sh-dialog-dados-titulo">Remuneração</li>
+                                    <li className="sh-dialog-dados-texto">R${dadosServico.servico_remuneracao},00 reais</li>
+                                </ul>
                             </DialogContentText>
 
-                            <DialogContentText className="sh-servico-subtitulos">
-                                Data
-                            </DialogContentText>
-                            {!diaServico &&
-                                <DialogContentText className="sh-servico-dados">
-                                    Sem data marcada
-                                </DialogContentText>
-                            }
-                            {diaServico &&
-                                <DialogContentText className="sh-servico-dados">
-                                    {diaServico}
-                                </DialogContentText>
-                            }
+                            <DialogContentText className="sh-servico-dados-cliente">
+                                <div className="sh-dialog-imagem-cliente">
+                                    {dadosServico.cliente_foto &&
+                                        <img src={dadosServico.cliente_foto} alt="" />
+                                    }
 
-                            <DialogContentText className="sh-servico-subtitulos">
-                                Endereço
-                            </DialogContentText>
-                            <DialogContentText className="sh-servico-dados">
-                                {local}
+                                    {!dadosServico.cliente_foto &&
+                                        <img src={fotoPadrao} alt="" />
+                                    }
+                                </div>
+                                <div className="sh-dialog-nome-cliente">{dadosServico.cliente_nome} {dadosServico.cliente_sobrenome}</div>
+                                <div className="sh-dialog-classificacao-cliente">
+                                    <img src={imgEstrelas} alt="" className="sh-dialog-classificacao-img" />
+                                    <div className="sh-dialog-classificacao-numero">
+                                        {dadosServico.cliente_classificacao}
+                                    </div>
+                                </div>
                             </DialogContentText>
 
-                            <DialogContentText className="sh-servico-subtitulos">
-                                Remuneração
-                            </DialogContentText>
-                            <DialogContentText className="sh-servico-dados">
-                                R${remuneracao} reais
+                            <DialogContentText className="sh-servico-subtitulo">
+                                Descrição do serviço
                             </DialogContentText>
 
-                            <DialogContentText className="sh-servico-subtitulos">
-                                Cliente desde
-                            </DialogContentText>
-                            <DialogContentText className="sh-servico-dados">
-                                {clienteDataCriacao}
-                            </DialogContentText>
-
-                            <DialogContentText className="sh-servico-subtitulos">
-                                Classificação
-                            </DialogContentText>
-                            <DialogContentText className="sh-servico-dados">
-                                <img src={imgEstrelas} className='sh-dialog-estrelas' />{clienteClassificacao}
+                            <DialogContentText className="sh-servico-textos">
+                                {dadosServico.servico_descricao}
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose}>
+                            <Button onClick={() => { setOpen(false) }}>
                                 Voltar
                             </Button>
-                            <Button autoFocus onClick={((e) => { aceitaServico(e) })}>
+
+                            <Button autoFocus onClick={((e) => { aceitaServico(e, dadosServico.servico_id) })}>
                                 Aceitar
                             </Button>
                         </DialogActions>

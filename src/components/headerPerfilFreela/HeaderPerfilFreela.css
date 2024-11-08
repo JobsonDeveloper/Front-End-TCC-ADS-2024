@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+
+  --sh-header-font-size-textos: 1rem;
+
+  --sh-index-font-family: "Nunito", sans-serif;
+
+  --sh-header-cor-primaria: #fff;
+  --sh-header-cor-secundaria: #0075FF;
+  --sh-header-cor-terciaria: #000;
+  --sh-header-cor-textos: #6F6F6F;
+  --sh-header-cor-textos-hover: #2c2c2c;
+  --sh-header-cor-background-blue: #356FB0;
+
+  --sh-header-padding: 5px;
+}
+
+.sh-header {
+  padding: var(--sh-header-padding);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  font-family: var(--sh-index-font-family);
+  overflow: hidden;
+
+  & .sh-header-options {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 5px;
+    padding: 5px 7px;
+    list-style-type: none;
+    border: 1px solid #5f5f5f5a;
+    z-index: 2;
+    position: relative;
+
+    & .sh-options-itens {
+      height: max-content;
+      width: max-content;
+
+      & .sh-options-login {
+        color: var(--sh-header-cor-terciaria);
+        font-size: var(--sh-header-font-size-textos);
+        text-decoration: none;
+      }
+
+      & .sh-options-img {
+        width: 35px;
+      }
+
+      & .sh-lg-logo-img {
+        width: 130px;
+      }
+    }
+  }
+
+  & .sh-desktop-logo {
+
+    & .sh-logo-img {
+      width: 150px;
+    }
+  }
+
+  & .sh-alerts {
+    width: max-content;
+    padding: 2px;
+    position: absolute;
+    top: 0;
+    right: -100%;
+    z-index: 1050;
+    animation: alertsAnim 4s linear;
+  }
+}
+
+/* Logo e opções de navegação para celulares */
+.sh-header-offcanvas {
+
+  & .sh-offcanvas-element {
+    border-bottom: 1px solid var(--sh-header-cor-primaria);
+    background-color: var(--sh-header-cor-secundaria);
+
+    & .sh-lg-header-title {
+      font-size: var(--sh-header-font-size-textos);
+      color: var(--sh-header-cor-primaria);
+      font-weight: 700;
+      font-family: var(--sh-index-font-family);
+
+      & .sh-logo-img {
+        width: 70px;
+      }
+    }
+  }
+
+  & .sh-header-offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--sh-header-cor-background-blue);
+
+    & .sh-header-navegacao {
+      display: flex;
+      flex-direction: column;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      row-gap: 15px;
+
+      & .sh-navegacao-item {
+        font-size: var(--sh-font-size-textos-header);
+        color: var(--sh-cor-textos);
+        align-items: center;
+        display: flex;
+
+        & .sh-item-text {
+          width: max-content;
+          cursor: pointer;
+          font-weight: 300;
+          transition: .5s;
+          text-decoration: none;
+          color: var(--sh-header-cor-primaria);
+          font-size: var(--sh-header-font-size-textos);
+          font-family: var(--sh-index-font-family);
+          background: none;
+          padding: 0;
+          opacity: 1;
+        }
+
+      }
+    }
+  }
+
+  & .sh-item-text {
+    margin: 0;
+    color: var(--sh-header-cor-textos);
+    font-size: var(--sh-header-font-size-textos);
+    cursor: pointer;
+  }
+
+  & .sh-perfil-icon {
+    color: var(--sh-header-cor-terciaria);
+  }
+}
+
+@media (min-width: 576px) {
+  :root {
+    --sh-header-font-size-textos: 1.2rem;
+  }
+
+
+  & .sh-header {
+    & .sh-header-options {
+      & .sh-options-itens {
+        & .sh-lg-logo-img {
+          width: 145px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --sh-header-font-size-textos: 1rem;
+    --sh-header-padding: 5px 10px;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --sh-header-padding: 10px;
+    --sh-header-font-size-textos: .9rem;
+    --sh-header-font-size-titulos: 1.5rem;
+    --sh-header-font-size-subtitulos: 1.2rem;
+  }
+
+  .sh-header {
+    padding: var(--sh-header-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  .sh-header-offcanvas {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    background-color: var(--sh-header-cor-primaria);
+
+    & .sh-offcanvas-element {
+
+      & .sh-lg-header-title {
+        font-size: var(--sh-font-size-textos-header);
+
+        & .sh-logo-img {
+          width: 70px;
+        }
+      }
+    }
+
+    & .sh-header-offcanvas-body {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      & .sh-header-navegacao {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        column-gap: 26px;
+
+        & .sh-navegacao-item {
+          font-size: var(--sh-font-size-textos-header);
+          color: var(--sh-cor-textos);
+          display: flex;
+          align-items: center;
+
+          & .sh-item-text {
+            width: max-content;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: .5s;
+            text-decoration: none;
+            color: var(--sh-header-cor-textos);
+            font-size: var(--sh-header-font-size-textos);
+            font-weight: 500;
+
+            &:hover {
+              color: var(--sh-cor-textos-hover);
+              border-color: var(--sh-cor-secundaria);
+            }
+          }
+
+        }
+      }
+    }
+
+    & .sh-header-option-dois {
+      display: flex;
+      flex-direction: row;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      column-gap: 26px;
+      align-items: center;
+
+      & .sh-navegacao-item {
+        font-size: var(--sh-font-size-textos-header);
+        color: var(--sh-cor-textos);
+        display: flex;
+        align-items: center;
+
+        & .sh-item-text {
+          width: max-content;
+          border: none;
+          background-color: transparent;
+          outline: none;
+          border-bottom: 2px solid transparent;
+          cursor: pointer;
+          transition: .5s;
+          text-decoration: none;
+          color: var(--sh-header-cor-textos);
+          font-size: var(--sh-header-font-size-textos);
+          border-bottom: 2px solid transparent;
+
+          &:hover {
+            color: var(--sh-cor-textos-hover);
+            border-color: var(--sh-header-cor-terciaria);
+          }
+        }
+      }
+    }
+
+
+  }
+
+  & .sh-modal-register {
+
+    & .modal-lg,
+    .modal-xl {
+      width: max-content;
+
+      & .modal-content {
+        border-radius: 5px;
+        background-color: transparent;
+
+        & .sh-modal-header-register {
+          background-color: var(--sh-header-cor-primaria);
+          padding: 5px 10px;
+          gap: 20px;
+
+          & .sh-modal-header-text {
+            color: var(--sh-header-cor-terciaria);
+            font-size: var(--sh-header-font-size-subtitulos);
+          }
+        }
+
+        & .sh-modal-body-register {
+          display: flex;
+          gap: 50px;
+          background-color: var(--sh-header-cor-background-blue);
+
+          & .sh-modal-body-link {
+            border-bottom: 2px solid transparent;
+            text-decoration: none;
+            color: var(--sh-header-cor-primaria);
+            font-size: var(--sh-header-font-size-textos);
+            transition: .5s;
+
+            &:hover {
+              border-color: var(--sh-header-cor-primaria);
+            }
+          }
+        }
+
+        & .sh-modal-footer {
+          background-color: var(--sh-header-cor-background-blue);
+          border: none;
+
+          & .sh-modal-footer-button {
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-size: var(--sh-header-font-size-textos);
+            color: var(--sh-header-cor-primaria);
+            border-radius: 0px;
+            transition: .5s;
+            padding: 0;
+
+            &:hover {
+              border-color: var(--sh-header-cor-primaria);
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+@media (min-width: 1400px) {
+  .sh-header {
+    width: 1400px;
+  }
+}
