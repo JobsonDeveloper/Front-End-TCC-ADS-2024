@@ -53,6 +53,10 @@ const HeaderPerfilFreela = ({ setMostrarAlert }: any) => {
                 <li className="sh-options-itens">
                     <img src={Logo} alt="Logo da SkillHub" className='sh-lg-logo-img' />
                 </li>
+
+                <li className="sh-options-itens">
+                    <img src={Logo} alt="Logo da SkillHub" className='sh-lg-logo-img' />
+                </li>
             </ul>
 
             <Offcanvas show={show} onHide={handleClose} responsive="lg" className='sh-header-offcanvas'>

@@ -1,0 +1,83 @@
+:root {
+    --sh-profissionais-font-family: "Roboto", sans-serif;
+    --sh-profissionais-cor-primaria: #fff;
+    --sh-profissionais-cor-secundaria: #0075FF;
+    --sh-profissionais-cor-terciaria: #000;
+    --sh-profissionais-cor-quaternaria: #4198ff;
+    --sh-profissionais-cor-textos: #6F6F6F;
+    --sh-profissionais-cor-textos-hover: #2c2c2c;
+    --sh-profissionais-cor-background-components: #356FB0;
+    --sh-profissionais-font-size-titulos: 1.4rem;
+    --sh-profissionais-font-size-textos: 1rem;
+    --sh-profissionais-itens-gap-top: 45px;
+    --sh-profissionais-padding: 45px 25px 0 25px;
+}
+
+& .sh-freelaDestaque {
+    font-family: var(--sh-profissionais-font-family);
+
+    & .sh-profissionais-titulo {
+        background-color: red;
+        text-align: center;
+        width: 100%;
+        margin: 30px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-size: var(--sh-profissionais-font-size-titulos);
+        color: var(--sh-profissionais-cor-terciaria);
+    }
+
+    & .sh-freelaDestaque-lista {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        list-style-type: none;
+        background-image: url('../../assets/index/backgrounds/background-profissoes.webp');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        padding: 10px;
+        overflow-x: auto;
+        column-gap: 10px;
+
+        & .sh-freelaDestaque-item {
+            padding: 7px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 300px;
+            border-radius: 4px;
+            box-shadow: 3px 3px 6px #000;
+            background-color: var(--sh-profissionais-cor-primaria);
+
+            & .sh-freela-main {
+                display: flex;
+
+                & .sh-freela-apresentacao {
+                    font-size: var(--sh-profissionais-font-size-textos);
+                    color: var(--sh-profissionais-cor-terciaria);
+                    font-weight: 300;
+                    text-align: left;
+
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 4;
+                    -webkit-box-orient: vertical;
+                }
+            }
+
+            & .sh-freela-footer {
+                display: flex;
+
+                & .sh-freela-footer-criacao {
+                    font-size: var(--sh-profissionais-font-size-textos);
+                    font-weight: 300;
+                    text-align: left;
+                    margin: 0;
+                }
+            }
+        }
+
+    }
+}

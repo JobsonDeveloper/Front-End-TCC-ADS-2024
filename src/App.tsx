@@ -26,13 +26,14 @@ import { duration } from '@mui/material';
 import Aos from "aos";
 import "aos/dist/aos.css";
 import ListaServicos from './components/listaServicos/ListaServicos';
+import FreelancersEmDestaque from './components/freelancersEmDestaque/FreelancersEmDestaque';
 
 // ------------ Monta do banco ----------
-let ultimosServicos: any = [];
+let ultimosServicos: Array<object> = [];
 
-const profDestaque: any = [];
+const profDestaque: Array<object> = [];
 
-const cliDestaque: any = [];
+const cliDestaque: Array<object> = [];
 
 let consulta = false;
 
@@ -113,9 +114,11 @@ function App() {
             let servicosSplit = dados.servicos.split(",");
 
             profDestaque.push({
+              id: dados.id,
               fotoUrl: dados.imagem_perfil,
               nome: `${dados.nome} ${dados.sobrenome}`,
               servico: servicosSplit[0],
+              apresentacao: dados.apresentacao,
               dataCadastro: formatData(dados.data_de_criacao),
               estrelas: dados.classificacao
             });
@@ -129,7 +132,6 @@ function App() {
               estrelas: dados.classificacao
             });
           })
-
         }
 
 
@@ -138,8 +140,6 @@ function App() {
       }
     }
   }
-
-
 
   return (
     <main className='sh-container'>
@@ -228,12 +228,13 @@ function App() {
         </div>
 
         {/* Profissionais em destaque */}
-        <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
+        {/* <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
           <h2 className="sh-profissionaisEmDestaque-titulo" data-aos="zoom-in">Profissionais em destaque</h2>
           <div className="sh-profissionalEmDestaque-lista">
             <ProfissionaisEmDestaque dados={profDestaque} />
           </div>
-        </article>
+        </article> */}
+        <FreelancersEmDestaque freelancers={profDestaque}/>
 
         {/* Clientes em destaque */}
         <article className="sh-clientesEmDestaque" id='sh_clientes_emDestaque'>
