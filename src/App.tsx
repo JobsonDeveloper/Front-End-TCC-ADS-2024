@@ -120,7 +120,7 @@ function App() {
               servico: servicosSplit[0],
               apresentacao: dados.apresentacao,
               dataCadastro: formatData(dados.data_de_criacao),
-              estrelas: dados.classificacao
+              classificacao: dados.classificacao
             });
           })
 

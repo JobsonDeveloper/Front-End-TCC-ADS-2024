@@ -15,7 +15,7 @@
     --sh-clientes-padding: 45px 25px 0 25px;
 }
 
-& .sh-cliEmDestaque {
+/* & .sh-cliEmDestaque {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     padding: 25px 20px;
@@ -64,7 +64,6 @@
                 margin: 0;
                 height: max-content;
                 font-weight: 500;
-                /* text-wrap: nowrap; */
 
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -102,9 +101,10 @@
         }
     }
 
-}
+} */
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
+
     :root {
         --sh-clientes-font-size-textos: 1.2rem;
     }
@@ -164,5 +164,60 @@
     & .sh-cliEmDestaque {
         width: 1400px;
         border-radius: 5px;
+    }
+} */
+
+& .sh-cliEmDestaque {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 25px 20px;
+    justify-items: center;
+    overflow-x: auto;
+    gap: 30px;
+    justify-items: center;
+    background-image: url('../../assets/index/backgrounds/background-profissoes.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    list-style-type: none;
+
+    & .sh-cliEmDestaque-item {
+        background-color: #0075FF;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        & .sh-cliente-foto {
+            & .cliente-img {
+                width: 50px;
+            }
+        }
+
+        & .sh-cliente-dados {
+            display: flex;
+            flex-direction: column;
+
+            & .sh-cliente-nome,
+            & .sh-cliente-dataCriacao {
+                margin: 0;
+                font-size: var(--sh-clientes-font-size-textos);
+                color: var(--sh-clientes-cor-terciaria);
+                font-family: 300;
+                text-wrap: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                max-width: 180px;
+            }
+
+            & .sh-cliente-dataCriacao {
+                font-size: .9rem;
+            }
+        }
+
+        & .sh-cliente-classificacao {
+            
+        }
     }
 }

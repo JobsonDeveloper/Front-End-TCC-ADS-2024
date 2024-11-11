@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 :root {
-    --sh-profissionais-font-family: "Roboto", sans-serif;
+    --sh-profissionais-font-family: "Nunito", sans-serif;
     --sh-profissionais-cor-primaria: #fff;
     --sh-profissionais-cor-secundaria: #0075FF;
     --sh-profissionais-cor-terciaria: #000;
@@ -15,9 +17,10 @@
 
 & .sh-freelaDestaque {
     font-family: var(--sh-profissionais-font-family);
+    width: 100%;
 
     & .sh-profissionais-titulo {
-        background-color: red;
+        font-family: var(--sh-profissionais-font-family);
         text-align: center;
         width: 100%;
         margin: 30px 0;
@@ -49,9 +52,69 @@
             border-radius: 4px;
             box-shadow: 3px 3px 6px #000;
             background-color: var(--sh-profissionais-cor-primaria);
+            justify-content: space-between;
+            cursor: pointer;
+
+            &:hover {
+                box-shadow: unset;
+                background-color: #f1f1f1;
+            }
+
+            & .sh-freela-header {
+                display: flex;
+                gap: 10px;
+                justify-content: space-between;
+                align-items: center;
+
+                & .sh-freela-foto {
+                    & .sh-freela-imagem {
+                        width: 45px;
+                        height: max-content;
+                    }
+                }
+
+                & .sh-freela-nomeServico {
+                    list-style-type: none;
+                    padding: 0;
+                    width: 100%;
+
+                    & .sh-freelaNome {
+                        font-size: var(--sh-profissionais-font-size-textos);
+                        font-weight: 400;
+                    }
+
+                    & .sh-freelaServico {
+                        font-size: .9rem;
+                        font-weight: 300;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                    }
+                }
+
+                & .sh-freela-classificacao {
+                    list-style-type: none;
+                    padding: 0;
+
+                    & .sh-freela-classicicacao-img {
+                        & .sh-classificacao-img {
+                            width: 25px;
+                        }
+                    }
+                }
+
+                & .sh-freela-classificacao-numero {
+                    font-weight: 300;
+                    color: var(--sh-profissionais-cor-terciaria);
+                    text-align: center;
+                }
+            }
 
             & .sh-freela-main {
                 display: flex;
+                margin-top: 8px;
 
                 & .sh-freela-apresentacao {
                     font-size: var(--sh-profissionais-font-size-textos);
@@ -72,12 +135,31 @@
 
                 & .sh-freela-footer-criacao {
                     font-size: var(--sh-profissionais-font-size-textos);
-                    font-weight: 300;
+                    font-weight: 400;
                     text-align: left;
                     margin: 0;
                 }
             }
         }
 
+    }
+}
+
+@media (min-width: 992px) {
+    & .sh-freelaDestaque {
+        & .sh-freelaDestaque-lista {
+            grid-template-columns: 1fr 1fr 1fr;
+            row-gap: 20px;
+            justify-items: center;
+        }
+    }
+}
+
+@media (min-width: 1400px) {
+    & .sh-freelaDestaque {
+        width: 1400px;
+        & .sh-freelaDestaque-lista {
+            border-radius: 5px;
+        }
     }
 }
