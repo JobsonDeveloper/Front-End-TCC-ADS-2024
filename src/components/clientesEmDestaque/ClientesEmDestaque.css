@@ -169,7 +169,7 @@
 
 & .sh-cliEmDestaque {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    width: 100%;
     padding: 25px 20px;
     justify-items: center;
     overflow-x: auto;
@@ -185,6 +185,17 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        padding: 8px;
+        border-radius: 5px;
+        background-color: var(--sh-clientes-cor-primaria);
+        box-shadow: 3px 3px 5px #000;
+        cursor: pointer;
+        width: 270px;
+
+        &:hover {
+            box-shadow: unset;
+            background-color: #f1f1f1;
+        }
 
         & .sh-cliente-foto {
             & .cliente-img {
@@ -195,6 +206,7 @@
         & .sh-cliente-dados {
             display: flex;
             flex-direction: column;
+            flex-grow: 1;
 
             & .sh-cliente-nome,
             & .sh-cliente-dataCriacao {
@@ -208,7 +220,7 @@
                 display: -webkit-box;
                 -webkit-line-clamp: 1;
                 -webkit-box-orient: vertical;
-                max-width: 180px;
+                max-width: 163px;
             }
 
             & .sh-cliente-dataCriacao {
@@ -217,7 +229,51 @@
         }
 
         & .sh-cliente-classificacao {
-            
+            height: max-content;
+
+            & .sh-cliente-classificacao-img {
+                width: 20px;
+            }
+
+            & .sh-cliente-classificacao-numero {
+                text-align: center;
+
+                & .sh-cliente-classificacao-texto {
+                    font-size: var(--sh-clientes-font-size-textos);
+                    color: var(--sh-clientes-cor-terciaria);
+                    font-weight: 300;
+                    margin: 0;
+                }
+            }
         }
+    }
+}
+
+@media (min-width: 576px) {
+    & .sh-cliEmDestaque {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 25px 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    & .sh-cliEmDestaque {
+        row-gap: 30px;
+    }
+}
+
+@media (min-width: 992px) {
+    & .sh-cliEmDestaque {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 992px) {
+    & .sh-cliEmDestaque {
+        padding: 25px 10px;
+        width: 1400px;
+        
+        border-radius: 5px;
     }
 }

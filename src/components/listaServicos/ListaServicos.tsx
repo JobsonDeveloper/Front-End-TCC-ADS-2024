@@ -6,9 +6,11 @@ import imgPerfilDefault from '../../assets/index/icons/profissional.png';
 import imgClassificacaoEstrela from '../../assets/icons/estrela.svg';
 import background from '../../assets/index/backgrounds/background-servicos.svg';
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, useMediaQuery } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, duration, useMediaQuery } from "@mui/material";
 import { display, fontSize, fontWeight, useTheme, width } from "@mui/system";
 import estrelaImg from '../../assets/FreelaHome/icons/estrela.svg';
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
 let dadosServico = {
     servico_id: '',
@@ -140,7 +142,8 @@ const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }:
     };
 
     useEffect(() => {
-    });
+        Aos.init({ duration: 500 })
+    }, []);
 
     function redirectLogin() {
         pagina('/login');
@@ -209,7 +212,7 @@ const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }:
     const montaServicos = servicos.map((servico: any) =>
         <>
             {servico.servico_status === 'aberto' && !tipo_usuario &&
-                <li className="sh-servicosItem" key={servico.id} onClick={redirectLogin}>
+                <li className="sh-servicosItem" key={servico.id} onClick={redirectLogin} data-aos='flip-left'>
                     <ul className="sh-servicosItem-lista">
                         <li className="sh-servicosLista-item sh-servicosLista-fotoServico">
                             {servico.servico_foto &&
@@ -247,7 +250,7 @@ const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }:
 
             {/* Serviços adequados */}
             {servico.servico_status === 'aberto' && tipo_usuario === '0' &&
-                <li className="sh-servicosItem" key={servico.id} onClick={(e) => detalhesServico(e, servico.id)}>
+                <li className="sh-servicosItem" key={servico.id} onClick={(e) => detalhesServico(e, servico.id)} data-aos='flip-left'>
                     <ul className="sh-servicosItem-lista">
                         <li className="sh-servicosLista-item sh-servicosLista-fotoServico">
                             {servico.servico_foto &&
@@ -285,7 +288,7 @@ const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }:
         </>
     );
 
-    async function aceitaServico(e:MouseEvent, servicoId:string) {
+    async function aceitaServico(e: MouseEvent, servicoId: string) {
         e.preventDefault();
         setOpen(false);
 

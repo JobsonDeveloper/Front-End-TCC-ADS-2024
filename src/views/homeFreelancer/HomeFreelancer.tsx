@@ -18,6 +18,7 @@ import ServicosDisponiveis from "../../components/servicosdisponiveis/ServicosDi
 import ServicosAdequados from "../../components/servicosAdequados/ServicosAdequados";
 import Planos from "../../components/planos/Planos";
 import ListaServicos from "../../components/listaServicos/ListaServicos";
+import FreelancersEmDestaque from "../../components/freelancersEmDestaque/FreelancersEmDestaque";
 
 const todosOsServicos: any = [];
 const profDestaque: any = [];
@@ -121,11 +122,13 @@ const HomeFreelancer = () => {
                         let servicosSplit = dados.servicos.split(",");
 
                         profDestaque.push({
+                            id: dados.id,
                             fotoUrl: dados.imagem_perfil,
                             nome: `${dados.nome} ${dados.sobrenome}`,
                             servico: servicosSplit[0],
+                            apresentacao: dados.apresentacao,
                             dataCadastro: formatData(dados.data_de_criacao),
-                            estrelas: dados.classificacao
+                            classificacao: dados.classificacao
                         });
                     })
                 }
@@ -289,12 +292,14 @@ const HomeFreelancer = () => {
             </article>
 
             <article className="sh-freela-main">
-                <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
+                {/* <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
                     <h2 className="sh-profissionaisEmDestaque-titulo" data-aos="zoom-in">Profissionais em destaque</h2>
                     <div className="sh-profissionalEmDestaque-lista">
                         <ProfissionaisEmDestaque dados={profDestaque} />
                     </div>
-                </article>
+                </article> */}
+                <FreelancersEmDestaque freelancers={profDestaque} />
+
 
                 <article className="sh-clientesEmDestaque" id='sh_clientes_emDestaque'>
                     <h2 className="sh-clientesEmDestaque-titulo" data-aos="zoom-in">Clientes em destaque</h2>

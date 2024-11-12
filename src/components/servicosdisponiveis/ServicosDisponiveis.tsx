@@ -9,6 +9,7 @@ import { Padding } from '@mui/icons-material';
 import Loading from '../loading/Loading';
 import imgEstrelas from '../../assets/icons/estrela.svg';
 import { ArrayBindingElement } from 'typescript';
+import 'aos/dist/aos.css';
 
 const styledTextField = {
     '& .MuiInputBase-input': {
@@ -75,6 +76,7 @@ const servicosAdequadosStyle = {
             marginBottom: '20px',
             // borderBottom: '1px solid #bdbdbd',
             paddingBottom: '8px',
+            marginTop: '10px',
 
             '& .sh-dialog-imagem-cliente': {
                 width: '35px'
@@ -257,45 +259,6 @@ const ServicosDisponiveis = ({ data }: any) => {
 
     }
 
-    // const mostrarDetalhes = (servico: any) => {
-    //     idServico = servico.id;
-    //     tipo = servico.tag;
-    //     descricao = servico.descricao;
-    //     if (servico.data) { diaServico = formatData(servico.data) }
-    //     local = servico.endereco_servico;
-    //     remuneracao = servico.remuneracao;
-    //     clienteId = servico.cliente_id;
-
-    //     dadosCliente();
-
-    //     async function dadosCliente() {
-
-    //         try {
-    //             const formData = new FormData();
-    //             formData.append('acao', 'dados_cliente_servico');
-    //             formData.append('cliId', `${clienteId}`);
-
-    //             const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-    //                 method: 'POST',
-    //                 mode: 'cors',
-    //                 body: formData
-    //             });
-
-    //             const response = await request.json();
-
-    //             if (response) {
-    //                 // clienteClassificacao = response.data.classificacao;
-    //                 // clienteDataCriacao = formatData(response.data.data_de_criacao);
-    //                 // setOpen(true);
-    //                 console.log(response)
-    //             }
-    //         }
-    //         catch (error) {
-    //             console.error(error);
-    //         }
-    //     }
-    // };
-
     async function detalhesServico(e: MouseEvent, servicoId: number) {
         e.preventDefault();
 
@@ -349,21 +312,6 @@ const ServicosDisponiveis = ({ data }: any) => {
         Aos.init({ duration: 500 });
     })
 
-    // const listaServicos = data.map((servico: any, index: any) =>
-    //     <li key={index} className="sh-servicosFreela-itens" data-aos="flip-left" onClick={(() => { mostrarDetalhes(servico) })}>
-    //         <div className="sh-itens-data">
-    //             <img src={fotoPadrao} alt="Foto de perfil sem rosto" className="sh-servicosFreela-img-perfil" />
-    //             <p className="sh-servicosFreela-data-marcador">{servico.tag}</p>
-    //         </div>
-    //         <div className="sh-itens-data">
-    //             <p className="sh-servicosFreela-data-descricao">{servico.descricao}</p>
-    //         </div>
-    //         {servico.remuneracao && <div className="sh-itens-data">
-    //             <p className="sh-servicos-data-remuneracao">R${servico.remuneracao},00 reais</p>
-    //         </div>}
-    //     </li>
-    // );
-
     return (
         <>
 
@@ -384,7 +332,7 @@ const ServicosDisponiveis = ({ data }: any) => {
 
                     {dadosFiltrados.map((dado: any) =>
                         <>
-                            <li className="sh-todosServicosItem" key={`${dado.tag} ${dado.id}`} onClick={((e) => { detalhesServico(e, dado.id) })}>
+                            <li className="sh-todosServicosItem" key={`${dado.tag} ${dado.id}`} onClick={((e) => { detalhesServico(e, dado.id) })} data-aos='flip-left'>
                                 <ul className="sh-todosServicosItem-lista">
                                     <li className="sh-servicosLista-item sh-servicosLista-fotoServico">
                                         {dado.servico_foto &&

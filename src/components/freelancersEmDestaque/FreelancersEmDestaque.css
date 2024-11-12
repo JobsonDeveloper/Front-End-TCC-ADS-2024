@@ -60,7 +60,7 @@
                 background-color: #f1f1f1;
             }
 
-            & .sh-freela-header {
+            & .sh-destaqueFreela-header {
                 display: flex;
                 gap: 10px;
                 justify-content: space-between;
@@ -112,7 +112,7 @@
                 }
             }
 
-            & .sh-freela-main {
+            & .sh-destaqueFreela-main {
                 display: flex;
                 margin-top: 8px;
 
@@ -130,7 +130,7 @@
                 }
             }
 
-            & .sh-freela-footer {
+            & .sh-destaqueFreela-footer {
                 display: flex;
 
                 & .sh-freela-footer-criacao {

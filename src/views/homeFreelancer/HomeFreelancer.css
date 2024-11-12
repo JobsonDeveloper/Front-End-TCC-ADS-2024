@@ -160,7 +160,7 @@
     & .sh-freela-main {
 
 
-        & .sh-profissionaisEmDestaque {
+        /* & .sh-profissionaisEmDestaque {
             & .sh-profissionaisEmDestaque-titulo {
                 text-align: center;
                 font-size: var(--sh-index-font-size-titulos);
@@ -171,11 +171,12 @@
                 width: 100%;
                 display: flex;
                 justify-content: center;
-                /* background-image: url('./assets/index/backgrounds/background-profissoes.webp');
+                background-image: url('./assets/index/backgrounds/background-profissoes.webp');
                 background-repeat: no-repeat;
-                background-size: cover; */
+                background-size: cover;
+                
             }
-        }
+        } */
 
         & .sh-clientesEmDestaque {
             display: flex;
