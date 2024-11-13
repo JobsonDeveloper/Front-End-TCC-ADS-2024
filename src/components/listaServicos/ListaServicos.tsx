@@ -68,7 +68,7 @@ const servicosAdequadosStyle = {
             gap: '20px',
             marginBottom: '20px',
             // borderBottom: '1px solid #bdbdbd',
-            paddingBottom: '8px',
+            paddingTop: '8px',
 
             '& .sh-dialog-imagem-cliente': {
                 width: '35px'

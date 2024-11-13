@@ -152,7 +152,7 @@ let mensagemAlert = "";
 let tipoAlert = 0;
 let userId: string | null = "";
 let userTipo: string | null = "";
-let tipoUsuario:string | null = "";
+let tipoUsuario: string | null = "";
 
 const servicosAceitos: any = [];
 const servicosFinalizados: any = [];
@@ -626,8 +626,9 @@ const Perfil = () => {
         <main className="sh-perfil">
             {loading && <Loading />}
 
-            <HeaderPerfilFreela 
-            setMostrarAlert={setMostrarAlert} 
+            <HeaderPerfilFreela
+                setMostrarAlert={setMostrarAlert}
+                tipoUsuario={userTipo}
             />
 
             {/* <header className="sh-perfil-header">

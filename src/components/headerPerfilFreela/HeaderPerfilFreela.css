@@ -116,6 +116,8 @@
         color: var(--sh-cor-textos);
         align-items: center;
         display: flex;
+        gap: 5px;
+        color: var(--sh-header-cor-primarias);
 
         & .sh-item-text {
           width: max-content;

@@ -2,6 +2,12 @@ import React from 'react';
 import './HeaderPerfilFreela.css';
 import Logo from '../../assets/index/backgrounds/logo.svg';
 import { Link, useNavigate } from 'react-router-dom';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import FormatListNumberedRoundedIcon from '@mui/icons-material/FormatListNumberedRounded';
+import ChecklistRoundedIcon from '@mui/icons-material/ChecklistRounded';
+import InventoryRoundedIcon from '@mui/icons-material/InventoryRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
 // ---- Bootstrap
 import { useState } from 'react';
@@ -20,7 +26,7 @@ import { Alert } from '@mui/material';
 let mensagemAlert = "asdasdasda";
 let tipoAlert = 0;
 
-const HeaderPerfilFreela = ({ setMostrarAlert }: any) => {
+const HeaderPerfilFreela = ({ setMostrarAlert, tipoUsuario }: any) => {
     // ---- Const Bootstrap
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -55,7 +61,9 @@ const HeaderPerfilFreela = ({ setMostrarAlert }: any) => {
                 </li>
 
                 <li className="sh-options-itens">
-                    <img src={Logo} alt="Logo da SkillHub" className='sh-lg-logo-img' />
+                    <Link to='/home-freelancer'>
+                        <HomeRoundedIcon />
+                    </Link>
                 </li>
             </ul>
 
@@ -68,25 +76,58 @@ const HeaderPerfilFreela = ({ setMostrarAlert }: any) => {
 
                 <Offcanvas.Header closeButton className='sh-offcanvas-element'>
                     <Offcanvas.Title className='sh-lg-header-title'>
-                        Navegue pelo nosso site
+                        Opções do perfil
                     </Offcanvas.Title>
                 </Offcanvas.Header>
 
                 <Offcanvas.Body className='sh-header-offcanvas-body'>
                     <ul className="mb-0 sh-header-navegacao">
                         <li className="sh-navegacao-item d-lg-none">
-                            <a href='#sh_home_header' className='sh-item-text'>Home</a>
+                            <PersonRoundedIcon />
+
+                            <Link to='/perfil' className='sh-item-text'>
+                                Perfil
+                            </Link>
                         </li>
 
-                        <li className="d-lg-none sh-navegacao-item">
-                            <p className='sh-item-text' onClick={logout}>Sair</p>
+                        <li className="sh-navegacao-item">
+                            {tipoUsuario === '0' &&
+                                <>
+                                    <ChecklistRoundedIcon />
+
+                                    <p className='sh-item-text' onClick={logout}>
+                                        Serviços aceitos
+                                    </p>
+                                </>
+                            }
+                            {tipoUsuario === '1' &&
+                                <>
+                                    <FormatListNumberedRoundedIcon />
+
+                                    <p className='sh-item-text' onClick={logout}>
+                                        Serviços solicitados
+                                    </p>
+                                </>
+                            }
+                        </li>
+
+                        <li className="sh-navegacao-item">
+                            <InventoryRoundedIcon />
+
+                            <p className='sh-item-text' onClick={logout}>
+                                Serviços concluídos
+                            </p>
+                        </li>
+
+                        <li className="sh-navegacao-item">
+                            <LogoutRoundedIcon />
+
+                            <p className='sh-item-text' onClick={logout}>
+                                Sair
+                            </p>
                         </li>
                     </ul>
                 </Offcanvas.Body>
-
-                <ul className='d-none d-lg-flex sh-header-option-dois'>
-                    <p className='sh-item-text' onClick={logout}>Sair</p>
-                </ul>
             </Offcanvas>
         </section>
     )

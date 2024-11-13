@@ -57,6 +57,7 @@ const styledDialogService = {
         display: 'flex',
         flexDirection: 'column',
         rowGap: '10px',
+        backgroundColor: 'red',
 
         '& .sh-servico-subtitulos': {
             fontSize: '1.1rem',
