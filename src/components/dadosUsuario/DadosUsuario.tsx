@@ -87,24 +87,68 @@ const DadosUsuario = () => {
     const [userClassificacao, setUserClassificacao] = useState('');
     const [userServicos, setUserServicos] = useState('');
     const [userLimite, setUserLimite] = useState('');
+    const [file, setFile] = useState<string | null>();
+
+    function geraBase64(arquivo: FileList | null) {
+        if (arquivo) {
+            let tipoArquivo = arquivo[0].type;
+
+            if (arquivo.length < 1) {
+                tipoAlert = 3;
+                mensagemAlert = "A imagem não foi fornecida!"
+                setMostrarAlert(true);
+
+                setTimeout(() => {
+                    setMostrarAlert(false);
+                }, 4000);
+            }
+            else if ((tipoArquivo != 'image/png') && (tipoArquivo != 'image/jpeg')) {
+                tipoAlert = 3;
+                mensagemAlert = "Formatos aceitos: PNG ou JPEG"
+                setMostrarAlert(true);
+
+                setTimeout(() => {
+                    setMostrarAlert(false);
+                }, 4000);
+            }
+            else {
+                if (arquivo[0].size > 6000) {
+                    tipoAlert = 3;
+                    mensagemAlert = "A imagem é muito pesada!"
+                    setMostrarAlert(true);
+
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                    }, 4000);
+                }
+                else {
+                    if (arquivo[0] != null) {
+                        let lerImagem = new FileReader();
+
+                        lerImagem.onload = function (imagem) {
+                            // let base64 = imagem.target.result;
+                        }
+
+                        lerImagem.readAsDataURL(arquivo[0]);
+                    }
+                }
+            }
+        }
+    }
 
     async function pegaDados() {
-
-        setUserId(sessionStorage.getItem('shUserLogId'));
-        setUserTipo(sessionStorage.getItem('shUserLogTipo'));
-
         try {
             setLoading(true);
 
             const formData = new FormData();
 
-            if (userTipo === "0") {
+            if (sessionStorage.getItem('shUserLogTipo') === "0") {
                 formData.append('acao', 'dados_freelancer');
-                formData.append('idfre', `${userId}`);
+                formData.append('idfre', `${sessionStorage.getItem('shUserLogId')}`);
             }
             else {
                 formData.append('acao', 'dados_cliente');
-                formData.append('idcliente', `${userId}`);
+                formData.append('idcliente', `${sessionStorage.getItem('shUserLogId')}`);
             }
 
             const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
@@ -117,6 +161,8 @@ const DadosUsuario = () => {
 
             if (response.status === 200) {
                 const dadosUsuario = response.dadosUser;
+
+                console.log(response);
 
                 setUserNome(dadosUsuario[0].nome);
                 setUserSobrenome(dadosUsuario[0].sobrenome);
@@ -134,8 +180,6 @@ const DadosUsuario = () => {
 
                 setUserClassificacao(dadosUsuario[0].classificacao);
 
-                console.log(userNascimento);
-
             }
             else {
                 tipoAlert = 3;
@@ -147,8 +191,6 @@ const DadosUsuario = () => {
                     setLoading(false);
                 }, 4000);
             }
-
-
         }
         catch (error) {
             tipoAlert = 3;
@@ -163,6 +205,62 @@ const DadosUsuario = () => {
         }
     }
 
+    async function mudarFotoPerfil(e: MouseEvent) {
+        e.preventDefault();
+
+        // try {
+        //     setLoading(true);
+
+        //     const formData = new FormData();
+
+        //     if (userTipo === "0") {
+        //         formData.append('acao', 'muda_foto_perfil');
+        //         formData.append('idFree', `${userId}`);
+        //     }
+        //     else {
+        //         formData.append('acao', 'muda_foto_perfil');
+        //         formData.append('idCliente', `${userId}`);
+        //     }
+
+        //     const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+        //         method: 'POST',
+        //         mode: 'cors',
+        //         body: formData
+        //     });
+
+        //     const response = await request.json();
+
+        //     if (response.status === 200) {
+
+        //         console.log(response.fotoPerfil);
+
+        //     }
+        //     else {
+        //         tipoAlert = 3;
+        //         mensagemAlert = "Foto não modificada!"
+        //         setMostrarAlert(true);
+
+        //         setTimeout(() => {
+        //             setMostrarAlert(false);
+        //             setLoading(false);
+        //         }, 4000);
+        //     }
+
+
+        // }
+        // catch (error) {
+        //     tipoAlert = 3;
+        //     mensagemAlert = "Erro de requisição!"
+        //     setMostrarAlert(true);
+
+        //     setTimeout(() => {
+        //         setMostrarAlert(false);
+        //         setLoading(false);
+        //     }, 4000);
+        //     console.error(error);
+        // }
+    }
+
     useEffect(() => {
         if ((!sessionStorage.getItem('shUserLogId')) || (!sessionStorage.getItem('shUserLogTipo'))) {
             tipoAlert = 3;
@@ -175,6 +273,8 @@ const DadosUsuario = () => {
             }, 4000);
         }
         else {
+            setUserId(sessionStorage.getItem('shUserLogId'));
+            setUserTipo(sessionStorage.getItem('shUserLogTipo'));
             pegaDados();
         }
     }, []);
@@ -190,10 +290,19 @@ const DadosUsuario = () => {
                         <img src={imgPerfilPadrao} alt="" className="sh-perfil-classificacao-img" />
                     }
                 </div>
+
                 <div className="sh-fotoPerfil-buttons">
-                    <button className="sh-button-imgPerfil">
+                    <label htmlFor="sh_input_file_perfil" className="sh-button-imgPerfil">
                         Mudar foto
-                    </button>
+                    </label>
+                    <input
+                        type="file"
+                        id="sh_input_file_perfil"
+                        className="sh-fotoPerfil-input"
+                        onChange={((e) => {
+                            geraBase64(e.target.files);
+                        })}
+                    />
                     <button className="sh-button-imgPerfil">
                         Remover foto
                     </button>
