@@ -1,41 +1,12 @@
 import { Alert } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './DadosUsuario.css';
+import imgPerfilPadrao from '../../assets/icons/perfil.svg';
+import imgEstrelas from '../../assets/icons/estrela.svg';
 
 let mensagemAlert = "";
 let tipoAlert = 0;
-
-type Usuario = {
-    id: string | null,
-    tipo: string | null,
-    nome: string | null,
-    sobrenome: string | null,
-    dataNascimento: string | null,
-    endereco: string | null,
-    telefone: string | null,
-    email: string | null,
-    dataCriacaoConta: string | null,
-    imagemPerfil: string | null,
-    classificacao: string | null,
-    servicos: string | null,
-    limite: string | null
-};
-
-const usuario: Usuario = {
-    id: '',
-    tipo: '',
-    nome: '',
-    sobrenome: '',
-    dataNascimento: '',
-    endereco: '',
-    telefone: '',
-    email: '',
-    dataCriacaoConta: '',
-    imagemPerfil: '',
-    classificacao: '',
-    servicos: '',
-    limite: ''
-};
 
 const ShAlert = () => {
     return (
@@ -102,23 +73,38 @@ const DadosUsuario = () => {
     const [mostrarAlert, setMostrarAlert] = useState(false);
     const pagina = useNavigate();
 
+    // Dados do usuario
+    const [userId, setUserId] = useState<string | null>();
+    const [userTipo, setUserTipo] = useState<string | null>('');
+    const [userNome, setUserNome] = useState('');
+    const [userSobrenome, setUserSobrenome] = useState('');
+    const [userNascimento, setUserNascimento] = useState('');
+    const [userEndereco, setUserEndereco] = useState('');
+    const [userTelefone, setUserTelefone] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [userDataCriacao, setUserDataCriacao] = useState('');
+    const [userImgPerfil, setUserImgPerfil] = useState('');
+    const [userClassificacao, setUserClassificacao] = useState('');
+    const [userServicos, setUserServicos] = useState('');
+    const [userLimite, setUserLimite] = useState('');
+
     async function pegaDados() {
 
-        usuario.id = sessionStorage.getItem('shUserLogId');
-        usuario.tipo = sessionStorage.getItem('shUserLogTipo');
+        setUserId(sessionStorage.getItem('shUserLogId'));
+        setUserTipo(sessionStorage.getItem('shUserLogTipo'));
 
         try {
             setLoading(true);
 
             const formData = new FormData();
 
-            if (usuario.tipo === "0") {
+            if (userTipo === "0") {
                 formData.append('acao', 'dados_freelancer');
-                formData.append('idfre', `${usuario.id}`);
+                formData.append('idfre', `${userId}`);
             }
             else {
                 formData.append('acao', 'dados_cliente');
-                formData.append('idcliente', `${usuario.id}`);
+                formData.append('idcliente', `${userId}`);
             }
 
             const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
@@ -131,19 +117,25 @@ const DadosUsuario = () => {
 
             if (response.status === 200) {
                 const dadosUsuario = response.dadosUser;
-                usuario.nome = dadosUsuario[0].nome;
-                usuario.sobrenome = dadosUsuario[0].sobrenome;
-                usuario.dataCriacaoConta = formatData(dadosUsuario[0].nascimento);
-                usuario.classificacao = dadosUsuario[0].classificacao;
-                usuario.endereco = dadosUsuario[0].endereco;
-                usuario.telefone = dadosUsuario[0].telefone;
-                usuario.email = dadosUsuario[0].email;
-                usuario.dataCriacaoConta = formatData(dadosUsuario[0].data_de_criacao);
-                usuario.imagemPerfil = dadosUsuario[0].imagem_perfil;
-                usuario.servicos = dadosUsuario[0].servicos;
-                usuario.limite = dadosUsuario[0].limite;
 
-                console.log(usuario);
+                setUserNome(dadosUsuario[0].nome);
+                setUserSobrenome(dadosUsuario[0].sobrenome);
+                setUserNascimento(formatData(dadosUsuario[0].nascimento));
+                setUserEndereco(dadosUsuario[0].endereco);
+                setUserTelefone(dadosUsuario[0].telefone);
+                setUserEmail(dadosUsuario[0].email);
+                setUserDataCriacao(formatData(dadosUsuario[0].data_de_criacao));
+                setUserImgPerfil(dadosUsuario[0].imagem_perfil);
+
+                if (userTipo === '0') {
+                    setUserServicos(dadosUsuario[0].servicos);
+                    setUserLimite(dadosUsuario[0].limite);
+                }
+
+                setUserClassificacao(dadosUsuario[0].classificacao);
+
+                console.log(userNascimento);
+
             }
             else {
                 tipoAlert = 3;
@@ -188,7 +180,30 @@ const DadosUsuario = () => {
     }, []);
 
     return (
-        <>Dados...</>
+        <ul className="sh-dadosPerfil">
+            <li className="sh-dadosPerfil-item">
+                <div className="sh-perfil-foto">
+                    {userImgPerfil &&
+                        <img src={userImgPerfil} alt="" className="sh-perfil-classificacao-img" />
+                    }
+                    {!userImgPerfil &&
+                        <img src={imgPerfilPadrao} alt="" className="sh-perfil-classificacao-img" />
+                    }
+                </div>
+                <div className="sh-fotoPerfil-buttons">
+                    <button className="sh-button-imgPerfil">
+                        Mudar foto
+                    </button>
+                    <button className="sh-button-imgPerfil">
+                        Remover foto
+                    </button>
+                </div>
+                <div className="sh-perfil-classificacao">
+                    <img src={imgEstrelas} alt="Estrelas de classificação" />
+                    <p>{userClassificacao}</p>
+                </div>
+            </li>
+        </ul>
     )
 }
 

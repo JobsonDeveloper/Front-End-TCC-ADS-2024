@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --sh-dadosPerfil-font-family: "Nunito", sans-serif;
+
+  --sh-dadosPerfil-cor-primaria: #fff;
+  --sh-dadosPerfil-cor-secundaria: #0075FF;
+  --sh-dadosPerfil-cor-terciaria: #000;
+  --sh-dadosPerfil-cor-quaternaria: #35FF62;
+  --sh-dadosPerfil-cor-textos: #494949;
+  --sh-dadosPerfil-cor-background-footer: #26466B;
+  --sh-dadosPerfil-cor-background-skillhub: #0089e0;
+  --sh-dadosPerfil-cor-background-components: #356FB0;
+
+  --sh-dadosPerfil-padding: 0 10px;
+  --sh-dadosPerfil-margin: 30px 0;
+
+  --sh-dadosPerfil-font-size-titulos: 1.4rem;
+  --sh-dadosPerfil-font-size-subtitulos: 1.2rem;
+  --sh-dadosPerfil-font-size-textos: 1rem;
+}
+
+& .sh-dadosPerfil {
+    background-color: aquamarine;
+    min-height: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 50px;
+
+    & .sh-dadosPerfil-item {
+        background-color: red;
+        padding: 5px;
+    }
+}
