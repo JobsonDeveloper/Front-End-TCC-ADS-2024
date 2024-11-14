@@ -61,7 +61,7 @@ const HeaderPerfilFreela = ({ setMostrarAlert, tipoUsuario }: any) => {
                 </li>
 
                 <li className="sh-options-itens">
-                    <Link to='/home-freelancer'>
+                    <Link to='/home-freelancer' className='sh-homeIcon'>
                         <HomeRoundedIcon />
                     </Link>
                 </li>

@@ -44,6 +44,10 @@
       height: max-content;
       width: max-content;
 
+      & .sh-homeIcon {
+        color: #000;
+      }
+
       & .sh-options-login {
         color: var(--sh-header-cor-terciaria);
         font-size: var(--sh-header-font-size-textos);
@@ -113,11 +117,10 @@
 
       & .sh-navegacao-item {
         font-size: var(--sh-font-size-textos-header);
-        color: var(--sh-cor-textos);
         align-items: center;
         display: flex;
         gap: 5px;
-        color: var(--sh-header-cor-primarias);
+        color: #fff;
 
         & .sh-item-text {
           width: max-content;

@@ -21,6 +21,7 @@ import Footer from "../../components/footer/Footer";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import HeaderPerfilFreela from "../../components/headerPerfilFreela/HeaderPerfilFreela";
+import DadosUsuario from "../../components/dadosUsuario/DadosUsuario";
 
 const ShAlert = () => {
     return (
@@ -212,8 +213,7 @@ const Perfil = () => {
             }, 4000);
         }
         else {
-            tipoUsuario = sessionStorage.getItem('shUserLogTipo');
-            pegaDados();
+            setLoading(false);
         }
     }, []);
 
@@ -631,7 +631,10 @@ const Perfil = () => {
                 tipoUsuario={userTipo}
             />
 
-            {/* <header className="sh-perfil-header">
+            <DadosUsuario />
+
+            <>
+                {/* <header className="sh-perfil-header">
                 <div className="sh-perfil-header-logo">
                     <img src={logoImg} alt="" />
                 </div>
@@ -962,7 +965,7 @@ const Perfil = () => {
                     <Footer />
                 </div>
             </footer> */}
-
+            </>
             {mostrarAlert &&
                 <div className="sh-alerts">
                     <ShAlert />
