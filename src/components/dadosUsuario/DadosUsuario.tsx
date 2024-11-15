@@ -1,42 +1,12 @@
 import { Alert } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './DadosUsuario.css';
 import imgPerfilPadrao from '../../assets/icons/perfil.svg';
 import imgEstrelas from '../../assets/icons/estrela.svg';
 
-let mensagemAlert = "";
-let tipoAlert = 0;
-
-const ShAlert = () => {
-    return (
-        <>
-            {tipoAlert === 0 &&
-                <Alert severity="success">
-                    {mensagemAlert}
-                </Alert>
-            }
-
-            {tipoAlert === 1 &&
-                <Alert severity="info">
-                    {mensagemAlert}
-                </Alert>
-            }
-
-            {tipoAlert === 2 &&
-                <Alert severity="warning">
-                    {mensagemAlert}
-                </Alert>
-            }
-
-            {tipoAlert === 3 &&
-                <Alert severity="error">
-                    {mensagemAlert}
-                </Alert>
-            }
-        </>
-    )
-}
+// let mensagemAlert = "";
+// let tipoAlert = 0;
 
 const dadosServicos = [
     'Reparo de Televisor',
@@ -68,9 +38,9 @@ function formatData(data: any) {
     return (`${dia}/${mes}/${ano}`);
 }
 
-const DadosUsuario = () => {
+const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert }: any) => {
     const [loading, setLoading] = useState(true);
-    const [mostrarAlert, setMostrarAlert] = useState(false);
+    // const [mostrarAlert, setMostrarAlert] = useState(false);
     const pagina = useNavigate();
 
     // Dados do usuario
@@ -87,35 +57,38 @@ const DadosUsuario = () => {
     const [userClassificacao, setUserClassificacao] = useState('');
     const [userServicos, setUserServicos] = useState('');
     const [userLimite, setUserLimite] = useState('');
-    const [file, setFile] = useState<string | null>();
+    // const [file, setFile] = useState<string | null>();
 
-    function geraBase64(arquivo: FileList | null) {
+    async function leituraDeImagem(arquivo: FileList | null) {
         if (arquivo) {
             let tipoArquivo = arquivo[0].type;
 
             if (arquivo.length < 1) {
-                tipoAlert = 3;
-                mensagemAlert = "A imagem não foi fornecida!"
+                setTipoAlert(3);
+                setMensagemAlert("A imagem não foi fornecida!");
                 setMostrarAlert(true);
+                console.log(0);
 
                 setTimeout(() => {
                     setMostrarAlert(false);
                 }, 4000);
             }
             else if ((tipoArquivo != 'image/png') && (tipoArquivo != 'image/jpeg')) {
-                tipoAlert = 3;
-                mensagemAlert = "Formatos aceitos: PNG ou JPEG"
+                setTipoAlert(3);
+                setMensagemAlert("Formatos aceitos: PNG ou JPEG");
                 setMostrarAlert(true);
+                console.log(1);
 
                 setTimeout(() => {
                     setMostrarAlert(false);
                 }, 4000);
             }
             else {
-                if (arquivo[0].size > 6000) {
-                    tipoAlert = 3;
-                    mensagemAlert = "A imagem é muito pesada!"
+                if (arquivo[0].size > 60000) {
+                    setTipoAlert(3);
+                    setMensagemAlert("A imagem é muito pesada!");
                     setMostrarAlert(true);
+                    console.log(arquivo[0]);
 
                     setTimeout(() => {
                         setMostrarAlert(false);
@@ -126,13 +99,75 @@ const DadosUsuario = () => {
                         let lerImagem = new FileReader();
 
                         lerImagem.onload = function (imagem) {
-                            // let base64 = imagem.target.result;
+                            if (imagem.target) {
+                                mudaFotoPerfil(imagem.target.result);
+                            }
                         }
 
                         lerImagem.readAsDataURL(arquivo[0]);
                     }
                 }
             }
+        }
+    }
+
+    async function mudaFotoPerfil(base64: string | ArrayBuffer | null) {
+        if (typeof base64 === 'string') {
+            try {
+                const formData = new FormData();
+                formData.append('acao', 'muda_foto_perfil');
+                formData.append('imagem', `${base64}`);
+
+                if (userTipo === "0") {
+                    formData.append('idFree', `${userId}`);
+                }
+                else {
+                    formData.append('idCliente', `${userId}`);
+                }
+
+                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                });
+
+                const response = await request.json();
+
+                if (response.status === 201) {
+                    window.location.reload();
+                }
+                else {
+                    setTipoAlert(3);
+                    setMensagemAlert("Foto não modificada!");
+                    setMostrarAlert(true);
+
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        setLoading(false);
+                    }, 4000);
+                }
+            }
+            catch (error) {
+                setTipoAlert(3);
+                setMensagemAlert("Erro de requisição!");
+                setMostrarAlert(true);
+
+                setTimeout(() => {
+                    setMostrarAlert(false);
+                    setLoading(false);
+                }, 4000);
+                console.error(error);
+            }
+        }
+        else {
+            setTipoAlert(4);
+            setMensagemAlert("Tente novamente!");
+            setMostrarAlert(true);
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+                setLoading(false);
+            }, 4000);
         }
     }
 
@@ -182,8 +217,8 @@ const DadosUsuario = () => {
 
             }
             else {
-                tipoAlert = 3;
-                mensagemAlert = "Dados não retornados!"
+                setTipoAlert(3);
+                setMensagemAlert("Dados não retornados!");
                 setMostrarAlert(true);
 
                 setTimeout(() => {
@@ -193,8 +228,8 @@ const DadosUsuario = () => {
             }
         }
         catch (error) {
-            tipoAlert = 3;
-            mensagemAlert = "Erro de requisição!"
+            setTipoAlert(3);
+            setMensagemAlert("Erro de requisição!");
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -205,66 +240,10 @@ const DadosUsuario = () => {
         }
     }
 
-    async function mudarFotoPerfil(e: MouseEvent) {
-        e.preventDefault();
-
-        // try {
-        //     setLoading(true);
-
-        //     const formData = new FormData();
-
-        //     if (userTipo === "0") {
-        //         formData.append('acao', 'muda_foto_perfil');
-        //         formData.append('idFree', `${userId}`);
-        //     }
-        //     else {
-        //         formData.append('acao', 'muda_foto_perfil');
-        //         formData.append('idCliente', `${userId}`);
-        //     }
-
-        //     const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-        //         method: 'POST',
-        //         mode: 'cors',
-        //         body: formData
-        //     });
-
-        //     const response = await request.json();
-
-        //     if (response.status === 200) {
-
-        //         console.log(response.fotoPerfil);
-
-        //     }
-        //     else {
-        //         tipoAlert = 3;
-        //         mensagemAlert = "Foto não modificada!"
-        //         setMostrarAlert(true);
-
-        //         setTimeout(() => {
-        //             setMostrarAlert(false);
-        //             setLoading(false);
-        //         }, 4000);
-        //     }
-
-
-        // }
-        // catch (error) {
-        //     tipoAlert = 3;
-        //     mensagemAlert = "Erro de requisição!"
-        //     setMostrarAlert(true);
-
-        //     setTimeout(() => {
-        //         setMostrarAlert(false);
-        //         setLoading(false);
-        //     }, 4000);
-        //     console.error(error);
-        // }
-    }
-
     useEffect(() => {
         if ((!sessionStorage.getItem('shUserLogId')) || (!sessionStorage.getItem('shUserLogTipo'))) {
-            tipoAlert = 3;
-            mensagemAlert = "Faça login antes!";
+            setTipoAlert(3);
+            setMensagemAlert("Faça login antes!");
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -284,10 +263,10 @@ const DadosUsuario = () => {
             <li className="sh-dadosPerfil-item">
                 <div className="sh-perfil-foto">
                     {userImgPerfil &&
-                        <img src={userImgPerfil} alt="" className="sh-perfil-classificacao-img" />
+                        <img src={userImgPerfil} alt="" className="sh-perfil-img" />
                     }
                     {!userImgPerfil &&
-                        <img src={imgPerfilPadrao} alt="" className="sh-perfil-classificacao-img" />
+                        <img src={imgPerfilPadrao} alt="" className="sh-perfil-img" />
                     }
                 </div>
 
@@ -300,7 +279,7 @@ const DadosUsuario = () => {
                         id="sh_input_file_perfil"
                         className="sh-fotoPerfil-input"
                         onChange={((e) => {
-                            geraBase64(e.target.files);
+                            leituraDeImagem(e.target.files);
                         })}
                     />
                     <button className="sh-button-imgPerfil">

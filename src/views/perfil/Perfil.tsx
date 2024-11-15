@@ -23,36 +23,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import HeaderPerfilFreela from "../../components/headerPerfilFreela/HeaderPerfilFreela";
 import DadosUsuario from "../../components/dadosUsuario/DadosUsuario";
 
-const ShAlert = () => {
-    return (
-        <>
-            {tipoAlert === 0 &&
-                <Alert severity="success">
-                    {mensagemAlert}
-                </Alert>
-            }
-
-            {tipoAlert === 1 &&
-                <Alert severity="info">
-                    {mensagemAlert}
-                </Alert>
-            }
-
-            {tipoAlert === 2 &&
-                <Alert severity="warning">
-                    {mensagemAlert}
-                </Alert>
-            }
-
-            {tipoAlert === 3 &&
-                <Alert severity="error">
-                    {mensagemAlert}
-                </Alert>
-            }
-        </>
-    )
-}
-
 const styledDialogService = {
     '& .sh-servico-dialog-titulo': {
         color: '#000',
@@ -149,8 +119,6 @@ let userDataCriacao: string | null = "";
 let userFotoPerfil: string | null = "";
 let freelaLimit: string | null = ""
 
-let mensagemAlert = "";
-let tipoAlert = 0;
 let userId: string | null = "";
 let userTipo: string | null = "";
 let tipoUsuario: string | null = "";
@@ -178,6 +146,38 @@ const Perfil = () => {
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const [imgPerfil, setImgPerfil] = useState();
     const [openNovoServico, setOpenNovoServico] = useState(false);
+    const [tipoAlert, setTipoAlert] = useState<number>();
+    const [mensagemAlert, setMensagemAlert] = useState<string>();
+
+    const ShAlert = () => {
+        return (
+            <>
+                {tipoAlert === 0 &&
+                    <Alert severity="success">
+                        {mensagemAlert}
+                    </Alert>
+                }
+    
+                {tipoAlert === 1 &&
+                    <Alert severity="info">
+                        {mensagemAlert}
+                    </Alert>
+                }
+    
+                {tipoAlert === 2 &&
+                    <Alert severity="warning">
+                        {mensagemAlert}
+                    </Alert>
+                }
+    
+                {tipoAlert === 3 &&
+                    <Alert severity="error">
+                        {mensagemAlert}
+                    </Alert>
+                }
+            </>
+        )
+    }
 
     const dadosServicos = [
         'Reparo de Televisor',
@@ -203,8 +203,8 @@ const Perfil = () => {
 
     useEffect(() => {
         if ((!sessionStorage.getItem('shUserLogId')) || (!sessionStorage.getItem('shUserLogTipo'))) {
-            tipoAlert = 3;
-            mensagemAlert = "Faça login antes!";
+            setTipoAlert(3);
+            setMensagemAlert("Faça login antes!");
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -218,8 +218,8 @@ const Perfil = () => {
     }, []);
 
     const logout = () => {
-        tipoAlert = 0;
-        mensagemAlert = "Volte sempre!"
+        setTipoAlert(0);
+        setMensagemAlert("Volte sempre!");
         setMostrarAlert(true);
 
         setTimeout(() => {
@@ -352,8 +352,8 @@ const Perfil = () => {
 
             }
             else {
-                tipoAlert = 3;
-                mensagemAlert = "Dados não retornados!"
+                setTipoAlert(3);
+                setMensagemAlert("Dados não retornados!");
                 setMostrarAlert(true);
 
                 setTimeout(() => {
@@ -365,8 +365,8 @@ const Perfil = () => {
 
         }
         catch (error) {
-            tipoAlert = 3;
-            mensagemAlert = "Erro de requisição!"
+            setTipoAlert(3);
+            setMensagemAlert("Erro de requisição!");
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -405,8 +405,8 @@ const Perfil = () => {
                 localStorage.clear();
             }
             else {
-                tipoAlert = 3;
-                mensagemAlert = "Usuário não excluido!"
+                setTipoAlert(3);
+                setMensagemAlert("Usuário não excluido!");
                 setMostrarAlert(true);
 
                 setTimeout(() => {
@@ -418,8 +418,8 @@ const Perfil = () => {
 
         }
         catch (error) {
-            tipoAlert = 3;
-            mensagemAlert = "Erro de requisição!"
+            setTipoAlert(3);
+            setMensagemAlert("Erro de requisição!");
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -489,8 +489,8 @@ const Perfil = () => {
             //     window.location.reload();
             // }
             // else {
-            //     tipoAlert = 3;
-            //     mensagemAlert = "Erro ao editar!"
+            //     setTipoAlert(3);
+            //     setMensagemAlert("Erro ao editar!");
             //     setMostrarAlert(true);
 
             //     setTimeout(() => {
@@ -502,8 +502,8 @@ const Perfil = () => {
 
         }
         catch (error) {
-            tipoAlert = 3;
-            mensagemAlert = "Erro de requisição!"
+            setTipoAlert(3);
+            setMensagemAlert("Erro de requisição!");
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -556,8 +556,8 @@ const Perfil = () => {
                     setLoading(false);
                 }
                 else {
-                    tipoAlert = 3;
-                    mensagemAlert = "Dados não retornados!"
+                    setTipoAlert(3);
+                    setMensagemAlert("Dados não retornados!");
                     setMostrarAlert(true);
 
                     setTimeout(() => {
@@ -569,8 +569,8 @@ const Perfil = () => {
 
             }
             catch (error) {
-                tipoAlert = 3;
-                mensagemAlert = "Erro de requisição!"
+                setTipoAlert(3);
+                setMensagemAlert("Erro de requisição!");
                 setMostrarAlert(true);
 
                 setTimeout(() => {
@@ -582,8 +582,8 @@ const Perfil = () => {
 
 
         } else {
-            tipoAlert = 3;
-            mensagemAlert = "Preencha todos os campos!"
+            setTipoAlert(3);
+            setMensagemAlert("Preencha todos os campos!");
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -597,8 +597,8 @@ const Perfil = () => {
         let tipoImgFrenteRg = imgFrenteRg[0].type;
 
         if (imgFrenteRg < 1) {
-            tipoAlert = 2;
-            mensagemAlert = "A imagem não foi fornecida!"
+            setTipoAlert(2);
+            setMensagemAlert("A imagem não foi fornecida!");
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -609,8 +609,8 @@ const Perfil = () => {
             (tipoImgFrenteRg != 'image/png')
             && (tipoImgFrenteRg != 'image/jpeg')
         ) {
-            tipoAlert = 2;
-            mensagemAlert = "Formatos aceitos: PNG ou JPEG"
+            setTipoAlert(2);
+            setMensagemAlert("Formatos aceitos: PNG ou JPEG");
             setMostrarAlert(true);
 
             setTimeout(() => {
@@ -631,7 +631,11 @@ const Perfil = () => {
                 tipoUsuario={userTipo}
             />
 
-            <DadosUsuario />
+            <DadosUsuario
+                setMostrarAlert={setMostrarAlert}
+                setTipoAlert={setTipoAlert}
+                setMensagemAlert={setMensagemAlert}
+            />
 
             <>
                 {/* <header className="sh-perfil-header">

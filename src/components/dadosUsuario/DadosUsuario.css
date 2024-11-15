@@ -36,11 +36,28 @@
   & .sh-dadosPerfil-item {
     background-color: red;
     padding: 5px;
+    display: flex;
+
+    & .sh-perfil-foto {
+      background-color: green;
+
+      & .sh-perfil-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 100px;
+      }
+    }
 
     & .sh-fotoPerfil-buttons {
+      background-color: gold;
+
       & .sh-fotoPerfil-input {
         display: none;
       }
+    }
+
+    & .sh-perfil-classificacao {
+      background-color: #0075FF;
     }
   }
 }
