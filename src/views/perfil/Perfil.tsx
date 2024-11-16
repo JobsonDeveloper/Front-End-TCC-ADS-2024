@@ -11,7 +11,7 @@ import entrarButtom from '../../assets/login/icons/entrar.svg';
 import homeImg from '../../assets/login/icons/home.svg';
 import imgLogin from '../../assets/icons/btn-login.svg';
 import Loading from "../../components/loading/Loading";
-import { Alert, Autocomplete, Box, Button, ButtonBase, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, fabClasses, FilledInput, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, Stack, SxProps, TextField, Theme, useMediaQuery, useTheme } from "@mui/material";
+import { Alert, Autocomplete, Box, Button, ButtonBase, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, fabClasses, FilledInput, FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, Slide, Stack, SxProps, TextField, Theme, useMediaQuery, useTheme } from "@mui/material";
 import { Edit, Padding, Visibility, VisibilityOff } from "@mui/icons-material";
 import ServicosAdequados from "../../components/servicosAdequados/ServicosAdequados";
 import fotoPerfil from '../../assets/perfil/icons/perfil.png';
@@ -22,6 +22,7 @@ import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import HeaderPerfilFreela from "../../components/headerPerfilFreela/HeaderPerfilFreela";
 import DadosUsuario from "../../components/dadosUsuario/DadosUsuario";
+import { TransitionProps } from "@mui/material/transitions";
 
 const styledDialogService = {
     '& .sh-servico-dialog-titulo': {
@@ -157,19 +158,19 @@ const Perfil = () => {
                         {mensagemAlert}
                     </Alert>
                 }
-    
+
                 {tipoAlert === 1 &&
                     <Alert severity="info">
                         {mensagemAlert}
                     </Alert>
                 }
-    
+
                 {tipoAlert === 2 &&
                     <Alert severity="warning">
                         {mensagemAlert}
                     </Alert>
                 }
-    
+
                 {tipoAlert === 3 &&
                     <Alert severity="error">
                         {mensagemAlert}

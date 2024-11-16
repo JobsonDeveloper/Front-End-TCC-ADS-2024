@@ -1,9 +1,10 @@
-import { Alert } from "@mui/material";
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from "@mui/material";
 import React, { SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './DadosUsuario.css';
 import imgPerfilPadrao from '../../assets/icons/perfil.svg';
 import imgEstrelas from '../../assets/icons/estrela.svg';
+import { TransitionProps } from "@mui/material/transitions";
 
 // let mensagemAlert = "";
 // let tipoAlert = 0;
@@ -38,7 +39,7 @@ function formatData(data: any) {
     return (`${dia}/${mes}/${ano}`);
 }
 
-const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert }: any) => {
+const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert, setOpenConfirm }: any) => {
     const [loading, setLoading] = useState(true);
     // const [mostrarAlert, setMostrarAlert] = useState(false);
     const pagina = useNavigate();
@@ -57,7 +58,15 @@ const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert }: any) 
     const [userClassificacao, setUserClassificacao] = useState('');
     const [userServicos, setUserServicos] = useState('');
     const [userLimite, setUserLimite] = useState('');
-    // const [file, setFile] = useState<string | null>();
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     async function leituraDeImagem(arquivo: FileList | null) {
         if (arquivo) {
@@ -240,6 +249,11 @@ const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert }: any) 
         }
     }
 
+    async function removeFotoPerfil() {
+        alert('removida');
+        handleClose();
+    }
+
     useEffect(() => {
         if ((!sessionStorage.getItem('shUserLogId')) || (!sessionStorage.getItem('shUserLogTipo'))) {
             setTipoAlert(3);
@@ -259,39 +273,83 @@ const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert }: any) 
     }, []);
 
     return (
-        <ul className="sh-dadosPerfil">
-            <li className="sh-dadosPerfil-item">
-                <div className="sh-perfil-foto">
-                    {userImgPerfil &&
-                        <img src={userImgPerfil} alt="" className="sh-perfil-img" />
-                    }
-                    {!userImgPerfil &&
-                        <img src={imgPerfilPadrao} alt="" className="sh-perfil-img" />
-                    }
-                </div>
+        <>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Deseja remover a foto de perfil?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} autoFocus>Voltar</Button>
+                    <Button onClick={removeFotoPerfil}>Excluir</Button>
+                </DialogActions>
+            </Dialog>
 
-                <div className="sh-fotoPerfil-buttons">
-                    <label htmlFor="sh_input_file_perfil" className="sh-button-imgPerfil">
-                        Mudar foto
-                    </label>
-                    <input
-                        type="file"
-                        id="sh_input_file_perfil"
-                        className="sh-fotoPerfil-input"
-                        onChange={((e) => {
-                            leituraDeImagem(e.target.files);
-                        })}
-                    />
-                    <button className="sh-button-imgPerfil">
-                        Remover foto
-                    </button>
-                </div>
-                <div className="sh-perfil-classificacao">
-                    <img src={imgEstrelas} alt="Estrelas de classificação" />
-                    <p>{userClassificacao}</p>
-                </div>
-            </li>
-        </ul>
+
+            <ul className="sh-dadosPerfil">
+                <li className="sh-dadosPerfil-header">
+                    <div className="sh-opcoesFotoPerfil">
+                        <div className="sh-perfil-foto">
+                            {userImgPerfil &&
+                                <img src={userImgPerfil} alt="" className="sh-perfil-img" />
+                            }
+                            {!userImgPerfil &&
+                                <img src={imgPerfilPadrao} alt="" className="sh-perfil-img" />
+                            }
+                        </div>
+
+                        <div className="sh-perfil-classificacao">
+                            <img src={imgEstrelas} alt="Estrelas de classificação" className="sh-icon-classificacao" />
+                            <p className="sh-numero-classificacao">{userClassificacao}</p>
+                        </div>
+                    </div>
+
+                    <div className="sh-fotoPerfil-buttons">
+                        <label htmlFor="sh_input_file_perfil" className="sh-button-imgPerfil sh-button-mudarFoto">
+                            Mudar foto
+                        </label>
+                        <input
+                            type="file"
+                            id="sh_input_file_perfil"
+                            className="sh-fotoPerfil-input"
+                            onChange={((e) => {
+                                leituraDeImagem(e.target.files);
+                            })}
+                        />
+                        <button
+                            className="sh-button-imgPerfil sh-button-removerFoto"
+                            onClick={handleClickOpen}
+                        >
+                            Remover foto
+                        </button>
+                    </div>
+                </li>
+
+                <li className="sh-dadosPerfil-main">
+                    <ul className="sh-dadosPerfil-informacoes">
+                        <li className="sh-dadosPerfil-main-titulos">Dados básicos</li>
+
+                        <li className="sh-dadosPerfil-main-subtitulos">Nome</li>
+                        <li className="sh-dadosPerfil-main-textos">{ userNome }</li>
+
+                        <li className="sh-dadosPerfil-main-subtitulos">Sobrenome</li>
+                        <li className="sh-dadosPerfil-main-textos">{ userSobrenome }</li>
+                        
+                        <li className="sh-dadosPerfil-main-subtitulos">Data de nascimento</li>
+                        <li className="sh-dadosPerfil-main-textos">{ userNascimento }</li>
+                        
+                        <li className="sh-dadosPerfil-main-subtitulos">Endereço</li>
+                        <li className="sh-dadosPerfil-main-textos">{ userEndereco }</li>
+                    </ul>
+                </li>
+            </ul>
+        </>
     )
 }
 
