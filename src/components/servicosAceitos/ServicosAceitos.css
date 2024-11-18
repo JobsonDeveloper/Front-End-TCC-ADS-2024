@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --sh-servicosAceitos-font-family: "Roboto", sans-serif;
+
+    --sh-servicosAceitos-cor-primaria: #fff;
+    --sh-servicosAceitos-cor-secundaria: #0075FF;
+    --sh-servicosAceitos-cor-terciaria: #000;
+    --sh-servicosAceitos-cor-quaternaria: #35FF62;
+    --sh-servicosAceitos-cor-texto: #494949;
+
+    --sh-servicosAceitos-cor-background-footer: #26466B;
+    --sh-servicosAceitos-cor-background-skillhub: #0089e0;
+    --sh-servicosAceitos-cor-background-components: #356FB0;
+
+    --sh-servicosAceitos-form-width: 300px;
+
+    --sh-servicosAceitos-fontSize-text: 1rem;
+    --sh-servicosAceitos-fontSize-titulos: 1.1rem;
+    --sh-servicosAceitos-fontSize-titulos-servicos: 1.3rem;
+}
+
+& .sh-servicosAceitos {
+    background-color: red;
+    min-height: 100vh;
+}

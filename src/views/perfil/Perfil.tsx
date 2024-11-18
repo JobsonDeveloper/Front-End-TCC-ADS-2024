@@ -23,6 +23,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import HeaderPerfilFreela from "../../components/headerPerfilFreela/HeaderPerfilFreela";
 import DadosUsuario from "../../components/dadosUsuario/DadosUsuario";
 import { TransitionProps } from "@mui/material/transitions";
+import ServicosAceitos from "../../components/servicosAceitos/ServicosAceitos";
 
 const styledDialogService = {
     '& .sh-servico-dialog-titulo': {
@@ -122,7 +123,6 @@ let freelaLimit: string | null = ""
 
 let userId: string | null = "";
 let userTipo: string | null = "";
-let tipoUsuario: string | null = "";
 
 const servicosAceitos: any = [];
 const servicosFinalizados: any = [];
@@ -149,6 +149,7 @@ const Perfil = () => {
     const [openNovoServico, setOpenNovoServico] = useState(false);
     const [tipoAlert, setTipoAlert] = useState<number>();
     const [mensagemAlert, setMensagemAlert] = useState<string>();
+    const [paginaPerfil, setPaginaPerfil] = useState<number>(1);
 
     const ShAlert = () => {
         return (
@@ -215,6 +216,7 @@ const Perfil = () => {
         }
         else {
             setLoading(false);
+            pegaDados();
         }
     }, []);
 
@@ -228,7 +230,7 @@ const Perfil = () => {
             sessionStorage.clear();
             pagina('/login');
         }, 4000);
-    }
+    };
 
     function formatData(data: any) {
         let dataFormatUm = new Date(data);
@@ -245,138 +247,136 @@ const Perfil = () => {
         }
 
         return (`${dia}/${mes}/${ano}`);
-    }
+    };
 
     async function pegaDados() {
         userId = sessionStorage.getItem('shUserLogId');
         userTipo = sessionStorage.getItem('shUserLogTipo');
 
-        try {
-            setLoading(true);
-            const formData = new FormData();
-            formData.append('acao', 'dados_perfil');
+        // try {
+        //     setLoading(true);
+        //     const formData = new FormData();
+        //     formData.append('acao', 'dados_perfil');
 
-            if (userTipo === "0") {
-                formData.append('idfre', `${userId}`);
-            }
-            else {
-                formData.append('idcliente', `${userId}`);
-            }
+        //     if (userTipo === "0") {
+        //         formData.append('idfre', `${userId}`);
+        //     }
+        //     else {
+        //         formData.append('idcliente', `${userId}`);
+        //     }
 
-            const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
-                method: 'POST',
-                mode: 'cors',
-                body: formData
-            });
+        //     const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+        //         method: 'POST',
+        //         mode: 'cors',
+        //         body: formData
+        //     });
 
-            const response = await request.json();
+        //     const response = await request.json();
 
-            if (response.status === 200) {
-                const dadosUsuario = response.dadosUser;
-                const servicosAceitosData = response.servAceitos;
-                const servicosFinalizadosData = response.servConc;
+        //     if (response.status === 200) {
+        //         const dadosUsuario = response.dadosUser;
+        //         const servicosAceitosData = response.servAceitos;
+        //         const servicosFinalizadosData = response.servConc;
 
-                console.log(response);
+        //         if (userTipo === "1") {
+        //             const servicosRegistradosData = response.servRegist;
 
-                if (userTipo === "1") {
-                    const servicosRegistradosData = response.servRegist;
+        //             if (servicosRegistrados[0] === undefined) {
+        //                 servicosRegistradosData.map((dados: any) => {
+        //                     servicosRegistrados.push({
+        //                         id: dados.id,
+        //                         tag: dados.tipo,
+        //                         descricao: dados.descricao,
+        //                         remuneracao: dados.remuneracao,
+        //                     });
+        //                 })
+        //             }
 
-                    if (servicosRegistrados[0] === undefined) {
-                        servicosRegistradosData.map((dados: any) => {
-                            servicosRegistrados.push({
-                                id: dados.id,
-                                tag: dados.tipo,
-                                descricao: dados.descricao,
-                                remuneracao: dados.remuneracao,
-                            });
-                        })
-                    }
+        //             userNome = dadosUsuario.nome;
+        //             userSobrenome = dadosUsuario.sobrenome;
+        //             userNascimento = formatData(dadosUsuario.nascimento);
+        //             userClassificacao = dadosUsuario.classificacao;
+        //             userEndereco = dadosUsuario.endereco;
+        //             userTelefone = dadosUsuario.telefone;
+        //             userEmail = dadosUsuario.email;
+        //             userDataCriacao = formatData(dadosUsuario.data_de_criacao);
+        //             userFotoPerfil = dadosUsuario.imagem_perfil;
 
-                    userNome = dadosUsuario.nome;
-                    userSobrenome = dadosUsuario.sobrenome;
-                    userNascimento = formatData(dadosUsuario.nascimento);
-                    userClassificacao = dadosUsuario.classificacao;
-                    userEndereco = dadosUsuario.endereco;
-                    userTelefone = dadosUsuario.telefone;
-                    userEmail = dadosUsuario.email;
-                    userDataCriacao = formatData(dadosUsuario.data_de_criacao);
-                    userFotoPerfil = dadosUsuario.imagem_perfil;
+        //         }
+        //         else {
+        //             userNome = dadosUsuario[0].nome;
+        //             userSobrenome = dadosUsuario[0].sobrenome;
+        //             userNascimento = formatData(dadosUsuario[0].nascimento);
+        //             userClassificacao = dadosUsuario[0].classificacao;
+        //             userEndereco = dadosUsuario[0].endereco;
+        //             userTelefone = dadosUsuario[0].telefone;
+        //             userEmail = dadosUsuario[0].email;
+        //             userDataCriacao = formatData(dadosUsuario[0].data_de_criacao);
+        //             userFotoPerfil = dadosUsuario[0].imagem_perfil;
+        //             freelaServico = dadosUsuario[0].servicos;
+        //             freelaLimit = dadosUsuario[0].limite;
+        //         }
 
-                }
-                else {
-                    userNome = dadosUsuario[0].nome;
-                    userSobrenome = dadosUsuario[0].sobrenome;
-                    userNascimento = formatData(dadosUsuario[0].nascimento);
-                    userClassificacao = dadosUsuario[0].classificacao;
-                    userEndereco = dadosUsuario[0].endereco;
-                    userTelefone = dadosUsuario[0].telefone;
-                    userEmail = dadosUsuario[0].email;
-                    userDataCriacao = formatData(dadosUsuario[0].data_de_criacao);
-                    userFotoPerfil = dadosUsuario[0].imagem_perfil;
-                    freelaServico = dadosUsuario[0].servicos;
-                    freelaLimit = dadosUsuario[0].limite;
-                }
+        //         setLoading(false);
 
-                setLoading(false);
+        //         if (servicosAceitos[0] === undefined) {
+        //             servicosAceitosData.map((dados: any) => {
+        //                 servicosAceitos.push({
+        //                     id: dados.id,
+        //                     clienteId: dados.cliente_id,
+        //                     freelaId: dados.freelancer_id,
+        //                     tag: dados.tipo,
+        //                     data: dados.data_servico,
+        //                     endereco: dados.local_servico,
+        //                     descricao: dados.descricao,
+        //                     remuneracao: dados.remuneracao,
+        //                     status: dados.status
+        //                 });
+        //             })
+        //         }
 
-                if (servicosAceitos[0] === undefined) {
-                    servicosAceitosData.map((dados: any) => {
-                        servicosAceitos.push({
-                            id: dados.id,
-                            clienteId: dados.cliente_id,
-                            freelaId: dados.freelancer_id,
-                            tag: dados.tipo,
-                            data: dados.data_servico,
-                            endereco: dados.local_servico,
-                            descricao: dados.descricao,
-                            remuneracao: dados.remuneracao,
-                            status: dados.status
-                        });
-                    })
-                }
+        //         if (servicosFinalizados[0] === undefined) {
+        //             servicosFinalizadosData.map((dados: any) => {
+        //                 servicosFinalizados.push({
+        //                     id: dados.id,
+        //                     clienteId: dados.cliente_id,
+        //                     tag: dados.tipo,
+        //                     data: dados.data_servico,
+        //                     endereco: dados.local_servico,
+        //                     descricao: dados.descricao,
+        //                     remuneracao: dados.remuneracao,
+        //                     status: dados.status,
+        //                     freelaId: dados.freelancer_id
+        //                 });
+        //             })
+        //         }
 
-                if (servicosFinalizados[0] === undefined) {
-                    servicosFinalizadosData.map((dados: any) => {
-                        servicosFinalizados.push({
-                            id: dados.id,
-                            clienteId: dados.cliente_id,
-                            tag: dados.tipo,
-                            data: dados.data_servico,
-                            endereco: dados.local_servico,
-                            descricao: dados.descricao,
-                            remuneracao: dados.remuneracao,
-                            status: dados.status,
-                            freelaId: dados.freelancer_id
-                        });
-                    })
-                }
+        //     }
+        //     else {
+        //         setTipoAlert(3);
+        //         setMensagemAlert("Dados não retornados!");
+        //         setMostrarAlert(true);
 
-            }
-            else {
-                setTipoAlert(3);
-                setMensagemAlert("Dados não retornados!");
-                setMostrarAlert(true);
-
-                setTimeout(() => {
-                    setMostrarAlert(false);
-                    setLoading(false);
-                }, 4000);
-            }
+        //         setTimeout(() => {
+        //             setMostrarAlert(false);
+        //             setLoading(false);
+        //         }, 4000);
+        //     }
 
 
-        }
-        catch (error) {
-            setTipoAlert(3);
-            setMensagemAlert("Erro de requisição!");
-            setMostrarAlert(true);
+        // }
+        // catch (error) {
+        //     setTipoAlert(3);
+        //     setMensagemAlert("Erro de requisição!");
+        //     setMostrarAlert(true);
 
-            setTimeout(() => {
-                setMostrarAlert(false);
-                setLoading(false);
-            }, 4000);
-            console.error(error);
-        }
-    }
+        //     setTimeout(() => {
+        //         setMostrarAlert(false);
+        //         setLoading(false);
+        //     }, 4000);
+        //     console.error(error);
+        // }
+    };
 
     async function excluirConta(e: any) {
         e.preventDefault();
@@ -429,17 +429,19 @@ const Perfil = () => {
             }, 4000);
             console.error(error);
         }
-    }
+    };
 
     const handleClose = () => {
         setOpenDelete(false);
     };
+
     const handleCloseEditPerfil = () => {
         setOpenDelete(false);
     };
+
     const handleCloseNovoServico = () => {
         setOpenNovoServico(false);
-    }
+    };
 
     async function editPerfil(e: any) {
         e.preventDefault();
@@ -513,7 +515,7 @@ const Perfil = () => {
             }, 4000);
             console.error(error);
         }
-    }
+    };
 
     async function novoServico(e: any) {
         e.preventDefault();
@@ -541,8 +543,6 @@ const Perfil = () => {
                 formData.append('desc', `${servicoDescricao}`);
                 formData.append('grana', `${servicoRemuneracao}`);
                 formData.append('tipo', `${servicoTipoValor}`);
-
-                // console.log(data);
 
                 const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
                     method: 'POST',
@@ -591,7 +591,7 @@ const Perfil = () => {
                 setMostrarAlert(false);
             }, 4000);
         }
-    }
+    };
 
     const pegaImgRgFrente = (documento: any) => {
         let imgFrenteRg = documento.target.files;
@@ -621,7 +621,7 @@ const Perfil = () => {
         else {
             setImgPerfil(imgFrenteRg);
         }
-    }
+    };
 
     return (
         <main className="sh-perfil">
@@ -630,13 +630,33 @@ const Perfil = () => {
             <HeaderPerfilFreela
                 setMostrarAlert={setMostrarAlert}
                 tipoUsuario={userTipo}
+                setPaginaPerfil={setPaginaPerfil}
             />
 
-            <DadosUsuario
-                setMostrarAlert={setMostrarAlert}
-                setTipoAlert={setTipoAlert}
-                setMensagemAlert={setMensagemAlert}
-            />
+            {paginaPerfil === 1 &&
+                <DadosUsuario
+                    setMostrarAlert={setMostrarAlert}
+                    setTipoAlert={setTipoAlert}
+                    setMensagemAlert={setMensagemAlert}
+                    setLoading={setLoading}
+                    pagina={pagina}
+                />
+            }
+            {paginaPerfil === 2 &&
+                <ServicosAceitos
+                    setMostrarAlert={setMostrarAlert}
+                    setTipoAlert={setTipoAlert}
+                    setMensagemAlert={setMensagemAlert}
+                    setLoading={setLoading}
+                    pagina={pagina}
+                />
+            }
+
+            <footer className="sh-perfil-footer">
+                <div className="sh-footer">
+                    <Footer />
+                </div>
+            </footer>
 
             <>
                 {/* <header className="sh-perfil-header">

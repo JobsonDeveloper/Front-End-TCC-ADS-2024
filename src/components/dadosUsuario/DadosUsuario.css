@@ -97,11 +97,11 @@
       }
 
       & .sh-button-mudarFoto {
-        background-color: var(--sh-dadosPerfil-cor-background-skillhub);
+        background-color: var(--sh-dadosPerfil-cor-background-components);
         color: var(--sh-dadosPerfil-cor-primaria);
 
         &:hover {
-          background-color: #0463cf;
+          background-color: #044da0;
         }
       }
 
@@ -118,13 +118,14 @@
   }
 
   & .sh-dadosPerfil-main {
-    background-color: red;
     padding: 20px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
     & .sh-dadosPerfil-informacoes {
       list-style-type: none;
-      padding: 0 0 20px;
-      background-color: rgb(175, 255, 175);
+      padding: 0;
 
       & .sh-dadosPerfil-main-titulos {
         font-size: var(--sh-dadosPerfil-font-size-subtitulos);
@@ -144,6 +145,38 @@
         font-weight: 300;
         padding: 0 0 15px;
       }
+    }
+
+    & .sh-dadosPerfil-opcoes {
+      display: flex;
+      gap: 15px;
+
+      & .sh-dadosPerfil-opcoes-buttons {
+        padding: 1px 5px;
+        border: none;
+        border-radius: 5px;
+        font-size: var(--sh-dadosPerfil-font-size-textos);
+        outline: none;
+      }
+
+      & .sh-options-button-editar {
+        color: var(--sh-dadosPerfil-cor-primaria);
+        background-color: var(--sh-dadosPerfil-cor-background-components);
+
+        &:hover {
+          background-color: #044da0;
+        }
+      }
+
+      & .sh-options-button-excluir {
+        color: #fc6060;
+        background-color: transparent;
+
+        &:hover {
+          color: #ff0000;
+        }
+      }
+      
     }
   }
 }

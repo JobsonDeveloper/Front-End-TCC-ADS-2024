@@ -26,7 +26,7 @@ import { Alert } from '@mui/material';
 let mensagemAlert = "asdasdasda";
 let tipoAlert = 0;
 
-const HeaderPerfilFreela = ({ setMostrarAlert, tipoUsuario }: any) => {
+const HeaderPerfilFreela = ({ setMostrarAlert, tipoUsuario, setPaginaPerfil }: any) => {
     // ---- Const Bootstrap
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -85,9 +85,14 @@ const HeaderPerfilFreela = ({ setMostrarAlert, tipoUsuario }: any) => {
                         <li className="sh-navegacao-item d-lg-none">
                             <PersonRoundedIcon />
 
-                            <Link to='/perfil' className='sh-item-text'>
+                            <p
+                                className='sh-item-text'
+                                onClick={() => {
+                                    setPaginaPerfil(1);
+                                    handleClose();
+                                }}>
                                 Perfil
-                            </Link>
+                            </p>
                         </li>
 
                         <li className="sh-navegacao-item">
@@ -95,7 +100,12 @@ const HeaderPerfilFreela = ({ setMostrarAlert, tipoUsuario }: any) => {
                                 <>
                                     <ChecklistRoundedIcon />
 
-                                    <p className='sh-item-text' onClick={logout}>
+                                    <p
+                                        className='sh-item-text'
+                                        onClick={() => {
+                                            setPaginaPerfil(2);
+                                            handleClose();
+                                        }}>
                                         Serviços aceitos
                                     </p>
                                 </>
@@ -104,7 +114,12 @@ const HeaderPerfilFreela = ({ setMostrarAlert, tipoUsuario }: any) => {
                                 <>
                                     <FormatListNumberedRoundedIcon />
 
-                                    <p className='sh-item-text' onClick={logout}>
+                                    <p 
+                                    className='sh-item-text' 
+                                    onClick={() => {
+                                        setPaginaPerfil(3);
+                                        handleClose();
+                                    }}>
                                         Serviços solicitados
                                     </p>
                                 </>
@@ -114,7 +129,12 @@ const HeaderPerfilFreela = ({ setMostrarAlert, tipoUsuario }: any) => {
                         <li className="sh-navegacao-item">
                             <InventoryRoundedIcon />
 
-                            <p className='sh-item-text' onClick={logout}>
+                            <p 
+                            className='sh-item-text' 
+                            onClick={() => {
+                                setPaginaPerfil(4);
+                                handleClose();
+                            }}>
                                 Serviços concluídos
                             </p>
                         </li>
