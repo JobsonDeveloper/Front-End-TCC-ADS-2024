@@ -27,6 +27,140 @@
 }
 
 & .sh-servicosAceitos {
-    background-color: red;
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .sh-servicosLista {
+        display: flex;
+        gap: 30px;
+        overflow-x: auto;
+        list-style-type: none;
+        padding: 10px;
+        width: 100%;
+
+
+        & .sh-servicosItem {
+            width: 300px;
+            /* overflow: hidden; */
+            border-radius: 5px;
+            box-shadow: 3px 3px 7px #000;
+            cursor: pointer;
+
+
+            & .sh-servicosItem-lista {
+                background-color: var(--sh-ListaServicos-cor-primaria);
+                list-style-type: none;
+                padding: 0;
+                border-radius: 5px;
+                height: 100%;
+
+                & .sh-servicosLista-item {
+
+                    & .sh-servicosLista-imagem {
+                        width: 300px;
+                        border-radius: 5px 5px 0 0;
+
+                    }
+                }
+
+                & .sh-servicosLista-fotoServico {
+                    height: 170px;
+                    overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    border-radius: 5px 5px 0 0;
+                }
+
+                & .sh-servicosLista-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 2px 5px;
+
+                    & .sh-servicosLista-fotoNome {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+
+                        & .sh-servicosLista-clienteImg {
+                            width: 40px;
+                        }
+
+                        & .sh-servicosLista-nomeCliente {
+                            margin: 0;
+                            /* Limitar tamanho de texto */
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
+                            max-width: 180px;
+                            height: max-content;
+                        }
+                    }
+
+
+                    & .sh-servicosLista-classificacao {
+                        height: max-content;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        & .sh-servicosLista-classificacaoImg {
+                            width: 23px;
+                        }
+
+                        & .sh-servicosLista-classificacaoNumero {
+                            margin: 0;
+                        }
+                    }
+                }
+
+                & .sh-servicosLista-main {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px 5px;
+                    height: 140px;
+
+                    & .sh-servicosLista-tipoServico {
+                        margin: 0;
+                        font-size: var(--sh-ListaServicos-font-size-textos);
+                        color: var(--sh-ListaServicos-cor-terciaria);
+                        font-weight: bold;
+                    }
+
+                    & .sh-servicosLista-descricaoServico {
+                        margin: 0;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 4;
+                        -webkit-box-orient: vertical;
+                        max-width: 100%;
+                        height: max-content;
+                    }
+                }
+
+                & .sh-servicosLista-footer {
+                    display: flex;
+                    padding: 5px;
+                    background-color: var(--sh-ListaServicos-cor-background-components);
+                    border-radius: 0 0 5px 5px;
+
+                    & .sh-servicosLista-remuneracao {
+                        margin: 0;
+                        font-size: var(--sh-ListaServicos-font-size-textos);
+                        font-weight: 500;
+                        color: var(--sh-ListaServicos-cor-primaria);
+                    }
+                }
+            }
+        }
+
+        & .sh-servicosItem:hover {
+            box-shadow: none;
+        }
+    }
 }
