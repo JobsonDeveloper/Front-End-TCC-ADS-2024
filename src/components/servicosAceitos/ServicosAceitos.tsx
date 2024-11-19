@@ -84,19 +84,10 @@ const ServicosAceitos = ({ setMostrarAlert, setTipoAlert, setMensagemAlert, setL
                             });
                         });
                     }
-                    setLoading(false);
                 }
             }
-            else {
-                setTipoAlert(3);
-                setMensagemAlert("Dados não retornados!");
-                setMostrarAlert(true);
 
-                setTimeout(() => {
-                    setMostrarAlert(false);
-                    setLoading(false);
-                }, 4000);
-            }
+            setLoading(false);
         }
         catch (error) {
             setTipoAlert(3);
@@ -200,7 +191,14 @@ const ServicosAceitos = ({ setMostrarAlert, setTipoAlert, setMensagemAlert, setL
         <article className="sh-servicosAceitos">
             <ul className="sh-servicosLista">
                 {listaServicos}
+ 
+                {servicosAceitos.length === 0 &&
+                    <h2 className="sh-servicosAceitos-semServicos">
+                        Nenhum serviço aceito
+                    </h2>
+                }
             </ul>
+
         </article>
     )
 }

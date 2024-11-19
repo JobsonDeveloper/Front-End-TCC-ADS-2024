@@ -54,6 +54,11 @@
     overflow-x: hidden;
     position: relative;
 
+    & .sh-perfil-header-lg {
+        width: 100%;
+        background-color: blue;
+    }
+
     & .sh-perfil-header {
         display: flex;
         padding: 3px 5px;
@@ -282,95 +287,170 @@
 
 @media (min-width: 992px) {
     .sh-perfil {
-        & .sh-perfil-main {
-            & .sh-dados-lista {
-                grid-template-areas:
-                    "header header "
-                    "nascimento endereco"
-                    "telefone servico"
-                    "email criacao"
-                    "buttons buttons";
 
-                & .sh-dados-item {
-                    & .sh-dados-item-text {
-                        margin: 0;
-                        font-size: .9rem;
-                        color: var(--sh-perfil-cor-texto);
+        & .sh-perfil-dados {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+
+            & .sh-sideBar {
+                border-right: 1px solid var(--sh-perfil-cor-texto);
+                width: 300px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+
+                & .sh-sideBar-logo {
+                    width: 100%;
+                    height: max-content;
+                    display: flex;
+                    justify-content: center;
+                    padding: 10px 0;
+
+                    & .sh-sideBar-logo-img {
+                        width: 130px;
                     }
                 }
 
-                & .sh-nascimento {
-                    margin-top: 0;
+                & .sh-sideBar-navegacao {
+                    list-style-type: none;
+                    padding: 0;
                     display: flex;
-                    gap: 15px;
-                }
+                    flex-direction: column;
+                    gap: 5px;
 
-                & .sh-endereco {
-                    grid-area: endereco;
-                    display: flex;
-                    gap: 15px;
-                }
+                    & .sh-sideBar-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        min-width: 250px;
+                        cursor: pointer;
+                        color: var(--sh-perfil-cor-terciaria);
+                        padding: 8px 15px 8px 15px;
 
-                & .sh-telefone {
-                    grid-area: telefone;
-                    display: flex;
-                    gap: 15px;
-                }
+                        &:hover {
+                            background-color: rgb(236, 245, 252);
+                        }
 
-                & .sh-servicos {
-                    grid-area: servico;
-                    display: flex;
-                    gap: 15px;
-                }
-
-                & .sh-email {
-                    grid-area: email;
-                    display: flex;
-                    gap: 15px;
-                }
-
-                & .sh-criacao {
-                    grid-area: criacao;
-                    display: flex;
-                    gap: 15px;
-                }
-
-                & .sh-buttons {
-                    display: flex;
-                    justify-content: start;
-                }
-
-                & .perfil-foto-nome {
-                    & .sh-dados-headerDois {
-                        & .sh-dados-adicionais {
-                            & .sh-dadosBase-item {
-                                align-items: self-start;
-
-
-                                & img {
-                                    width: 16px;
-                                }
-
-                                & .sh-dados-item-text {
-                                    padding: 0;
-                                    margin: 0;
-                                    display: flex;
-                                    font-size: .9rem;
-                                }
-                            }
-
-                            & .sh-dadosBase-item {
-
-                                & svg {
-                                    width: 16px;
-                                }
-                            }
-
-
+                        & .sh-item-text {
+                            margin: 0;
+                            font-size: var(--sh-perfil-fontSize-text);
+                            font-weight: 380;
+                            text-wrap: nowrap;
                         }
                     }
                 }
             }
+
+            & .sh-main {
+                width: 100%;
+
+                & .sh-header-desktop {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 10px;
+                    text-decoration: none;
+                    color: var(--sh-perfil-cor-texto);
+                    cursor: pointer;
+
+                    & .sh-perfil-titulo {
+                        color: var(--sh-perfil-cor-terciaria);
+                        font-size: var(--sh-perfil-fontSize-titulos-servicos);
+                    }
+                }
+            }
+
+            /* & .sh-perfil-main {
+                & .sh-dados-lista {
+                    grid-template-areas:
+                        "header header "
+                        "nascimento endereco"
+                        "telefone servico"
+                        "email criacao"
+                        "buttons buttons";
+
+                    & .sh-dados-item {
+                        & .sh-dados-item-text {
+                            margin: 0;
+                            font-size: .9rem;
+                            color: var(--sh-perfil-cor-texto);
+                        }
+                    }
+
+                    & .sh-nascimento {
+                        margin-top: 0;
+                        display: flex;
+                        gap: 15px;
+                    }
+
+                    & .sh-endereco {
+                        grid-area: endereco;
+                        display: flex;
+                        gap: 15px;
+                    }
+
+                    & .sh-telefone {
+                        grid-area: telefone;
+                        display: flex;
+                        gap: 15px;
+                    }
+
+                    & .sh-servicos {
+                        grid-area: servico;
+                        display: flex;
+                        gap: 15px;
+                    }
+
+                    & .sh-email {
+                        grid-area: email;
+                        display: flex;
+                        gap: 15px;
+                    }
+
+                    & .sh-criacao {
+                        grid-area: criacao;
+                        display: flex;
+                        gap: 15px;
+                    }
+
+                    & .sh-buttons {
+                        display: flex;
+                        justify-content: start;
+                    }
+
+                    & .perfil-foto-nome {
+                        & .sh-dados-headerDois {
+                            & .sh-dados-adicionais {
+                                & .sh-dadosBase-item {
+                                    align-items: self-start;
+
+
+                                    & img {
+                                        width: 16px;
+                                    }
+
+                                    & .sh-dados-item-text {
+                                        padding: 0;
+                                        margin: 0;
+                                        display: flex;
+                                        font-size: .9rem;
+                                    }
+                                }
+
+                                & .sh-dadosBase-item {
+
+                                    & svg {
+                                        width: 16px;
+                                    }
+                                }
+
+
+                            }
+                        }
+                    }
+                }
+            } */
         }
     }
 }
@@ -378,7 +458,7 @@
 
 @media (min-width: 1400px) {
     .sh-perfil {
-        align-items: center;
+        /* align-items: center; */
 
         & .sh-perfil-header {
             width: 1400px;

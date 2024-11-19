@@ -67,7 +67,7 @@ const HeaderPerfilFreela = ({ setMostrarAlert, tipoUsuario, setPaginaPerfil }: a
                 </li>
             </ul>
 
-            <Offcanvas show={show} onHide={handleClose} responsive="lg" className='sh-header-offcanvas'>
+            <Offcanvas show={show} onHide={handleClose} responsive="lg" className='sh-header-offcanvas d-lg-none'>
                 <div className="d-none d-lg-block sh-desktop-logo">
                     <Link to='/'>
                         <img src={Logo} alt="Logo da SkillHub" className='sh-logo-img' />

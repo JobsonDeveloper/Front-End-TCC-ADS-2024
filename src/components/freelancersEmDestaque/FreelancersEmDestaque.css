@@ -69,6 +69,8 @@
                 & .sh-freela-foto {
                     & .sh-freela-imagem {
                         width: 45px;
+                        height: 45px;
+                        border-radius: 100%;
                         height: max-content;
                     }
                 }

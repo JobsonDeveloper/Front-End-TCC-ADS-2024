@@ -176,7 +176,41 @@
           color: #ff0000;
         }
       }
-      
+
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  & .sh-dadosPerfil {
+
+    & .sh-dadosPerfil-main {
+      display: grid;
+      grid-template-areas:
+        "dadosBase adicionais"
+        "buttons buttons";
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  & .sh-dadosPerfil {
+    margin: 0;
+
+    & .sh-dadosPerfil-main {
+
+      &:nth-child(1) {
+        grid-area: dadosBase;
+      }
+
+      &:nth-child(2) {
+        grid-area: adicionais;
+      }
+
+      &:nth-child(3) {
+        grid-area: buttons;
+      }
     }
   }
 }

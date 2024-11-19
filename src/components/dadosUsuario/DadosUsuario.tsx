@@ -9,8 +9,8 @@ import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from "dayjs";
 
-let userId:string | null= ''
-let userTipo:string | null= ''
+let userId: string | null = ''
+let userTipo: string | null = ''
 
 const dadosServicos = [
     'Reparo de Televisor',
@@ -89,7 +89,7 @@ function formatDataBanco(data: any) {
     return (`${ano}-${mes}-${dia}`);
 }
 
-const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert, setOpenConfirm}: any) => {
+const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert, setOpenConfirm }: any) => {
     const [loading, setLoading] = useState(true);
     // const [mostrarAlert, setMostrarAlert] = useState(false);
     const pagina = useNavigate();
@@ -487,268 +487,269 @@ const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert, setOpen
         }
     }, []);
 
-    return (<>
-        {/* Remover foto de Perfil */}
-        <Dialog
-            open={open}
-            onClose={fecharDialogConfirmExcliImgPerfil}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-        >
-            <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    Deseja remover a foto de perfil?
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={fecharDialogConfirmExcliImgPerfil} autoFocus>Voltar</Button>
-                <Button onClick={removeFotoPerfil}>Excluir</Button>
-            </DialogActions>
-        </Dialog>
+    return (
+        <>
+            {/* Remover foto de Perfil */}
+            <Dialog
+                open={open}
+                onClose={fecharDialogConfirmExcliImgPerfil}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Deseja remover a foto de perfil?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={fecharDialogConfirmExcliImgPerfil} autoFocus>Voltar</Button>
+                    <Button onClick={removeFotoPerfil}>Excluir</Button>
+                </DialogActions>
+            </Dialog>
 
-        {/* Excluir Perfil */}
-        <Dialog
-            open={openDialogConfirmExcluiConta}
-            onClose={fecharDialogConfirmExcluiPerfil}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-        >
-            <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    Deseja excluir o perfil?
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={fecharDialogConfirmExcluiPerfil} autoFocus>Voltar</Button>
-                <Button onClick={removeFotoPerfil}>Excluir</Button>
-            </DialogActions>
-        </Dialog>
+            {/* Excluir Perfil */}
+            <Dialog
+                open={openDialogConfirmExcluiConta}
+                onClose={fecharDialogConfirmExcluiPerfil}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Deseja excluir o perfil?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={fecharDialogConfirmExcluiPerfil} autoFocus>Voltar</Button>
+                    <Button onClick={removeFotoPerfil}>Excluir</Button>
+                </DialogActions>
+            </Dialog>
 
-        {/* Editar Perfil */}
-        <Dialog
-            open={openDialogEditarPerfil}
-            onClose={fechaDialogEditarPerfil}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-        >
-            <DialogTitle id="alert-dialog-title">
-                {"Editar perfil"}
-            </DialogTitle>
-            <DialogContent>
-                <DialogContentText id="alert-dialog-description" sx={styledDialogEditaPerfil}>
-                    <TextField
-                        label="Nome"
-                        variant="standard"
-                        type="text"
-                        sx={styledTextField}
-                        onChange={(e: any) => setNovoNome(e.target.value)}
-                        defaultValue={userNome}
-                    />
-
-                    <TextField
-                        label="Sobrenome"
-                        variant="standard"
-                        type="text"
-                        sx={styledTextField}
-                        onChange={(e: any) => setNovoSobrenome(e.target.value)}
-                        defaultValue={userSobrenome}
-                    />
-
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateField
-                            label="Nascimento"
+            {/* Editar Perfil */}
+            <Dialog
+                open={openDialogEditarPerfil}
+                onClose={fechaDialogEditarPerfil}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Editar perfil"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description" sx={styledDialogEditaPerfil}>
+                        <TextField
+                            label="Nome"
                             variant="standard"
-                            format="DD/MM/YYYY"
+                            type="text"
                             sx={styledTextField}
-                            onChange={(e: any) => setNovaDataNascimento(e)}
-                            defaultValue={dayjs(userNascimento)}
+                            onChange={(e: any) => setNovoNome(e.target.value)}
+                            defaultValue={userNome}
                         />
-                    </LocalizationProvider>
 
-                    <TextField
-                        label="Endereço"
-                        variant="standard"
-                        type="text"
-                        sx={styledTextField}
-                        onChange={(e: any) => setNovoEndereco(e.target.value)}
-                        defaultValue={userEndereco}
-                    />
+                        <TextField
+                            label="Sobrenome"
+                            variant="standard"
+                            type="text"
+                            sx={styledTextField}
+                            onChange={(e: any) => setNovoSobrenome(e.target.value)}
+                            defaultValue={userSobrenome}
+                        />
 
-                    <TextField
-                        label="Telefone"
-                        variant="standard"
-                        type="tel"
-                        sx={styledTextField}
-                        onChange={(e: any) => setNovoTelefone(e.target.value)}
-                        defaultValue={userTelefone}
-                    />
-
-                    <TextField
-                        label="E-mail"
-                        variant="standard"
-                        type="text"
-                        sx={styledTextField}
-                        onChange={(e: any) => setNovoEmail(e.target.value)}
-                        defaultValue={userEmail}
-                    />
-
-                    <TextField
-                        label="Senha"
-                        variant="standard"
-                        type="text"
-                        sx={styledTextField}
-                        onChange={(e: any) => setNovaSenha(e.target.value)}
-                    />
-
-                    {userTipo === '0' &&
-                        <>
-                            <Stack spacing={1} sx={styledSelectServicos}>
-                                <Autocomplete
-                                    {...capturaServicos}
-                                    disableClearable
-                                    defaultValue={'Serviço um'}
-                                    onChange={(event: any, newValue: string) => {
-                                        setNovoServicoUm(newValue);
-                                    }}
-                                    renderInput={(parametros) => (
-                                        <TextField {...parametros}
-                                            label=""
-                                            variant="standard" />
-                                    )}
-                                />
-                            </ Stack>
-
-                            <Stack spacing={1} sx={styledSelectServicos}>
-                                <Autocomplete
-                                    {...capturaServicos}
-                                    disableClearable
-                                    defaultValue={'Serviço dois'}
-                                    onChange={(event: any, newValue: string) => {
-                                        setNovoServicoDois(newValue);
-                                    }}
-                                    renderInput={(parametros) => (
-                                        <TextField {...parametros}
-                                            label=""
-                                            variant="standard" />
-                                    )}
-                                />
-                            </ Stack>
-
-                            <Stack spacing={1} sx={styledSelectServicos}>
-                                <Autocomplete
-                                    {...capturaServicos}
-                                    disableClearable
-                                    defaultValue={'Serviço três'}
-                                    onChange={(event: any, newValue: string) => {
-                                        setNovoServicoTres(newValue);
-                                    }}
-                                    renderInput={(parametros) => (
-                                        <TextField {...parametros}
-                                            label=""
-                                            variant="standard" />
-                                    )}
-                                />
-                            </ Stack>
-
-                            <TextField
-                                id="filled-multiline-static"
-                                label="Apresentação"
-                                multiline
-                                maxRows={6}
-                                defaultValue={userApresentacao}
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DateField
+                                label="Nascimento"
+                                variant="standard"
+                                format="DD/MM/YYYY"
+                                sx={styledTextField}
+                                onChange={(e: any) => setNovaDataNascimento(e)}
+                                defaultValue={dayjs(userNascimento)}
                             />
-                        </>
-                    }
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={fechaDialogEditarPerfil} autoFocus>Voltar</Button>
-                <Button onClick={(e) => editarDadosPerfil(e.nativeEvent)}>Editar</Button>
-            </DialogActions>
-        </Dialog>
+                        </LocalizationProvider>
 
-        <ul className="sh-dadosPerfil">
-            <li className="sh-dadosPerfil-header">
-                <div className="sh-opcoesFotoPerfil">
-                    <div className="sh-perfil-foto">
-                        {userImgPerfil &&
-                            <img src={userImgPerfil} alt="" className="sh-perfil-img" />
+                        <TextField
+                            label="Endereço"
+                            variant="standard"
+                            type="text"
+                            sx={styledTextField}
+                            onChange={(e: any) => setNovoEndereco(e.target.value)}
+                            defaultValue={userEndereco}
+                        />
+
+                        <TextField
+                            label="Telefone"
+                            variant="standard"
+                            type="tel"
+                            sx={styledTextField}
+                            onChange={(e: any) => setNovoTelefone(e.target.value)}
+                            defaultValue={userTelefone}
+                        />
+
+                        <TextField
+                            label="E-mail"
+                            variant="standard"
+                            type="text"
+                            sx={styledTextField}
+                            onChange={(e: any) => setNovoEmail(e.target.value)}
+                            defaultValue={userEmail}
+                        />
+
+                        <TextField
+                            label="Senha"
+                            variant="standard"
+                            type="text"
+                            sx={styledTextField}
+                            onChange={(e: any) => setNovaSenha(e.target.value)}
+                        />
+
+                        {userTipo === '0' &&
+                            <>
+                                <Stack spacing={1} sx={styledSelectServicos}>
+                                    <Autocomplete
+                                        {...capturaServicos}
+                                        disableClearable
+                                        defaultValue={'Serviço um'}
+                                        onChange={(event: any, newValue: string) => {
+                                            setNovoServicoUm(newValue);
+                                        }}
+                                        renderInput={(parametros) => (
+                                            <TextField {...parametros}
+                                                label=""
+                                                variant="standard" />
+                                        )}
+                                    />
+                                </ Stack>
+
+                                <Stack spacing={1} sx={styledSelectServicos}>
+                                    <Autocomplete
+                                        {...capturaServicos}
+                                        disableClearable
+                                        defaultValue={'Serviço dois'}
+                                        onChange={(event: any, newValue: string) => {
+                                            setNovoServicoDois(newValue);
+                                        }}
+                                        renderInput={(parametros) => (
+                                            <TextField {...parametros}
+                                                label=""
+                                                variant="standard" />
+                                        )}
+                                    />
+                                </ Stack>
+
+                                <Stack spacing={1} sx={styledSelectServicos}>
+                                    <Autocomplete
+                                        {...capturaServicos}
+                                        disableClearable
+                                        defaultValue={'Serviço três'}
+                                        onChange={(event: any, newValue: string) => {
+                                            setNovoServicoTres(newValue);
+                                        }}
+                                        renderInput={(parametros) => (
+                                            <TextField {...parametros}
+                                                label=""
+                                                variant="standard" />
+                                        )}
+                                    />
+                                </ Stack>
+
+                                <TextField
+                                    id="filled-multiline-static"
+                                    label="Apresentação"
+                                    multiline
+                                    maxRows={6}
+                                    defaultValue={userApresentacao}
+                                />
+                            </>
                         }
-                        {!userImgPerfil &&
-                            <img src={imgPerfilPadrao} alt="" className="sh-perfil-img" />
-                        }
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={fechaDialogEditarPerfil} autoFocus>Voltar</Button>
+                    <Button onClick={(e) => editarDadosPerfil(e.nativeEvent)}>Editar</Button>
+                </DialogActions>
+            </Dialog>
+
+            <ul className="sh-dadosPerfil">
+                <li className="sh-dadosPerfil-header">
+                    <div className="sh-opcoesFotoPerfil">
+                        <div className="sh-perfil-foto">
+                            {userImgPerfil &&
+                                <img src={userImgPerfil} alt="" className="sh-perfil-img" />
+                            }
+                            {!userImgPerfil &&
+                                <img src={imgPerfilPadrao} alt="" className="sh-perfil-img" />
+                            }
+                        </div>
+
+                        <div className="sh-perfil-classificacao">
+                            <img src={imgEstrelas} alt="Estrelas de classificação" className="sh-icon-classificacao" />
+                            <p className="sh-numero-classificacao">{userClassificacao}</p>
+                        </div>
                     </div>
 
-                    <div className="sh-perfil-classificacao">
-                        <img src={imgEstrelas} alt="Estrelas de classificação" className="sh-icon-classificacao" />
-                        <p className="sh-numero-classificacao">{userClassificacao}</p>
+                    <div className="sh-fotoPerfil-buttons">
+                        <label htmlFor="sh_input_file_perfil" className="sh-button-imgPerfil sh-button-mudarFoto">
+                            Mudar foto
+                        </label>
+                        <input
+                            type="file"
+                            id="sh_input_file_perfil"
+                            className="sh-fotoPerfil-input"
+                            onChange={((e) => {
+                                leituraDeImagem(e.target.files);
+                            })}
+                        />
+                        <button
+                            className="sh-button-imgPerfil sh-button-removerFoto"
+                            onClick={abreDialogConfirmExcluiImgPerfil}
+                        >
+                            Remover foto
+                        </button>
                     </div>
-                </div>
+                </li>
 
-                <div className="sh-fotoPerfil-buttons">
-                    <label htmlFor="sh_input_file_perfil" className="sh-button-imgPerfil sh-button-mudarFoto">
-                        Mudar foto
-                    </label>
-                    <input
-                        type="file"
-                        id="sh_input_file_perfil"
-                        className="sh-fotoPerfil-input"
-                        onChange={((e) => {
-                            leituraDeImagem(e.target.files);
-                        })}
-                    />
-                    <button
-                        className="sh-button-imgPerfil sh-button-removerFoto"
-                        onClick={abreDialogConfirmExcluiImgPerfil}
-                    >
-                        Remover foto
-                    </button>
-                </div>
-            </li>
+                <li className="sh-dadosPerfil-main">
+                    <ul className="sh-dadosPerfil-informacoes">
+                        <li className="sh-dadosPerfil-main-titulos">Dados básicos</li>
 
-            <li className="sh-dadosPerfil-main">
-                <ul className="sh-dadosPerfil-informacoes">
-                    <li className="sh-dadosPerfil-main-titulos">Dados básicos</li>
+                        <li className="sh-dadosPerfil-main-subtitulos">Nome</li>
+                        <li className="sh-dadosPerfil-main-textos">{userNome}</li>
 
-                    <li className="sh-dadosPerfil-main-subtitulos">Nome</li>
-                    <li className="sh-dadosPerfil-main-textos">{userNome}</li>
+                        <li className="sh-dadosPerfil-main-subtitulos">Sobrenome</li>
+                        <li className="sh-dadosPerfil-main-textos">{userSobrenome}</li>
 
-                    <li className="sh-dadosPerfil-main-subtitulos">Sobrenome</li>
-                    <li className="sh-dadosPerfil-main-textos">{userSobrenome}</li>
+                        <li className="sh-dadosPerfil-main-subtitulos">Data de nascimento</li>
+                        <li className="sh-dadosPerfil-main-textos">{userNascimento}</li>
 
-                    <li className="sh-dadosPerfil-main-subtitulos">Data de nascimento</li>
-                    <li className="sh-dadosPerfil-main-textos">{userNascimento}</li>
+                        <li className="sh-dadosPerfil-main-subtitulos">Endereço</li>
+                        <li className="sh-dadosPerfil-main-textos">{userEndereco}</li>
 
-                    <li className="sh-dadosPerfil-main-subtitulos">Endereço</li>
-                    <li className="sh-dadosPerfil-main-textos">{userEndereco}</li>
+                        <li className="sh-dadosPerfil-main-subtitulos">Limite atual de serviços</li>
+                        <li className="sh-dadosPerfil-main-textos">{userLimite}</li>
+                    </ul>
 
-                    <li className="sh-dadosPerfil-main-subtitulos">Limite atual de serviços</li>
-                    <li className="sh-dadosPerfil-main-textos">{userLimite}</li>
-                </ul>
+                    <ul className="sh-dadosPerfil-informacoes">
+                        <li className="sh-dadosPerfil-main-titulos">Informações adicionais</li>
 
-                <ul className="sh-dadosPerfil-informacoes">
-                    <li className="sh-dadosPerfil-main-titulos">Informações adicionais</li>
+                        <li className="sh-dadosPerfil-main-subtitulos">Serviços fornecidos</li>
+                        <li className="sh-dadosPerfil-main-textos">{userServicos}</li>
 
-                    <li className="sh-dadosPerfil-main-subtitulos">Serviços fornecidos</li>
-                    <li className="sh-dadosPerfil-main-textos">{userServicos}</li>
+                        <li className="sh-dadosPerfil-main-subtitulos">Telefone</li>
+                        <li className="sh-dadosPerfil-main-textos">{userTelefone}</li>
 
-                    <li className="sh-dadosPerfil-main-subtitulos">Telefone</li>
-                    <li className="sh-dadosPerfil-main-textos">{userTelefone}</li>
+                        <li className="sh-dadosPerfil-main-subtitulos">E-mail</li>
+                        <li className="sh-dadosPerfil-main-textos">{userEmail}</li>
 
-                    <li className="sh-dadosPerfil-main-subtitulos">E-mail</li>
-                    <li className="sh-dadosPerfil-main-textos">{userEmail}</li>
+                        <li className="sh-dadosPerfil-main-subtitulos">Data de criação da conta</li>
+                        <li className="sh-dadosPerfil-main-textos">{userDataCriacao}</li>
+                    </ul>
 
-                    <li className="sh-dadosPerfil-main-subtitulos">Data de criação da conta</li>
-                    <li className="sh-dadosPerfil-main-textos">{userDataCriacao}</li>
-                </ul>
-
-                <div className="sh-dadosPerfil-opcoes">
-                    <button className="sh-dadosPerfil-opcoes-buttons sh-options-button-editar" onClick={abreDialogEditaPerfil}>Editar perfil</button>
-                    <button className="sh-dadosPerfil-opcoes-buttons sh-options-button-excluir" onClick={abreDialogConfirmExcluiPerfil}>Excluir perfil</button>
-                </div>
-            </li>
-        </ul>
-    </>
+                    <div className="sh-dadosPerfil-opcoes">
+                        <button className="sh-dadosPerfil-opcoes-buttons sh-options-button-editar" onClick={abreDialogEditaPerfil}>Editar perfil</button>
+                        <button className="sh-dadosPerfil-opcoes-buttons sh-options-button-excluir" onClick={abreDialogConfirmExcluiPerfil}>Excluir perfil</button>
+                    </div>
+                </li>
+            </ul>
+        </>
     )
 }
 

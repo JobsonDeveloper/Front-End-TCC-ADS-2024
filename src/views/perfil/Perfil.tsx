@@ -3,6 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import './Perfil.css';
 
 // Components
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import FormatListNumberedRoundedIcon from '@mui/icons-material/FormatListNumberedRounded';
+import ChecklistRoundedIcon from '@mui/icons-material/ChecklistRounded';
+import InventoryRoundedIcon from '@mui/icons-material/InventoryRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import logoImg from '../../assets/login/icons/logo.svg';
 import imgDescricao from '../../assets/icons/descricao.svg';
@@ -218,6 +224,8 @@ const Perfil = () => {
             setLoading(false);
             pegaDados();
         }
+
+        console.log(userTipo);
     }, []);
 
     const logout = () => {
@@ -627,36 +635,132 @@ const Perfil = () => {
         <main className="sh-perfil">
             {loading && <Loading />}
 
-            <HeaderPerfilFreela
-                setMostrarAlert={setMostrarAlert}
-                tipoUsuario={userTipo}
-                setPaginaPerfil={setPaginaPerfil}
-            />
+            <div className="sh-perfil-header-lg d-lg-none">
+                <HeaderPerfilFreela
+                    setMostrarAlert={setMostrarAlert}
+                    tipoUsuario={userTipo}
+                    setPaginaPerfil={setPaginaPerfil}
+                />
+            </div>
 
-            {paginaPerfil === 1 &&
-                <DadosUsuario
-                    setMostrarAlert={setMostrarAlert}
-                    setTipoAlert={setTipoAlert}
-                    setMensagemAlert={setMensagemAlert}
-                    setLoading={setLoading}
-                    pagina={pagina}
-                />
-            }
-            {paginaPerfil === 2 &&
-                <ServicosAceitos
-                    setMostrarAlert={setMostrarAlert}
-                    setTipoAlert={setTipoAlert}
-                    setMensagemAlert={setMensagemAlert}
-                    setLoading={setLoading}
-                    pagina={pagina}
-                />
-            }
+            <div className="sh-perfil-dados">
+                <article className="sh-sideBar d-none d-lg-flex">
+                    <div className="sh-sideBar-logo">
+                        <img src={logoImg} alt="" className="sh-sideBar-logo-img" />
+                    </div>
+
+                    <ul className="mb-0 sh-sideBar-navegacao">
+                        <li className="sh-sideBar-item">
+                            <PersonRoundedIcon />
+
+                            <p
+                                className='sh-item-text'
+                                onClick={() => {
+                                    setPaginaPerfil(1);
+                                    handleClose();
+                                }}>
+                                Perfil
+                            </p>
+                        </li>
+
+                        <li className="sh-sideBar-item">
+                            {userTipo === '0' &&
+                                <>
+                                    <ChecklistRoundedIcon />
+
+                                    <p
+                                        className='sh-item-text'
+                                        onClick={() => {
+                                            setPaginaPerfil(2);
+                                            handleClose();
+                                        }}>
+                                        Serviços aceitos
+                                    </p>
+                                </>
+                            }
+                            {userTipo === '1' &&
+                                <>
+                                    <FormatListNumberedRoundedIcon />
+
+                                    <p
+                                        className='sh-item-text'
+                                        onClick={() => {
+                                            setPaginaPerfil(3);
+                                            handleClose();
+                                        }}>
+                                        Serviços solicitados
+                                    </p>
+                                </>
+                            }
+                        </li>
+
+                        <li className="sh-sideBar-item">
+                            <InventoryRoundedIcon />
+
+                            <p
+                                className='sh-item-text'
+                                onClick={() => {
+                                    setPaginaPerfil(4);
+                                    handleClose();
+                                }}>
+                                Serviços concluídos
+                            </p>
+                        </li>
+
+                        <li className="sh-sideBar-item">
+                            <LogoutRoundedIcon />
+
+                            <p className='sh-item-text' onClick={logout}>
+                                Sair
+                            </p>
+                        </li>
+                    </ul>
+                </article>
+
+                <div className="sh-main">
+                    <Link to='/home-freelancer' className="sh-header-desktop d-none d-lg-flex">
+                        {paginaPerfil === 1 &&
+                            <p className="sh-perfil-titulo">
+                                Perfil
+                            </p>
+                        }
+
+                        {paginaPerfil === 2 &&
+                            <p className="sh-perfil-titulo">
+                                Servicos Aceitos
+                            </p>
+                        }
+
+                        <HomeRoundedIcon />
+                    </Link>
+
+                    {paginaPerfil === 1 &&
+                        <DadosUsuario
+                            setMostrarAlert={setMostrarAlert}
+                            setTipoAlert={setTipoAlert}
+                            setMensagemAlert={setMensagemAlert}
+                            setLoading={setLoading}
+                            pagina={pagina}
+                        />
+                    }
+                    {paginaPerfil === 2 &&
+                        <ServicosAceitos
+                            setMostrarAlert={setMostrarAlert}
+                            setTipoAlert={setTipoAlert}
+                            setMensagemAlert={setMensagemAlert}
+                            setLoading={setLoading}
+                            pagina={pagina}
+                        />
+                    }
+                </div>
+            </div>
 
             <footer className="sh-perfil-footer">
                 <div className="sh-footer">
                     <Footer />
                 </div>
             </footer>
+
 
             <>
                 {/* <header className="sh-perfil-header">
