@@ -360,106 +360,12 @@
                     }
                 }
             }
-
-            /* & .sh-perfil-main {
-                & .sh-dados-lista {
-                    grid-template-areas:
-                        "header header "
-                        "nascimento endereco"
-                        "telefone servico"
-                        "email criacao"
-                        "buttons buttons";
-
-                    & .sh-dados-item {
-                        & .sh-dados-item-text {
-                            margin: 0;
-                            font-size: .9rem;
-                            color: var(--sh-perfil-cor-texto);
-                        }
-                    }
-
-                    & .sh-nascimento {
-                        margin-top: 0;
-                        display: flex;
-                        gap: 15px;
-                    }
-
-                    & .sh-endereco {
-                        grid-area: endereco;
-                        display: flex;
-                        gap: 15px;
-                    }
-
-                    & .sh-telefone {
-                        grid-area: telefone;
-                        display: flex;
-                        gap: 15px;
-                    }
-
-                    & .sh-servicos {
-                        grid-area: servico;
-                        display: flex;
-                        gap: 15px;
-                    }
-
-                    & .sh-email {
-                        grid-area: email;
-                        display: flex;
-                        gap: 15px;
-                    }
-
-                    & .sh-criacao {
-                        grid-area: criacao;
-                        display: flex;
-                        gap: 15px;
-                    }
-
-                    & .sh-buttons {
-                        display: flex;
-                        justify-content: start;
-                    }
-
-                    & .perfil-foto-nome {
-                        & .sh-dados-headerDois {
-                            & .sh-dados-adicionais {
-                                & .sh-dadosBase-item {
-                                    align-items: self-start;
-
-
-                                    & img {
-                                        width: 16px;
-                                    }
-
-                                    & .sh-dados-item-text {
-                                        padding: 0;
-                                        margin: 0;
-                                        display: flex;
-                                        font-size: .9rem;
-                                    }
-                                }
-
-                                & .sh-dadosBase-item {
-
-                                    & svg {
-                                        width: 16px;
-                                    }
-                                }
-
-
-                            }
-                        }
-                    }
-                }
-            } */
         }
     }
 }
 
-
 @media (min-width: 1400px) {
     .sh-perfil {
-        /* align-items: center; */
-
         & .sh-perfil-header {
             width: 1400px;
         }

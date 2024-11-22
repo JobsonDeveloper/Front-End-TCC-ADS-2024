@@ -17,6 +17,8 @@ import HomeCliente from './views/homeCliente/HomeCliente';
 // Rotas Freelancers
 import CadastroFreelancer from './views/cadastroFreelamcer/CadastroFreelancer';
 import HomeFreelancer from './views/homeFreelancer/HomeFreelancer';
+import ServicosAceitos from './views/servicosAceitos/ServicosAceitos';
+import ServicosConcluidos from './views/servicosConcluidos/ServicosConcluidos';
 
 const router = createBrowserRouter([
   // Geral
@@ -25,6 +27,8 @@ const router = createBrowserRouter([
   { path: '/sobrenos', element: <SobreNos /> },
   { path: '/duvidas', element: <Duvidas /> },
   { path: '/perfil', element: <Perfil /> },
+  { path: '/servicos-aceitos', element: <ServicosAceitos /> },
+  { path: '/servicos-concluidos', element: <ServicosConcluidos /> },
 
   // Rotas de clientes
   { path: '/cadastro-cliente', element: <CadastroCliente /> },
