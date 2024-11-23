@@ -317,7 +317,7 @@ const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }:
                     localStorage.setItem('ServicoAceito', 'true');
 
                     setTimeout(() => {
-                        pagina('/perfil');
+                        pagina('/servicos-aceitos');
                     }, 500);
                 }
             }

@@ -124,14 +124,14 @@ const Perfil = () => {
                             <li
                                 className="sh-sideBar-item"
                                 onClick={() => {
-                                    pagina('/servicos-solicitados')
+                                    pagina('/servicos-registrados')
                                 }}
                             >
                                 <>
                                     <FormatListNumberedRoundedIcon />
 
                                     <p className='sh-item-text'>
-                                        Serviços solicitados
+                                        Serviços registrados
                                     </p>
                                 </>
                             </li>

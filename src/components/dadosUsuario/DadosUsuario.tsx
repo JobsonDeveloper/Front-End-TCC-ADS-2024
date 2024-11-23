@@ -296,7 +296,6 @@ const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert, setOpen
                     setUserServicos(dadosUsuario[0].servicos);
                     setUserLimite(dadosUsuario[0].limite);
                 }
-                console.log(userTipo);
 
                 setUserClassificacao(dadosUsuario[0].classificacao);
 
@@ -723,15 +722,23 @@ const DadosUsuario = ({ setMostrarAlert, setTipoAlert, setMensagemAlert, setOpen
                         <li className="sh-dadosPerfil-main-subtitulos">Endereço</li>
                         <li className="sh-dadosPerfil-main-textos">{userEndereco}</li>
 
-                        <li className="sh-dadosPerfil-main-subtitulos">Limite atual de serviços</li>
-                        <li className="sh-dadosPerfil-main-textos">{userLimite}</li>
+                        {userTipo === "0" &&
+                            <>
+                                <li className="sh-dadosPerfil-main-subtitulos">Limite atual de serviços</li>
+                                <li className="sh-dadosPerfil-main-textos">{userLimite}</li>
+                            </>
+                        }
                     </ul>
 
                     <ul className="sh-dadosPerfil-informacoes">
                         <li className="sh-dadosPerfil-main-titulos">Informações adicionais</li>
 
-                        <li className="sh-dadosPerfil-main-subtitulos">Serviços fornecidos</li>
-                        <li className="sh-dadosPerfil-main-textos">{userServicos}</li>
+                        {userTipo === "0" &&
+                            <>
+                                <li className="sh-dadosPerfil-main-subtitulos">Serviços fornecidos</li>
+                                <li className="sh-dadosPerfil-main-textos">{userServicos}</li>
+                            </>
+                        }
 
                         <li className="sh-dadosPerfil-main-subtitulos">Telefone</li>
                         <li className="sh-dadosPerfil-main-textos">{userTelefone}</li>

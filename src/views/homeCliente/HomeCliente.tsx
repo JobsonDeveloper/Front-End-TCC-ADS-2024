@@ -15,6 +15,7 @@ import backgroundApresentacaoUm from '../../assets/FreelaHome/backgrounds/backgr
 import backgroundApresentacaoDois from '../../assets/FreelaHome/backgrounds/imagem-apresentacao.webp'
 import backgroundApresentacaoMd from '../../assets/FreelaHome/backgrounds/background-apresentacaoMd.png'
 import { Link, useNavigate } from "react-router-dom";
+import FreelancersEmDestaque from "../../components/freelancersEmDestaque/FreelancersEmDestaque";
 
 const profDestaque: any = [];
 
@@ -100,11 +101,13 @@ const HomeCliente = () => {
                         let servicosSplit = dados.servicos.split(",");
 
                         profDestaque.push({
+                            id: dados.id,
                             fotoUrl: dados.imagem_perfil,
                             nome: `${dados.nome} ${dados.sobrenome}`,
                             servico: servicosSplit[0],
+                            apresentacao: dados.apresentacao,
                             dataCadastro: formatData(dados.data_de_criacao),
-                            estrelas: dados.classificacao
+                            classificacao: dados.classificacao
                         });
                     })
                 }
@@ -216,12 +219,22 @@ const HomeCliente = () => {
             </article>
 
             <article className="sh-freela-main">
-                <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
+                {/* <article className="sh-profissionaisEmDestaque" id='sh_profissionais_emDestaque'>
                     <h2 className="sh-profissionaisEmDestaque-titulo" data-aos="zoom-in">Profissionais em destaque</h2>
                     <div className="sh-profissionalEmDestaque-lista">
                         <ProfissionaisEmDestaque dados={profDestaque} />
                     </div>
                 </article>
+
+                <article className="sh-clientesEmDestaque" id='sh_clientes_emDestaque'>
+                    <h2 className="sh-clientesEmDestaque-titulo" data-aos="zoom-in">Clientes em destaque</h2>
+                    <div className="sh-clientesEmDestaque-lista">
+                        <ClientesEmDestaque dados={cliDestaque} />
+                    </div>
+                </article> */}
+
+                <FreelancersEmDestaque freelancers={profDestaque} />
+
 
                 <article className="sh-clientesEmDestaque" id='sh_clientes_emDestaque'>
                     <h2 className="sh-clientesEmDestaque-titulo" data-aos="zoom-in">Clientes em destaque</h2>

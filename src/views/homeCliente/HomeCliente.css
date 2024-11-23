@@ -159,24 +159,6 @@
 
     & .sh-freela-main {
 
-
-        & .sh-profissionaisEmDestaque {
-            & .sh-profissionaisEmDestaque-titulo {
-                text-align: center;
-                font-size: var(--sh-index-font-size-titulos);
-                color: var(--sh-index-cor-terciaria);
-            }
-
-            & .sh-profissionalEmDestaque-lista {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                /* background-image: url('./assets/index/backgrounds/background-profissoes.webp');
-                background-repeat: no-repeat;
-                background-size: cover; */
-            }
-        }
-
         & .sh-clientesEmDestaque {
             display: flex;
             flex-direction: column;
@@ -199,6 +181,46 @@
         background-size: cover; */
             }
         }
+
+        /* & .sh-profissionaisEmDestaque {
+            & .sh-profissionaisEmDestaque-titulo {
+                text-align: center;
+                font-size: var(--sh-index-font-size-titulos);
+                color: var(--sh-index-cor-terciaria);
+            }
+
+            & .sh-profissionalEmDestaque-lista {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                background-image: url('./assets/index/backgrounds/background-profissoes.webp');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        }
+
+        & .sh-clientesEmDestaque {
+            display: flex;
+            flex-direction: column;
+            margin: var(--sh-index-margin);
+            gap: 20px;
+            width: 100%;
+
+            & .sh-clientesEmDestaque-titulo {
+                text-align: center;
+                font-size: var(--sh-index-font-size-titulos);
+                color: var(--sh-index-cor-terciaria);
+            }
+
+            & .sh-clientesEmDestaque-lista {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                background-image: url('./assets/index/backgrounds/background-profissoes.webp');
+        background-repeat: no-repeat;
+        background-size: cover;
+            }
+        } */
 
         & .sh-main-servicos {
             margin: var(--sh-index-margin);

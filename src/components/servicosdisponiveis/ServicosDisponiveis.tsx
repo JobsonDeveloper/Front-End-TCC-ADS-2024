@@ -245,7 +245,7 @@ const ServicosDisponiveis = ({ data }: any) => {
                     localStorage.setItem('ServicoAceito', 'true');
 
                     setTimeout(() => {
-                        pagina('/perfil');
+                        pagina('/servicos-aceitos');
                     }, 500);
                 }
             }

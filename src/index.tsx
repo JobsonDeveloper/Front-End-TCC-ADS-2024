@@ -19,6 +19,7 @@ import CadastroFreelancer from './views/cadastroFreelamcer/CadastroFreelancer';
 import HomeFreelancer from './views/homeFreelancer/HomeFreelancer';
 import ServicosAceitos from './views/servicosAceitos/ServicosAceitos';
 import ServicosConcluidos from './views/servicosConcluidos/ServicosConcluidos';
+import ServicosRegistrados from './views/servicosRegistrados/ServicosRegistrados';
 
 const router = createBrowserRouter([
   // Geral
@@ -29,10 +30,11 @@ const router = createBrowserRouter([
   { path: '/perfil', element: <Perfil /> },
   { path: '/servicos-aceitos', element: <ServicosAceitos /> },
   { path: '/servicos-concluidos', element: <ServicosConcluidos /> },
-
+  
   // Rotas de clientes
   { path: '/cadastro-cliente', element: <CadastroCliente /> },
   { path: '/home-cliente', element: <HomeCliente /> },
+  { path: '/servicos-registrados', element: <ServicosRegistrados /> },
 
   // Rotas de Freelancers
   { path: '/cadastro-freelancer', element: <CadastroFreelancer /> },

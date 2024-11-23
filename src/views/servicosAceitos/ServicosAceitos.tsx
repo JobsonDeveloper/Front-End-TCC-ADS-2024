@@ -74,7 +74,12 @@ const servicosAdequadosStyle = {
             paddingTop: '8px',
 
             '& .sh-dialog-imagem-cliente': {
-                width: '35px'
+
+                '& .sh-servico-dados-cliente-foto': {
+                    width: '35px',
+                    height: '35px',
+                    borderRadius: '100%'
+                }
             },
 
             '& .sh-dialog-nome-cliente': {
@@ -211,6 +216,7 @@ const ServicosAceitos = () => {
                                 descricao: servAceitos.descricao,
                                 remuneracao: servAceitos.remuneracao,
                                 fotoServico: servAceitos.servico_foto,
+
                                 clienteNome: servAceitos.nome,
                                 clienteSobrenome: servAceitos.sobrenome,
                                 clienteTelefone: servAceitos.telefone,
@@ -233,15 +239,18 @@ const ServicosAceitos = () => {
                                 endereco: servAceitos.local_servico,
                                 descricao: servAceitos.descricao,
                                 remuneracao: servAceitos.remuneracao,
-                                freelancerNome: servAceitos.freelancerNome,
-                                freelancerSobrenome: servAceitos.freelancerSobrenome,
-                                freelancerTelefone: servAceitos.freelancerTelefone,
-                                freelancerEmail: servAceitos.freelancerEmail,
-                                freelancerClassificacao: servAceitos.freelancerClassificacao,
-                                freelancerFotoPerfil: servAceitos.freelancerFotoPerfil,
+                                fotoServico: servAceitos.servico_foto,
+
+                                freelancerNome: servAceitos.nome,
+                                freelancerSobrenome: servAceitos.sobrenome,
+                                freelancerTelefone: servAceitos.telefone,
+                                freelancerEmail: servAceitos.email,
+                                freelancerClassificacao: servAceitos.classificacao,
+                                freelancerFotoPerfil: servAceitos.imagem_perfil,
                             });
                         });
                     }
+
                 }
             }
 
@@ -368,12 +377,18 @@ const ServicosAceitos = () => {
                 </li>
             }
             {userTipo === "1" &&
-                <li className="sh-servicosItem" key={servico.id}>
+                <li
+                    className="sh-servicosItem"
+                    key={servico.id}
+                    onClick={() => {
+                        selecionaServico(servico)
+                    }}
+                >
                     <ul className="sh-servicosItem-lista">
                         <li className="sh-servicosLista-item sh-servicosLista-fotoServico">
-                            <img src={servico.servico_foto} className="sh-servicosLista-imagem" alt="Imgagem do serviço a ser realizado" />
+                            <img src={servico.fotoServico} className="sh-servicosLista-imagem" alt="Imgagem do serviço a ser realizado" />
                         </li>
-                        <li className="sh-servicosLista-item sh-servicosLista-header">
+                        {/* <li className="sh-servicosLista-item sh-servicosLista-header">
                             <div className="sh-servicosLista-fotoNome">
                                 {servico.cliente_foto &&
                                     <img src={servico.cliente_foto} alt="Imagem de perfil do cliente" className="sh-servicosLista-clienteImg" />
@@ -385,9 +400,9 @@ const ServicosAceitos = () => {
                             </div>
                             <div className="sh-servicosLista-classificacao">
                                 <img src={imgClassificacaoEstrela} alt="" className="sh-servicosLista-classificacaoImg" />
-                                <p className="sh-servicosLista-classificacaoNumero">{servico.cliente_classificacao}</p>
+                                <p className="sh-servicosLista-classificacaoNumero">{servico.clienteClassificacao}</p>
                             </div>
-                        </li>
+                        </li> */}
                         <li className="sh-servicosLista-item sh-servicosLista-main">
                             <p className="sh-servicosLista-tipoServico">{servico.tag}</p>
                             <p className="sh-servicosLista-descricaoServico">{servico.descricao}</p>
@@ -448,14 +463,13 @@ const ServicosAceitos = () => {
                 const response = await request.json();
 
                 if (response) {
-                    console.log(response);
                     window.location.reload();
                 }
             }
             catch (error) {
                 console.error(error);
-                setOpenAvaliacao(false);
-                setOpen(false);
+                closeDialogServico();
+                closeDialogAvaliacao();
             }
         }
 
@@ -496,13 +510,13 @@ const ServicosAceitos = () => {
                             <li
                                 className="sh-sideBar-item"
                                 onClick={() => {
-                                    pagina('/servicos-solicitados')
+                                    pagina('/servicos-registrados')
                                 }}
                             >
                                 <>
                                     <FormatListNumberedRoundedIcon />
 
-                                    <p className='sh-item-text'>Servicos solicitados</p>
+                                    <p className='sh-item-text'>Servicos registrados</p>
                                 </>
                             </li>
                         }
@@ -576,33 +590,80 @@ const ServicosAceitos = () => {
                                         <DialogContentText className="sh-servico-subtitulos sh-dialog-imagem">
                                             <img src={dadosDoServico.fotoServico} alt="Foto do serviço" className="sh-dialog-imagem-servico" />
 
-                                            <ul className="sh-dialog-dados">
-                                                <li className="sh-dialog-dados-tipo-servico">{dadosDoServico.tag}</li>
-                                                <li className="sh-dialog-dados-titulo">Local do serviço</li>
-                                                <li className="sh-dialog-dados-texto">{dadosDoServico.endereco}</li>
-                                                <li className="sh-dialog-dados-titulo">Remuneração</li>
-                                                <li className="sh-dialog-dados-texto">R${dadosDoServico.remuneracao},00 reais</li>
-                                            </ul>
+                                            {userTipo === "0" &&
+                                                <ul className="sh-dialog-dados">
+                                                    <li className="sh-dialog-dados-tipo-servico">{dadosDoServico.tag}</li>
+                                                    <li className="sh-dialog-dados-texto">
+                                                        <strong>Endereço:</strong> {dadosDoServico.endereco}
+                                                    </li>
+                                                    <li className="sh-dialog-dados-texto">
+                                                        <strong>Telefone:</strong> {dadosDoServico.clienteTelefone} <br />
+                                                    </li>
+                                                    <li className="sh-dialog-dados-texto">
+                                                        <strong>E-mail:</strong> {dadosDoServico.clienteEmail}
+                                                    </li>
+                                                    <li className="sh-dialog-dados-texto">
+                                                        <strong>Remuneração:</strong> R${dadosDoServico.remuneracao},00 reais
+                                                    </li>
+                                                </ul>
+                                            }
+
+                                            {userTipo === "1" &&
+                                                <ul className="sh-dialog-dados">
+                                                    <li className="sh-dialog-dados-tipo-servico">{dadosDoServico.tag}</li>
+                                                    <li className="sh-dialog-dados-texto">
+                                                        <strong>Telefone do Freelancer:</strong> {dadosDoServico.freelancerTelefone} <br />
+                                                    </li>
+                                                    <li className="sh-dialog-dados-texto">
+                                                        <strong>E-mail  do Freelancer:</strong> {dadosDoServico.freelancerEmail}
+                                                    </li>
+                                                    <li className="sh-dialog-dados-texto">
+                                                        <strong>Remuneração:</strong> R${dadosDoServico.remuneracao},00 reais
+                                                    </li>
+                                                </ul>
+                                            }
                                         </DialogContentText>
 
-                                        <DialogContentText className="sh-servico-dados-cliente">
-                                            <div className="sh-dialog-imagem-cliente">
-                                                {dadosDoServico.clienteFotoPerfil &&
-                                                    <img src={dadosDoServico.clienteFotoPerfil} alt="" />
-                                                }
+                                        {userTipo === "0" &&
+                                            <DialogContentText className="sh-servico-dados-cliente">
+                                                <div className="sh-dialog-imagem-cliente">
+                                                    {dadosDoServico.clienteFotoPerfil &&
+                                                        <img src={dadosDoServico.clienteFotoPerfil} alt="" className="sh-servico-dados-cliente-foto" />
+                                                    }
 
-                                                {!dadosDoServico.clienteFotoPerfil &&
-                                                    <img src={imgPerfilDefault} alt="" />
-                                                }
-                                            </div>
-                                            <div className="sh-dialog-nome-cliente">{dadosDoServico.clienteNome} {dadosDoServico.clienteSobrenome}</div>
-                                            <div className="sh-dialog-classificacao-cliente">
-                                                <img src={imgEstrelas} alt="" className="sh-dialog-classificacao-img" />
-                                                <div className="sh-dialog-classificacao-numero">
-                                                    {dadosDoServico.clienteClassificacao}
+                                                    {!dadosDoServico.clienteFotoPerfil &&
+                                                        <img src={imgPerfilDefault} alt="" className="sh-servico-dados-cliente-foto"/>
+                                                    }
                                                 </div>
-                                            </div>
-                                        </DialogContentText>
+                                                <div className="sh-dialog-nome-cliente">{dadosDoServico.clienteNome} {dadosDoServico.clienteSobrenome}</div>
+                                                <div className="sh-dialog-classificacao-cliente">
+                                                    <img src={imgEstrelas} alt="" className="sh-dialog-classificacao-img" />
+                                                    <div className="sh-dialog-classificacao-numero">
+                                                        {dadosDoServico.clienteClassificacao}
+                                                    </div>
+                                                </div>
+                                            </DialogContentText>
+                                        }
+                                        {userTipo === "1" &&
+                                            <DialogContentText className="sh-servico-dados-cliente">
+                                                <div className="sh-dialog-imagem-cliente">
+                                                    {dadosDoServico.freelancerFotoPerfil &&
+                                                        <img src={dadosDoServico.freelancerFotoPerfil} alt="" className="sh-servico-dados-cliente-foto"/>
+                                                    }
+
+                                                    {!dadosDoServico.freelancerFotoPerfil &&
+                                                        <img src={imgPerfilDefault} alt="" className="sh-servico-dados-cliente-foto"/>
+                                                    }
+                                                </div>
+                                                <div className="sh-dialog-nome-cliente">{dadosDoServico.freelancerNome} {dadosDoServico.freelancerSobrenome}</div>
+                                                <div className="sh-dialog-classificacao-cliente">
+                                                    <img src={imgEstrelas} alt="" className="sh-dialog-classificacao-img" />
+                                                    <div className="sh-dialog-classificacao-numero">
+                                                        {dadosDoServico.freelancerClassificacao}
+                                                    </div>
+                                                </div>
+                                            </DialogContentText>
+                                        }
 
                                         <DialogContentText className="sh-servico-subtitulo">
                                             Descrição do serviço
