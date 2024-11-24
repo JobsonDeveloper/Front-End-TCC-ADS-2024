@@ -86,7 +86,7 @@
           background-color: red;
 
           & .sh-servicosLista-fotoNome {
-            
+            display: flex;
 
             & .sh-servicosLista-clienteImg {
               width: 40px;
