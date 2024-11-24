@@ -88,15 +88,14 @@
           & .sh-servicosLista-fotoNome {
             display: flex;
 
-            & .sh-servicosLista-clienteImg {
+            /* & .sh-servicosLista-clienteImg {
               width: 40px;
               height: 40px;
               border-radius: 100%;
-            }
+            } */
 
-            & .sh-servicosLista-nomeCliente {
+            /* & .sh-servicosLista-nomeCliente {
               margin: 0;
-              /* Limitar tamanho de texto */
               overflow: hidden;
               text-overflow: ellipsis;
               display: -webkit-box;
@@ -104,7 +103,7 @@
               -webkit-box-orient: vertical;
               max-width: 180px;
               height: max-content;
-            }
+            } */
           }
 
 
