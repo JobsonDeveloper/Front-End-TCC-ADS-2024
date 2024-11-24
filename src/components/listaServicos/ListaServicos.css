@@ -88,6 +88,7 @@
             display: flex;
             align-items: center;
             background-color: red;
+            display: flex;
             gap: 10px;
 
             & .sh-servicosLista-clienteImg {
