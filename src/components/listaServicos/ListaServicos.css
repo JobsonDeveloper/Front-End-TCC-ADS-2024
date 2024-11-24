@@ -83,7 +83,6 @@
           /* justify-content: space-between; */
           align-items: center;
           padding: 2px 5px;
-          background-color: red;
           gap: 10px;
 
           & .sh-servicosLista-fotoNome {
@@ -108,7 +107,6 @@
             -webkit-box-orient: vertical;
             max-width: 100%;
             flex-grow: 1;
-            background-color: green;
             height: max-content;
           }
 
