@@ -87,7 +87,7 @@
           & .sh-servicosLista-fotoNome {
             display: flex;
             align-items: center;
-            background-color: red;
+            background-color: green;
             display: flex;
             gap: 10px;
 
