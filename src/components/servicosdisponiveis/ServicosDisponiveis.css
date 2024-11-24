@@ -260,6 +260,7 @@
 
 @media (min-width: 1400px) {
     & .sh-span-servicos-filtro {
+        width: max-content;
 
         & .sh-servicosFreela-lista {
             width: 1400px;
