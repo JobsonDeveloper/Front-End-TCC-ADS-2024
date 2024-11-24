@@ -568,166 +568,167 @@ const ServicosAceitos = () => {
                     </Link>
 
                     <article className="sh-servicosAceitos">
-                        <ul className="sh-servicosLista">
-                            {listaServicos}
+                        {servicosAceitos.length === 0 &&
+                            <h2 className="sh-servicosAceitos-semServicos">
+                                Nenhum serviço aceito
+                            </h2>
+                        }
+                        {servicosAceitos.length > 0 &&
+                            <ul className="sh-servicosLista">
+                                {listaServicos}
 
-                            {servicosAceitos.length === 0 &&
-                                <h2 className="sh-servicosAceitos-semServicos">
-                                    Nenhum serviço aceito
-                                </h2>
-                            }
+                                {dadosDoServico &&
+                                    <Dialog
+                                        fullScreen={fullScreen}
+                                        open={open}
+                                        onClose={closeDialogServico}
+                                        aria-labelledby="responsive-dialog-title"
+                                        sx={servicosAdequadosStyle}
+                                    >
+                                        <DialogContent className='sh-servico-dialog-dados'>
 
-                            {dadosDoServico &&
-                                <Dialog
-                                    fullScreen={fullScreen}
-                                    open={open}
-                                    onClose={closeDialogServico}
-                                    aria-labelledby="responsive-dialog-title"
-                                    sx={servicosAdequadosStyle}
-                                >
-                                    <DialogContent className='sh-servico-dialog-dados'>
+                                            <DialogContentText className="sh-servico-subtitulos sh-dialog-imagem">
+                                                <img src={dadosDoServico.fotoServico} alt="Foto do serviço" className="sh-dialog-imagem-servico" />
 
-                                        <DialogContentText className="sh-servico-subtitulos sh-dialog-imagem">
-                                            <img src={dadosDoServico.fotoServico} alt="Foto do serviço" className="sh-dialog-imagem-servico" />
+                                                {userTipo === "0" &&
+                                                    <ul className="sh-dialog-dados">
+                                                        <li className="sh-dialog-dados-tipo-servico">{dadosDoServico.tag}</li>
+                                                        <li className="sh-dialog-dados-texto">
+                                                            <strong>Endereço:</strong> {dadosDoServico.endereco}
+                                                        </li>
+                                                        <li className="sh-dialog-dados-texto">
+                                                            <strong>Telefone:</strong> {dadosDoServico.clienteTelefone} <br />
+                                                        </li>
+                                                        <li className="sh-dialog-dados-texto">
+                                                            <strong>E-mail:</strong> {dadosDoServico.clienteEmail}
+                                                        </li>
+                                                        <li className="sh-dialog-dados-texto">
+                                                            <strong>Remuneração:</strong> R${dadosDoServico.remuneracao},00 reais
+                                                        </li>
+                                                    </ul>
+                                                }
+
+                                                {userTipo === "1" &&
+                                                    <ul className="sh-dialog-dados">
+                                                        <li className="sh-dialog-dados-tipo-servico">{dadosDoServico.tag}</li>
+                                                        <li className="sh-dialog-dados-texto">
+                                                            <strong>Telefone do Freelancer:</strong> {dadosDoServico.freelancerTelefone} <br />
+                                                        </li>
+                                                        <li className="sh-dialog-dados-texto">
+                                                            <strong>E-mail  do Freelancer:</strong> {dadosDoServico.freelancerEmail}
+                                                        </li>
+                                                        <li className="sh-dialog-dados-texto">
+                                                            <strong>Remuneração:</strong> R${dadosDoServico.remuneracao},00 reais
+                                                        </li>
+                                                    </ul>
+                                                }
+                                            </DialogContentText>
 
                                             {userTipo === "0" &&
-                                                <ul className="sh-dialog-dados">
-                                                    <li className="sh-dialog-dados-tipo-servico">{dadosDoServico.tag}</li>
-                                                    <li className="sh-dialog-dados-texto">
-                                                        <strong>Endereço:</strong> {dadosDoServico.endereco}
-                                                    </li>
-                                                    <li className="sh-dialog-dados-texto">
-                                                        <strong>Telefone:</strong> {dadosDoServico.clienteTelefone} <br />
-                                                    </li>
-                                                    <li className="sh-dialog-dados-texto">
-                                                        <strong>E-mail:</strong> {dadosDoServico.clienteEmail}
-                                                    </li>
-                                                    <li className="sh-dialog-dados-texto">
-                                                        <strong>Remuneração:</strong> R${dadosDoServico.remuneracao},00 reais
-                                                    </li>
-                                                </ul>
-                                            }
+                                                <DialogContentText className="sh-servico-dados-cliente">
+                                                    <div className="sh-dialog-imagem-cliente">
+                                                        {dadosDoServico.clienteFotoPerfil &&
+                                                            <img src={dadosDoServico.clienteFotoPerfil} alt="" className="sh-servico-dados-cliente-foto" />
+                                                        }
 
+                                                        {!dadosDoServico.clienteFotoPerfil &&
+                                                            <img src={imgPerfilDefault} alt="" className="sh-servico-dados-cliente-foto" />
+                                                        }
+                                                    </div>
+                                                    <div className="sh-dialog-nome-cliente">{dadosDoServico.clienteNome} {dadosDoServico.clienteSobrenome}</div>
+                                                    <div className="sh-dialog-classificacao-cliente">
+                                                        <img src={imgEstrelas} alt="" className="sh-dialog-classificacao-img" />
+                                                        <div className="sh-dialog-classificacao-numero">
+                                                            {dadosDoServico.clienteClassificacao}
+                                                        </div>
+                                                    </div>
+                                                </DialogContentText>
+                                            }
                                             {userTipo === "1" &&
-                                                <ul className="sh-dialog-dados">
-                                                    <li className="sh-dialog-dados-tipo-servico">{dadosDoServico.tag}</li>
-                                                    <li className="sh-dialog-dados-texto">
-                                                        <strong>Telefone do Freelancer:</strong> {dadosDoServico.freelancerTelefone} <br />
-                                                    </li>
-                                                    <li className="sh-dialog-dados-texto">
-                                                        <strong>E-mail  do Freelancer:</strong> {dadosDoServico.freelancerEmail}
-                                                    </li>
-                                                    <li className="sh-dialog-dados-texto">
-                                                        <strong>Remuneração:</strong> R${dadosDoServico.remuneracao},00 reais
-                                                    </li>
-                                                </ul>
+                                                <DialogContentText className="sh-servico-dados-cliente">
+                                                    <div className="sh-dialog-imagem-cliente">
+                                                        {dadosDoServico.freelancerFotoPerfil &&
+                                                            <img src={dadosDoServico.freelancerFotoPerfil} alt="" className="sh-servico-dados-cliente-foto" />
+                                                        }
+
+                                                        {!dadosDoServico.freelancerFotoPerfil &&
+                                                            <img src={imgPerfilDefault} alt="" className="sh-servico-dados-cliente-foto" />
+                                                        }
+                                                    </div>
+                                                    <div className="sh-dialog-nome-cliente">{dadosDoServico.freelancerNome} {dadosDoServico.freelancerSobrenome}</div>
+                                                    <div className="sh-dialog-classificacao-cliente">
+                                                        <img src={imgEstrelas} alt="" className="sh-dialog-classificacao-img" />
+                                                        <div className="sh-dialog-classificacao-numero">
+                                                            {dadosDoServico.freelancerClassificacao}
+                                                        </div>
+                                                    </div>
+                                                </DialogContentText>
                                             }
-                                        </DialogContentText>
 
-                                        {userTipo === "0" &&
-                                            <DialogContentText className="sh-servico-dados-cliente">
-                                                <div className="sh-dialog-imagem-cliente">
-                                                    {dadosDoServico.clienteFotoPerfil &&
-                                                        <img src={dadosDoServico.clienteFotoPerfil} alt="" className="sh-servico-dados-cliente-foto" />
-                                                    }
-
-                                                    {!dadosDoServico.clienteFotoPerfil &&
-                                                        <img src={imgPerfilDefault} alt="" className="sh-servico-dados-cliente-foto"/>
-                                                    }
-                                                </div>
-                                                <div className="sh-dialog-nome-cliente">{dadosDoServico.clienteNome} {dadosDoServico.clienteSobrenome}</div>
-                                                <div className="sh-dialog-classificacao-cliente">
-                                                    <img src={imgEstrelas} alt="" className="sh-dialog-classificacao-img" />
-                                                    <div className="sh-dialog-classificacao-numero">
-                                                        {dadosDoServico.clienteClassificacao}
-                                                    </div>
-                                                </div>
+                                            <DialogContentText className="sh-servico-subtitulo">
+                                                Descrição do serviço
                                             </DialogContentText>
-                                        }
-                                        {userTipo === "1" &&
-                                            <DialogContentText className="sh-servico-dados-cliente">
-                                                <div className="sh-dialog-imagem-cliente">
-                                                    {dadosDoServico.freelancerFotoPerfil &&
-                                                        <img src={dadosDoServico.freelancerFotoPerfil} alt="" className="sh-servico-dados-cliente-foto"/>
-                                                    }
 
-                                                    {!dadosDoServico.freelancerFotoPerfil &&
-                                                        <img src={imgPerfilDefault} alt="" className="sh-servico-dados-cliente-foto"/>
-                                                    }
-                                                </div>
-                                                <div className="sh-dialog-nome-cliente">{dadosDoServico.freelancerNome} {dadosDoServico.freelancerSobrenome}</div>
-                                                <div className="sh-dialog-classificacao-cliente">
-                                                    <img src={imgEstrelas} alt="" className="sh-dialog-classificacao-img" />
-                                                    <div className="sh-dialog-classificacao-numero">
-                                                        {dadosDoServico.freelancerClassificacao}
-                                                    </div>
-                                                </div>
+                                            <DialogContentText className="sh-servico-textos">
+                                                {dadosDoServico.descricao}
                                             </DialogContentText>
-                                        }
+                                        </DialogContent>
+                                        <DialogActions>
+                                            <Button onClick={() => { setOpen(false) }}>
+                                                Voltar
+                                            </Button>
 
-                                        <DialogContentText className="sh-servico-subtitulo">
-                                            Descrição do serviço
-                                        </DialogContentText>
+                                            <Button autoFocus onClick={() => setOpenAvaliacao(true)}>
+                                                Concluído
+                                            </Button>
+                                        </DialogActions>
+                                    </Dialog>
+                                }
 
-                                        <DialogContentText className="sh-servico-textos">
-                                            {dadosDoServico.descricao}
+                                <Dialog
+                                    fullScreen={fullScreen}
+                                    open={openAvaliacao}
+                                    onClose={closeDialogAvaliacao}
+                                    aria-labelledby="responsive-dialog-title"
+                                >
+                                    <DialogContent sx={stylesDialogAvaliacao}>
+                                        <DialogContentText className="sh-avaliacao-conteudo">
+                                            {userTipo === '0' &&
+                                                <Typography component="legend" className="sh-avaliacao-titulo">Avalie o Cliente</Typography>
+                                            }
+                                            {userTipo === '1' &&
+                                                <Typography component="legend" className="sh-avaliacao-titulo">Avalie o Freelancer</Typography>
+                                            }
+                                            <Rating
+                                                name="no-value"
+                                                value={avaliacao}
+                                                onChange={(event, newValue) => {
+                                                    setAvaliacao(newValue);
+                                                }}
+                                            />
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={() => { setOpen(false) }}>
+                                        <Button onClick={closeDialogAvaliacao}>
                                             Voltar
                                         </Button>
 
-                                        <Button autoFocus onClick={() => setOpenAvaliacao(true)}>
-                                            Concluído
+                                        <Button
+                                            autoFocus
+                                            onClick={() => {
+                                                idServico = dadosDoServico.id;
+                                                freelaId = dadosDoServico.freelaId;
+                                                clienteId = dadosDoServico.clienteId;
+                                                concluirServico();
+                                            }}
+                                        >
+                                            Avaliar
                                         </Button>
+
                                     </DialogActions>
                                 </Dialog>
-                            }
-
-                            <Dialog
-                                fullScreen={fullScreen}
-                                open={openAvaliacao}
-                                onClose={closeDialogAvaliacao}
-                                aria-labelledby="responsive-dialog-title"
-                            >
-                                <DialogContent sx={stylesDialogAvaliacao}>
-                                    <DialogContentText className="sh-avaliacao-conteudo">
-                                        {userTipo === '0' &&
-                                            <Typography component="legend" className="sh-avaliacao-titulo">Avalie o Cliente</Typography>
-                                        }
-                                        {userTipo === '1' &&
-                                            <Typography component="legend" className="sh-avaliacao-titulo">Avalie o Freelancer</Typography>
-                                        }
-                                        <Rating
-                                            name="no-value"
-                                            value={avaliacao}
-                                            onChange={(event, newValue) => {
-                                                setAvaliacao(newValue);
-                                            }}
-                                        />
-                                    </DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={closeDialogAvaliacao}>
-                                        Voltar
-                                    </Button>
-
-                                    <Button
-                                        autoFocus
-                                        onClick={() => {
-                                            idServico = dadosDoServico.id;
-                                            freelaId = dadosDoServico.freelaId;
-                                            clienteId = dadosDoServico.clienteId;
-                                            concluirServico();
-                                        }}
-                                    >
-                                        Avaliar
-                                    </Button>
-
-                                </DialogActions>
-                            </Dialog>
-                        </ul>
+                            </ul>
+                        }
                     </article>
                 </div>
             </div>

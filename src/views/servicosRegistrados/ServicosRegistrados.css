@@ -252,10 +252,10 @@
     & .sh-alerts {
         width: max-content;
         padding: 2px;
-        position: absolute;
+        position: fixed;
         top: 0;
         right: -100%;
-        z-index: 1000;
+        z-index: 1301;
         animation: alertsAnim 4s linear;
     }
 }
@@ -389,6 +389,7 @@
 
                     & .sh-servicosLista {
                         margin: 0;
+                        grid-template-columns: 1fr 1fr;
                     }
                 }
             }
@@ -411,6 +412,18 @@
 
                 & .sh-nascimento {
                     margin-top: 0;
+                }
+            }
+
+        }
+
+        & .sh-perfil-dados {
+            & .sh-main {
+                & .sh-servicosConcluidos {
+                    & .sh-servicosLista {
+                        margin: 0;
+                        grid-template-columns: 1fr 1fr 1fr;
+                    }
                 }
             }
         }

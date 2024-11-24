@@ -168,7 +168,33 @@ const styledTextField = {
 const styledDialogEditaPerfil = {
     display: 'flex',
     flexDirection: 'column',
-    rowGap: '15px'
+    rowGap: '15px',
+
+    '& .sh-label-imgServico': {
+        cursor: 'pointer',
+        width: '250px',
+        height: 'max-content',
+
+        '& .sh-label-imgServico-texto': {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '100%',
+            padding: '15px',
+            backgroundColor: '#eaeaea',
+            margin: '0',
+            fontSize: '1rem'
+        },
+
+        '& .sh-label-imgServico-imagem': {
+            width: '250px'
+        }
+    },
+
+    '& .sh-fotoServico-input': {
+        display: 'none'
+    }
 }
 
 const stylesDialogAvaliacao = {
@@ -245,6 +271,7 @@ const ServicosRegistrados = () => {
         if (arquivo) {
             let tipoArquivo = arquivo[0].type;
 
+
             if (arquivo.length < 1) {
                 setTipoAlert(3);
                 setMensagemAlert("A imagem não foi fornecida!");
@@ -272,6 +299,8 @@ const ServicosRegistrados = () => {
                     setTimeout(() => {
                         setMostrarAlert(false);
                     }, 4000);
+
+                    console.log('aqui');
                 }
                 else {
                     if (arquivo[0] !== null) {
@@ -280,6 +309,7 @@ const ServicosRegistrados = () => {
                         lerImagem.onload = function (imagem) {
                             if (imagem.target) {
                                 setFotoServico(`${imagem.target.result}`);
+                                console.log(imagem.target.result);
                             }
                         }
 
@@ -416,12 +446,73 @@ const ServicosRegistrados = () => {
     }
 
     async function registrarServico() {
-        console.log(dataServico);
-        console.log(localServico);
-        console.log(descricaoServico);
-        console.log(remuneracaoServico);
-        console.log(fotoServico);
-        console.log(tipoServico);
+        try {
+
+            if (!fotoServico || !tipoServico || !descricaoServico || !remuneracaoServico) {
+                setTipoAlert(3);
+                setMensagemAlert("Preencha os campos obrigatórios!");
+                setMostrarAlert(true);
+
+                setTimeout(() => {
+                    setMostrarAlert(false);
+                    setLoading(false);
+                }, 4000);
+            }
+            else {
+                setLoading(true);
+                const formData = new FormData();
+                formData.append('acao', 'cadserv');
+
+                if (dataServico) {
+                    formData.append('data', `${formatDataBanco(dataServico)}`);
+                }
+                if (localServico) {
+                    formData.append('local', `${localServico}`);
+                }
+
+                formData.append('idCliente', `${userId}`);
+                formData.append('foto_servico', `${fotoServico}`);
+                formData.append('tipo', `${tipoServico}`);
+                formData.append('descricao', `${descricaoServico}`);
+                formData.append('remuneracao', `${remuneracaoServico}`);
+
+                const request = await fetch('https://jobsondeveloper.site/cadastro_login.php', {
+                    method: 'POST',
+                    mode: 'cors',
+                    body: formData
+                });
+
+                const response = await request.json();
+
+                if (response.status === 201) {
+                    closeDialogAddServico();
+                    window.location.reload();
+                }
+                else {
+                    setTipoAlert(3);
+                    setMensagemAlert("Erro ao registrar!");
+                    setMostrarAlert(true);
+
+                    setTimeout(() => {
+                        setMostrarAlert(false);
+                        setLoading(false);
+                    }, 4000);
+                }
+            }
+
+        }
+        catch (error) {
+            setTipoAlert(3);
+            setMensagemAlert("Erro de requisição!");
+            setMostrarAlert(true);
+            closeDialogAddServico();
+
+            setTimeout(() => {
+                setMostrarAlert(false);
+                setLoading(false);
+            }, 4000);
+            console.error(error);
+        }
     }
 
     const listaServicos = servicosRegistrados.map((servico: any, index: any) =>
@@ -536,15 +627,17 @@ const ServicosRegistrados = () => {
                     </Link>
 
                     <article className="sh-servicosConcluidos">
-                        <ul className="sh-servicosLista">
-                            {listaServicos}
+                        {servicosRegistrados.length === 0 &&
+                            <h2 className="sh-servicosConcluidos-semServicos">
+                                Nenhum serviço registrado
+                            </h2>
+                        }
+                        {servicosRegistrados.length > 0 &&
+                            <ul className="sh-servicosLista">
+                                {listaServicos}
 
-                            {servicosRegistrados.length === 0 &&
-                                <h2 className="sh-servicosConcluidos-semServicos">
-                                    Nenhum serviço registrado
-                                </h2>
-                            }
-                        </ul>
+                            </ul>
+                        }
 
                         <div
                             className="sh-servicosConcluidos-adicionarServico"
@@ -591,47 +684,33 @@ const ServicosRegistrados = () => {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogTitle id="alert-dialog-title">
-                        {"Editar perfil"}
+                        {"Registrar novo serviço"}
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description" sx={styledDialogEditaPerfil}>
-                            <label htmlFor="sh_input_file_perfil" className="sh-button-imgPerfil sh-button-mudarFoto">
-                                Foto do Servico
+                            <label
+                                htmlFor="sh_input_file_perfil"
+                                className="sh-label-imgServico sh-button-mudarFoto">
+                                {!fotoServico &&
+                                    <p className='sh-label-imgServico-texto'>Foto do Servico</p>
+                                }
+
+                                {fotoServico &&
+                                    <img
+                                        src={fotoServico}
+                                        alt="Foto do serviço"
+                                        className='sh-label-imgServico-imagem'
+                                    />
+                                }
                             </label>
 
                             <input
                                 type="file"
                                 id="sh_input_file_perfil"
-                                className="sh-fotoPerfil-input"
+                                className="sh-fotoServico-input"
                                 onChange={((e) => {
                                     leituraDeImagem(e.target.files);
                                 })}
-                            />
-
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DateField
-                                    label="Data (Não é obrigatório"
-                                    variant="standard"
-                                    format="DD/MM/YYYY"
-                                    sx={styledTextField}
-                                    onChange={(e: any) => setDataServico(e)}
-                                />
-                            </LocalizationProvider>
-
-                            <TextField
-                                label="Remuneração"
-                                variant="standard"
-                                type="number"
-                                sx={styledTextField}
-                                onChange={(e: any) => setRemuneracaoServico(e.target.value)}
-                            />
-
-                            <TextField
-                                label="Local (Não é obrigatório)"
-                                variant="standard"
-                                type="text"
-                                sx={styledTextField}
-                                onChange={(e: any) => setLocalServico(e.target.value)}
                             />
 
                             <Stack spacing={1} sx={styledSelectServicos}>
@@ -650,16 +729,45 @@ const ServicosRegistrados = () => {
                                 />
                             </ Stack>
 
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateField
+                                    label="Data (Não é obrigatório)"
+                                    variant="standard"
+                                    format="DD/MM/YYYY"
+                                    sx={styledTextField}
+                                    onChange={(e: any) => setDataServico(e)}
+                                />
+                            </LocalizationProvider>
+
+                            <TextField
+                                label="Local (Não é obrigatório)"
+                                variant="standard"
+                                type="text"
+                                sx={styledTextField}
+                                onChange={(e: any) => setLocalServico(e.target.value)}
+                            />
+
+                            <TextField
+                                label="Remuneração"
+                                variant="standard"
+                                type="number"
+                                sx={styledTextField}
+                                onChange={(e: any) => setRemuneracaoServico(e.target.value)}
+                            />
+
                             <TextField
                                 id="filled-multiline-static"
                                 label="Descrição"
                                 multiline
                                 maxRows={6}
+                                onChange={(e) => {
+                                    setDescricaoServico(e.target.value);
+                                }}
                             />
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={closeDialogAddServico} autoFocus>Voltar</Button>
+                        <Button onClick={closeDialogAddServico}>Voltar</Button>
                         <Button onClick={(e) => registrarServico()}>Registrar</Button>
                     </DialogActions>
                 </Dialog>
@@ -671,12 +779,13 @@ const ServicosRegistrados = () => {
                 </div>
             </footer>
 
-            {mostrarAlert &&
+            {
+                mostrarAlert &&
                 <div className="sh-alerts">
                     <ShAlert />
                 </div>
             }
-        </main>
+        </main >
     )
 }
 
