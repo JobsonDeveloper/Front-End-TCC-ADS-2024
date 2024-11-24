@@ -230,8 +230,8 @@ const ListaServicos = ({ setLoading, setMostraAlert, tituloDaSessao, servicos }:
                                 {!servico.cliente_foto &&
                                     <img src={imgPerfilDefault} alt="Imagem de perfil do cliente" className="sh-servicosLista-clienteImg" />
                                 }
-                                <p className="sh-servicosLista-nomeCliente">{servico.cliente_nome} {servico.cliente_sobrenome}</p>
                             </div>
+                            <p className="sh-servicosLista-nomeCliente">{servico.cliente_nome} {servico.cliente_sobrenome}</p>
                             <div className="sh-servicosLista-classificacao">
                                 <img src={imgClassificacaoEstrela} alt="" className="sh-servicosLista-classificacaoImg" />
                                 <p className="sh-servicosLista-classificacaoNumero">{servico.cliente_classificacao}</p>
