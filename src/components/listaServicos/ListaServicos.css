@@ -112,9 +112,9 @@
 
 
           & .sh-servicosLista-classificacao {
-            height: max-content;
             display: flex;
             flex-direction: column;
+            height: max-content;
             align-items: end;
             flex-grow: 1;
 
