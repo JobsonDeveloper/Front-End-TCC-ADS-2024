@@ -433,6 +433,7 @@
             & .sh-todos-servicos {
                 & .sh-todos-os-servicos-info {
                     align-items: center;
+                    width: 1400px;
                 }
             }
 
