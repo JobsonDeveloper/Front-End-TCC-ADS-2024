@@ -80,7 +80,7 @@
 
         & .sh-servicosLista-header {
           display: flex;
-          justify-content: space-between;
+          /* justify-content: space-between; */
           align-items: center;
           padding: 2px 5px;
           background-color: red;
@@ -106,7 +106,9 @@
             display: -webkit-box;
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
-            max-width: 180px;
+            max-width: 100%;
+            flex-grow: 1;
+            background-color: green;
             height: max-content;
           }
 
@@ -116,7 +118,6 @@
             flex-direction: column;
             height: max-content;
             align-items: end;
-            flex-grow: 1;
 
             & .sh-servicosLista-classificacaoImg {
               width: 23px;
