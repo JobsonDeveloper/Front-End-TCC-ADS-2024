@@ -205,7 +205,7 @@ A Skillhub proporciona, assim, um ambiente seguro, confiável e organizado, perm
 <br/>
 ![image](https://github.com/user-attachments/assets/9bd2182b-0809-48b7-b715-37faad42d01e)
 
-## Finalização do serviço por parte do cliente
+## Cliente finalizando um serviço e avaliando o Freelancer
 
 ![image](https://github.com/user-attachments/assets/b3ea5b25-506d-47f6-8f77-89c02d4e0c3a)
 <br/>
