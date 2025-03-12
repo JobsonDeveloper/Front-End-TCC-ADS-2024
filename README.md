@@ -193,10 +193,11 @@ A Skillhub proporciona, assim, um ambiente seguro, confiável e organizado, perm
 <br/>
 <br/>
 ![image](https://github.com/user-attachments/assets/a8ece9ce-ef96-49c3-8df5-57a1f371b51d)
-<br/>
-<br/>
-<br/>
-<br/>
+
+
+### Freelancer finalizando um serviço e avaliando o cliente
+
+
 ![image](https://github.com/user-attachments/assets/54ff7b90-ca20-4bf5-adb4-de8d357c9168)
 <br/>
 <br/>
