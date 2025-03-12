@@ -58,23 +58,23 @@ A Skillhub proporciona, assim, um ambiente seguro, confiável e organizado, perm
 <br/>
 <br/>
 ![image](https://github.com/user-attachments/assets/cf43d530-f783-46ea-91e9-7aeb95c70767)
-<br/>
-<br/>
+
+
 ### Tela de cadastro para o Cliente
-<br/>
-<br/>
+
+
 ![image](https://github.com/user-attachments/assets/61b8d501-6e78-474b-ac1f-f4755d3dd114)
-<br/>
-<br/>
+
+
 ### Tela de cadastro para o Freelancer
-<br/>
-<br/>
+
+
 ![image](https://github.com/user-attachments/assets/b5b96074-2b3d-4afb-8b90-9cba74ef34fa)
-<br/>
-<br/>
+
+
 ### Tela de Login
-<br/>
-<br/>
+
+
 ![image](https://github.com/user-attachments/assets/1b7bed8c-6a87-4440-aaa5-b82f88d92607)
 <br/>
 <br/>
@@ -86,11 +86,11 @@ A Skillhub proporciona, assim, um ambiente seguro, confiável e organizado, perm
 <br/>
 <br/>
 ![image](https://github.com/user-attachments/assets/b02b84ff-c861-41da-804e-6a78f18f14d4)
-<br/>
-<br/>
+
+
 ### Tela de perfil do Cliente
-<br/>
-<br/>
+
+
 ![image](https://github.com/user-attachments/assets/5e7b2382-19c0-4449-8b9f-9f3c1238142f)
 <br/>
 <br/>
