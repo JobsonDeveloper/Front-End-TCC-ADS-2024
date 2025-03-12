@@ -63,10 +63,9 @@ A Skillhub proporciona, assim, um ambiente seguro, confiável e organizado, perm
 <br/>
 <br/>
 ![image](https://github.com/user-attachments/assets/61b8d501-6e78-474b-ac1f-f4755d3dd114)
-<br/>
-<br/>
-<br/>
-<br/>
+
+### Tela de cadastro para o cliente
+
 ![image](https://github.com/user-attachments/assets/b5b96074-2b3d-4afb-8b90-9cba74ef34fa)
 <br/>
 <br/>
