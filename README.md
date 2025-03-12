@@ -122,10 +122,11 @@ A Skillhub proporciona, assim, um ambiente seguro, confiável e organizado, perm
 <br/>
 <br/>
 ![image](https://github.com/user-attachments/assets/409fcca5-6a84-42de-aee2-7cbf80d56682)
-<br/>
-<br/>
-<br/>
-<br/>
+
+
+### Cliente realizando o cadastro de um serviço
+
+
 ![image](https://github.com/user-attachments/assets/7e1b417d-b6e6-4cba-941e-dd0e7a04faa2)
 <br/>
 <br/>
