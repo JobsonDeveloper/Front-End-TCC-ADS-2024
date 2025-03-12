@@ -1,7 +1,7 @@
 ### Site da Skillhub, projeto de Startup criado como TCC do curso de Análise e Desenvolvimento de Sistemas na UNIBRA - Centro Universitário Brasileiro
 
 ### Ferramentas utiliizadas:
-[![My Skills](https://skillicons.dev/icons?i=html,css,react,ts,bootstrap,materialui,styledcomponents,figma,git,gimp,vercel)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html,css,react,ts,bootstrap,materialui,styledcomponents,figma,git,vercel)](https://skillicons.dev)
 
 ### Lista completa:
 HTML | CSS | React | React Icons | React Hooks | React Router  | TypeScript | Bootstrap | Material UI | AOS - Animate On Scroll Library | Styled-components | API | Figma | Git | Gimp | Vercel
